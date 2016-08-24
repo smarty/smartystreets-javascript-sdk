@@ -52,8 +52,8 @@ var Validate = function () {};
 // ]
 
 // A helper function for detemring if an address has a valid field.
-var lookupHasValidInputField = function (lookup, inputField) {
-	if (lookup.hasOwnProperty(inputField) && lookup[inputField]) {
+var lookupHasValidInputField = function (address, inputField) {
+	if (address.hasOwnProperty(inputField) && address[inputField]) {
 		return true;
 	}
 
@@ -65,7 +65,7 @@ Validate.prototype.validate = function (auth_id, auth_token, addresses, options)
 	options = options || {};
 
 	// A template lookup object.
-	var lookup = {
+	var exampleLookup = {
 			"input_id": true,
 			"street": true,
 			"street2": true,
@@ -94,9 +94,11 @@ Validate.prototype.validate = function (auth_id, auth_token, addresses, options)
 		// An array of lookups in subarrays of up to 100.
 		lookups = [],
 		lookupGroup = [],
+		// The object that is returned if errors are encountered.
+		errors = {},
 		// An array of bad lookups to be return to the user.
-		invalidInputFieldLookups = [],
-		insufficientDataLookups = [];
+		invalidInputFields = [],
+		insufficientLookupData = [];
 
 	// Split list of lookups into groups of 100.
 	for (var i = 0; i < addresses.length; i++) {
@@ -108,14 +110,19 @@ Validate.prototype.validate = function (auth_id, auth_token, addresses, options)
 
 		var lookup = addresses[i];
 
+		// console.log("Vetting lookup at index " + i + " for submittal to the API.");
+		// console.log("Checking keys.");
+
 		// Validate the input fields.
 		for (var key in lookup) {
-			if (key in lookup) {
-				console.log('Key ' + key + ' is valid.');
+			// console.log("\tChecking key: " + key);
+			if (exampleLookup.hasOwnProperty(key)) {
+				// console.log("\t\t" + key + " is a valid key.");
 				settings.path += "&" + key + "=" + encodeURIComponent(lookup[key]);
 			} else {
-				// If an input field doesn't match the lookup template variable, add it to the invalidInputFieldLookups array.
-				invalidInputFieldLookups.push({
+				// console.log("\t\t" + key + " is not a valid key. Saving an error.");
+				// If an input field doesn't match the lookup template variable, add it to the invalidInputFields array.
+				invalidInputFields.push({
 					"index": i,
 					"input_field": key
 				});
@@ -125,42 +132,61 @@ Validate.prototype.validate = function (auth_id, auth_token, addresses, options)
 		// Make sure there's enough data in the lookup to perform a lookup.
 		// A valid lookup can contain only a street, city, and state.
 		if (lookupHasValidInputField(lookup, "street") && lookupHasValidInputField(lookup, "city") && lookupHasValidInputField(lookup, "state")) {
+			// console.log("\tLookup " + i + " has enough street, city, and state data to perform an API request.");
 			lookupGroup.push(lookup);
 		}
 
 		// A valid lookup can contain only a street and zipcode.
 		else if (lookupHasValidInputField(lookup, "street") && lookupHasValidInputField(lookup, "zipcode")) {
+			// console.log("\tLookup " + i + " has enough street and zipcode data to perform an API request.");
 			lookupGroup.push(lookup);
 		}
 
 		// A valid look can contain only freeform street
 		else if (lookupHasValidInputField(lookup, "street")) {
+			// console.log("\tLookup " + i + " has enough freeform street to perform an API request.");
 			lookupGroup.push(lookup)
 		}
 
 		// If a case is not matched, throw an error.
 		else {
-			insufficientDataLookups.push({
+			// console.log("\tLookup " + i + " does not have enough data to perform an API request.");
+			insufficientLookupData.push({
 				"index": i
 			});
 		}
 	}
 	
+	// console.log("\tNumber of input field errors:", invalidInputFields.length);
+	// console.log("\tIndexes with invalid input fields: ", invalidInputFields);
+	// console.log("");
+	// console.log("\tNumber of insufficient data lookup errors:", insufficientLookupData.length);
+	// console.log("\tIndexes with insufficient data: ", insufficientLookupData);
+	// Build the error return object.
+
 	// If there were lookups with invalid input fields, return an error.
-	if (invalidInputFieldLookups.length) {
-		return {
+	// console.log("\t" + invalidInputFields);
+
+	if (invalidInputFields.length > 0) {
+		errors["invalid_input_fields_error"] =  {
 			"message": "Error: Request not sent. One or more input fields found in the lookup have invalid input field name. See the documentation for valid input field names.",
-			"invalid_input_fields": invalidInputFieldLookups
+			"invalid_input_fields": invalidInputFields
 		};
 	}
 
 	// If there were lookups with insufficient input fields, return an error.
-	if (insufficientDataLookups) {
-		return  {
+	if (insufficientLookupData.length > 0) {
+		errors["insufficient_lookup_data_error"] = {
 			"message": "Error: Request not sent. One or more lookups contained insufficient information to complete address validation. See the documentation for more information on the input field combinations required to perform a successful address validation.",
-			"invalid_lookup_indexes": insufficientDataLookups
+			"invalid_lookup_indexes": insufficientLookupData
 		};
 	}
+
+	// console.log(errors);
+
+	// If there were errors, return the errors.
+	return errors;
+
 
 	// Iterate through each address fed to 
 	for (var i = 0; i < addresses.length; i++) {
