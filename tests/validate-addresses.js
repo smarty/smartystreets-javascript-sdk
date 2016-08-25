@@ -4,55 +4,42 @@
 // Includes
 var chai = require("chai"),
 	expect = chai.expect,
-	Validate = require("../index");
+	SmartyStreetsLibrary = require("../index"),
+	authId = process.env.SMARTYSTREETS_AUTH_ID,
+	authToken = process.env.SMARTYSTREETS_AUTH_TOKEN;
+
+// console.log(authId, authToken);
+
+var generateValidLookups = function(quantity) {
+	var validLookups = [];
+
+	for (var i = 0; i < quantity; i++) {
+		validLookups.push({
+			"street": "180 Pasito Terrace",
+			"zipcode": "94086"
+		});
+	}
+
+	return validLookups;
+};
 
 // Sanity Check
-describe("SanityCheck", function() {
-	var validate = new Validate;
+describe("SanityCheck", function () {
+	var smartyStreets = new SmartyStreetsLibrary;
 
-	it ("validate.sanityCheck() should return 'The module loaded.'", function () {
-		expect(validate.sanityCheck()).to.equal("The module loaded.");
+	it ("smartyStreets.sanityCheck() should return 'The module loaded.'", function () {
+		expect(smartyStreets.sanityCheck()).to.equal("The module loaded.");
 	});
 });
 
-describe("BadInputField", function () {
-	var validate = new Validate;
+// Break lookup lists into chunks of 100 lookups.
+describe("BreakLookupsIntoGroupsOf100", function () {
+	var smartyStreets = new SmartyStreetsLibrary;
 
-	it ("validate.validate(\"some-id\", \"some-token\", {\"address1\": \"404 Wrong Way\"}) should return an error object with property called 'invalid_input_fields_error'", function () {
-		expect(validate.validate("some-id", "some-token", {"address1": "404 Wrong Way"})).to.have.property("invalid_input_fields_error");
+	it ("expects passing 1000 lookups to validate() to return 10 grouped results", function () {
+		expect(smartyStreets.validate(authId, authToken, generateValidLookups(1000))).to.have.length(10);
+	});
+	it ("expects passing 1 lookup to validate() to return 1 grouped result", function () {
+		expect(smartyStreets.validate(authId, authToken, generateValidLookups(1))).to.have.length(1);
 	});
 });
-
-describe("InsufficientData", function () {
-	var validate = new Validate,
-		insufficientDataErrorMessage = "Error: Request not sent. One or more lookups contained insufficient information to complete address validation. See the documentation for more information on the input field combinations required to perform a successful address validation.";
-
-	it ("Calling validate.validate() on a lookup with insufficient data to process returns an error object with an appropriate error message and array listing bad inputs", function () {
-		expect(validate.validate("some-id", "some-token", {"street2": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"secondary": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"city": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"state": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"zipcode": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"lastline": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"addressee": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"urbanization": "12345"})).to.have.property("insufficient_lookup_data_error");
-		expect(validate.validate("some-id", "some-token", {"candidates": 10})).to.have.property("insufficient_lookup_data_error");
-	});
-
-	it ("should not return insufficient data errors when sufficient data is provided.", function () {
-		expect(validate.validate("some-id", "some-token", {"street": "110 Pasito Terr", "zipcode": "94083"})).to.not.have.property("insufficient_lookup_data_error");
-	});
-});
-
-
-describe("BadAuthID", function () {});
-
-describe("BadAuthToken", function () {});
-
-describe("SingleAddressLookup", function () {});
-
-describe("MultipleAddressLookups", function () {});
-
-describe("SingleZipcodeLookup", function () {});
-
-describe("MultipleZipcodeLookups", function () {});
