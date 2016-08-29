@@ -66,12 +66,15 @@ var SmartyStreets = function () {},
 // ]
 
 SmartyStreets.prototype.validate = function (authId, authToken, lookups) {
+	errors = {};
+	lookups = [].concat(lookups);
+
 	var returnObject =  {
 		"lookups": breakLookupsIntoMaxSizedGroups(lookups),
 		"errors": getErrors()
 	};
 
-	// console.log(returnObject);
+	console.log(returnObject.errors);
 	return returnObject
 }
 
@@ -106,9 +109,11 @@ var logIfLookupHasInsufficientData = function (lookup) {
 		// console.log("\tStreet, city, and state found.");
 	} else if (lookup.hasOwnProperty("street") && lookup.street.length > minimumFreeformStreetLength && !lookup.hasOwnProperty("city") && !lookup.hasOwnProperty("state") && !lookup.hasOwnProperty("zipcode")) {
 		// console.log("\tAddress length is sufficiently long to be a freeform address.");
+	} else if (lookup.hasOwnProperty("street") && lookup.hasOwnProperty("lastline")) {
+		// console.log("\tAddress length is sufficiently long to be a freeform address.");
 	} else {
 		// console.log("\tNot enough data to return useful information.");
-		recordError("lookupHasInsufficientData", lookup);
+		recordError("lookupsHaveInsufficientData", lookup);
 	}
 };
 
