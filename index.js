@@ -1,7 +1,21 @@
 "use strict"
 
 const https = require("https");
-var SmartyStreets = function () {};
+var SmartyStreets = function () {},
+	lookupTemplate = {
+		"input_id": true,
+		"street": true,
+		"street2": true,
+		"secondary": true,
+		"city": true,
+		"state": true,
+		"zipcode": true,
+		"lastline": true,
+		"addressee": true,
+		"urbanization": true,
+		"candidates": true
+	},
+	errors = {};
 
 // Example addresses
 // 
@@ -52,23 +66,70 @@ var SmartyStreets = function () {};
 // ]
 
 SmartyStreets.prototype.validate = function (authId, authToken, lookups) {
-	return breakLookupsIntoGroupsOf100(lookups);
+	var returnObject =  {
+		"lookups": breakLookupsIntoMaxSizedGroups(lookups),
+		"errors": getErrors()
+	};
+
+	// console.log(returnObject);
+	return returnObject
 }
 
-var breakLookupsIntoGroupsOf100 = function (lookups) {
-	var returnArray = [],
-		groupOf100 = [];
+var breakLookupsIntoMaxSizedGroups = function (lookups) {
+	var returnData = [],
+		apiLookupGroup = [],
+		apiLookupLimit = 100;
 
-	for (var i = 0; i < lookups.length; i++) {
-		if (i % 100 === 0) {
-			returnArray.push(groupOf100);
-			groupOf100 = [];
-		}
-
-		groupOf100.push(lookups[i]);
+	while (lookups.length > 0) {
+		apiLookupGroup = lookups.splice(0, apiLookupLimit);
+		apiLookupGroup.forEach(function (lookup) {
+			logIfLookupHasInsufficientData(lookup);
+		});
+		returnData.push(apiLookupGroup);
 	}
 
-	return returnArray;
+	// console.log(returnData);
+
+	return returnData;
+};
+
+var logIfLookupHasInsufficientData = function (lookup) {
+	var minimumFreeformStreetLength = 9;
+
+	// console.log(lookup)
+
+	if (lookup.hasOwnProperty("street") && lookup.hasOwnProperty("zipcode")) {
+		// console.log("\tStreet and zipcode found.");
+	} else if (lookup.hasOwnProperty("street") && lookup.hasOwnProperty("city") && lookup.hasOwnProperty("state")) {
+		// console.log("\tStreet, city, and state found.");
+	} else if (lookup.hasOwnProperty("street") && lookup.hasOwnProperty("city") && lookup.hasOwnProperty("zipcode")) {
+		// console.log("\tStreet, city, and state found.");
+	} else if (lookup.hasOwnProperty("street") && lookup.street.length > minimumFreeformStreetLength && !lookup.hasOwnProperty("city") && !lookup.hasOwnProperty("state") && !lookup.hasOwnProperty("zipcode")) {
+		// console.log("\tAddress length is sufficiently long to be a freeform address.");
+	} else {
+		// console.log("\tNot enough data to return useful information.");
+		recordError("lookupHasInsufficientData", lookup);
+	}
+};
+
+var getErrors = function () {
+	return errors;
+};
+
+var recordError = function (errorGroup, elementWithAnError) {
+	if (!errors.hasOwnProperty(errorGroup)) {
+		errors[errorGroup] = [elementWithAnError];
+	} else {
+		errors[errorGroup].push(elementWithAnError);
+	}
+}
+
+var inputFieldIsValid = function (inputField) {
+	if (lookupTemplate.hasOwnProperty(inputField) && inputField) {
+		return true;
+	}
+
+	return false;
 };
 
 
