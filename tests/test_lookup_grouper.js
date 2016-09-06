@@ -4,7 +4,7 @@ var chai = require("chai"),
 
 describe ("Lookup grouping", function () {
 	it ("expects an array of less than 100 values to return an array with a single value containing all original values", function () {
-		expect(group([1, 2, 3, 4, 5])).to.have.length(1);
+		expect (group([1, 2, 3, 4, 5])).to.have.length(1);
 	});
 
 	it ("expects an array of 1000 values to return an array with 10 values, each containing 100 values", function () {
