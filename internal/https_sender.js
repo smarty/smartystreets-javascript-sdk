@@ -2,9 +2,8 @@ var https = require("https"),
 	sign = require("./credential_signer");
 
 var send = function (credentials, data, options) {
-	options = setApiOptions(options);
+	options = setRequestOptions(options);
 	options = sign(options, credentials);
-	// console.log(options);
 
 	return new Promise((resolve, reject) => {
 		var request = https.request(options, (response) => {
@@ -28,11 +27,10 @@ var send = function (credentials, data, options) {
 	});
 };
 
-var setApiOptions = (options) => {
+var setRequestOptions = (options) => {
 	options.method = "POST";
 	options.headers = {
-		"Content-Type": "application/json",
-		"Host": "us-street.api.smartystreets.com"
+		"Content-Type": "application/json"
 	};
 	
 	return options;	
