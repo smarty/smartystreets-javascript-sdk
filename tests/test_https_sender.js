@@ -19,9 +19,9 @@ describe ("Test connections to the API server", function () {
 		})).to.eventually.equal(405);
 	});
 
-	it ("expects a POST to the API with a valid endpoint to return a HTTP 401 without valid credentials", function () {
+	it ("expects a POST to the API with a valid endpoint to return a HTTP 400 without valid credentials", function () {
 		return expect(send({}, [], {
-			hostname: "api.smartystreets.com",
+			hostname: "us-street.api.smartystreets.com",
 			path: "/street-address"
 		}).catch(function (err) {
 			return err;
