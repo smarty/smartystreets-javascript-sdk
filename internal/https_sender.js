@@ -1,9 +1,10 @@
-var https = require("https");
+var https = require("https"),
+	sign = require("./credential_signer");
 
-var sender = function () {};
-
-sender.prototype.send = function (options) {
-	options.method = "POST";
+var send = function (credentials, data, options) {
+	options = setApiOptions(options);
+	options = sign(options, credentials);
+	// console.log(options);
 
 	return new Promise((resolve, reject) => {
 		var request = https.request(options, (response) => {
@@ -20,9 +21,21 @@ sender.prototype.send = function (options) {
 			response.on("end", () => resolve(body));
 		});
 
-		request.end()
+		request.write(JSON.stringify(data));
+
+		request.end();
 		request.on("error", (err) => reject(err));
 	});
 };
 
-module.exports = sender;
+var setApiOptions = (options) => {
+	options.method = "POST";
+	options.headers = {
+		"Content-Type": "application/json",
+		"Host": "us-street.api.smartystreets.com"
+	};
+	
+	return options;	
+}
+
+module.exports = send;

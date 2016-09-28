@@ -4,7 +4,6 @@ var validateInputFields = (lookupTemplate, lookups) => {
 
 		checkEachLookupForInvalidInputFields(lookups);
 
-		console.log(getErrorsIfAny());
 		return getErrorsIfAny();
 	},
 
