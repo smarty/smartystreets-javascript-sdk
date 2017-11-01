@@ -1,7 +1,8 @@
-const assert = require("assert");
+const chai = require("chai");
+const should = chai.should();
 
 describe("A match candidate", function () {
 	it ("has populated fields.", function () {
-		assert.equal(true, false);
+		true.should.equal(false);
 	});
 });
