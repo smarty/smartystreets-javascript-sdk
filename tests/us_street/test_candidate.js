@@ -28,7 +28,7 @@ describe("A match candidate", function () {
 				city_name: "19",
 				default_city_name: "20",
 				state_abbreviation: "21",
-				zipcode: "22",
+				zipCode: "22",
 				plus4_code: "23",
 				delivery_point: "24",
 				delivery_point_check_digit: "25"
@@ -88,8 +88,8 @@ describe("A match candidate", function () {
 		expect(candidate.components.pmbNumber).to.equal('18');
 		expect(candidate.components.cityName).to.equal('19');
 		expect(candidate.components.defaultCityName).to.equal('20');
-		expect(candidate.components.stateAbbreviation).to.equal('21');
-		expect(candidate.components.zipcode).to.equal('22');
+		expect(candidate.components.state).to.equal('21');
+		expect(candidate.components.zipCode).to.equal('22');
 		expect(candidate.components.plus4Code).to.equal('23');
 		expect(candidate.components.deliveryPoint).to.equal('24');
 		expect(candidate.components.deliveryPointCheckDigit).to.equal('25');

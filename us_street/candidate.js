@@ -22,8 +22,8 @@ class Candidate {
 			pmbNumber: responseData.components.pmb_number,
 			cityName: responseData.components.city_name,
 			defaultCityName: responseData.components.default_city_name,
-			stateAbbreviation: responseData.components.state_abbreviation,
-			zipcode: responseData.components.zipcode,
+			state: responseData.components.state_abbreviation,
+			zipCode: responseData.components.zipCode,
 			plus4Code: responseData.components.plus4_code,
 			deliveryPoint: responseData.components.delivery_point,
 			deliveryPointCheckDigit: responseData.components.delivery_point_check_digit
