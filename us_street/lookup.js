@@ -12,6 +12,7 @@ class Lookup {
 		this.match = match || undefined;
 		this.maxCandidates = maxCandidates || undefined;
 		this.inputId = inputId || undefined;
+		this.result = [];
 	}
 }
 

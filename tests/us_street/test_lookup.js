@@ -1,9 +1,9 @@
 const chai = require("chai");
 const expect = chai.expect;
+const Lookup = require("../../us_street/lookup");
 
 describe ("A US Street lookup", function () {
-	it ("stores field data.", function () {
-		const Lookup = require("../../us_street/lookup");
+	it ("correctly populates fields.", function () {
 		const lookup = new Lookup("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
 
 		expect(lookup.street).to.equal("a");
@@ -18,5 +18,11 @@ describe ("A US Street lookup", function () {
 		expect(lookup.match).to.equal("j");
 		expect(lookup.maxCandidates).to.equal("k");
 		expect(lookup.inputId).to.equal("l");
+	});
+
+	it ("has a result array.", function () {
+		const lookup = new Lookup();
+
+		expect(Array.isArray(lookup.result)).to.equal(true);
 	});
 });
