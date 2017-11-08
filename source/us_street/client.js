@@ -4,7 +4,9 @@ class Client {
 	}
 
 	sendLookup(lookup) {
-		let request = lookup;
+		let request = {
+			payload: lookup
+		};
 		this.sender.send(request);
 	}
 }

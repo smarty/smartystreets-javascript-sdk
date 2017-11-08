@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Lookup = require("../../us_street/lookup");
+const Lookup = require("../../source/us_street/lookup");
 
 describe ("A US Street lookup", function () {
 	it ("correctly populates fields.", function () {

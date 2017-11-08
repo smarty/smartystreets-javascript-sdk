@@ -3,7 +3,7 @@ const expect = chai.expect;
 
 describe("A match candidate", function () {
 	it("has populated fields.", function () {
-		const Candidate = require("../../us_street/candidate");
+		const Candidate = require("../../source/us_street/candidate");
 		const sampleResponse = {
 			input_index: 0,
 			candidate_index: 1,
