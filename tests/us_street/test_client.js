@@ -64,6 +64,12 @@ describe("A client", function () {
 	});
 
 	// it ("builds a request for a batch lookup with the correct JSON payload.", function () {
+	// 	let mockSender = new MockSender();
+	// 	const client = new Client(mockSender);
+	// 	let lookup0 = new Lookup("lookup0");
+	// 	let lookup1 = new Lookup("lookup1");
+	// 	let lookup2 = new Lookup("lookup2");
+	//
 	//
 	// });
 });
