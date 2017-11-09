@@ -10,7 +10,6 @@ class Client {
 		let request = new Request(JSON.stringify(payload));
 
 		this.sender.send(request);
-
 	}
 
 	generateRequestPayload(lookup) {

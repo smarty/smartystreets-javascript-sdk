@@ -2,9 +2,19 @@ const chai = require("chai");
 const expect = chai.expect;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
-const Request = require("../../source/request");
 
 describe("A client", function () {
+	function MockSender () {
+		let request = {
+			payload: ""
+		};
+		this.request = request;
+
+		this.send = function (clientRequest) {
+			request.payload = clientRequest.payload;
+		}
+	}
+
 	it ("has a sender.", function () {
 		const mockSender = {};
 		const client = new Client(mockSender);
@@ -28,19 +38,7 @@ describe("A client", function () {
 
 		expect(sentFlag).to.equal(true);
 	});
-
-	it ("builds a request with the correct JSON payload.", function () {
-		function MockSender () {
-			let request = {
-				payload: ""
-			};
-			this.request = request;
-
-			this.send = function (clientRequest) {
-				request.payload = clientRequest.payload;
-			}
-		}
-
+	it ("builds a request for a single lookup with the correct JSON payload.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
@@ -64,4 +62,8 @@ describe("A client", function () {
 
 		expect(mockSender.request.payload).to.equal(expectedPayload);
 	});
+
+	// it ("builds a request for a batch lookup with the correct JSON payload.", function () {
+	//
+	// });
 });
