@@ -21,6 +21,10 @@ class Batch {
 	clear () {
 		this.lookups = [];
 	}
+
+	length() {
+		return this.lookups.length;
+	}
 }
 
 module.exports = Batch;

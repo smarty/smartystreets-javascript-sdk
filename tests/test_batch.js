@@ -35,4 +35,12 @@ describe("A batch", function () {
 		batch.clear();
 		expect(batch.lookups.length).to.equal(0);
 	});
+
+	it ("has a length.", function () {
+		expect(batch.length()).to.equal(0);
+		for (let i = 0; i < 50; i++) {
+			batch.add(i);
+		}
+		expect(batch.length()).to.equal(50);
+	});
 });
