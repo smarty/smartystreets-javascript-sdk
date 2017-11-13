@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const errors = require("../source/errors");
 const Batch = require("../source/batch");
+const Lookup = require("../source/us_street/lookup");
 
 describe("A batch", function () {
 	let batch;
@@ -50,5 +51,17 @@ describe("A batch", function () {
 		}
 
 		expect(batch.getByIndex(50)).to.equal(50);
+	});
+
+	it ("returns a lookup by input id.", function () {
+		for (let i = 0; i < 100; i++) {
+			let lookup = new Lookup();
+			lookup.inputId = i;
+			batch.add(lookup);
+		}
+
+		let expectedLookup = batch.getByIndex(50);
+
+		expect(batch.getByInputId(50)).to.deep.equal(expectedLookup);
 	});
 });

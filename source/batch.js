@@ -26,6 +26,12 @@ class Batch {
 		return this.lookups[index];
 	}
 
+	getByInputId(inputId) {
+		return this.lookups.filter((lookup) => {
+			return lookup.inputId === inputId;
+		})[0];
+	}
+
 	clear () {
 		this.lookups = [];
 	}
