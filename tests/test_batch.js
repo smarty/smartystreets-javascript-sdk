@@ -29,4 +29,10 @@ describe("A batch", function () {
 
 		expect(() => batch.add({})).to.throw(errors.BatchFullError);
 	});
+
+	it ("can be cleared.", function () {
+		batch.add("Hi.");
+		batch.clear();
+		expect(batch.lookups.length).to.equal(0);
+	});
 });

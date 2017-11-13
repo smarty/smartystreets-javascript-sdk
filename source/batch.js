@@ -17,6 +17,10 @@ class Batch {
 		const maxNumberOfLookups = 100;
 		return this.lookups.length < maxNumberOfLookups;
 	}
+
+	clear () {
+		this.lookups = [];
+	}
 }
 
 module.exports = Batch;
