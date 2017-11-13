@@ -18,12 +18,16 @@ class Batch {
 		return this.lookups.length < maxNumberOfLookups;
 	}
 
-	clear () {
-		this.lookups = [];
-	}
-
 	length() {
 		return this.lookups.length;
+	}
+
+	getByIndex(index) {
+		return this.lookups[index];
+	}
+
+	clear () {
+		this.lookups = [];
 	}
 }
 

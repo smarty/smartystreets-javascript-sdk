@@ -43,4 +43,12 @@ describe("A batch", function () {
 		}
 		expect(batch.length()).to.equal(50);
 	});
+
+	it ("returns a lookup by index.", function () {
+		for (let i = 0; i < 100; i++) {
+			batch.add(i);
+		}
+
+		expect(batch.getByIndex(50)).to.equal(50);
+	});
 });
