@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
+const Batch = require("../../source/batch");
 
 describe("A client", function () {
 	function MockSender () {
@@ -38,11 +39,12 @@ describe("A client", function () {
 
 		expect(sentFlag).to.equal(true);
 	});
+
 	it ("builds a request for a single lookup with the correct JSON payload.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-		let expectedPayloadObject = {
+		let expectedPayloadObject = [{
 			street: "1",
 			street2: "2",
 			secondary: "3",
@@ -55,7 +57,7 @@ describe("A client", function () {
 			match: "10",
 			candidates: "11",
 			input_id: "12"
-		};
+		}];
 		let expectedPayload = JSON.stringify(expectedPayloadObject);
 
 		client.sendLookup(lookup);
@@ -69,7 +71,19 @@ describe("A client", function () {
 	// 	let lookup0 = new Lookup("lookup0");
 	// 	let lookup1 = new Lookup("lookup1");
 	// 	let lookup2 = new Lookup("lookup2");
+	// 	let batch = new Batch();
+	// 	const expectedPayload = JSON.stringify([
+	// 		{"street": "lookup0"},
+	// 		{"street": "lookup1"},
+	// 		{"street": "lookup2"}
+	// 	]);
 	//
+	// 	batch.add(lookup0);
+	// 	batch.add(lookup1);
+	// 	batch.add(lookup2);
 	//
+	// 	client.sendBatch(batch);
+	//
+	// 	expect(mockSender.request.payload).to.equal(expectedPayload);
 	// });
 });
