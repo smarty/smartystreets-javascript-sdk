@@ -14,7 +14,7 @@ class Client {
 
 	generateRequestPayload(batch) {
 		return batch.lookups.map((lookup) => {
-			let payloadLookup = {};
+			let payloadReadyLookup = {};
 
 			buildPayloadElement("street", "street");
 			buildPayloadElement("street2", "street2");
@@ -29,11 +29,11 @@ class Client {
 			buildPayloadElement("candidates", "maxCandidates");
 			buildPayloadElement("input_id", "inputId");
 
-			return payloadLookup;
+			return payloadReadyLookup;
 
 			function buildPayloadElement(apiField, lookupField) {
 				if (lookupFieldIsPopulated()) {
-					payloadLookup[apiField] = lookup[lookupField];
+					payloadReadyLookup[apiField] = lookup[lookupField];
 				}
 
 				function lookupFieldIsPopulated() {
