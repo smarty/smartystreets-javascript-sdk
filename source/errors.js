@@ -1,15 +1,22 @@
 class SmartyError extends Error {
-	constructor (message) {
+	constructor(message) {
 		super(message);
 	}
 }
 
 class BatchFullError extends SmartyError {
-	constructor () {
+	constructor() {
 		super("A batch can contain a max of 100 lookups.");
 	}
 }
 
+class BatchEmptyError extends SmartyError {
+	constructor() {
+		super("A batch must contain at least 1 lookup.");
+	}
+}
+
 module.exports = {
-	BatchFullError: BatchFullError
+	BatchFullError: BatchFullError,
+	BatchEmptyError: BatchEmptyError
 };

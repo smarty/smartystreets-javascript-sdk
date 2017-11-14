@@ -3,6 +3,7 @@ const expect = chai.expect;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
 const Batch = require("../../source/batch");
+const errors = require("../../source/errors");
 
 describe("A client", function () {
 	function MockSender () {
@@ -65,25 +66,33 @@ describe("A client", function () {
 		expect(mockSender.request.payload).to.equal(expectedPayload);
 	});
 
-	// it ("builds a request for a batch lookup with the correct JSON payload.", function () {
+	it ("builds a request for a batch lookup with the correct JSON payload.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup0 = new Lookup("lookup0");
+		let lookup1 = new Lookup("lookup1");
+		let lookup2 = new Lookup("lookup2");
+		let batch = new Batch();
+		const expectedPayload = JSON.stringify([
+			{"street": "lookup0"},
+			{"street": "lookup1"},
+			{"street": "lookup2"}
+		]);
+
+		batch.add(lookup0);
+		batch.add(lookup1);
+		batch.add(lookup2);
+
+		client.sendBatch(batch);
+
+		expect(mockSender.request.payload).to.equal(expectedPayload);
+	});
+
+	// it ("doesn't send an empty batch.", function () {
 	// 	let mockSender = new MockSender();
 	// 	const client = new Client(mockSender);
-	// 	let lookup0 = new Lookup("lookup0");
-	// 	let lookup1 = new Lookup("lookup1");
-	// 	let lookup2 = new Lookup("lookup2");
 	// 	let batch = new Batch();
-	// 	const expectedPayload = JSON.stringify([
-	// 		{"street": "lookup0"},
-	// 		{"street": "lookup1"},
-	// 		{"street": "lookup2"}
-	// 	]);
 	//
-	// 	batch.add(lookup0);
-	// 	batch.add(lookup1);
-	// 	batch.add(lookup2);
-	//
-	// 	client.sendBatch(batch);
-	//
-	// 	expect(mockSender.request.payload).to.equal(expectedPayload);
+	// 	expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
 	// });
 });
