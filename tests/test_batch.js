@@ -64,4 +64,10 @@ describe("A batch", function () {
 
 		expect(batch.getByInputId(50)).to.deep.equal(expectedLookup);
 	});
+
+	it ("knows if it's empty.", function () {
+		expect(batch.isEmpty()).to.equal(true);
+		batch.add("1");
+		expect(batch.isEmpty()).to.equal(false);
+	});
 });
