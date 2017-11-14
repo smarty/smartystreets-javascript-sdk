@@ -1,5 +1,6 @@
 const Request = require("../request");
 const Batch = require("../batch");
+const errors = require("../errors");
 
 class Client {
 	constructor(sender) {
@@ -44,6 +45,10 @@ class Client {
 	}
 
 	sendBatch(batch) {
+		if (batch.isEmpty()) {
+			throw new errors.BatchEmptyError;
+		}
+
 		let payload = this.generateRequestPayload(batch);
 		let request = new Request(JSON.stringify(payload));
 

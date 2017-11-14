@@ -88,11 +88,11 @@ describe("A client", function () {
 		expect(mockSender.request.payload).to.equal(expectedPayload);
 	});
 
-	// it ("doesn't send an empty batch.", function () {
-	// 	let mockSender = new MockSender();
-	// 	const client = new Client(mockSender);
-	// 	let batch = new Batch();
-	//
-	// 	expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
-	// });
+	it ("doesn't send an empty batch.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let batch = new Batch();
+
+		expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
+	});
 });
