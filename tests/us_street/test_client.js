@@ -6,17 +6,6 @@ const Batch = require("../../source/batch");
 const errors = require("../../source/errors");
 
 describe("A client", function () {
-	function MockSender () {
-		let request = {
-			payload: ""
-		};
-		this.request = request;
-
-		this.send = function (clientRequest) {
-			request.payload = clientRequest.payload;
-		}
-	}
-
 	it ("has a sender.", function () {
 		const mockSender = {};
 		const client = new Client(mockSender);
@@ -95,4 +84,35 @@ describe("A client", function () {
 
 		expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
 	});
+
+	// it ("attaches a match candidate from a response to a lookup.", function () {
+	// 	let mockSender = new MockSenderWithResponse();
+	// 	const client = new Client(mockSender);
+	// 	let lookup = new Lookup();
+	// 	let expectedResult = [{deliveryLine1: "An address"}];
+	//
+	// 	client.sendLookup(lookup);
+	//
+	// 	expect(lookup.result[0]).to.equal(expectedResult);
+	// });
 });
+
+function MockSender () {
+	let request = {
+		payload: ""
+	};
+	this.request = request;
+
+	this.send = function (clientRequest) {
+		request.payload = clientRequest.payload;
+	}
+}
+
+function MockSenderWithResponse () {
+	this.send = function () {
+		return {
+			payload: JSON.stringify([{deliveryLine1: "An address"}]),
+			status_code: ""
+		};
+	}
+}
