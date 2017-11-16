@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
+const Candidate = require("../../source/us_street/candidate");
 const Batch = require("../../source/batch");
 const errors = require("../../source/errors");
 
@@ -85,16 +86,16 @@ describe("A client", function () {
 		expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
 	});
 
-	// it ("attaches a match candidate from a response to a lookup.", function () {
-	// 	let mockSender = new MockSenderWithResponse();
-	// 	const client = new Client(mockSender);
-	// 	let lookup = new Lookup();
-	// 	let expectedResult = [{deliveryLine1: "An address"}];
-	//
-	// 	client.sendLookup(lookup);
-	//
-	// 	expect(lookup.result[0]).to.equal(expectedResult);
-	// });
+	it ("attaches a match candidate from a response to a lookup.", function () {
+		let mockSender = new MockSenderWithResponse();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		let expectedResult = new Candidate({delivery_line_1: "An address", input_index: 0});
+
+		client.sendLookup(lookup);
+
+		expect(lookup.result[0]).to.deep.equal(expectedResult);
+	});
 });
 
 function MockSender () {
@@ -103,16 +104,18 @@ function MockSender () {
 	};
 	this.request = request;
 
-	this.send = function (clientRequest) {
+	this.send = function (callback, clientRequest) {
 		request.payload = clientRequest.payload;
 	}
 }
 
 function MockSenderWithResponse () {
-	this.send = function () {
-		return {
-			payload: JSON.stringify([{deliveryLine1: "An address"}]),
+	this.send = function (callback, request) {
+		let mockResponse = JSON.stringify({
+			payload: [{delivery_line_1: "An address", input_index: 0}],
 			status_code: ""
-		};
+		});
+
+		callback(mockResponse);
 	}
 }

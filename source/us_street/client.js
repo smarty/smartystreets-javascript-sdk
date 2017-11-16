@@ -1,6 +1,7 @@
 const Request = require("../request");
 const Batch = require("../batch");
 const errors = require("../errors");
+const Candidate = require("./candidate");
 
 class Client {
 	constructor(sender) {
@@ -52,7 +53,24 @@ class Client {
 		let payload = this.generateRequestPayload(batch);
 		let request = new Request(JSON.stringify(payload));
 
-		this.sender.send(request);
+		this.sender.send(this.assignCandidatesToLookupsGenerator(batch), request);
+	}
+
+	assignCandidatesToLookupsGenerator(batch) {
+		return (response) => {
+			this.assignCandidatesToLookups(batch, response)
+		}
+	}
+
+	assignCandidatesToLookups (batch, response) {
+		let parsedResponse = JSON.parse(response);
+
+		parsedResponse.payload.forEach((rawCandidate) => {
+			let candidate = new Candidate(rawCandidate);
+			let lookup = batch.getByIndex(candidate.inputIndex);
+
+			lookup.result.push(candidate);
+		});
 	}
 }
 

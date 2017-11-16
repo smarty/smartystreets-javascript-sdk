@@ -1,9 +1,9 @@
 const chai = require("chai");
 const expect = chai.expect;
+const Candidate = require("../../source/us_street/candidate");
 
 describe("A match candidate", function () {
 	it("has populated fields.", function () {
-		const Candidate = require("../../source/us_street/candidate");
 		const sampleResponse = {
 			input_index: 0,
 			candidate_index: 1,
