@@ -87,7 +87,7 @@ describe("A client", function () {
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
-		const expectedMockPayload = [{delivery_line_1: "An address", input_index: 0}];
+		const expectedMockPayload = JSON.stringify([{delivery_line_1: "An address", input_index: 0}]);
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -99,12 +99,12 @@ describe("A client", function () {
 	});
 
 	it("attaches match candidates to their corresponding lookups.", function () {
-		const expectedMockPayload = [
+		const expectedMockPayload = JSON.stringify([
 			{delivery_line_1: "Address 0", input_index: 0},
 			{delivery_line_1: "Alternate address 0", input_index: 0},
 			{delivery_line_1: "Address 1", input_index: 1},
 			{delivery_line_1: "Address 3", input_index: 3},
-		];
+		]);
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
 		let lookup0 = new Lookup();
@@ -126,6 +126,15 @@ describe("A client", function () {
 		expect(batch.getByIndex(2).result).to.deep.equal([]);
 		expect(batch.getByIndex(3).result[0].deliveryLine1).to.equal("Address 3");
 	});
+
+	it("throws an exception if the response comes back with an error.", function () {
+		const expectedMockError = new Error("Stamn! She's a tough one!");
+		let mockSender = new MockSenderWithResponse([], expectedMockError);
+		let client = new Client(mockSender);
+		let lookup = new Lookup();
+
+		expect(() => client.sendLookup(() => {}, lookup)).to.throw(Error);
+	});
 });
 
 function MockSender() {
@@ -139,12 +148,13 @@ function MockSender() {
 	}
 }
 
-function MockSenderWithResponse(expectedPayload) {
+function MockSenderWithResponse(expectedPayload, expectedError) {
 	this.send = function (callback, request) {
-		let mockResponse = JSON.stringify({
+		let mockResponse = {
 			payload: expectedPayload,
-			status_code: ""
-		});
+			status_code: "",
+			error: expectedError
+		};
 
 		callback(mockResponse);
 	}

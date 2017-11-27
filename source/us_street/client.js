@@ -63,9 +63,13 @@ class Client {
 	}
 
 	assignCandidatesToLookups (batch, response) {
-		let parsedResponse = JSON.parse(response);
+		if (response.error) {
+			throw response.error;
+		}
 
-		parsedResponse.payload.forEach((rawCandidate) => {
+		console.log(response.payload);
+
+		JSON.parse(response.payload).forEach((rawCandidate) => {
 			let candidate = new Candidate(rawCandidate);
 			let lookup = batch.getByIndex(candidate.inputIndex);
 
