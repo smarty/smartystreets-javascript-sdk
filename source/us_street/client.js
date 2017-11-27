@@ -67,8 +67,6 @@ class Client {
 			throw response.error;
 		}
 
-		console.log(response.payload);
-
 		JSON.parse(response.payload).forEach((rawCandidate) => {
 			let candidate = new Candidate(rawCandidate);
 			let lookup = batch.getByIndex(candidate.inputIndex);
