@@ -9,6 +9,10 @@ class Client {
 	}
 
 	sendLookup(lookup) {
+		if (typeof lookup === "undefined") {
+			throw new errors.MissingLookupError;
+		}
+
 		let batch = new Batch();
 		batch.add(lookup);
 		this.sendBatch(batch);

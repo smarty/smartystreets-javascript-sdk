@@ -133,7 +133,14 @@ describe("A client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		expect(() => client.sendLookup(() => {}, lookup)).to.throw(Error);
+		expect(() => client.sendLookup(lookup)).to.throw(Error);
+	});
+
+	it ("throws an exception if a lookup is undefined.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+
+		expect(() => client.sendLookup()).to.throw(errors.MissingLookupError);
 	});
 });
 
