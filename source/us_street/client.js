@@ -10,7 +10,7 @@ class Client {
 
 	sendLookup(lookup) {
 		if (typeof lookup === "undefined") {
-			throw new errors.MissingLookupError;
+			throw new errors.UndefinedLookupError;
 		}
 
 		let batch = new Batch();

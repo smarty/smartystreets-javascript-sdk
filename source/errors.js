@@ -16,7 +16,7 @@ class BatchEmptyError extends SmartyError {
 	}
 }
 
-class MissingLookupError extends SmartyError {
+class UndefinedLookupError extends SmartyError {
 	constructor() {
 		super("The lookup provided is missing or undefined.");
 	}
@@ -25,5 +25,5 @@ class MissingLookupError extends SmartyError {
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
-	MissingLookupError: MissingLookupError
+	UndefinedLookupError: UndefinedLookupError
 };

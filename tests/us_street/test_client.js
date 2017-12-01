@@ -140,7 +140,7 @@ describe("A client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.sendLookup()).to.throw(errors.MissingLookupError);
+		expect(() => client.sendLookup()).to.throw(errors.UndefinedLookupError);
 	});
 });
 
