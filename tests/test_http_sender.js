@@ -22,5 +22,14 @@ describe ("An Axios implementation of a HTTP sender", function () {
 
 		expect(requestConfig.hasOwnProperty("method")).to.equal(true);
 		expect(requestConfig.method).to.equal("POST");
-	})
+	});
+
+	it ("adds a GET method to the HTTP request config when appropriate.", function () {
+		let request = new Request();
+		let sender = new HttpSender();
+		let requestConfig = sender.buildRequestConfig(request);
+
+		expect(requestConfig.hasOwnProperty("method")).to.equal(true);
+		expect(requestConfig.method).to.equal("GET");
+	});
 });
