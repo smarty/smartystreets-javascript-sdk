@@ -1,15 +1,17 @@
 class HttpSender {
 	constructor () {}
 
-	buildRequestConfig (request) {
-		return {
-			// method: "POST",
-			// baseURL: "something",
-			// params: {},
-			data: request.payload,
-			// headers: {},
-			// timeout: 0
-		};
+	buildRequestConfig ({payload, headers}) {
+		let config = {};
+
+		if (payload) {
+			config.method = "POST";
+			config.data = payload;
+		} else {
+			config.method = "GET";
+		}
+
+		return config;
 	}
 }
 
