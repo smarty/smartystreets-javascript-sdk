@@ -1,8 +1,12 @@
 class HttpSender {
-	constructor () {}
+	constructor (timeout = 10000) {
+		this.timeout = timeout;
+	}
 
 	buildRequestConfig ({payload, headers}) {
-		let config = {};
+		let config = {
+			timeout: this.timeout
+		};
 
 		if (payload) {
 			config.method = "POST";

@@ -32,4 +32,18 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.hasOwnProperty("method")).to.equal(true);
 		expect(requestConfig.method).to.equal("GET");
 	});
+
+	it ("add a timeout to the HTTP request config.", function () {
+		let request = new Request("test payload");
+		let sender = new HttpSender();
+		let requestConfig = sender.buildRequestConfig(request);
+
+		let customTimeoutSender = new HttpSender(5);
+		let customTimeoutRequestConfig = customTimeoutSender.buildRequestConfig(request);
+
+		expect(requestConfig.hasOwnProperty("timeout")).to.equal(true);
+		expect(requestConfig.timeout).to.equal(10000);
+
+		expect(customTimeoutRequestConfig.timeout).to.equal(5);
+	});
 });
