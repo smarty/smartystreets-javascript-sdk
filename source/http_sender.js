@@ -5,14 +5,13 @@ class HttpSender {
 
 	buildRequestConfig ({payload, headers}) {
 		let config = {
+			method: "GET",
 			timeout: this.timeout
 		};
 
 		if (payload) {
 			config.method = "POST";
 			config.data = payload;
-		} else {
-			config.method = "GET";
 		}
 
 		return config;

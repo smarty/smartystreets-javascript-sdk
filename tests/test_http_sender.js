@@ -46,4 +46,6 @@ describe ("An Axios implementation of a HTTP sender", function () {
 
 		expect(customTimeoutRequestConfig.timeout).to.equal(5);
 	});
+
+
 });
