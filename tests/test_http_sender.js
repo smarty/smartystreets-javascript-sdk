@@ -47,5 +47,14 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(customTimeoutRequestConfig.timeout).to.equal(5);
 	});
 
+	it ("adds parameters to the HTTP request config.", function () {
+		let request = new Request("");
+		let sender = new HttpSender();
 
+		request.parameters.test = "1";
+		let requestConfig = sender.buildRequestConfig(request);
+
+		expect(requestConfig.hasOwnProperty("params")).to.equal(true);
+		expect(requestConfig.params).to.deep.equal(request.parameters);
+	});
 });
