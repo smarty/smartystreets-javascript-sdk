@@ -50,11 +50,21 @@ describe ("An Axios implementation of a HTTP sender", function () {
 	it ("adds parameters to the HTTP request config.", function () {
 		let request = new Request("");
 		let sender = new HttpSender();
-
 		request.parameters.test = "1";
 		let requestConfig = sender.buildRequestConfig(request);
 
 		expect(requestConfig.hasOwnProperty("params")).to.equal(true);
 		expect(requestConfig.params).to.deep.equal(request.parameters);
+	});
+
+	it ("adds headers to the HTTP request config.", function () {
+		let request = new Request("");
+		let sender = new HttpSender();
+		let requestConfig = sender.buildRequestConfig(request);
+		let version = require("../package.json").version;
+
+		expect(requestConfig.hasOwnProperty("headers")).to.equal(true);
+		expect(requestConfig.headers["Content-Type"]).to.equal("application/json");
+		expect(requestConfig.headers["User-Agent"]).to.equal("smartystreets (sdk:javascript@" + version + ")");
 	});
 });

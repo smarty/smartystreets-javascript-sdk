@@ -3,11 +3,12 @@ class HttpSender {
 		this.timeout = timeout;
 	}
 
-	buildRequestConfig ({payload, parameters}) {
+	buildRequestConfig ({payload, parameters, headers}) {
 		let config = {
 			method: "GET",
 			timeout: this.timeout,
-			params: parameters
+			params: Object.assign({}, parameters),
+			headers: Object.assign({}, headers)
 		};
 
 		if (payload) {
