@@ -5,8 +5,11 @@ class Request {
 		this.payload = payload;
 		this.headers = {
 			"Content-Type": "application/json",
-			"User-Agent": "smartystreets (sdk:javascript@" + version + ")"
 		};
+		if (typeof module !== "undefined" && module.exports) {
+			this.headers["User-Agent"] = "smartystreets (sdk:javascript@" + version + ")";
+		}
+
 		this.parameters = {};
 	}
 }
