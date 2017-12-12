@@ -4,6 +4,7 @@ const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
 const Candidate = require("../../source/us_street/candidate");
 const Batch = require("../../source/batch");
+const Response = require("../../source/response");
 const errors = require("../../source/errors");
 
 describe("A client", function () {
@@ -157,11 +158,7 @@ function MockSender() {
 
 function MockSenderWithResponse(expectedPayload, expectedError) {
 	this.send = function (callback, request) {
-		let mockResponse = {
-			payload: expectedPayload,
-			status_code: "",
-			error: expectedError
-		};
+		let mockResponse = new Response("", expectedPayload, expectedError);
 
 		callback(mockResponse);
 	}
