@@ -1,16 +1,19 @@
 const Response = require("./response");
+const Axios = require("axios");
+const Promise = require("promise");
 
 class HttpSender {
 	constructor (timeout = 10000) {
 		this.timeout = timeout;
 	}
 
-	buildRequestConfig ({payload, parameters, headers}) {
+	buildRequestConfig ({payload, parameters, headers, baseUrl}) {
 		let config = {
 			method: "GET",
 			timeout: this.timeout,
 			params: Object.assign({}, parameters),
-			headers: Object.assign({}, headers)
+			headers: Object.assign({}, headers),
+			baseURL: baseUrl
 		};
 
 		if (payload) {
@@ -23,6 +26,18 @@ class HttpSender {
 
 	buildSmartyResponse(response) {
 		return new Response(response.status, response.data);
+	}
+
+	send (request) {
+		return new Promise((resolve, reject) => {
+			let requestConfig = this.buildRequestConfig(request);
+
+			Axios(requestConfig).then(response => {
+				resolve(this.buildSmartyResponse(response));
+			}, error => {
+				reject(this.buildSmartyResponse(error.response));
+			});
+		});
 	}
 }
 

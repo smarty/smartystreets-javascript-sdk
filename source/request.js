@@ -2,6 +2,7 @@ class Request {
 	constructor(payload) {
 		const version = require("../package.json").version;
 
+		this.baseUrl = "";
 		this.payload = payload;
 		this.headers = {
 			"Content-Type": "application/json",
