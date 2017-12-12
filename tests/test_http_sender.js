@@ -67,4 +67,28 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.headers["Content-Type"]).to.equal("application/json");
 		expect(requestConfig.headers["User-Agent"]).to.equal("smartystreets (sdk:javascript@" + version + ")");
 	});
+
+	it ("has has a response with the right status code.", function () {
+		let sender = new HttpSender();
+		let mockResponse = {
+			status: 200
+		};
+		let smartyResponse = sender.buildSmartyResponse(mockResponse);
+
+		expect(smartyResponse.hasOwnProperty("statusCode")).to.equal(true);
+		expect(smartyResponse.statusCode).to.equal(200);
+	});
+
+	it ("has response with a payload.", function () {
+		let sender = new HttpSender();
+		let mockData = [1, 2, 3];
+		let mockResponse = {
+			status: 200,
+			data: mockData
+		};
+		let smartyResponse = sender.buildSmartyResponse(mockResponse);
+
+		expect(smartyResponse.hasOwnProperty("payload")).to.equal(true);
+		expect(smartyResponse.payload).to.equal(mockData);
+	});
 });

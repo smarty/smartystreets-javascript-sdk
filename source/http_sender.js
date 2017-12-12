@@ -1,3 +1,5 @@
+const Response = require("./response");
+
 class HttpSender {
 	constructor (timeout = 10000) {
 		this.timeout = timeout;
@@ -17,6 +19,10 @@ class HttpSender {
 		}
 
 		return config;
+	}
+
+	buildSmartyResponse(response) {
+		return new Response(response.status, response.data);
 	}
 }
 
