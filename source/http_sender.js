@@ -3,11 +3,11 @@ const Axios = require("axios");
 const Promise = require("promise");
 
 class HttpSender {
-	constructor (timeout = 10000) {
+	constructor(timeout = 10000) {
 		this.timeout = timeout;
 	}
 
-	buildRequestConfig ({payload, parameters, headers, baseUrl}) {
+	buildRequestConfig({payload, parameters, headers, baseUrl}) {
 		let config = {
 			method: "GET",
 			timeout: this.timeout,
@@ -28,7 +28,7 @@ class HttpSender {
 		return new Response(response.status, response.data);
 	}
 
-	send (request) {
+	send(request) {
 		return new Promise((resolve, reject) => {
 			let requestConfig = this.buildRequestConfig(request);
 
