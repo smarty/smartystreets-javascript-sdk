@@ -20,7 +20,7 @@ describe("A signing sender", function () {
 
 	it("signs a request with static credentials.", function () {
 		let staticCredentials = new StaticCredentials(mockAuthId, mockAuthToken);
-		let signingSender = new SigningSender(staticCredentials, mockSender);
+		let signingSender = new SigningSender(mockSender, staticCredentials);
 
 		signingSender.send(request);
 
@@ -32,7 +32,7 @@ describe("A signing sender", function () {
 
 	it("signs a request with shared credentials.", function () {
 		let sharedCredentials = new SharedCredentials(mockAuthId, mockHostName);
-		let signingSender = new SigningSender(sharedCredentials, mockSender);
+		let signingSender = new SigningSender(mockSender, sharedCredentials);
 
 		signingSender.send(request);
 

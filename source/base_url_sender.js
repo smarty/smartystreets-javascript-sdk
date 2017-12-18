@@ -1,7 +1,7 @@
 const Promise = require("promise");
 
 class BaseUrlSender {
-	constructor(urlOverride, innerSender) {
+	constructor(innerSender, urlOverride) {
 		this.urlOverride = urlOverride;
 		this.innerSender = innerSender;
 	}

@@ -16,7 +16,7 @@ describe("A Base Url Sender", function () {
 		};
 		request = new Request();
 		urlOverride = "I'm in your base, killing your mans.";
-		baseUrlSender = new BaseUrlSender(urlOverride, innerSender);
+		baseUrlSender = new BaseUrlSender(innerSender, urlOverride);
 	});
 
 	it("replaces the request's base url with a new value.", function () {

@@ -1,7 +1,7 @@
 const Promise = require("promise");
 
 class SigningSender {
-	constructor (signer, innerSender) {
+	constructor(innerSender, signer) {
 		this.signer = signer;
 		this.innerSender = innerSender;
 	}
