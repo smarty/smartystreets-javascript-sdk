@@ -4,7 +4,7 @@ const BaseUrlSender = require("../source/base_url_sender");
 const Request = require("../source/request");
 const Promise = require("promise");
 
-describe("A Base Url Sender", function () {
+describe("A base url sender", function () {
 	let innerSender;
 	let request;
 	let urlOverride;
