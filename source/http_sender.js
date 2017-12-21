@@ -4,11 +4,12 @@ const axiosRetry = require("axios-retry");
 const Promise = require("promise");
 
 class HttpSender {
-	constructor(timeout = 10000, retries = 5) {
+	constructor(timeout = 10000, retries = 5, proxyConfig) {
 		axiosRetry(Axios, {
 			retries: retries,
 		});
 		this.timeout = timeout;
+		this.proxyConfig = proxyConfig;
 	}
 
 	buildRequestConfig({payload, parameters, headers, baseUrl}) {
@@ -24,6 +25,8 @@ class HttpSender {
 			config.method = "POST";
 			config.data = payload;
 		}
+
+		if (this.proxyConfig) config.proxy = this.proxyConfig;
 
 		return config;
 	}
