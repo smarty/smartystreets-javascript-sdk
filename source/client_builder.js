@@ -68,6 +68,10 @@ class ClientBuilder {
 	}
 
 	buildUsStreetApiClient() {
+		if (!this.baseUrl) {
+			this.baseUrl = US_STREET_API_URL;
+		}
+
 		return new UsStreetClient(this.buildSender());
 	}
 }

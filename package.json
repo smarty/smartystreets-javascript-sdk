@@ -1,17 +1,17 @@
 {
-  "name": "smarty-streets-sdk",
+  "name": "smartystreets-sdk",
   "version": "0.0.0",
   "version_comment": "DO NOT EDIT THE VERSION NUMBER (it is updated by a build job when a new release is published)",
   "description": "Quick and easy Smarty Streets address validation.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha 'tests/**/*.js'"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^4.0.1"
+    "mocha": "^4.1.0"
   },
   "dependencies": {
     "axios": "^0.17.1",

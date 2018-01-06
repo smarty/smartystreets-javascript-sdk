@@ -1,11 +1,13 @@
 const chai = require("chai");
 const expect = chai.expect;
+const should = chai.should;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
 const Candidate = require("../../source/us_street/candidate");
 const Batch = require("../../source/batch");
 const Response = require("../../source/response");
 const errors = require("../../source/errors");
+const Promise = require("promise");
 
 describe("A client", function () {
 	it("has a sender.", function () {
@@ -88,15 +90,15 @@ describe("A client", function () {
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
-		const expectedMockPayload = JSON.stringify([{delivery_line_1: "An address", input_index: 0}]);
+		const expectedMockPayload = [{delivery_line_1: "An address", input_index: 0}];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
 		let expectedResult = new Candidate({delivery_line_1: "An address", input_index: 0});
 
-		client.sendLookup(lookup);
-
-		expect(lookup.result[0]).to.deep.equal(expectedResult);
+		client.sendLookup(lookup).then(response => {
+			expect(lookup.result[0]).to.deep.equal(expectedResult);
+		});
 	});
 
 	it("attaches match candidates to their corresponding lookups.", function () {
@@ -119,13 +121,13 @@ describe("A client", function () {
 		batch.add(lookup2);
 		batch.add(lookup3);
 
-		client.sendBatch(batch);
-
-		expect(batch.getByIndex(0).result[0].deliveryLine1).to.equal("Address 0");
-		expect(batch.getByIndex(0).result[1].deliveryLine1).to.equal("Alternate address 0");
-		expect(batch.getByIndex(1).result[0].deliveryLine1).to.equal("Address 1");
-		expect(batch.getByIndex(2).result).to.deep.equal([]);
-		expect(batch.getByIndex(3).result[0].deliveryLine1).to.equal("Address 3");
+		client.sendBatch(batch).then(response => {
+			expect(batch.getByIndex(0).result[0].deliveryLine1).to.equal("Address 0");
+			expect(batch.getByIndex(0).result[1].deliveryLine1).to.equal("Alternate address 0");
+			expect(batch.getByIndex(1).result[0].deliveryLine1).to.equal("Address 1");
+			expect(batch.getByIndex(2).result).to.deep.equal([]);
+			expect(batch.getByIndex(3).result[0].deliveryLine1).to.equal("Address 3");
+		});
 	});
 
 	it("throws an exception if the response comes back with an error.", function () {
@@ -134,10 +136,10 @@ describe("A client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		expect(() => client.sendLookup(lookup)).to.throw(Error);
+		expect(client.sendLookup(lookup).then).to.throw(Error);
 	});
 
-	it ("throws an exception if a lookup is undefined.", function () {
+	it("throws an exception if a lookup is undefined.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 
@@ -151,15 +153,15 @@ function MockSender() {
 	};
 	this.request = request;
 
-	this.send = function (callback, clientRequest) {
+	this.send = function (clientRequest) {
 		request.payload = clientRequest.payload;
 	}
 }
 
 function MockSenderWithResponse(expectedPayload, expectedError) {
-	this.send = function (callback, request) {
-		let mockResponse = new Response("", expectedPayload, expectedError);
-
-		callback(mockResponse);
+	this.send = function () {
+		return new Promise((resolve, reject) => {
+			resolve(new Response("", expectedPayload, expectedError));
+		});
 	}
 }

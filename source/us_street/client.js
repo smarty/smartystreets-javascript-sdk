@@ -2,6 +2,7 @@ const Request = require("../request");
 const Batch = require("../batch");
 const errors = require("../errors");
 const Candidate = require("./candidate");
+const Promise = require("promise");
 
 class Client {
 	constructor(sender) {
@@ -15,7 +16,7 @@ class Client {
 
 		let batch = new Batch();
 		batch.add(lookup);
-		this.sendBatch(batch);
+		return this.sendBatch(batch);
 	}
 
 	generateRequestPayload(batch) {
@@ -57,21 +58,21 @@ class Client {
 		let payload = this.generateRequestPayload(batch);
 		let request = new Request(JSON.stringify(payload));
 
-		this.sender.send(this.assignCandidatesToLookupsGenerator(batch), request);
-	}
-
-	assignCandidatesToLookupsGenerator(batch) {
-		return (response) => {
-			this.assignCandidatesToLookups(batch, response)
-		}
+		return new Promise((resolve, reject) => {
+			this.sender.send(request).then(response => {
+				resolve(this.assignCandidatesToLookups(batch, response));
+			}, error => {
+				reject(error);
+			});
+		});
 	}
 
 	assignCandidatesToLookups (batch, response) {
-		if (response.error) {
+		if (response.error !== undefined) {
 			throw response.error;
 		}
 
-		JSON.parse(response.payload).forEach((rawCandidate) => {
+		response.payload.forEach((rawCandidate) => {
 			let candidate = new Candidate(rawCandidate);
 			let lookup = batch.getByIndex(candidate.inputIndex);
 

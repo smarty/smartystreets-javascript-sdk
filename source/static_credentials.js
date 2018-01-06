@@ -1,12 +1,12 @@
 class StaticCredentials {
 	constructor (authId, authToken) {
 		this.authId = authId;
-		this.hostName = authToken;
+		this.authToken = authToken;
 	}
 
 	sign (request) {
 		request.parameters["auth-id"] = this.authId;
-		request.parameters["auth-token"] = this.hostName;
+		request.parameters["auth-token"] = this.authToken;
 	}
 }
 
