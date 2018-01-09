@@ -4,11 +4,9 @@ const Lookup = require("../index").usStreet.Lookup;
 let authId = process.env.SMARTY_AUTH_ID;
 let authToken = process.env.SMARTY_AUTH_TOKEN;
 
-let clientBuilder = new smartystreetsCore.ClientBuilder();
+let clientBuilder = new smartystreetsCore.ClientBuilder(new smartystreetsCore.StaticCredentials(authId, authToken));
 //Configure the Client Builder
-clientBuilder.withProxy("192.168.1.74", 8080, "user", "openSesame");
-clientBuilder.signer = new smartystreetsCore.StaticCredentials(authId, authToken);
-let client = clientBuilder.buildUsStreetApiClient();
+let client = clientBuilder.withProxy("localhost", 8080, "user", "openSesame").buildUsStreetApiClient();
 
 let lookup1 = new Lookup();
 lookup1.street = "330 N 100 W";

@@ -1,5 +1,6 @@
 const Response = require("./response");
-const Axios = require("axios");
+// const Axios = require("axios");
+const Axios = require("axios-proxy-fix");
 const axiosRetry = require("axios-retry");
 const Promise = require("promise");
 
@@ -18,7 +19,10 @@ class HttpSender {
 			timeout: this.timeout,
 			params: Object.assign({}, parameters),
 			headers: Object.assign({}, headers),
-			baseURL: baseUrl
+			baseURL: baseUrl,
+			validateStatus: function (status) {
+				return status < 500;
+			}
 		};
 
 		if (payload) {
@@ -27,12 +31,14 @@ class HttpSender {
 		}
 
 		if (this.proxyConfig) config.proxy = this.proxyConfig;
-
 		return config;
 	}
 
-	buildSmartyResponse(response) {
-		return new Response(response.status, response.data);
+	buildSmartyResponse(response, error) {
+		if (response) {
+			return new Response(response.status, response.data);
+		}
+		return new Response(undefined, undefined, error)
 	}
 
 	send(request) {
@@ -42,7 +48,7 @@ class HttpSender {
 			Axios(requestConfig).then(response => {
 				resolve(this.buildSmartyResponse(response));
 			}, error => {
-				reject(this.buildSmartyResponse(error.response));
+				reject(this.buildSmartyResponse(undefined, error));
 			});
 		});
 	}
