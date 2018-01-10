@@ -55,6 +55,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.RequestEntityTooLargeError);
 		})
 	});
+
+	it("gives a Bad Request error on a 400.", function () {
+		let mockSender = generateMockSender(400);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.BadRequestError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {

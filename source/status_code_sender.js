@@ -12,6 +12,10 @@ class StatusCodeSender {
 				resolve(response);
 			}, error => {
 				switch (error.statusCode) {
+					case 400:
+						error.error = errors.BadRequestError;
+						break;
+
 					case 401:
 						error.error = errors.BadCredentialsError;
 						break;

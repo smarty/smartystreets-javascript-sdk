@@ -40,11 +40,18 @@ class RequestEntityTooLargeError extends SmartyError {
 	}
 }
 
+class BadRequestError extends SmartyError {
+	constructor() {
+		super("Bad Request (Malformed Payload): A GET request lacked a street field or the request body of a POST request contained malformed JSON.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
 	UndefinedLookupError: UndefinedLookupError,
 	BadCredentialsError: BadCredentialsError,
 	PaymentRequiredError: PaymentRequiredError,
-	RequestEntityTooLargeError: RequestEntityTooLargeError
+	RequestEntityTooLargeError: RequestEntityTooLargeError,
+	BadRequestError: BadRequestError
 };
