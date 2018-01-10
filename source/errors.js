@@ -22,8 +22,15 @@ class UndefinedLookupError extends SmartyError {
 	}
 }
 
+class BadCredentialsError extends SmartyError {
+	constructor() {
+		super("Unauthorized: The credentials were provided incorrectly or did not match any existing active credentials.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
-	UndefinedLookupError: UndefinedLookupError
+	UndefinedLookupError: UndefinedLookupError,
+	BadCredentialsError: BadCredentialsError
 };
