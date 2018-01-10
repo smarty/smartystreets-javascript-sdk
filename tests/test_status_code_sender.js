@@ -77,6 +77,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.UnprocessableEntityError);
 		})
 	});
+
+	it("gives a Too Many Requests error on a 429.", function () {
+		let mockSender = generateMockSender(429);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.TooManyRequestsError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {

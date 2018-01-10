@@ -52,6 +52,12 @@ class UnprocessableEntityError extends SmartyError {
 	}
 }
 
+class TooManyRequestsError extends SmartyError {
+	constructor() {
+		super("When using the public 'website key' authentication, we restrict the number of requests coming from a given source over too short of a time.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
@@ -60,5 +66,6 @@ module.exports = {
 	PaymentRequiredError: PaymentRequiredError,
 	RequestEntityTooLargeError: RequestEntityTooLargeError,
 	BadRequestError: BadRequestError,
-	UnprocessableEntityError: UnprocessableEntityError
+	UnprocessableEntityError: UnprocessableEntityError,
+	TooManyRequestsError: TooManyRequestsError
 };

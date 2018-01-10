@@ -31,6 +31,10 @@ class StatusCodeSender {
 					case 422:
 						error.error = errors.UnprocessableEntityError;
 						break;
+
+					case 429:
+						error.error = errors.TooManyRequestsError;
+						break;
 				}
 				reject(error);
 			});
