@@ -28,9 +28,16 @@ class BadCredentialsError extends SmartyError {
 	}
 }
 
+class PaymentRequiredError extends SmartyError {
+	constructor() {
+		super("Payment Required: There is no active subscription for the account associated with the credentials submitted with the request.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
 	UndefinedLookupError: UndefinedLookupError,
-	BadCredentialsError: BadCredentialsError
+	BadCredentialsError: BadCredentialsError,
+	PaymentRequiredError: PaymentRequiredError
 };

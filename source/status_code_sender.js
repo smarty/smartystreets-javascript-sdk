@@ -15,6 +15,10 @@ class StatusCodeSender {
 					case 401:
 						error.error = errors.BadCredentialsError;
 						break;
+
+					case 402:
+						error.error = errors.PaymentRequiredError;
+						break;
 				}
 				reject(error);
 			});

@@ -33,6 +33,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.BadCredentialsError);
 		})
 	});
+
+	it("gives a Payment Required error on a 402.", function () {
+		let mockSender = generateMockSender(402);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.PaymentRequiredError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {
