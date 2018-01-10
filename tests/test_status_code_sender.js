@@ -6,7 +6,7 @@ const Request = require("../source/request");
 const errors = require("../source/errors");
 
 describe("A status code sender", function () {
-	it ("doesn't attach an error on a 200.", function () {
+	it("doesn't attach an error on a 200.", function () {
 		let mockSender = {
 			send: () => {
 				return new Promise((resolve, reject) => {
@@ -23,14 +23,8 @@ describe("A status code sender", function () {
 		});
 	});
 
-	it ("gives a Bad Credentials error on a 401.", function () {
-		let mockSender = {
-			send: () => {
-				return new Promise((resolve, reject) => {
-					reject(new Response(401))
-				});
-			}
-		};
+	it("gives a Bad Credentials error on a 401.", function () {
+		let mockSender = generateMockSender(401);
 		let statusCodeSender = new StatusCodeSender(mockSender);
 		let request = new Request();
 
@@ -40,3 +34,13 @@ describe("A status code sender", function () {
 		})
 	});
 });
+
+function generateMockSender(httpError) {
+	return {
+		send: () => {
+			return new Promise((resolve, reject) => {
+				reject(new Response(httpError))
+			});
+		}
+	};
+}
