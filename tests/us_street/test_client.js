@@ -96,7 +96,7 @@ describe("A client", function () {
 		let lookup = new Lookup();
 		let expectedResult = new Candidate({delivery_line_1: "An address", input_index: 0});
 
-		client.sendLookup(lookup).then(response => {
+		return client.sendLookup(lookup).then(response => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
