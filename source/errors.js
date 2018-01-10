@@ -34,10 +34,17 @@ class PaymentRequiredError extends SmartyError {
 	}
 }
 
+class RequestEntityTooLargeError extends SmartyError {
+	constructor() {
+		super("Request Entity Too Large: The request body has exceeded the maximum size.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
 	UndefinedLookupError: UndefinedLookupError,
 	BadCredentialsError: BadCredentialsError,
-	PaymentRequiredError: PaymentRequiredError
+	PaymentRequiredError: PaymentRequiredError,
+	RequestEntityTooLargeError: RequestEntityTooLargeError
 };

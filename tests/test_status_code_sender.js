@@ -44,6 +44,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.PaymentRequiredError);
 		})
 	});
+
+	it("gives a Request Entity Too Large error on a 413.", function () {
+		let mockSender = generateMockSender(413);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.RequestEntityTooLargeError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {

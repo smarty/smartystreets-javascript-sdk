@@ -19,6 +19,10 @@ class StatusCodeSender {
 					case 402:
 						error.error = errors.PaymentRequiredError;
 						break;
+
+					case 413:
+						error.error = errors.RequestEntityTooLargeError;
+						break;
 				}
 				reject(error);
 			});
