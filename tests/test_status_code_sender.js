@@ -66,6 +66,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.BadRequestError);
 		})
 	});
+
+	it("gives an Unprocessable Entity error on a 422.", function () {
+		let mockSender = generateMockSender(422);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.UnprocessableEntityError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {

@@ -27,6 +27,10 @@ class StatusCodeSender {
 					case 413:
 						error.error = errors.RequestEntityTooLargeError;
 						break;
+
+					case 422:
+						error.error = errors.UnprocessableEntityError;
+						break;
 				}
 				reject(error);
 			});

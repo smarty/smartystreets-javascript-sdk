@@ -46,6 +46,12 @@ class BadRequestError extends SmartyError {
 	}
 }
 
+class UnprocessableEntityError extends SmartyError {
+	constructor() {
+		super("GET request lacked required fields.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
@@ -53,5 +59,6 @@ module.exports = {
 	BadCredentialsError: BadCredentialsError,
 	PaymentRequiredError: PaymentRequiredError,
 	RequestEntityTooLargeError: RequestEntityTooLargeError,
-	BadRequestError: BadRequestError
+	BadRequestError: BadRequestError,
+	UnprocessableEntityError: UnprocessableEntityError
 };
