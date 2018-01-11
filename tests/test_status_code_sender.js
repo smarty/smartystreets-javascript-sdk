@@ -67,11 +67,11 @@ function expectedErrorForStatusCode(expectedError, errorCode) {
 	})
 }
 
-function generateMockSender(httpError) {
+function generateMockSender(errorCode) {
 	return {
 		send: () => {
 			return new Promise((resolve, reject) => {
-				reject(new Response(httpError))
+				reject(new Response(errorCode))
 			});
 		}
 	};
