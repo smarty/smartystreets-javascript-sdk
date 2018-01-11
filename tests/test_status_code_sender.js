@@ -88,6 +88,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.TooManyRequestsError);
 		})
 	});
+
+	it("gives an Internal Server Error error on a 500.", function () {
+		let mockSender = generateMockSender(500);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.InternalServerError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {

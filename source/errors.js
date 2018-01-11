@@ -58,6 +58,12 @@ class TooManyRequestsError extends SmartyError {
 	}
 }
 
+class InternalServerError extends SmartyError {
+	constructor() {
+		super("Internal Server Error.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
@@ -67,5 +73,6 @@ module.exports = {
 	RequestEntityTooLargeError: RequestEntityTooLargeError,
 	BadRequestError: BadRequestError,
 	UnprocessableEntityError: UnprocessableEntityError,
-	TooManyRequestsError: TooManyRequestsError
+	TooManyRequestsError: TooManyRequestsError,
+	InternalServerError: InternalServerError
 };

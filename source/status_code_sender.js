@@ -35,6 +35,10 @@ class StatusCodeSender {
 					case 429:
 						error.error = errors.TooManyRequestsError;
 						break;
+
+					case 500:
+						error.error = errors.InternalServerError;
+						break;
 				}
 				reject(error);
 			});
