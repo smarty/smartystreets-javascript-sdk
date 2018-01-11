@@ -64,6 +64,12 @@ class InternalServerError extends SmartyError {
 	}
 }
 
+class ServiceUnavailableError extends SmartyError {
+	constructor() {
+		super("Service Unavailable. Try again later.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
@@ -74,5 +80,6 @@ module.exports = {
 	BadRequestError: BadRequestError,
 	UnprocessableEntityError: UnprocessableEntityError,
 	TooManyRequestsError: TooManyRequestsError,
-	InternalServerError: InternalServerError
+	InternalServerError: InternalServerError,
+	ServiceUnavailableError: ServiceUnavailableError
 };

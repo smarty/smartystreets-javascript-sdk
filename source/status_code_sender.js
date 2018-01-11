@@ -39,6 +39,10 @@ class StatusCodeSender {
 					case 500:
 						error.error = errors.InternalServerError;
 						break;
+
+					case 503:
+						error.error = errors.ServiceUnavailableError;
+						break;
 				}
 				reject(error);
 			});

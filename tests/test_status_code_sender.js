@@ -99,6 +99,17 @@ describe("A status code sender", function () {
 			expect(error.error).to.equal(errors.InternalServerError);
 		})
 	});
+
+	it("gives an Service Unvailable error on a 503.", function () {
+		let mockSender = generateMockSender(503);
+		let statusCodeSender = new StatusCodeSender(mockSender);
+		let request = new Request();
+
+		return statusCodeSender.send(request).then(response => {
+		}, error => {
+			expect(error.error).to.equal(errors.ServiceUnavailableError);
+		})
+	});
 });
 
 function generateMockSender(httpError) {
