@@ -70,6 +70,12 @@ class ServiceUnavailableError extends SmartyError {
 	}
 }
 
+class GatewayTimeoutError extends SmartyError {
+	constructor() {
+		super("The upstream data provider did not respond in a timely fashion and the request failed. A serious, yet rare occurrence indeed.");
+	}
+}
+
 module.exports = {
 	BatchFullError: BatchFullError,
 	BatchEmptyError: BatchEmptyError,
@@ -81,5 +87,6 @@ module.exports = {
 	UnprocessableEntityError: UnprocessableEntityError,
 	TooManyRequestsError: TooManyRequestsError,
 	InternalServerError: InternalServerError,
-	ServiceUnavailableError: ServiceUnavailableError
+	ServiceUnavailableError: ServiceUnavailableError,
+	GatewayTimeoutError: GatewayTimeoutError
 };
