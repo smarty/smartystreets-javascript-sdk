@@ -1,6 +1,5 @@
 const chai = require("chai");
 const expect = chai.expect;
-const should = chai.should;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
 const Candidate = require("../../source/us_street/candidate");
@@ -34,11 +33,11 @@ describe("A client", function () {
 		expect(sentFlag).to.equal(true);
 	});
 
-	it("builds a request for a single lookup with the correct JSON payload.", function () {
+	it("builds a request for a single lookup with the correct request parameters.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-		let expectedPayloadObject = [{
+		let expectedParameters = {
 			street: "1",
 			street2: "2",
 			secondary: "3",
@@ -51,12 +50,11 @@ describe("A client", function () {
 			match: "10",
 			candidates: "11",
 			input_id: "12"
-		}];
-		let expectedPayload = JSON.stringify(expectedPayloadObject);
+		};
 
 		client.sendLookup(lookup);
 
-		expect(mockSender.request.payload).to.equal(expectedPayload);
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
 	it("builds a request for a batch lookup with the correct JSON payload.", function () {
@@ -145,16 +143,36 @@ describe("A client", function () {
 
 		expect(() => client.sendLookup()).to.throw(errors.UndefinedLookupError);
 	});
+
+	it("attaches request parameters for batches with a single lookup and a request payload for batches with more than 1 lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup1 = new Lookup("a");
+		let lookup2 = new Lookup("b");
+		let batch = new Batch();
+
+		batch.add(lookup1);
+		client.sendBatch(batch);
+
+		expect(mockSender.request.parameters).not.to.deep.equal({});
+
+		batch.add(lookup2);
+		client.sendBatch(batch);
+
+		expect(mockSender.request.payload).not.to.equal(undefined);
+	});
 });
 
 function MockSender() {
 	let request = {
-		payload: ""
+		payload: undefined,
+		parameters: undefined
 	};
 	this.request = request;
 
 	this.send = function (clientRequest) {
 		request.payload = clientRequest.payload;
+		request.parameters = clientRequest.parameters
 	}
 }
 

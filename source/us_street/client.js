@@ -55,8 +55,13 @@ class Client {
 			throw new errors.BatchEmptyError;
 		}
 
-		let payload = this.generateRequestPayload(batch);
-		let request = new Request(JSON.stringify(payload));
+		let request = new Request();
+
+		if (batch.length() === 1) {
+			request.parameters = this.generateRequestPayload(batch)[0];
+		} else {
+			request.payload = JSON.stringify(this.generateRequestPayload(batch));
+		}
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request).then(response => {
