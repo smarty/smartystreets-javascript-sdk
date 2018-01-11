@@ -24,93 +24,48 @@ describe("A status code sender", function () {
 	});
 
 	it("gives a Bad Credentials error on a 401.", function () {
-		let mockSender = generateMockSender(401);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.BadCredentialsError);
-		})
+		return expectedErrorForStatusCode(errors.BadCredentialsError, 401);
 	});
 
 	it("gives a Payment Required error on a 402.", function () {
-		let mockSender = generateMockSender(402);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.PaymentRequiredError);
-		})
+		return expectedErrorForStatusCode(errors.PaymentRequiredError, 402);
 	});
 
 	it("gives a Request Entity Too Large error on a 413.", function () {
-		let mockSender = generateMockSender(413);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.RequestEntityTooLargeError);
-		})
+		return expectedErrorForStatusCode(errors.RequestEntityTooLargeError, 413);
 	});
 
 	it("gives a Bad Request error on a 400.", function () {
-		let mockSender = generateMockSender(400);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.BadRequestError);
-		})
+		return expectedErrorForStatusCode(errors.BadRequestError, 400);
 	});
 
 	it("gives an Unprocessable Entity error on a 422.", function () {
-		let mockSender = generateMockSender(422);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.UnprocessableEntityError);
-		})
+		return expectedErrorForStatusCode(errors.UnprocessableEntityError, 422);
 	});
 
 	it("gives a Too Many Requests error on a 429.", function () {
-		let mockSender = generateMockSender(429);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.TooManyRequestsError);
-		})
+		return expectedErrorForStatusCode(errors.TooManyRequestsError, 429);
 	});
 
 	it("gives an Internal Server Error error on a 500.", function () {
-		let mockSender = generateMockSender(500);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.InternalServerError);
-		})
+		return expectedErrorForStatusCode(errors.InternalServerError, 500);
 	});
 
 	it("gives an Service Unvailable error on a 503.", function () {
-		let mockSender = generateMockSender(503);
-		let statusCodeSender = new StatusCodeSender(mockSender);
-		let request = new Request();
-
-		return statusCodeSender.send(request).then(response => {
-		}, error => {
-			expect(error.error).to.equal(errors.ServiceUnavailableError);
-		})
+		return expectedErrorForStatusCode(errors.ServiceUnavailableError, 503);
 	});
 });
+
+function expectedErrorForStatusCode(expectedError, errorCode) {
+	let mockSender = generateMockSender(errorCode);
+	let statusCodeSender = new StatusCodeSender(mockSender);
+	let request = new Request();
+
+	return statusCodeSender.send(request).then(response => {
+	}, error => {
+		expect(error.error).to.equal(expectedError);
+	})
+}
 
 function generateMockSender(httpError) {
 	return {
