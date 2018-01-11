@@ -43,6 +43,10 @@ class StatusCodeSender {
 					case 503:
 						error.error = errors.ServiceUnavailableError;
 						break;
+
+					case 504:
+						error.error = errors.GatewayTimeoutError;
+						break;
 				}
 				reject(error);
 			});

@@ -54,6 +54,10 @@ describe("A status code sender", function () {
 	it("gives an Service Unvailable error on a 503.", function () {
 		return expectedErrorForStatusCode(errors.ServiceUnavailableError, 503);
 	});
+
+	it("gives an Gateway Timeout error on a 504.", function () {
+		return expectedErrorForStatusCode(errors.GatewayTimeoutError, 504);
+	});
 });
 
 function expectedErrorForStatusCode(expectedError, errorCode) {
