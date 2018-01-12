@@ -1,6 +1,7 @@
 const HttpSender = require("./http_sender");
 const SigningSender = require("./signing_sender");
 const BaseUrlSender = require("./base_url_sender");
+const AgentSender = require("./agent_sender");
 const StaticCredentials = require("./static_credentials");
 
 const UsStreetClient = require("./us_street/client");
@@ -62,7 +63,8 @@ class ClientBuilder {
 
 		let httpSender = new HttpSender(this.maxTimeout, this.maxRetries, this.proxy);
 		let signingSender = new SigningSender(httpSender, this.signer);
-		let baseUrlSender = new BaseUrlSender(signingSender, this.baseUrl);
+		let agentSender = new AgentSender(signingSender);
+		let baseUrlSender = new BaseUrlSender(agentSender, this.baseUrl);
 
 		return baseUrlSender;
 	}

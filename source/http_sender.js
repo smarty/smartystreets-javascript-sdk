@@ -17,8 +17,8 @@ class HttpSender {
 		let config = {
 			method: "GET",
 			timeout: this.timeout,
-			params: Object.assign({}, parameters),
-			headers: Object.assign({}, headers),
+			params: parameters,
+			headers: headers,
 			baseURL: baseUrl,
 			validateStatus: function (status) {
 				return status < 500;
