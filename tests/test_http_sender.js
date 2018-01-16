@@ -1,6 +1,5 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Axios = require("axios");
 const Request = require("../source/request");
 const HttpSender = require("../source/http_sender");
 
