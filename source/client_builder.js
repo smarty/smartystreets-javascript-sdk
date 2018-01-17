@@ -3,6 +3,7 @@ const SigningSender = require("./signing_sender");
 const BaseUrlSender = require("./base_url_sender");
 const AgentSender = require("./agent_sender");
 const StaticCredentials = require("./static_credentials");
+const CustomHeaderSender = require("./custom_header_sender");
 
 const UsStreetClient = require("./us_street/client");
 
@@ -20,6 +21,7 @@ class ClientBuilder {
 		this.maxTimeout = 10000;
 		this.baseUrl = undefined;
 		this.proxy = undefined;
+		this.customHeaders = {};
 	}
 
 	withMaxRetries(retries) {
@@ -58,13 +60,20 @@ class ClientBuilder {
 		return this;
 	}
 
+	withCustomHeaders(customHeaders) {
+		this.customHeaders = customHeaders;
+
+		return this;
+	}
+
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
 		let httpSender = new HttpSender(this.maxTimeout, this.maxRetries, this.proxy);
 		let signingSender = new SigningSender(httpSender, this.signer);
 		let agentSender = new AgentSender(signingSender);
-		let baseUrlSender = new BaseUrlSender(agentSender, this.baseUrl);
+		let customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);
+		let baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 
 		return baseUrlSender;
 	}
