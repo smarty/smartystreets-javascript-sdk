@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha 'tests/**/*.js'"
   },
-  "author": "",
+  "author": "SmartyStreets <support@smartystreets.com> (https://www.smartystreets.com)",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
