@@ -1,5 +1,6 @@
-const smartystreetsCore = require("../index").core;
-const Lookup = require("../index").usStreet.Lookup;
+const SmartyStreetsSdk = require("../index");
+const smartystreetsCore = SmartyStreetsSdk.core;
+const Lookup = SmartyStreetsSdk.usStreet.Lookup;
 
 let authId = process.env.SMARTY_AUTH_ID;
 let authToken = process.env.SMARTY_AUTH_TOKEN;
