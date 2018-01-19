@@ -8,7 +8,7 @@
     "test": "mocha 'tests/**/*.js'"
   },
   "author": "SmartyStreets <support@smartystreets.com> (https://www.smartystreets.com)",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.1.0"
