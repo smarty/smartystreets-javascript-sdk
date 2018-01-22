@@ -5,7 +5,7 @@ class Result {
 		this.reason = responseData.reason;
 		this.valid = this.status === undefined && this.reason === undefined;
 
-		this.cities = responseData.city_states.map(city => {
+		this.cities = (responseData.city_states === undefined) ? [] : responseData.city_states.map(city => {
 			return {
 				city: city.city,
 				stateAbbreviation: city.state_abbreviation,
@@ -14,7 +14,7 @@ class Result {
 			};
 		});
 
-		this.zipcodes = responseData.zipcodes.map(zipcode => {
+		this.zipcodes = (responseData.zipcodes === undefined) ? [] : responseData.zipcodes.map(zipcode => {
 			return {
 				zipcode: zipcode.zipcode,
 				zipcodeType: zipcode.zipcode_type,

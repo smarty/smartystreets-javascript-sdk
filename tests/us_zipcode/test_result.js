@@ -65,4 +65,17 @@ describe("A US Zipcode result", function () {
 
 		expect(result.valid).to.equal(true);
 	});
+
+	it("populates accurately on an invalid lookup", function () {
+		let sampleResponse = {
+			"status": "testing_status",
+			"reason": "We are testing."
+		};
+
+		let result = new Result(sampleResponse);
+
+		expect(result.status).to.equal("testing_status");
+		expect(result.reason).to.equal("We are testing.");
+
+	});
 });
