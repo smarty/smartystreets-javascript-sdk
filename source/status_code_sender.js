@@ -3,12 +3,12 @@ const errors = require("./errors");
 
 class StatusCodeSender {
 	constructor (innerSender) {
-		this.innerSender = innerSender;
+		this.sender = innerSender;
 	}
 
 	send(request) {
 		return new Promise((resolve, reject) => {
-			this.innerSender.send(request).then(response => {
+			this.sender.send(request).then(response => {
 				resolve(response);
 			}, error => {
 				switch (error.statusCode) {

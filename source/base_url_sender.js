@@ -3,13 +3,13 @@ const Promise = require("promise");
 class BaseUrlSender {
 	constructor(innerSender, urlOverride) {
 		this.urlOverride = urlOverride;
-		this.innerSender = innerSender;
+		this.sender = innerSender;
 	}
 
 	send(request) {
 		return new Promise((resolve, reject) => {
 			request.baseUrl = this.urlOverride;
-			this.innerSender.send(request).then(response => {
+			this.sender.send(request).then(response => {
 				resolve(response);
 			}, error => {
 				reject(error);
