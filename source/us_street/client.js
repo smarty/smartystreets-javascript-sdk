@@ -3,6 +3,7 @@ const Batch = require("../batch");
 const errors = require("../errors");
 const Candidate = require("./candidate");
 const Promise = require("promise");
+const InputData = require("../input_data");
 
 class Client {
 	constructor(sender) {
@@ -21,32 +22,22 @@ class Client {
 
 	generateRequestPayload(batch) {
 		return batch.lookups.map((lookup) => {
-			let payloadReadyLookup = {};
+			let inputData = new InputData(lookup);
 
-			buildPayloadElement("street", "street");
-			buildPayloadElement("street2", "street2");
-			buildPayloadElement("secondary", "secondary");
-			buildPayloadElement("city", "city");
-			buildPayloadElement("state", "state");
-			buildPayloadElement("zip_code", "zipCode");
-			buildPayloadElement("last_line", "lastLine");
-			buildPayloadElement("addressee", "addressee");
-			buildPayloadElement("urbanization", "urbanization");
-			buildPayloadElement("match", "match");
-			buildPayloadElement("candidates", "maxCandidates");
-			buildPayloadElement("input_id", "inputId");
+			inputData.add("street", "street");
+			inputData.add("street2", "street2");
+			inputData.add("secondary", "secondary");
+			inputData.add("city", "city");
+			inputData.add("state", "state");
+			inputData.add("zipcode", "zipCode");
+			inputData.add("lastline", "lastLine");
+			inputData.add("addressee", "addressee");
+			inputData.add("urbanization", "urbanization");
+			inputData.add("match", "match");
+			inputData.add("candidates", "maxCandidates");
+			inputData.add("input_id", "inputId");
 
-			return payloadReadyLookup;
-
-			function buildPayloadElement(apiField, lookupField) {
-				if (lookupFieldIsPopulated()) {
-					payloadReadyLookup[apiField] = lookup[lookupField];
-				}
-
-				function lookupFieldIsPopulated() {
-					return lookup[lookupField] !== "" && lookup[lookupField] !== undefined;
-				}
-			}
+			return inputData.data;
 		});
 	}
 
