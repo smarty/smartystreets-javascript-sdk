@@ -1,10 +1,17 @@
+const Request = require("../request");
+const InputData = require("../input_data");
+const errors = require("../errors");
+
 class Client {
 	constructor(sender) {
 		this.sender = sender;
 	}
 
-	sendLookup(lookup) {
-		this.sender.send(lookup);
+	sendBatch(batch) {
+		if (batch.isEmpty()) {
+			throw new errors.BatchEmptyError;
+		}
+
 	}
 }
 

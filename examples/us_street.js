@@ -11,8 +11,9 @@ let client = clientBuilder.buildUsStreetApiClient();
 
 let lookup1 = new Lookup();
 lookup1.street = "330 N 100 W";
-lookup1.city = "Provo";
-lookup1.state = "Utah";
+// lookup1.city = "Provo";
+// lookup1.state = "Utah";
+lookup1.zipCode = "84601";
 
 let lookup2 = new Lookup();
 lookup2.street = "1600 Amphitheater Pkwy";
@@ -25,4 +26,4 @@ let batch = new smartystreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
 
-client.sendBatch(batch).then(response => console.log(lookup2.result), error => console.log("error:", error));
+client.sendBatch(batch).then(response => console.log(lookup1.result), error => console.log("error:", error));
