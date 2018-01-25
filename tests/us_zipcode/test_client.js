@@ -2,9 +2,11 @@ const chai = require("chai");
 const expect = chai.expect;
 const Client = require("../../source/us_zipcode/client");
 const Lookup = require("../../source/us_zipcode/lookup");
+const Result = require("../../source/us_zipcode/result");
 const Batch = require("../../source/batch");
-const Promise = require("promise");
+const Response = require("../../source/response");
 const errors = require("../../source/errors");
+const Promise = require("promise");
 
 describe("A US Zipcode client", function () {
 	it("has a sender.", function () {
@@ -60,6 +62,18 @@ describe("A US Zipcode client", function () {
 		client.sendBatch(batch);
 
 		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+	});
+
+	it("attaches a match candidate from a response to a lookup.", function () {
+		const expectedMockPayload = [{input_index: 0}];
+		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		let expectedResult = new Result({input_index: 0});
+
+		return client.sendLookup(lookup).then(response => {
+			expect(lookup.result[0]).to.deep.equal(expectedResult);
+		});
 	});
 
 });

@@ -54,16 +54,16 @@ class Client {
 	}
 
 	assignResultsToLookups (batch, response) {
-		// if (response.error !== undefined) {
-		// 	throw response.error;
-		// }
-		//
-		// response.payload.forEach((rawResult) => {
-		// 	let result = new Result(rawResult);
-		// 	let lookup = batch.getByIndex(result.inputIndex);
-		//
-		// 	lookup.result.push(result);
-		// });
+		if (response.error !== undefined) {
+			throw response.error;
+		}
+
+		response.payload.forEach((rawResult) => {
+			let result = new Result(rawResult);
+			let lookup = batch.getByIndex(result.inputIndex);
+
+			lookup.result.push(result);
+		});
 	}
 }
 
