@@ -39,19 +39,41 @@ describe("A US Zipcode client", function () {
 		expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
 	});
 
+	it("builds a request for a batch lookup with the correct JSON payload.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup0 = new Lookup("lookup0");
+		let lookup1 = new Lookup("lookup1");
+		let lookup2 = new Lookup("lookup2");
+		let batch = new Batch();
+		const expectedPayload = [
+			{"city": "lookup0"},
+			{"city": "lookup1"},
+			{"city": "lookup2"}
+		];
+
+		batch.add(lookup0);
+		batch.add(lookup1);
+		batch.add(lookup2);
+
+		client.sendBatch(batch);
+
+		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+	});
 
 });
 
 function MockSender() {
 	let request = {
-		data: undefined,
+		payload: undefined,
 		parameters: undefined
 	};
 	this.request = request;
 
 	this.send = function (clientRequest) {
-		request.data = clientRequest.data;
-		request.parameters = clientRequest.parameters
+		request.payload = clientRequest.payload;
+		request.parameters = clientRequest.parameters;
+		return new Promise((resolve, reject) => {});
 	}
 }
 

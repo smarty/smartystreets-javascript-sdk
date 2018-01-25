@@ -49,7 +49,6 @@ describe("A client", function () {
 			urbanization: "9",
 			match: "10",
 			candidates: "11",
-			input_id: "12"
 		};
 
 		client.sendLookup(lookup);
