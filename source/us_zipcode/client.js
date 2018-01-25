@@ -1,4 +1,5 @@
 const Request = require("../request");
+const Batch = require("../batch");
 const InputData = require("../input_data");
 const Result = require("./result");
 const errors = require("../errors");
@@ -6,6 +7,16 @@ const errors = require("../errors");
 class Client {
 	constructor(sender) {
 		this.sender = sender;
+	}
+
+	sendLookup(lookup) {
+		if (typeof lookup === "undefined") {
+			throw new errors.UndefinedLookupError;
+		}
+
+		let batch = new Batch();
+		batch.add(lookup);
+		return this.sendBatch(batch);
 	}
 
 	sendBatch(batch) {

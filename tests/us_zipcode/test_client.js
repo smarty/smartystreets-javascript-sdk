@@ -14,22 +14,23 @@ describe("A US Zipcode client", function () {
 		expect(client.sender).to.deep.equal(mockSender);
 	});
 
-	// it("calls its inner sender's send function.", function () {
-	// 	const mockSender = {
-	// 		send: function (request) {
-	// 			sentFlag = true;
-	// 			mockSenderRequest = request;
-	// 		}
-	// 	};
-	// 	const client = new Client(mockSender);
-	// 	let lookup = new Lookup();
-	// 	let sentFlag = false;
-	// 	let mockSenderRequest = {};
-	//
-	// 	client.sendLookup(lookup);
-	//
-	// 	expect(sentFlag).to.equal(true);
-	// });
+	it("calls its inner sender's send function.", function () {
+		const mockSender = {
+			send: function (request) {
+				sentFlag = true;
+				mockSenderRequest = request;
+				return new Promise((resolve, reject) => {});
+			}
+		};
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		let sentFlag = false;
+		let mockSenderRequest = {};
+
+		client.sendLookup(lookup);
+
+		expect(sentFlag).to.equal(true);
+	});
 
 	it("doesn't send an empty batch.", function () {
 		let mockSender = new MockSender();
