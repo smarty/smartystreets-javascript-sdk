@@ -105,6 +105,24 @@ describe("A US Zipcode client", function () {
 		});
 	});
 
+	it("attaches request parameters for batches with a single lookup and a request payload for batches with more than 1 lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup1 = new Lookup("a");
+		let lookup2 = new Lookup("b");
+		let batch = new Batch();
+
+		batch.add(lookup1);
+		client.sendBatch(batch);
+
+		expect(mockSender.request.parameters).not.to.deep.equal({});
+
+		batch.add(lookup2);
+		client.sendBatch(batch);
+
+		expect(mockSender.request.payload).not.to.equal(undefined);
+	});
+
 });
 
 function MockSender() {
