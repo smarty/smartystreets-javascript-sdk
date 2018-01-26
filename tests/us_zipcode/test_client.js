@@ -76,6 +76,35 @@ describe("A US Zipcode client", function () {
 		});
 	});
 
+	it("attaches match candidates to their corresponding lookups.", function () {
+		const expectedMockPayload = JSON.stringify([
+			{city: "City 0", input_index: 0},
+			{city: "Alternate city 0", input_index: 0},
+			{city: "City 1", input_index: 1},
+			{city: "City 3", input_index: 3},
+		]);
+		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		let client = new Client(mockSender);
+		let lookup0 = new Lookup();
+		let lookup1 = new Lookup();
+		let lookup2 = new Lookup();
+		let lookup3 = new Lookup();
+		let batch = new Batch();
+
+		batch.add(lookup0);
+		batch.add(lookup1);
+		batch.add(lookup2);
+		batch.add(lookup3);
+
+		client.sendBatch(batch).then(response => {
+			expect(batch.getByIndex(0).result[0].city).to.equal("City 0");
+			expect(batch.getByIndex(0).result[1].city).to.equal("Alternate city 0");
+			expect(batch.getByIndex(1).result[0].city).to.equal("City 1");
+			expect(batch.getByIndex(2).result).to.deep.equal([]);
+			expect(batch.getByIndex(3).result[0].city).to.equal("City 3");
+		});
+	});
+
 });
 
 function MockSender() {
