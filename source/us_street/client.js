@@ -55,6 +55,9 @@ class Client {
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request).then(response => {
+				if (response.error) {
+					reject(response.error);
+				}
 				resolve(this.assignCandidatesToLookups(batch, response));
 			}, error => {
 				reject(error);
@@ -63,16 +66,14 @@ class Client {
 	}
 
 	assignCandidatesToLookups (batch, response) {
-		if (response.error !== undefined) {
-			throw response.error;
-		}
-
-		response.payload.forEach((rawCandidate) => {
+		response.payload.map((rawCandidate) => {
 			let candidate = new Candidate(rawCandidate);
 			let lookup = batch.getByIndex(candidate.inputIndex);
 
 			lookup.result.push(candidate);
 		});
+
+		return batch;
 	}
 }
 

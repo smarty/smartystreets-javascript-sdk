@@ -1,4 +1,6 @@
 const chai = require("chai");
+const chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
 const expect = chai.expect;
 const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
@@ -8,7 +10,7 @@ const Response = require("../../source/response");
 const errors = require("../../source/errors");
 const Promise = require("promise");
 
-describe("A client", function () {
+describe("A US Street client", function () {
 	it("has a sender.", function () {
 		const mockSender = {};
 		const client = new Client(mockSender);
@@ -127,13 +129,13 @@ describe("A client", function () {
 		});
 	});
 
-	it("throws an exception if the response comes back with an error.", function () {
+	it("rejects with an exception if the response comes back with an error.", function () {
 		const expectedMockError = new Error("Stamn! She's a tough one!");
 		let mockSender = new MockSenderWithResponse([], expectedMockError);
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		expect(client.sendLookup(lookup).then).to.throw(Error);
+		return expect(client.sendLookup(lookup)).to.eventually.be.rejectedWith(expectedMockError);
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {
