@@ -3,6 +3,7 @@ const Batch = require("../batch");
 const InputData = require("../input_data");
 const Result = require("./result");
 const errors = require("../errors");
+const Promise = require("promise");
 
 class Client {
 	constructor(sender) {
