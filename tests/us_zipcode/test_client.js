@@ -1,4 +1,6 @@
-const chai = require("chai");
+let chai = require("chai");
+const chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
 const expect = chai.expect;
 const Client = require("../../source/us_zipcode/client");
 const Lookup = require("../../source/us_zipcode/lookup");
@@ -123,6 +125,14 @@ describe("A US Zipcode client", function () {
 		expect(mockSender.request.payload).not.to.equal(undefined);
 	});
 
+	it("rejects with an exception if the response comes back with an error.", function () {
+		const expectedMockError = new Error("Stamn! She's a tough one!");
+		let mockSender = new MockSenderWithResponse([], expectedMockError);
+		let client = new Client(mockSender);
+		let lookup = new Lookup();
+
+		return expect(client.sendLookup(lookup)).to.eventually.be.rejectedWith(expectedMockError);
+	});
 });
 
 function MockSender() {
@@ -132,7 +142,7 @@ function MockSender() {
 	};
 	this.request = request;
 
-	this.send = function (clientRequest) {
+	this.send = clientRequest => {
 		request.payload = clientRequest.payload;
 		request.parameters = clientRequest.parameters;
 		return new Promise((resolve, reject) => {});
@@ -140,7 +150,7 @@ function MockSender() {
 }
 
 function MockSenderWithResponse(expectedPayload, expectedError) {
-	this.send = function () {
+	this.send = () => {
 		return new Promise((resolve, reject) => {
 			resolve(new Response("", expectedPayload, expectedError));
 		});
