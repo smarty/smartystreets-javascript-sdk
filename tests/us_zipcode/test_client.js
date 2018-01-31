@@ -140,6 +140,21 @@ describe("A US Zipcode client", function () {
 
 		expect(() => client.sendLookup()).to.throw(errors.UndefinedLookupError);
 	});
+
+	it("builds a request for a single lookup with the correct request parameters.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup("4", "5", "6");
+		let expectedParameters = {
+			city: "4",
+			state: "5",
+			zipcode: "6",
+		};
+
+		client.sendLookup(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
 });
 
 function MockSender() {
