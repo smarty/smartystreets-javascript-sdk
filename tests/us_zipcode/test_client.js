@@ -133,6 +133,13 @@ describe("A US Zipcode client", function () {
 
 		return expect(client.sendLookup(lookup)).to.eventually.be.rejectedWith(expectedMockError);
 	});
+
+	it("throws an exception if a lookup is undefined.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+
+		expect(() => client.sendLookup()).to.throw(errors.UndefinedLookupError);
+	});
 });
 
 function MockSender() {
