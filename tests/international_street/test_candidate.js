@@ -4,7 +4,7 @@ const Candidate = require("../../source/international_street/candidate");
 
 describe("An International match candidate", function () {
 	it("populates with the appropriate fields.", function () {
-		const expectedResponseData = {
+		const mockResponseData = {
 				organization: "1",
 				address1: "2",
 				address2: "3",
@@ -32,6 +32,7 @@ describe("An International match candidate", function () {
 					postal_code_extra: "24",
 					premise: "25",
 					premise_extra: "26",
+					premise_prefix_number: "26.5",
 					premise_number: "27",
 					premise_type: "28",
 					thoroughfare: "29",
@@ -71,8 +72,76 @@ describe("An International match candidate", function () {
 					max_address_precision: "59",
 				},
 			};
-		let candidate = new Candidate(expectedResponseData);
+		const expectedCandidateFields = {
+			organization: "1",
+			address1: "2",
+			address2: "3",
+			address3: "4",
+			address4: "5",
+			address5: "6",
+			address6: "7",
+			address7: "8",
+			address8: "9",
+			address9: "10",
+			address10: "11",
+			address11: "12",
+			address12: "13",
+			components: {
+				countryIso3: "14",
+				superAdministrativeArea: "15",
+				administrativeArea: "16",
+				subAdministrativeArea: "17",
+				dependentLocality: "18",
+				dependentLocalityName: "19",
+				doubleDependentLocality: "20",
+				locality: "21",
+				postalCode: "22",
+				postalCodeShort: "23",
+				postalCodeExtra: "24",
+				premise: "25",
+				premiseExtra: "26",
+				premisePrefixNumber: "26.5",
+				premiseNumber: "27",
+				premiseType: "28",
+				thoroughfare: "29",
+				thoroughfarePredirection: "30",
+				thoroughfarePostdirection: "31",
+				thoroughfareName: "32",
+				thoroughfareTrailingType: "33",
+				thoroughfareType: "34",
+				dependentThoroughfare: "35",
+				dependentThoroughfarePredirection: "36",
+				dependentThoroughfarePostdirection: "37",
+				dependentThoroughfareName: "38",
+				dependentThoroughfareTrailingType: "39",
+				dependentThoroughfareType: "40",
+				building: "41",
+				buildingLeadingType: "42",
+				buildingName: "43",
+				buildingTrailingType: "44",
+				subBuildingType: "45",
+				subBuildingNumber: "46",
+				subBuildingName: "47",
+				subBuilding: "48",
+				postBox: "49",
+				postBoxType: "50",
+				postBoxNumber: "51",
+			},
+			metadata: {
+				latitude: 52.0,
+				longitude: 53.0,
+				geocodePrecision: "54",
+				maxGeocodePrecision: "55",
+				addressFormat: "56",
+			},
+			analysis: {
+				verificationStatus: "57",
+				addressPrecision: "58",
+				maxAddressPrecision: "59",
+			},
+		};
+		let candidate = new Candidate(mockResponseData);
 
-		expect(candidate).to.deep.equal(expectedResponseData);
+		expect(candidate).to.deep.equal(expectedCandidateFields);
 	});
 });
