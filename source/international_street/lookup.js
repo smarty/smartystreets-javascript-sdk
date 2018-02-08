@@ -20,16 +20,6 @@ class Lookup {
 	}
 
 	ensureEnoughInfo() {
-		let fieldIsMissing = (field) => {
-			if (!field) return true;
-
-			return field.replace(/\s/g, "").length > 1;
-		};
-
-		let fieldIsSet = (field) => {
-			return !fieldIsMissing(field);
-		};
-
 		if (fieldIsMissing(this.country)) throw new UnprocessableEntityError("Country field is required.");
 
 		if (fieldIsSet(this.freeform)) return true;
@@ -41,6 +31,16 @@ class Lookup {
 		if (fieldIsMissing(this.locality) || fieldIsMissing(this.administrativeArea)) throw new UnprocessableEntityError("Insufficient information: One or more required fields were not set on the lookup.");
 
 		return true;
+
+		function fieldIsMissing (field) {
+			if (!field) return true;
+
+			return field.replace(/\s/g, "").length > 1;
+		}
+
+		function fieldIsSet (field) {
+			return !fieldIsMissing(field);
+		}
 	}
 }
 
