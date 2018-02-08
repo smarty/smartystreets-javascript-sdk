@@ -50,9 +50,11 @@ describe("An International Street lookup", function () {
 
 	it ("accepts lookups with enough info.", function () {
 		let lookup1 = new Lookup("a", "b");
+
 		let lookup2 = new Lookup("a");
 		lookup2.address1 = "b";
 		lookup2.postalCode = "c";
+
 		let lookup3 = new Lookup("a");
 		lookup3.address1 = "b";
 		lookup3.locality = "c";
