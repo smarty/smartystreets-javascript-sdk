@@ -36,7 +36,11 @@ class Lookup {
 
 		if (fieldIsMissing(this.address1)) throw new UnprocessableEntityError("Either freeform or address1 is required.");
 
+		if (fieldIsSet(this.postalCode)) return true;
+
 		if (fieldIsMissing(this.locality) || fieldIsMissing(this.administrativeArea)) throw new UnprocessableEntityError("Insufficient information: One or more required fields were not set on the lookup.");
+
+		return true;
 	}
 }
 

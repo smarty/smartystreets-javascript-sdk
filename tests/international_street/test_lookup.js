@@ -48,6 +48,21 @@ describe("An International Street lookup", function () {
 		verifyErrorMessage(lookup, messages.insufficientInformation);
 	});
 
+	it ("accepts lookups with enough info.", function () {
+		let lookup1 = new Lookup("a", "b");
+		let lookup2 = new Lookup("a");
+		lookup2.address1 = "b";
+		lookup2.postalCode = "c";
+		let lookup3 = new Lookup("a");
+		lookup3.address1 = "b";
+		lookup3.locality = "c";
+		lookup3.administrativeArea = "d";
+
+		expect(lookup1.ensureEnoughInfo()).to.equal(true);
+		expect(lookup2.ensureEnoughInfo()).to.equal(true);
+		expect(lookup3.ensureEnoughInfo()).to.equal(true);
+	});
+
 	function verifyErrorMessage(lookup, message) {
 		let expectedError = new errors.UnprocessableEntityError(message);
 
