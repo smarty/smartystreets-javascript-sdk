@@ -67,7 +67,7 @@ function expectedErrorForStatusCode(expectedError, errorCode) {
 
 	return statusCodeSender.send(request).then(response => {
 	}, error => {
-		expect(error.error).to.equal(expectedError);
+		expect(error.error).to.be.an.instanceOf(expectedError);
 	})
 }
 

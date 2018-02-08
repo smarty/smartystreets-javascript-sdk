@@ -1,3 +1,5 @@
+const UnprocessableEntityError = require("../errors").UnprocessableEntityError;
+
 class Lookup {
 	constructor(country, freeform) {
 		this.result = [];
@@ -15,6 +17,14 @@ class Lookup {
 		this.geocode = undefined;
 		this.language = undefined;
 		this.inputId = undefined;
+
+		this.ensureEnoughInfo = this.ensureEnoughInfo.bind(this);
+	}
+
+	ensureEnoughInfo() {
+		if (typeof this.country === "undefined") {
+			throw new UnprocessableEntityError("Country field is required.");
+		}
 	}
 }
 

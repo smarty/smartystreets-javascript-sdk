@@ -47,8 +47,8 @@ class BadRequestError extends SmartyError {
 }
 
 class UnprocessableEntityError extends SmartyError {
-	constructor() {
-		super("GET request lacked required fields.");
+	constructor(message) {
+		super(message);
 	}
 }
 

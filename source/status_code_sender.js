@@ -13,39 +13,39 @@ class StatusCodeSender {
 			}, error => {
 				switch (error.statusCode) {
 					case 400:
-						error.error = errors.BadRequestError;
+						error.error = new errors.BadRequestError();
 						break;
 
 					case 401:
-						error.error = errors.BadCredentialsError;
+						error.error = new errors.BadCredentialsError();
 						break;
 
 					case 402:
-						error.error = errors.PaymentRequiredError;
+						error.error = new errors.PaymentRequiredError();
 						break;
 
 					case 413:
-						error.error = errors.RequestEntityTooLargeError;
+						error.error = new errors.RequestEntityTooLargeError();
 						break;
 
 					case 422:
-						error.error = errors.UnprocessableEntityError;
+						error.error = new errors.UnprocessableEntityError("GET request lacked required fields.");
 						break;
 
 					case 429:
-						error.error = errors.TooManyRequestsError;
+						error.error = new errors.TooManyRequestsError();
 						break;
 
 					case 500:
-						error.error = errors.InternalServerError;
+						error.error = new errors.InternalServerError();
 						break;
 
 					case 503:
-						error.error = errors.ServiceUnavailableError;
+						error.error = new errors.ServiceUnavailableError();
 						break;
 
 					case 504:
-						error.error = errors.GatewayTimeoutError;
+						error.error = new errors.GatewayTimeoutError();
 						break;
 				}
 				reject(error);
