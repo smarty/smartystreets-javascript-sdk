@@ -4,6 +4,12 @@ const Lookup = require("../../source/international_street/lookup");
 const errors = require("../../source/errors");
 
 describe("An International Street lookup", function () {
+	const messages = {
+		countryRequired: "Country field is required.",
+		freeformOrAddress1Required: "Either freeform or address1 is required.",
+		insufficientInformation: "Insufficient information: One or more required fields were not set on the lookup.",
+	};
+
 	it("correctly populates fields.", function () {
 		let lookup = new Lookup("a", "b");
 
@@ -12,27 +18,29 @@ describe("An International Street lookup", function () {
 	});
 
 	it("rejects lookups without a country.", function () {
-		const message = "Country field is required.";
-
-		testRejection(new Lookup(), message);
+		verifyErrorMessage(new Lookup(), messages.countryRequired);
 	});
 
 	it("rejects lookups with only a country.", function () {
-		const message = "Either freeform or address1 is required.";
-
-		testRejection(new Lookup("a"), message);
+		verifyErrorMessage(new Lookup("a"), messages.freeformOrAddress1Required);
 	});
 
 	it("rejects lookups with only a country and address 1.", function () {
 		let lookup = new Lookup("a");
 		lookup.address1 = "b";
 
-		const message = "Insufficient information: One or more required fields were not set on the lookup.";
-
-		testRejection(lookup, message);
+		verifyErrorMessage(lookup, messages.insufficientInformation);
 	});
 
-	function testRejection(lookup, message) {
+	it("rejects lookups with only a country, address 1, and locality.", function () {
+		let lookup = new Lookup("a");
+		lookup.address1 = "b";
+		lookup.locality = "c";
+
+		verifyErrorMessage(lookup, messages.insufficientInformation);
+	});
+
+	function verifyErrorMessage(lookup, message) {
 		let expectedError = new errors.UnprocessableEntityError(message);
 
 		try {
