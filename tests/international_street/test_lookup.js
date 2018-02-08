@@ -40,6 +40,14 @@ describe("An International Street lookup", function () {
 		verifyErrorMessage(lookup, messages.insufficientInformation);
 	});
 
+	it("rejects lookups with only a country, address 1, and adminstrative area.", function () {
+		let lookup = new Lookup("a");
+		lookup.address1 = "b";
+		lookup.administrativeArea = "c";
+
+		verifyErrorMessage(lookup, messages.insufficientInformation);
+	});
+
 	function verifyErrorMessage(lookup, message) {
 		let expectedError = new errors.UnprocessableEntityError(message);
 
