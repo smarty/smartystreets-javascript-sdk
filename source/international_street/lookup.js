@@ -17,6 +17,9 @@ class Lookup {
 		this.geocode = undefined;
 		this.language = undefined;
 		this.inputId = undefined;
+
+		this.ensureEnoughInfo = this.ensureEnoughInfo.bind(this);
+		this.ensureValidData = this.ensureValidData.bind(this);
 	}
 
 	ensureEnoughInfo() {
@@ -31,17 +34,21 @@ class Lookup {
 		if (fieldIsMissing(this.locality) || fieldIsMissing(this.administrativeArea)) throw new UnprocessableEntityError("Insufficient information: One or more required fields were not set on the lookup.");
 
 		return true;
-
-		function fieldIsMissing (field) {
-			if (!field) return true;
-
-			return field.replace(/\s/g, "").length > 1;
-		}
-
-		function fieldIsSet (field) {
-			return !fieldIsMissing(field);
-		}
 	}
+
+	ensureValidData() {
+		if (fieldIsSet(this.geocode) && this.geocode.toLowerCase() !== "true") throw new UnprocessableEntityError("Invalid input: geocode can only be set to 'true' (default is 'false'.");
+	}
+}
+
+function fieldIsMissing (field) {
+	if (!field) return true;
+
+	return field.replace(/\s/g, "").length < 1;
+}
+
+function fieldIsSet (field) {
+	return !fieldIsMissing(field);
 }
 
 module.exports = Lookup;

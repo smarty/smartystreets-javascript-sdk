@@ -8,6 +8,7 @@ describe("An International Street lookup", function () {
 		countryRequired: "Country field is required.",
 		freeformOrAddress1Required: "Either freeform or address1 is required.",
 		insufficientInformation: "Insufficient information: One or more required fields were not set on the lookup.",
+		badGeocode: "Invalid input: geocode can only be set to 'true' (default is 'false'.",
 	};
 
 	it("correctly populates fields.", function () {
@@ -18,18 +19,18 @@ describe("An International Street lookup", function () {
 	});
 
 	it("rejects lookups without a country.", function () {
-		verifyErrorMessage(new Lookup(), messages.countryRequired);
+		ensureValidationThrows(new Lookup().ensureEnoughInfo, messages.countryRequired);
 	});
 
 	it("rejects lookups with only a country.", function () {
-		verifyErrorMessage(new Lookup("a"), messages.freeformOrAddress1Required);
+		ensureValidationThrows(new Lookup("a").ensureEnoughInfo, messages.freeformOrAddress1Required);
 	});
 
 	it("rejects lookups with only a country and address 1.", function () {
 		let lookup = new Lookup("a");
 		lookup.address1 = "b";
 
-		verifyErrorMessage(lookup, messages.insufficientInformation);
+		ensureValidationThrows(lookup.ensureEnoughInfo, messages.insufficientInformation);
 	});
 
 	it("rejects lookups with only a country, address 1, and locality.", function () {
@@ -37,7 +38,7 @@ describe("An International Street lookup", function () {
 		lookup.address1 = "b";
 		lookup.locality = "c";
 
-		verifyErrorMessage(lookup, messages.insufficientInformation);
+		ensureValidationThrows(lookup.ensureEnoughInfo, messages.insufficientInformation);
 	});
 
 	it("rejects lookups with only a country, address 1, and adminstrative area.", function () {
@@ -45,7 +46,14 @@ describe("An International Street lookup", function () {
 		lookup.address1 = "b";
 		lookup.administrativeArea = "c";
 
-		verifyErrorMessage(lookup, messages.insufficientInformation);
+		ensureValidationThrows(lookup.ensureEnoughInfo, messages.insufficientInformation);
+	});
+
+	it("rejects lookups with an invalid geocode value.", function () {
+		let lookup = new Lookup();
+		lookup.geocode = "Blarg!";
+
+		ensureValidationThrows(lookup.ensureValidData, messages.badGeocode);
 	});
 
 	it ("accepts lookups with enough info.", function () {
@@ -65,11 +73,11 @@ describe("An International Street lookup", function () {
 		expect(lookup3.ensureEnoughInfo()).to.equal(true);
 	});
 
-	function verifyErrorMessage(lookup, message) {
+	function ensureValidationThrows(callback, message) {
 		let expectedError = new errors.UnprocessableEntityError(message);
 
 		try {
-			lookup.ensureEnoughInfo();
+			callback();
 			expect(true).to.equal(false);
 		}
 		catch (error) {
