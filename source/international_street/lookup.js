@@ -60,7 +60,9 @@ class Lookup {
 function fieldIsMissing (field) {
 	if (!field) return true;
 
-	return field.replace(/\s/g, "").length < 1;
+	const whitespaceCharacters = /\s/g;
+
+	return field.replace(whitespaceCharacters, "").length < 1;
 }
 
 function fieldIsSet (field) {
