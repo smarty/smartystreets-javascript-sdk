@@ -9,6 +9,7 @@ describe("An International Street lookup", function () {
 		freeformOrAddress1Required: "Either freeform or address1 is required.",
 		insufficientInformation: "Insufficient information: One or more required fields were not set on the lookup.",
 		badGeocode: "Invalid input: geocode can only be set to 'true' (default is 'false'.",
+		invalidLanguage: "Invalid input: language can only be set to 'latin' or 'native'. When not set, the the output language will match the language of the input values."
 	};
 
 	it("correctly populates fields.", function () {
@@ -54,6 +55,14 @@ describe("An International Street lookup", function () {
 		lookup.geocode = "Blarg!";
 
 		ensureValidationThrows(lookup.ensureValidData, messages.badGeocode);
+	});
+
+	//TODO: Reject lookups with an invalid language.
+	it("rejects lookups with an invalid language.", function () {
+		let lookup = new Lookup("a", "b");
+		lookup.language = "Rubberduckian";
+
+		ensureValidationThrows(lookup.ensureValidData, messages.invalidLanguage);
 	});
 
 	it ("accepts lookups with enough info.", function () {

@@ -1,4 +1,11 @@
 const UnprocessableEntityError = require("../errors").UnprocessableEntityError;
+const messages = {
+	countryRequired: "Country field is required.",
+	freeformOrAddress1Required: "Either freeform or address1 is required.",
+	insufficientInformation: "Insufficient information: One or more required fields were not set on the lookup.",
+	badGeocode: "Invalid input: geocode can only be set to 'true' (default is 'false'.",
+	invalidLanguage: "Invalid input: language can only be set to 'latin' or 'native'. When not set, the the output language will match the language of the input values."
+};
 
 class Lookup {
 	constructor(country, freeform) {
@@ -23,21 +30,30 @@ class Lookup {
 	}
 
 	ensureEnoughInfo() {
-		if (fieldIsMissing(this.country)) throw new UnprocessableEntityError("Country field is required.");
+		if (fieldIsMissing(this.country)) throw new UnprocessableEntityError(messages.countryRequired);
 
 		if (fieldIsSet(this.freeform)) return true;
 
-		if (fieldIsMissing(this.address1)) throw new UnprocessableEntityError("Either freeform or address1 is required.");
+		if (fieldIsMissing(this.address1)) throw new UnprocessableEntityError(messages.freeformOrAddress1Required);
 
 		if (fieldIsSet(this.postalCode)) return true;
 
-		if (fieldIsMissing(this.locality) || fieldIsMissing(this.administrativeArea)) throw new UnprocessableEntityError("Insufficient information: One or more required fields were not set on the lookup.");
+		if (fieldIsMissing(this.locality) || fieldIsMissing(this.administrativeArea)) throw new UnprocessableEntityError(messages.insufficientInformation);
 
 		return true;
 	}
 
 	ensureValidData() {
-		if (fieldIsSet(this.geocode) && this.geocode.toLowerCase() !== "true") throw new UnprocessableEntityError("Invalid input: geocode can only be set to 'true' (default is 'false'.");
+		let languageIsSetIncorrectly = () => {
+			let isLanguage = language => this.language.toLowerCase() === language;
+
+			return fieldIsSet(this.language) && !(isLanguage("latin") || isLanguage("native"));
+		};
+
+		if (fieldIsSet(this.geocode) && this.geocode.toLowerCase() !== "true") throw new UnprocessableEntityError(messages.badGeocode);
+
+		if (languageIsSetIncorrectly()) throw new UnprocessableEntityError(messages.invalidLanguage);
+
 	}
 }
 
