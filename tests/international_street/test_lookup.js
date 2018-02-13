@@ -57,15 +57,14 @@ describe("An International Street lookup", function () {
 		ensureValidationThrows(lookup.ensureValidData, messages.badGeocode);
 	});
 
-	//TODO: Reject lookups with an invalid language.
 	it("rejects lookups with an invalid language.", function () {
-		let lookup = new Lookup("a", "b");
+		let lookup = new Lookup();
 		lookup.language = "Rubberduckian";
 
 		ensureValidationThrows(lookup.ensureValidData, messages.invalidLanguage);
 	});
 
-	it ("accepts lookups with enough info.", function () {
+	it("accepts lookups with enough info.", function () {
 		let lookup1 = new Lookup("a", "b");
 
 		let lookup2 = new Lookup("a");
@@ -80,6 +79,18 @@ describe("An International Street lookup", function () {
 		expect(lookup1.ensureEnoughInfo()).to.equal(true);
 		expect(lookup2.ensureEnoughInfo()).to.equal(true);
 		expect(lookup3.ensureEnoughInfo()).to.equal(true);
+	});
+
+	it("accepts lookups with a valid language.", function () {
+		let lookup1 = new Lookup();
+		lookup1.language = "latin";
+
+		expect(lookup1.ensureValidData()).to.equal(true);
+
+		let lookup2 = new Lookup();
+		lookup2.language = "native";
+
+		expect(lookup2.ensureValidData()).to.equal(true);
 	});
 
 	function ensureValidationThrows(callback, message) {

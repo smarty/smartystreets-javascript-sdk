@@ -54,6 +54,7 @@ class Lookup {
 
 		if (languageIsSetIncorrectly()) throw new UnprocessableEntityError(messages.invalidLanguage);
 
+		return true;
 	}
 }
 
