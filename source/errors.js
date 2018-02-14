@@ -18,7 +18,7 @@ class BatchEmptyError extends SmartyError {
 
 class UndefinedLookupError extends SmartyError {
 	constructor() {
-		super("The lookup provided is missing or undefined.");
+		super("The lookup provided is missing or undefined. Make sure you're passing a Lookup object.");
 	}
 }
 

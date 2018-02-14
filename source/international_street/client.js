@@ -11,7 +11,9 @@ class Client {
 	}
 
 	send(lookup) {
-
+		if (typeof lookup === "undefined") {
+			throw new errors.UndefinedLookupError();
+		}
 	}
 }
 
