@@ -50,7 +50,11 @@ class Lookup {
 			return fieldIsSet(this.language) && !(isLanguage("latin") || isLanguage("native"));
 		};
 
-		if (fieldIsSet(this.geocode) && this.geocode.toLowerCase() !== "true") throw new UnprocessableEntityError(messages.badGeocode);
+		let geocodeIsSetIncorrectly = () => {
+			return fieldIsSet(this.geocode) && this.geocode.toLowerCase() !== "true";
+		};
+
+		if (geocodeIsSetIncorrectly()) throw new UnprocessableEntityError(messages.badGeocode);
 
 		if (languageIsSetIncorrectly()) throw new UnprocessableEntityError(messages.invalidLanguage);
 
