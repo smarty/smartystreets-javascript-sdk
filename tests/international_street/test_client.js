@@ -19,12 +19,50 @@ describe("An International Street client", function () {
 		expect(client.send).to.throw(errors.UndefinedLookupError);
 	});
 
-	function MockSender() {
-		let sent = false;
+	it("correctly assigns request parameters based on lookup input.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("a", "b");
+		lookup.address1 = "c";
+		lookup.address2 = "d";
+		lookup.address3 = "e";
+		lookup.address4 = "f";
+		lookup.organization = "g";
+		lookup.locality = "h";
+		lookup.administrativeArea = "i";
+		lookup.postalCode = "j";
+		lookup.geocode = "k";
+		lookup.language = "l";
+		let expectedParameters = {
+			country: "a",
+			freeform: "b",
+			address1: "c",
+			address2: "d",
+			address3: "e",
+			address4: "f",
+			organization: "g",
+			locality: "h",
+			administrative_area: "i",
+			postal_code: "j",
+			geocode: "k",
+			language: "l",
+		};
 
-		this.sent = sent;
-		this.send = () => {
-			sent = true;
-		}
-	}
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
 });
+
+function MockSender() {
+	let request = {
+		payload: undefined,
+		parameters: undefined,
+	};
+	this.request = request;
+
+	this.send = function (clientRequest) {
+		request.payload = clientRequest.payload;
+		request.parameters = clientRequest.parameters;
+	}
+}
