@@ -19,9 +19,27 @@ class Client {
 		request.parameters = this.generateRequestParameters(lookup);
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request);
-			resolve();
+			this.sender.send(request)
+				.then(response => {
+					if (response.error) {
+						reject(response.error);
+					}
+
+					resolve(this.attachLookupCandidates(response, lookup));
+				})
+				.catch(error => {
+					reject(error);
+				});
 		});
+	}
+
+	attachLookupCandidates(response, lookup) {
+		response.payload.map(rawCandidate => {
+			let candidate = new Candidate(rawCandidate);
+			lookup.result.push(candidate);
+		});
+
+		return lookup;
 	}
 
 	generateRequestParameters(lookup) {

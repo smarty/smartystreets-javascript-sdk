@@ -2,6 +2,8 @@ const chai = require("chai");
 const expect = chai.expect;
 const Client = require("../../source/international_street/client");
 const Lookup = require("../../source/international_street/lookup");
+const Candidate = require("../../source/international_street/candidate");
+const Response = require("../../source/response");
 const errors = require("../../source/errors");
 
 describe("An International Street client", function () {
@@ -52,6 +54,18 @@ describe("An International Street client", function () {
 
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
+
+	it("attaches a match candidate from a response to a lookup.", function () {
+		const expectedMockPayload = [{address1: "A", }];
+		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		let expectedResult = new Candidate({address1: "A"});
+
+		return client.send(lookup).then(response => {
+			expect(lookup.result[0]).to.deep.equal(expectedResult);
+		});
+	});
 });
 
 function MockSender() {
@@ -64,5 +78,13 @@ function MockSender() {
 	this.send = function (clientRequest) {
 		request.payload = clientRequest.payload;
 		request.parameters = clientRequest.parameters;
+	}
+}
+
+function MockSenderWithResponse(expectedPayload, expectedError) {
+	this.send = function () {
+		return new Promise((resolve, reject) => {
+			resolve(new Response("", expectedPayload, expectedError));
+		});
 	}
 }

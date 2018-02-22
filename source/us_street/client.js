@@ -21,7 +21,7 @@ class Client {
 	}
 
 	generateRequestPayload(batch) {
-		return batch.lookups.map((lookup) => {
+		return batch.lookups.map(lookup => {
 			let inputData = new InputData(lookup);
 
 			inputData.add("street", "street");
@@ -66,7 +66,7 @@ class Client {
 	}
 
 	assignCandidatesToLookups (batch, response) {
-		response.payload.map((rawCandidate) => {
+		response.payload.map(rawCandidate => {
 			let candidate = new Candidate(rawCandidate);
 			let lookup = batch.getByIndex(candidate.inputIndex);
 
