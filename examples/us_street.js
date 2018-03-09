@@ -1,11 +1,11 @@
-const SmartyStreetsSdk = require("../index");
-const smartystreetsCore = SmartyStreetsSdk.core;
-const Lookup = SmartyStreetsSdk.usStreet.Lookup;
+const SmartyStreetsSDK = require("../index");
+const SmartyStreetsCore = SmartyStreetsSDK.core;
+const Lookup = SmartyStreetsSDK.usStreet.Lookup;
 
 let authId = process.env.SMARTY_AUTH_ID;
 let authToken = process.env.SMARTY_AUTH_TOKEN;
 
-let clientBuilder = new smartystreetsCore.ClientBuilder(new smartystreetsCore.StaticCredentials(authId, authToken));
+let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.StaticCredentials(authId, authToken));
 //Configure the Client Builder
 let client = clientBuilder.buildUsStreetApiClient();
 
@@ -22,7 +22,7 @@ lookup2.state = "CA";
 
 // client.sendLookup(lookup1).then(() => console.log(), error => console.log());
 
-let batch = new smartystreetsCore.Batch();
+let batch = new SmartyStreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
 

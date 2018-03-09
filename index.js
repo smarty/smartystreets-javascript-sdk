@@ -9,6 +9,9 @@ const sdkApi = {
 	usStreet: {
 		Lookup: require("./source/us_street/lookup"),
 	},
+	usZipcode: {
+		Lookup: require("./source/us_zipcode/lookup"),
+	}
 };
 
 module.exports = sdkApi;

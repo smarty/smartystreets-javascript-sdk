@@ -6,6 +6,8 @@ const StaticCredentials = require("./static_credentials");
 const CustomHeaderSender = require("./custom_header_sender");
 
 const UsStreetClient = require("./us_street/client");
+const UsZipcodeClient = require("./us_zipcode/client");
+const InternationalStreetClient = require("./international_street/client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smartystreets.com/verify";
 const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smartystreets.com/suggest";
@@ -78,12 +80,24 @@ class ClientBuilder {
 		return baseUrlSender;
 	}
 
-	buildUsStreetApiClient() {
+	buildClient(baseUrl, Client) {
 		if (!this.baseUrl) {
-			this.baseUrl = US_STREET_API_URL;
+			this.baseUrl = baseUrl;
 		}
 
-		return new UsStreetClient(this.buildSender());
+		return new Client(this.buildSender());
+	}
+
+	buildUsStreetApiClient() {
+		return this.buildClient(US_STREET_API_URL, UsStreetClient);
+	}
+
+	buildUsZipcodeClient() {
+		return this.buildClient(US_ZIP_CODE_API_URL, UsZipcodeClient);
+	}
+
+	buildInternationalStreetClient() {
+		return this.buildClient(INTERNATIONAL_STREET_API_URI, InternationalStreetClient);
 	}
 }
 
