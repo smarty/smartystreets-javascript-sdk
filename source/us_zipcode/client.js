@@ -57,10 +57,11 @@ class Client {
 		});
 	}
 
-	assignResultsToLookups (batch, response) {
-		response.payload.map((rawResult) => {
+	assignResultsToLookups(batch, response) {
+		response.payload.map(rawResult => {
 			let result = new Result(rawResult);
 			let lookup = batch.getByIndex(result.inputIndex);
+
 
 			lookup.result.push(result);
 		});
