@@ -1,4 +1,4 @@
-const sdkApi = {
+const sdkAPI = {
 	core: {
 		Batch: require("./source/batch"),
 		ClientBuilder: require("./source/client_builder"),
@@ -11,7 +11,10 @@ const sdkApi = {
 	},
 	usZipcode: {
 		Lookup: require("./source/us_zipcode/lookup"),
-	}
+	},
+	internationalStreet: {
+		Lookup: require("./source/international_street/lookup"),
+	},
 };
 
-module.exports = sdkApi;
+module.exports = sdkAPI;
