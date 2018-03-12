@@ -10,7 +10,7 @@ class StatusCodeSender {
 		return new Promise((resolve, reject) => {
 			this.sender.send(request).then(response => {
 				resolve(response);
-			}, error => {
+			}).catch(error => {
 				switch (error.statusCode) {
 					case 400:
 						error.error = new errors.BadRequestError();

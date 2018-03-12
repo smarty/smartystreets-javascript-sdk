@@ -45,7 +45,13 @@ class HttpSender {
 			let requestConfig = this.buildRequestConfig(request);
 
 			Axios(requestConfig).then(response => {
-				resolve(this.buildSmartyResponse(response));
+				let smartyResponse = this.buildSmartyResponse(response);
+
+				if (smartyResponse.statusCode >= 400) {
+					reject(smartyResponse);
+				}
+
+				resolve(smartyResponse);
 			}, error => {
 				reject(this.buildSmartyResponse(undefined, error));
 			});
