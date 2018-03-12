@@ -34,14 +34,14 @@ class Client {
 		}
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request).then(response => {
-				if (response.error) {
-					reject(response.error);
-				}
-				resolve(this.assignResultsToLookups(batch, response));
-			}, error => {
-				reject(error);
-			});
+			this.sender.send(request)
+				.then(response => {
+					if (response.error) {
+						reject(response.error);
+					}
+					resolve(this.assignResultsToLookups(batch, response));
+				})
+				.catch(reject);
 		});
 	}
 
@@ -61,7 +61,6 @@ class Client {
 		response.payload.map(rawResult => {
 			let result = new Result(rawResult);
 			let lookup = batch.getByIndex(result.inputIndex);
-
 
 			lookup.result.push(result);
 		});

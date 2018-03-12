@@ -44,17 +44,17 @@ class HttpSender {
 		return new Promise((resolve, reject) => {
 			let requestConfig = this.buildRequestConfig(request);
 
-			Axios(requestConfig).then(response => {
-				let smartyResponse = this.buildSmartyResponse(response);
+			Axios(requestConfig)
+				.then(response => {
+					let smartyResponse = this.buildSmartyResponse(response);
 
-				if (smartyResponse.statusCode >= 400) {
-					reject(smartyResponse);
-				}
+					if (smartyResponse.statusCode >= 400) {
+						reject(smartyResponse);
+					}
 
-				resolve(smartyResponse);
-			}, error => {
-				reject(this.buildSmartyResponse(undefined, error));
-			});
+					resolve(smartyResponse);
+				})
+				.catch(error => reject(this.buildSmartyResponse(undefined, error)));
 		});
 	}
 }

@@ -6,6 +6,7 @@ const StaticCredentials = require("./static_credentials");
 const CustomHeaderSender = require("./custom_header_sender");
 const StatusCodeSender = require("./status_code_sender");
 
+//TODO: refactor this to work more cleanly with a bundler.
 const UsStreetClient = require("./us_street/client");
 const UsZipcodeClient = require("./us_zipcode/client");
 const InternationalStreetClient = require("./international_street/client");

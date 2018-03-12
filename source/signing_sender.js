@@ -9,11 +9,9 @@ class SigningSender {
 	send(request) {
 		return new Promise((resolve, reject) => {
 			this.signer.sign(request);
-			this.sender.send(request).then(response => {
-				resolve(response);
-			}, error => {
-				reject(error);
-			});
+			this.sender.send(request)
+				.then(resolve)
+				.catch(reject);
 		});
 	}
 }

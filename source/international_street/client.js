@@ -1,5 +1,4 @@
 const Request = require("../request");
-const Batch = require("../batch");
 const errors = require("../errors");
 const Candidate = require("./candidate");
 const Promise = require("promise");
@@ -27,9 +26,7 @@ class Client {
 
 					resolve(this.attachLookupCandidates(response, lookup));
 				})
-				.catch(error => {
-					reject(error);
-				});
+				.catch(reject);
 		});
 	}
 
