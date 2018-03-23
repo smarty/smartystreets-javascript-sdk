@@ -4,6 +4,7 @@ const Promise = require("promise");
 const Response = require("../../source/response");
 const Client = require("../../source/us_autocomplete/client");
 const Lookup = require("../../source/us_autocomplete/lookup");
+const errors = require("../../source/errors");
 
 describe("A US Autocomplete Client", function () {
 	it("correctly builds parameters for a prefix only lookup.", function () {
@@ -54,6 +55,12 @@ describe("A US Autocomplete Client", function () {
 
 		client.send(lookup);
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("throws an error if sending without a lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		expect(client.send).to.throw(errors.UndefinedLookupError);
 	});
 });
 

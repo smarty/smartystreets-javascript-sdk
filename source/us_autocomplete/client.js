@@ -1,10 +1,18 @@
+const errors = require("../errors");
+
 class Client {
 	constructor(sender) {
 		this.sender = sender;
 	}
 
 	send(lookup) {
-		this.sender.request.parameters = this.buildRequestParameters(lookup);
+		if (typeof lookup === "undefined") {
+			throw new errors.UndefinedLookupError();
+		}
+
+		const parameters = this.buildRequestParameters(lookup);
+
+		this.sender.request.parameters = parameters;
 	}
 
 	buildRequestParameters (lookup) {
