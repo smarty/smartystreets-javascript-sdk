@@ -4,8 +4,9 @@ class Lookup {
 
 		this.prefix = prefix;
 		this.maxSuggestions = undefined;
-		this.cityFilter = undefined;
-		this.prefer = undefined;
+		this.cityFilter = [];
+		this.stateFilter = [];
+		this.prefer = [];
 		this.preferRatio = undefined;
 		this.geolocate = undefined;
 		this.geolocatePrecision = undefined;
