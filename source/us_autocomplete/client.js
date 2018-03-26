@@ -1,5 +1,6 @@
 const errors = require("../errors");
 const Request = require("../request");
+const Suggestion = require("./suggestion");
 const Promise = require("promise");
 
 class Client {
@@ -20,7 +21,8 @@ class Client {
 				.then(response => {
 					if (response.error) reject(response.error);
 
-					resolve(response);
+					lookup.result = this.buildSuggestionsFromResponsePayload(response.payload);
+					resolve(lookup);
 				})
 				.catch(reject);
 		});
@@ -41,6 +43,10 @@ class Client {
 		function joinFieldWith(field, delimiter) {
 			if (field.length) return field.join(delimiter);
 		}
+	}
+
+	buildSuggestionsFromResponsePayload(payload) {
+		return payload.map(suggestion => new Suggestion(suggestion));
 	}
 }
 

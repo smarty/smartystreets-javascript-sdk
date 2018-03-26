@@ -6,6 +6,7 @@ const Promise = require("promise");
 const Response = require("../../source/response");
 const Client = require("../../source/us_autocomplete/client");
 const Lookup = require("../../source/us_autocomplete/lookup");
+const Suggestion = require("../../source/us_autocomplete/suggestion");
 const errors = require("../../source/errors");
 
 describe("A US Autocomplete Client", function () {
@@ -73,6 +74,24 @@ describe("A US Autocomplete Client", function () {
 
 		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedError);
 	});
+
+	it("attaches suggestions from a response to a lookup.", function () {
+		const responseData = {
+			text: "a",
+			street_line: "b",
+			city: "c",
+			state: "d",
+		};
+		let mockExpectedPayload = [responseData];
+		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
+		let client = new Client(mockSender);
+		let lookup = new Lookup("Trevor the Vampire");
+		let expectedSuggestion = new Suggestion(responseData);
+
+		return client.send(lookup).then(response => {
+			expect(lookup.result[0]).to.deep.equal(expectedSuggestion);
+		});
+	})
 });
 
 function MockSender() {
