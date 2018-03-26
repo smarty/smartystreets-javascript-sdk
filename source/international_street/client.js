@@ -20,9 +20,7 @@ class Client {
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
 				.then(response => {
-					if (response.error) {
-						reject(response.error);
-					}
+					if (response.error) reject(response.error);
 
 					resolve(this.attachLookupCandidates(response, lookup));
 				})

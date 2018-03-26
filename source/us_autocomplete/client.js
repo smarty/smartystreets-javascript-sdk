@@ -1,4 +1,6 @@
 const errors = require("../errors");
+const Request = require("../request");
+const Promise = require("promise");
 
 class Client {
 	constructor(sender) {
@@ -10,12 +12,21 @@ class Client {
 			throw new errors.UndefinedLookupError();
 		}
 
-		const parameters = this.buildRequestParameters(lookup);
+		let request = new Request();
+		request.parameters = this.buildRequestParameters(lookup);
 
-		this.sender.request.parameters = parameters;
+		return new Promise((resolve, reject) => {
+			this.sender.send(request)
+				.then(response => {
+					if (response.error) reject(response.error);
+
+					resolve(response);
+				})
+				.catch(reject);
+		});
 	}
 
-	buildRequestParameters (lookup) {
+	buildRequestParameters(lookup) {
 		return {
 			prefix: lookup.prefix,
 			suggestions: lookup.maxSuggestions,

@@ -1,5 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
+const chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
 const Promise = require("promise");
 const Response = require("../../source/response");
 const Client = require("../../source/us_autocomplete/client");
@@ -61,6 +63,15 @@ describe("A US Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		expect(client.send).to.throw(errors.UndefinedLookupError);
+	});
+
+	it("rejects with an exception if the response comes back with an error.", function () {
+		let expectedError = new Error("I'm the error.");
+		let mockSender = new MockSenderWithResponse("", expectedError);
+		let client = new Client(mockSender);
+		let lookup = new Lookup("¯\\_(ツ)_/¯");
+
+		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedError);
 	});
 });
 
