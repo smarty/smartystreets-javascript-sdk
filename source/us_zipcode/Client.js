@@ -23,41 +23,41 @@ class Client {
 
 		let request = new Request();
 
-		if (batch.length() === 1) request.parameters = this.generateRequestPayload(batch)[0];
-		else request.payload = this.generateRequestPayload(batch);
+		if (batch.length() === 1) request.parameters = generateRequestPayload(batch)[0];
+		else request.payload = generateRequestPayload(batch);
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
 				.then(response => {
 					if (response.error) reject(response.error);
 
-					resolve(this.assignResultsToLookups(batch, response));
+					resolve(assignResultsToLookups(batch, response));
 				})
 				.catch(reject);
 		});
-	}
 
-	generateRequestPayload(batch) {
-		return batch.lookups.map((lookup) => {
-			let inputData = new InputData(lookup);
+		function generateRequestPayload(batch) {
+			return batch.lookups.map((lookup) => {
+				let inputData = new InputData(lookup);
 
-			inputData.add("city", "city");
-			inputData.add("state", "state");
-			inputData.add("zipcode", "zipCode");
+				inputData.add("city", "city");
+				inputData.add("state", "state");
+				inputData.add("zipcode", "zipCode");
 
-			return inputData.data;
-		});
-	}
+				return inputData.data;
+			});
+		}
 
-	assignResultsToLookups(batch, response) {
-		response.payload.map(rawResult => {
-			let result = new Result(rawResult);
-			let lookup = batch.getByIndex(result.inputIndex);
+		function assignResultsToLookups(batch, response) {
+			response.payload.map(rawResult => {
+				let result = new Result(rawResult);
+				let lookup = batch.getByIndex(result.inputIndex);
 
-			lookup.result.push(result);
-		});
+				lookup.result.push(result);
+			});
 
-		return batch;
+			return batch;
+		}
 	}
 }
 
