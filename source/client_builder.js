@@ -9,6 +9,7 @@ const StatusCodeSender = require("./status_code_sender");
 //TODO: refactor this to work more cleanly with a bundler.
 const UsStreetClient = require("./us_street/client");
 const UsZipcodeClient = require("./us_zipcode/client");
+const UsAutocompleteClient = require("./us_autocomplete/client");
 const InternationalStreetClient = require("./international_street/client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smartystreets.com/verify";
@@ -97,6 +98,10 @@ class ClientBuilder {
 
 	buildUsZipcodeClient() {
 		return this.buildClient(US_ZIP_CODE_API_URL, UsZipcodeClient);
+	}
+
+	buildUsAutocompleteClient() {
+		return this.buildClient(US_AUTOCOMPLETE_API_URL, UsAutocompleteClient);
 	}
 
 	buildInternationalStreetClient() {

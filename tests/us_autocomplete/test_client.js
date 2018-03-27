@@ -82,7 +82,7 @@ describe("A US Autocomplete Client", function () {
 			city: "c",
 			state: "d",
 		};
-		let mockExpectedPayload = [responseData];
+		let mockExpectedPayload = {suggestions: [responseData]};
 		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Trevor the Vampire");

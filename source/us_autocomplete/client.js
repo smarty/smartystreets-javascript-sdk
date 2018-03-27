@@ -21,7 +21,7 @@ class Client {
 				.then(response => {
 					if (response.error) reject(response.error);
 
-					lookup.result = this.buildSuggestionsFromResponsePayload(response.payload);
+					lookup.result = this.buildSuggestionsFromResponse(response.payload);
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -45,8 +45,8 @@ class Client {
 		}
 	}
 
-	buildSuggestionsFromResponsePayload(payload) {
-		return payload.map(suggestion => new Suggestion(suggestion));
+	buildSuggestionsFromResponse(payload) {
+		return payload.suggestions.map(suggestion => new Suggestion(suggestion));
 	}
 }
 

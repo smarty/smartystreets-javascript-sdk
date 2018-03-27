@@ -12,6 +12,9 @@ const sdkAPI = {
 	usZipcode: {
 		Lookup: require("./source/us_zipcode/lookup"),
 	},
+	usAutocomplete: {
+		Lookup: require("./source/us_autocomplete/lookup"),
+	},
 	internationalStreet: {
 		Lookup: require("./source/international_street/lookup"),
 	},
