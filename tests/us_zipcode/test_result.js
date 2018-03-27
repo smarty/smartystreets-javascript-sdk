@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Result = require("../../source/us_zipcode/result");
+const Result = require("../../source/us_zipcode/Result");
 
 describe("A US Zipcode result", function () {
 	it("populates accurately on a valid lookup.", function () {

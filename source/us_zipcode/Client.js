@@ -1,7 +1,7 @@
-const Request = require("../request");
-const Batch = require("../batch");
-const InputData = require("../input_data");
-const Result = require("./result");
+const Request = require("../Request");
+const Batch = require("../Batch");
+const InputData = require("../InputData");
+const Result = require("./Result");
 const errors = require("../errors");
 const Promise = require("promise");
 

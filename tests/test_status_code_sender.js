@@ -1,8 +1,8 @@
 const chai = require("chai");
 const expect = chai.expect;
-const StatusCodeSender = require("../source/status_code_sender");
-const Response = require("../source/response");
-const Request = require("../source/request");
+const StatusCodeSender = require("../source/StatusCodeSender");
+const Response = require("../source/Response");
+const Request = require("../source/Request");
 const errors = require("../source/errors");
 
 describe("A status code sender", function () {

@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Request = require("../source/request");
-const AgentSender = require("../source/agent_sender");
+const Request = require("../source/Request");
+const AgentSender = require("../source/AgentSender");
 
 describe("An agent sender", function () {
 	it ("attaches an 'agent' parameter to the request config.", function () {

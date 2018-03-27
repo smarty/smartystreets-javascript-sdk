@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
-const BaseUrlSender = require("../source/base_url_sender");
-const Request = require("../source/request");
+const BaseUrlSender = require("../source/BaseUrlSender");
+const Request = require("../source/Request");
 const Promise = require("promise");
 
 describe("A base url sender", function () {

@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Candidate = require("../../source/international_street/candidate");
+const Candidate = require("../../source/international_street/Candidate");
 
 describe("An International match candidate", function () {
 	it("populates with the appropriate fields.", function () {

@@ -1,16 +1,16 @@
-const HttpSender = require("./http_sender");
-const SigningSender = require("./signing_sender");
-const BaseUrlSender = require("./base_url_sender");
-const AgentSender = require("./agent_sender");
-const StaticCredentials = require("./static_credentials");
-const CustomHeaderSender = require("./custom_header_sender");
-const StatusCodeSender = require("./status_code_sender");
+const HttpSender = require("./HttpSender");
+const SigningSender = require("./SigningSender");
+const BaseUrlSender = require("./BaseUrlSender");
+const AgentSender = require("./AgentSender");
+const StaticCredentials = require("./StaticCredentials");
+const CustomHeaderSender = require("./CustomHeaderSender");
+const StatusCodeSender = require("./StatusCodeSender");
 
 //TODO: refactor this to work more cleanly with a bundler.
-const UsStreetClient = require("./us_street/client");
-const UsZipcodeClient = require("./us_zipcode/client");
-const UsAutocompleteClient = require("./us_autocomplete/client");
-const InternationalStreetClient = require("./international_street/client");
+const UsStreetClient = require("./us_street/Client");
+const UsZipcodeClient = require("./us_zipcode/Client");
+const UsAutocompleteClient = require("./us_autocomplete/Client");
+const InternationalStreetClient = require("./international_street/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smartystreets.com/verify";
 const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smartystreets.com/suggest";

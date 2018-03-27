@@ -1,8 +1,8 @@
-const Request = require("../request");
+const Request = require("../Request");
 const errors = require("../errors");
-const Candidate = require("./candidate");
+const Candidate = require("./Candidate");
 const Promise = require("promise");
-const InputData = require("../input_data");
+const InputData = require("../InputData");
 
 class Client {
 	constructor(sender) {

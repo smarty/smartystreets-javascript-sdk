@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Lookup = require("../../source/international_street/lookup");
+const Lookup = require("../../source/international_street/Lookup");
 const errors = require("../../source/errors");
 
 describe("An International Street lookup", function () {

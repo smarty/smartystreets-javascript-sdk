@@ -1,9 +1,9 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Request = require("../source/request");
-const SigningSender = require("../source/signing_sender");
-const StaticCredentials = require("../source/static_credentials");
-const SharedCredentials = require("../source/shared_credentials");
+const Request = require("../source/Request");
+const SigningSender = require("../source/SigningSender");
+const StaticCredentials = require("../source/StaticCredentials");
+const SharedCredentials = require("../source/SharedCredentials");
 
 describe("A signing sender", function () {
 	let mockAuthId = "testId";
