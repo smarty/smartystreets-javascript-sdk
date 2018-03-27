@@ -2,12 +2,12 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
-const Promise = require("promise");
-const Response = require("../../source/response");
 const Client = require("../../source/us_autocomplete/client");
 const Lookup = require("../../source/us_autocomplete/lookup");
 const Suggestion = require("../../source/us_autocomplete/suggestion");
 const errors = require("../../source/errors");
+const MockSender = require("../fixtures/mock_senders").MockSender;
+const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
 describe("A US Autocomplete Client", function () {
 	it("correctly builds parameters for a prefix only lookup.", function () {
@@ -93,24 +93,3 @@ describe("A US Autocomplete Client", function () {
 		});
 	})
 });
-
-function MockSender() {
-	let request = {
-		payload: undefined,
-		parameters: undefined,
-	};
-	this.request = request;
-
-	this.send = function (clientRequest) {
-		request.payload = clientRequest.payload;
-		request.parameters = clientRequest.parameters;
-	}
-}
-
-function MockSenderWithResponse(expectedPayload, expectedError) {
-	this.send = function () {
-		return new Promise((resolve, reject) => {
-			resolve(new Response("", expectedPayload, expectedError));
-		});
-	}
-}

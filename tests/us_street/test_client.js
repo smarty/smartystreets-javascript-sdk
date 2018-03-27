@@ -6,9 +6,9 @@ const Client = require("../../source/us_street/client");
 const Lookup = require("../../source/us_street/lookup");
 const Candidate = require("../../source/us_street/candidate");
 const Batch = require("../../source/batch");
-const Response = require("../../source/response");
 const errors = require("../../source/errors");
-const Promise = require("promise");
+const MockSender = require("../fixtures/mock_senders").MockSender;
+const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
 describe("A US Street client", function () {
 	it("has a sender.", function () {
@@ -163,24 +163,3 @@ describe("A US Street client", function () {
 		expect(mockSender.request.payload).not.to.equal(undefined);
 	});
 });
-
-function MockSender() {
-	let request = {
-		payload: undefined,
-		parameters: undefined
-	};
-	this.request = request;
-
-	this.send = function (clientRequest) {
-		request.payload = clientRequest.payload;
-		request.parameters = clientRequest.parameters
-	}
-}
-
-function MockSenderWithResponse(expectedPayload, expectedError) {
-	this.send = function () {
-		return new Promise((resolve, reject) => {
-			resolve(new Response("", expectedPayload, expectedError));
-		});
-	}
-}

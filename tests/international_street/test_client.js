@@ -3,8 +3,9 @@ const expect = chai.expect;
 const Client = require("../../source/international_street/client");
 const Lookup = require("../../source/international_street/lookup");
 const Candidate = require("../../source/international_street/candidate");
-const Response = require("../../source/response");
 const errors = require("../../source/errors");
+const MockSender = require("../fixtures/mock_senders").MockSender;
+const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
 describe("An International Street client", function () {
 	it("has an inner sender.", function () {
@@ -67,24 +68,3 @@ describe("An International Street client", function () {
 		});
 	});
 });
-
-function MockSender() {
-	let request = {
-		payload: undefined,
-		parameters: undefined,
-	};
-	this.request = request;
-
-	this.send = function (clientRequest) {
-		request.payload = clientRequest.payload;
-		request.parameters = clientRequest.parameters;
-	}
-}
-
-function MockSenderWithResponse(expectedPayload, expectedError) {
-	this.send = function () {
-		return new Promise((resolve, reject) => {
-			resolve(new Response("", expectedPayload, expectedError));
-		});
-	}
-}

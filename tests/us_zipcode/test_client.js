@@ -6,9 +6,10 @@ const Client = require("../../source/us_zipcode/client");
 const Lookup = require("../../source/us_zipcode/lookup");
 const Result = require("../../source/us_zipcode/result");
 const Batch = require("../../source/batch");
-const Response = require("../../source/response");
 const errors = require("../../source/errors");
 const Promise = require("promise");
+const MockSender = require("../fixtures/mock_senders").MockSender;
+const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
 describe("A US Zipcode client", function () {
 	it("has a sender.", function () {
@@ -156,25 +157,3 @@ describe("A US Zipcode client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 });
-
-function MockSender() {
-	let request = {
-		payload: undefined,
-		parameters: undefined
-	};
-	this.request = request;
-
-	this.send = clientRequest => {
-		request.payload = clientRequest.payload;
-		request.parameters = clientRequest.parameters;
-		return new Promise((resolve, reject) => {});
-	}
-}
-
-function MockSenderWithResponse(expectedPayload, expectedError) {
-	this.send = () => {
-		return new Promise((resolve, reject) => {
-			resolve(new Response("", expectedPayload, expectedError));
-		});
-	}
-}
