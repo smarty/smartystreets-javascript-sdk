@@ -6,11 +6,8 @@ class Batch {
 	}
 
 	add (lookup) {
-		if (this.lookupsHasRoomForLookup()) {
-			this.lookups.push(lookup);
-		} else {
-			throw new errors.BatchFullError();
-		}
+		if (this.lookupsHasRoomForLookup()) this.lookups.push(lookup);
+		else throw new errors.BatchFullError();
 	}
 
 	lookupsHasRoomForLookup() {
@@ -27,7 +24,7 @@ class Batch {
 	}
 
 	getByInputId(inputId) {
-		return this.lookups.filter((lookup) => {
+		return this.lookups.filter(lookup => {
 			return lookup.inputId === inputId;
 		})[0];
 	}

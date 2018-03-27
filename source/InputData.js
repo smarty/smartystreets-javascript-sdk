@@ -5,9 +5,7 @@ class InputData {
 	}
 
 	add(apiField, lookupField) {
-		if (this.lookupFieldIsPopulated(lookupField)) {
-			this.data[apiField] = this.lookup[lookupField];
-		}
+		if (this.lookupFieldIsPopulated(lookupField)) this.data[apiField] = this.lookup[lookupField];
 	}
 
 	lookupFieldIsPopulated(lookupField) {

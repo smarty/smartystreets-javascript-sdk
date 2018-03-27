@@ -9,9 +9,7 @@ class Client {
 	}
 
 	send(lookup) {
-		if (typeof lookup === "undefined") {
-			throw new errors.UndefinedLookupError();
-		}
+		if (typeof lookup === "undefined") throw new errors.UndefinedLookupError();
 
 		let request = new Request();
 		request.parameters = this.buildRequestParameters(lookup);

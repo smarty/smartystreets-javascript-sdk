@@ -34,9 +34,7 @@ class HttpSender {
 	}
 
 	buildSmartyResponse(response, error) {
-		if (response) {
-			return new Response(response.status, response.data);
-		}
+		if (response) return new Response(response.status, response.data);
 		return new Response(undefined, undefined, error)
 	}
 
@@ -48,9 +46,7 @@ class HttpSender {
 				.then(response => {
 					let smartyResponse = this.buildSmartyResponse(response);
 
-					if (smartyResponse.statusCode >= 400) {
-						reject(smartyResponse);
-					}
+					if (smartyResponse.statusCode >= 400) reject(smartyResponse);
 
 					resolve(smartyResponse);
 				})
