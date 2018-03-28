@@ -1,6 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 const Result = require("../../source/us_extract/Result");
+const Address = require("../../source/us_extract/Address");
 
 describe("A US Extract Result", function () {
 	it("correctly populates fields.", function () {
@@ -32,5 +33,7 @@ describe("A US Extract Result", function () {
 		expect(result.meta.verifiedCount).to.equal(1);
 		expect(result.meta.bytes).to.equal(53);
 		expect(result.meta.characterCount).to.equal(53);
+
+		expect(result.addresses[0]).to.be.an.instanceOf(Address);
 	});
 });

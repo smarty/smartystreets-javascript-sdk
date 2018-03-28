@@ -1,12 +1,17 @@
+const Address = require("./Address");
+
 class Result {
-	constructor({meta}) {
-		this.meta = {};
-		this.meta.lines = meta.lines;
-		this.meta.unicode = meta.unicode;
-		this.meta.addressCount = meta.address_count;
-		this.meta.verifiedCount = meta.verified_count;
-		this.meta.bytes = meta.bytes;
-		this.meta.characterCount = meta.character_count;
+	constructor({meta, addresses}) {
+		this.meta = {
+			lines: meta.lines,
+			unicode: meta.unicode,
+			addressCount: meta.address_count,
+			verifiedCount: meta.verified_count,
+			bytes: meta.bytes,
+			characterCount: meta.character_count,
+		};
+
+		this.addresses = addresses.map(rawAddress => new Address(rawAddress));
 	}
 }
 
