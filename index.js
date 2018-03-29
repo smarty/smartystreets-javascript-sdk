@@ -15,6 +15,9 @@ const sdkAPI = {
 	usAutocomplete: {
 		Lookup: require("./source/us_autocomplete/Lookup"),
 	},
+	usExtract: {
+		Lookup: require("./source/us_extract/Lookup"),
+	},
 	internationalStreet: {
 		Lookup: require("./source/international_street/Lookup"),
 	},

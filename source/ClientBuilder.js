@@ -10,6 +10,7 @@ const StatusCodeSender = require("./StatusCodeSender");
 const UsStreetClient = require("./us_street/Client");
 const UsZipcodeClient = require("./us_zipcode/Client");
 const UsAutocompleteClient = require("./us_autocomplete/Client");
+const UsExtractClient = require("./us_extract/Client");
 const InternationalStreetClient = require("./international_street/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smartystreets.com/verify";
@@ -102,6 +103,10 @@ class ClientBuilder {
 
 	buildUsAutocompleteClient() {
 		return this.buildClient(US_AUTOCOMPLETE_API_URL, UsAutocompleteClient);
+	}
+
+	buildUsExtractClient() {
+		return this.buildClient(US_EXTRACT_API_URL, UsExtractClient);
 	}
 
 	buildInternationalStreetClient() {
