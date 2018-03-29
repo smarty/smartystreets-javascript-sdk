@@ -33,4 +33,27 @@ describe("A US Extract Client", function () {
 
 		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
 	});
+
+	it("correctly builds parameters for a fully-populated lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		const mockText = "Flocculated scunge is subprime for human consumption.";
+		let lookup = new Lookup(mockText);
+		lookup.html = 1;
+		lookup.aggressive = 2;
+		lookup.addressesHaveLineBreaks = 3;
+		lookup.addressesPerLine = 4;
+
+		let expectedPayload = {
+			text: mockText,
+			html: 1,
+			aggressive: 2,
+			addr_line_breaks: 3,
+			addr_per_line: 4,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+	});
 });
