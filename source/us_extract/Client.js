@@ -1,6 +1,7 @@
 const errors = require("../errors");
 const Promise = require("promise");
 const Request = require("../Request");
+const Result = require("./Result");
 
 class Client {
 	constructor(sender) {
@@ -17,6 +18,8 @@ class Client {
 				.then(response => {
 					if (response.error) reject(response.error);
 
+					lookup.result = new Result(response.payload);
+					resolve(lookup);
 				})
 				.catch(reject);
 		});
