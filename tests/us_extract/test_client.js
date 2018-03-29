@@ -15,21 +15,22 @@ describe("A US Extract Client", function () {
 
 		expect(client.send).to.throw(errors.UndefinedLookupError);
 	});
-	// it("calls its inner sender's send function.", function () {
-	// 	let mockSender = new MockSender();
-	// 	let client = new Client(mockSender);
-	// 	let mockText = "yump.";
-	// 	let lookup = new Lookup(mockText);
-	// 	let expectedPayload = {
-	// 		text: mockText,
-	// 		html: undefined,
-	// 		aggressive: undefined,
-	// 		addr_line_breaks: undefined,
-	// 		addr_per_line: undefined,
-	// 	};
-	//
-	// 	client.send(lookup);
-	//
-	// 	expect(mockSender.request.payload).to.deep.equal(expectedPayload);
-	// });
+
+	it("correctly builds a payload for a text only lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let mockText = "yump.";
+		let lookup = new Lookup(mockText);
+		let expectedPayload = {
+			text: mockText,
+			html: undefined,
+			aggressive: undefined,
+			addr_line_breaks: undefined,
+			addr_per_line: undefined,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+	});
 });
