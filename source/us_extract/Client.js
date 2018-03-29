@@ -13,7 +13,12 @@ class Client {
 		let request = new Request(buildRequestPayload(lookup));
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request);
+			this.sender.send(request)
+				.then(response => {
+					if (response.error) reject(response.error);
+
+				})
+				.catch(reject);
 		});
 
 		function buildRequestPayload(lookup) {

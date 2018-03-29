@@ -37,7 +37,7 @@ describe("A US Extract Client", function () {
 	it("correctly builds parameters for a fully-populated lookup.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
-		const mockText = "Flocculated scunge is subprime for human consumption.";
+		const mockText = "The flocculated scunge is subprime for human consumption.";
 		let lookup = new Lookup(mockText);
 		lookup.html = 1;
 		lookup.aggressive = 2;
@@ -55,5 +55,14 @@ describe("A US Extract Client", function () {
 		client.send(lookup);
 
 		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+	});
+
+	it("rejects with an exception if the response comes back with an error.", function () {
+		let expectedError = new Error("I'm the error.");
+		let mockSender = new MockSenderWithResponse("", expectedError);
+		let client = new Client(mockSender);
+		let lookup = new Lookup("Shine on you crazy diamond.");
+
+		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedError);
 	});
 });
