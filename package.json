@@ -15,9 +15,8 @@
     "mocha": "^4.1.0"
   },
   "dependencies": {
-    "axios": "^0.17.1",
-    "axios-retry": "^3.0.1",
     "axios-proxy-fix": "^0.16.3",
+    "axios-retry": "^3.0.1",
     "promise": "^8.0.1"
   }
 }
