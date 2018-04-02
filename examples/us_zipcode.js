@@ -19,7 +19,9 @@ let batch = new SmartyStreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
 
-client.sendBatch(batch).then(viewResults).catch(error => console.log(error));
+client.sendBatch(batch)
+	.then(viewResults)
+	.catch(console.log);
 
 function viewResults(response) {
 	response.lookups.map(lookup => lookup.result.map(candidate => {

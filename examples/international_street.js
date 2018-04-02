@@ -13,8 +13,12 @@ let lookup2 = new Lookup();
 lookup2.country = "Brazil";
 lookup2.freeform = "Rua Padre Antonio D’Angelo 121 Casa Verde, Sao Paulo";
 
-client.send(lookup1).then(displayResult).catch(handleError);
-client.send(lookup2).then(displayResult).catch(handleError);
+client.send(lookup1)
+	.then(displayResult)
+	.catch(handleError);
+client.send(lookup2)
+	.then(displayResult)
+	.catch(handleError);
 
 function displayResult(result) {
 	console.log(result.result[0].components);

@@ -26,4 +26,14 @@ let batch = new SmartyStreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
 
-client.sendBatch(batch).then(response => console.log(lookup1.result), error => console.log("error:", error));
+client.sendBatch(batch)
+	.then(handleSuccess)
+	.catch(handleError);
+
+function handleSuccess() {
+	console.log(lookup1.result);
+}
+
+function handleError(response) {
+	console.log(response);
+}
