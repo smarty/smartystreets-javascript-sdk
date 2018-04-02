@@ -21,7 +21,7 @@ class HttpSender {
 			baseURL: baseUrl,
 			validateStatus: function (status) {
 				return status < 500;
-			}
+			},
 		};
 
 		if (payload) {
