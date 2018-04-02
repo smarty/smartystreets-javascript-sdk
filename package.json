@@ -1,5 +1,5 @@
 {
-  "name": "smartystreets-sdk",
+  "name": "smartystreets-javascript-sdk",
   "version": "0.0.0",
   "version_comment": "DO NOT EDIT THE VERSION NUMBER (it is updated by a build job when a new release is published)",
   "description": "Quick and easy SmartyStreets address validation.",
