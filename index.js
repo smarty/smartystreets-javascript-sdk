@@ -1,10 +1,10 @@
-const sdkAPI = {
+module.exports = {
 	core: {
 		Batch: require("./src/Batch"),
 		ClientBuilder: require("./src/ClientBuilder"),
 		SharedCredentials: require("./src/SharedCredentials"),
 		StaticCredentials: require("./src/StaticCredentials"),
-		errors: require("./src/errors")
+		Errors: require("./src/errors"),
 	},
 	usStreet: {
 		Lookup: require("./src/us_street/Lookup"),
@@ -22,5 +22,3 @@ const sdkAPI = {
 		Lookup: require("./src/international_street/Lookup"),
 	},
 };
-
-module.exports = sdkAPI;
