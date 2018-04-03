@@ -1,8 +1,8 @@
 const chai = require("chai");
 const expect = chai.expect;
-const errors = require("../source/errors");
-const Batch = require("../source/Batch");
-const Lookup = require("../source/us_street/Lookup");
+const errors = require("../src/errors");
+const Batch = require("../src/Batch");
+const Lookup = require("../src/us_street/Lookup");
 
 describe("A batch", function () {
 	let batch;

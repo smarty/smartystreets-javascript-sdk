@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Lookup = require("../../source/us_autocomplete/Lookup");
+const Lookup = require("../../src/us_autocomplete/Lookup");
 
 describe("A US Autocomplete Lookup", function () {
 	it("can be newed up with a prefix.", function () {

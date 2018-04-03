@@ -2,12 +2,12 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
-const Client = require("../../source/us_extract/Client");
-const Lookup = require("../../source/us_extract/Lookup");
-const Result = require("../../source/us_extract/Result");
+const Client = require("../../src/us_extract/Client");
+const Lookup = require("../../src/us_extract/Lookup");
+const Result = require("../../src/us_extract/Result");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
-const errors = require("../../source/errors");
+const errors = require("../../src/errors");
 
 describe("A US Extract Client", function () {
 	it("throws an error if sending without a lookup.", function () {

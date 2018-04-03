@@ -1,9 +1,9 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Client = require("../../source/international_street/Client");
-const Lookup = require("../../source/international_street/Lookup");
-const Candidate = require("../../source/international_street/Candidate");
-const errors = require("../../source/errors");
+const Client = require("../../src/international_street/Client");
+const Lookup = require("../../src/international_street/Lookup");
+const Candidate = require("../../src/international_street/Candidate");
+const errors = require("../../src/errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 

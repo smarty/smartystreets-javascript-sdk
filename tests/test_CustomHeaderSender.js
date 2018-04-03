@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
-const CustomHeaderSender = require("../source/CustomHeaderSender");
-const Request = require("../source/Request");
+const CustomHeaderSender = require("../src/CustomHeaderSender");
+const Request = require("../src/Request");
 const Promise = require("promise");
 
 describe("A custom header sender", function () {

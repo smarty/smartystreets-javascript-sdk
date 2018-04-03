@@ -1,25 +1,25 @@
 const sdkAPI = {
 	core: {
-		Batch: require("./source/Batch"),
-		ClientBuilder: require("./source/ClientBuilder"),
-		SharedCredentials: require("./source/SharedCredentials"),
-		StaticCredentials: require("./source/StaticCredentials"),
-		errors: require("./source/errors")
+		Batch: require("./src/Batch"),
+		ClientBuilder: require("./src/ClientBuilder"),
+		SharedCredentials: require("./src/SharedCredentials"),
+		StaticCredentials: require("./src/StaticCredentials"),
+		errors: require("./src/errors")
 	},
 	usStreet: {
-		Lookup: require("./source/us_street/Lookup"),
+		Lookup: require("./src/us_street/Lookup"),
 	},
 	usZipcode: {
-		Lookup: require("./source/us_zipcode/Lookup"),
+		Lookup: require("./src/us_zipcode/Lookup"),
 	},
 	usAutocomplete: {
-		Lookup: require("./source/us_autocomplete/Lookup"),
+		Lookup: require("./src/us_autocomplete/Lookup"),
 	},
 	usExtract: {
-		Lookup: require("./source/us_extract/Lookup"),
+		Lookup: require("./src/us_extract/Lookup"),
 	},
 	internationalStreet: {
-		Lookup: require("./source/international_street/Lookup"),
+		Lookup: require("./src/international_street/Lookup"),
 	},
 };
 

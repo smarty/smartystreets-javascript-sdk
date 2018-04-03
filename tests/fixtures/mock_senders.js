@@ -1,5 +1,5 @@
 const Promise = require("promise");
-const Response = require("../../source/Response");
+const Response = require("../../src/Response");
 
 module.exports = {
 	MockSender: function () {

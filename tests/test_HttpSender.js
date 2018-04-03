@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Request = require("../source/Request");
-const HttpSender = require("../source/HttpSender");
+const Request = require("../src/Request");
+const HttpSender = require("../src/HttpSender");
 
 describe ("An Axios implementation of a HTTP sender", function () {
 	it("adds a data payload to the HTTP request config.", function () {

@@ -2,10 +2,10 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
-const Client = require("../../source/us_autocomplete/Client");
-const Lookup = require("../../source/us_autocomplete/Lookup");
-const Suggestion = require("../../source/us_autocomplete/Suggestion");
-const errors = require("../../source/errors");
+const Client = require("../../src/us_autocomplete/Client");
+const Lookup = require("../../src/us_autocomplete/Lookup");
+const Suggestion = require("../../src/us_autocomplete/Suggestion");
+const errors = require("../../src/errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 

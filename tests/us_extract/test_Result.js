@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Result = require("../../source/us_extract/Result");
-const Address = require("../../source/us_extract/Address");
+const Result = require("../../src/us_extract/Result");
+const Address = require("../../src/us_extract/Address");
 
 describe("A US Extract Result", function () {
 	it("correctly populates fields.", function () {

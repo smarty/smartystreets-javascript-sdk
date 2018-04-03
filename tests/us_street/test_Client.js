@@ -2,11 +2,11 @@ const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 const expect = chai.expect;
-const Client = require("../../source/us_street/Client");
-const Lookup = require("../../source/us_street/Lookup");
-const Candidate = require("../../source/us_street/Candidate");
-const Batch = require("../../source/Batch");
-const errors = require("../../source/errors");
+const Client = require("../../src/us_street/Client");
+const Lookup = require("../../src/us_street/Lookup");
+const Candidate = require("../../src/us_street/Candidate");
+const Batch = require("../../src/Batch");
+const errors = require("../../src/errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
