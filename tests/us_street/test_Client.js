@@ -11,13 +11,6 @@ const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
 describe("A US Street client", function () {
-	it("has a sender.", function () {
-		const mockSender = {};
-		const client = new Client(mockSender);
-
-		expect(client.sender).to.deep.equal(mockSender);
-	});
-
 	it("calls its inner sender's send function.", function () {
 		const mockSender = {
 			send: function (request) {
