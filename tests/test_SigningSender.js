@@ -4,6 +4,7 @@ const Request = require("../src/Request");
 const SigningSender = require("../src/SigningSender");
 const StaticCredentials = require("../src/StaticCredentials");
 const SharedCredentials = require("../src/SharedCredentials");
+const errors = require("../src/errors");
 
 describe("A signing sender", function () {
 	let mockAuthId = "testId";
@@ -40,5 +41,16 @@ describe("A signing sender", function () {
 		expect(request.parameters["auth-id"]).to.equal(mockAuthId);
 		expect(request.headers.hasOwnProperty("Referer")).to.equal(true);
 		expect(request.headers["Referer"]).to.equal(mockHostName);
+	});
+
+	it("errors if signing a POST request with shared credentials.", function () {
+		let sharedCredentials = new SharedCredentials(mockAuthId, mockHostName);
+		let signingSender = new SigningSender(mockSender, sharedCredentials);
+		let mockRequestPayload = {
+			foo: "bar",
+		};
+		request.payload = mockRequestPayload;
+
+		expect(() => signingSender.send(request)).to.throw(errors.UnprocessableEntityError);
 	});
 });

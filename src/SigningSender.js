@@ -1,4 +1,6 @@
 const Promise = require("promise");
+const Errors = require("./errors");
+const SharedCredentials = require("./SharedCredentials");
 
 class SigningSender {
 	constructor(innerSender, signer) {
@@ -7,6 +9,12 @@ class SigningSender {
 	}
 
 	send(request) {
+		const sendingPostWithSharedCredentials = request.payload && this.signer instanceof SharedCredentials;
+		if (sendingPostWithSharedCredentials) {
+			const message = "Shared credentials cannot be used in batches with a length greater than 1 or when using the US Extract API.";
+			throw new Errors.UnprocessableEntityError(message);
+		}
+
 		return new Promise((resolve, reject) => {
 			this.signer.sign(request);
 			this.sender.send(request)
