@@ -19,7 +19,7 @@ let batch = new SmartyStreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
 
-client.sendBatch(batch)
+client.send(batch)
 	.then(viewResults)
 	.catch(console.log);
 

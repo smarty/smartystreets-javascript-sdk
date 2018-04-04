@@ -1,6 +1,7 @@
+const Lookup = require("./Lookup");
 const Request = require("../Request");
 const Batch = require("../Batch");
-const errors = require("../errors");
+const Errors = require("../errors");
 const Candidate = require("./Candidate");
 const Promise = require("promise");
 const InputData = require("../InputData");
@@ -10,16 +11,22 @@ class Client {
 		this.sender = sender;
 	}
 
-	sendLookup(lookup) {
-		if (typeof lookup === "undefined") throw new errors.UndefinedLookupError;
+	send(data) {
+		const dataIsBatch = data instanceof Batch;
+		const dataIsLookup = data instanceof Lookup;
 
-		let batch = new Batch();
-		batch.add(lookup);
-		return this.sendBatch(batch);
-	}
+		if(!dataIsLookup && !dataIsBatch) throw new Errors.UndefinedLookupError;
 
-	sendBatch(batch) {
-		if (batch.isEmpty()) throw new errors.BatchEmptyError;
+		let batch;
+
+		if (dataIsLookup) {
+			batch = new Batch();
+			batch.add(data);
+		} else {
+			batch = data;
+		}
+
+		if (batch.isEmpty()) throw new Errors.BatchEmptyError;
 
 		let request = new Request();
 

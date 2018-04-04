@@ -23,7 +23,7 @@ describe("A US Street client", function () {
 		let sentFlag = false;
 		let mockSenderRequest = {};
 
-		client.sendLookup(lookup);
+		client.send(lookup);
 
 		expect(sentFlag).to.equal(true);
 	});
@@ -46,7 +46,7 @@ describe("A US Street client", function () {
 			candidates: "11",
 		};
 
-		client.sendLookup(lookup);
+		client.send(lookup);
 
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
@@ -68,7 +68,7 @@ describe("A US Street client", function () {
 		batch.add(lookup1);
 		batch.add(lookup2);
 
-		client.sendBatch(batch);
+		client.send(batch);
 
 		expect(mockSender.request.payload).to.equal(expectedPayload);
 	});
@@ -78,7 +78,7 @@ describe("A US Street client", function () {
 		const client = new Client(mockSender);
 		let batch = new Batch();
 
-		expect(() => client.sendBatch(batch)).to.throw(errors.BatchEmptyError);
+		expect(() => client.send(batch)).to.throw(errors.BatchEmptyError);
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
@@ -88,7 +88,7 @@ describe("A US Street client", function () {
 		let lookup = new Lookup();
 		let expectedResult = new Candidate({delivery_line_1: "An address", input_index: 0});
 
-		return client.sendLookup(lookup).then(response => {
+		return client.send(lookup).then(response => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
@@ -113,7 +113,7 @@ describe("A US Street client", function () {
 		batch.add(lookup2);
 		batch.add(lookup3);
 
-		client.sendBatch(batch).then(response => {
+		client.send(batch).then(response => {
 			expect(batch.getByIndex(0).result[0].deliveryLine1).to.equal("Address 0");
 			expect(batch.getByIndex(0).result[1].deliveryLine1).to.equal("Alternate address 0");
 			expect(batch.getByIndex(1).result[0].deliveryLine1).to.equal("Address 1");
@@ -128,14 +128,14 @@ describe("A US Street client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		return expect(client.sendLookup(lookup)).to.eventually.be.rejectedWith(expectedMockError);
+		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedMockError);
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.sendLookup()).to.throw(errors.UndefinedLookupError);
+		expect(() => client.send()).to.throw(errors.UndefinedLookupError);
 	});
 
 	it("attaches request parameters for batches with a single lookup and a request payload for batches with more than 1 lookup.", function () {
@@ -146,12 +146,12 @@ describe("A US Street client", function () {
 		let batch = new Batch();
 
 		batch.add(lookup1);
-		client.sendBatch(batch);
+		client.send(batch);
 
 		expect(mockSender.request.parameters).not.to.deep.equal({});
 
 		batch.add(lookup2);
-		client.sendBatch(batch);
+		client.send(batch);
 
 		expect(mockSender.request.payload).not.to.equal(undefined);
 	});
