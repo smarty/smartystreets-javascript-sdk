@@ -1,12 +1,12 @@
 class SharedCredentials {
-	constructor (authId, hostName) {
+	constructor(authId, hostName) {
 		this.authId = authId;
 		this.hostName = hostName;
 	}
 
-	sign (request) {
+	sign(request) {
 		request.parameters["auth-id"] = this.authId;
-		request.headers["Referer"] = this.hostName;
+		if (this.hostName) request.headers["Referer"] = this.hostName;
 	}
 }
 
