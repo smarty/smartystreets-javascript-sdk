@@ -2,7 +2,8 @@ const Request = require("../Request");
 const Errors = require("../Errors");
 const Candidate = require("./Candidate");
 const Promise = require("promise");
-const InputData = require("../InputData");
+const buildInputData = require("../util/buildInputData");
+const keyTranslationFormat = require("../util/apiToSDKKeyMap").internationalStreet;
 
 class Client {
 	constructor(sender) {
@@ -13,7 +14,7 @@ class Client {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
 		let request = new Request();
-		request.parameters = generateRequestParameters(lookup);
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
@@ -32,25 +33,6 @@ class Client {
 			});
 
 			return lookup;
-		}
-
-		function generateRequestParameters(lookup) {
-			let inputData = new InputData(lookup);
-
-			inputData.add("country", "country");
-			inputData.add("freeform", "freeform");
-			inputData.add("address1", "address1");
-			inputData.add("address2", "address2");
-			inputData.add("address3", "address3");
-			inputData.add("address4", "address4");
-			inputData.add("organization", "organization");
-			inputData.add("locality", "locality");
-			inputData.add("administrative_area", "administrativeArea");
-			inputData.add("postal_code", "postalCode");
-			inputData.add("geocode", "geocode");
-			inputData.add("language", "language");
-
-			return inputData.data;
 		}
 	}
 }

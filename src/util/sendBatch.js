@@ -1,7 +1,7 @@
-const InputData = require("../InputData");
 const Request = require("../Request");
 const Promise = require("promise");
 const Errors = require("../Errors");
+const buildInputData = require("../util/buildInputData");
 
 module.exports = (batch, sender, Result, keyTranslationFormat) => {
 	if (batch.isEmpty()) throw new Errors.BatchEmptyError;
@@ -23,13 +23,7 @@ module.exports = (batch, sender, Result, keyTranslationFormat) => {
 
 	function generateRequestPayload(batch) {
 		return batch.lookups.map((lookup) => {
-			let inputData = new InputData(lookup);
-
-			for (let key in keyTranslationFormat) {
-				inputData.add(key, keyTranslationFormat[key]);
-			}
-
-			return inputData.data;
+			return buildInputData(lookup, keyTranslationFormat);
 		});
 	}
 

@@ -17,4 +17,18 @@ module.exports = {
 		state: "state",
 		zipcode: "zipCode",
 	},
+	internationalStreet: {
+		country: "country",
+		freeform: "freeform",
+		address1: "address1",
+		address2: "address2",
+		address3: "address3",
+		address4: "address4",
+		organization: "organization",
+		locality: "locality",
+		administrative_area: "administrativeArea",
+		postal_code: "postalCode",
+		geocode: "geocode",
+		language: "language",
+	}
 };
