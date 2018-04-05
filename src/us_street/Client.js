@@ -1,8 +1,9 @@
+const Candidate = require("./Candidate");
 const Lookup = require("./Lookup");
 const Batch = require("../Batch");
 const Errors = require("../errors");
-const Candidate = require("./Candidate");
 const sendBatch = require("../util/sendBatch");
+const keyTranslationFormat = require("../util/apiToSDKKeyMap").usStreet;
 
 class Client {
 	constructor(sender) {
@@ -23,20 +24,6 @@ class Client {
 		} else {
 			batch = data;
 		}
-
-		const keyTranslationFormat = {
-			street: "street",
-			street2: "street2",
-			secondary: "secondary",
-			city: "city",
-			state: "state",
-			zipcode: "zipCode",
-			lastline: "lastLine",
-			addressee: "addressee",
-			urbanization: "urbanization",
-			match: "match",
-			candidates: "maxCandidates",
-		};
 
 		return sendBatch(batch, this.sender, Candidate, keyTranslationFormat);
 	}
