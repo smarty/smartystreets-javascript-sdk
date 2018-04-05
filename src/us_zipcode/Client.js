@@ -24,7 +24,13 @@ class Client {
 			batch.add(data);
 		} else batch = data;
 
-		return sendBatch(batch, this.sender, Result);
+		const keyTranslationFormat = {
+			city: "city",
+			state: "state",
+			zipcode: "zipCode",
+		};
+
+		return sendBatch(batch, this.sender, Result, keyTranslationFormat);
 	}
 }
 

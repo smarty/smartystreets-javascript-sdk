@@ -3,7 +3,7 @@ const Request = require("../Request");
 const Promise = require("promise");
 const Errors = require("../errors");
 
-module.exports = (batch, sender, Result) => {
+module.exports = (batch, sender, Result, keyTranslationFormat) => {
 	if (batch.isEmpty()) throw new Errors.BatchEmptyError;
 
 	let request = new Request();
@@ -25,9 +25,9 @@ module.exports = (batch, sender, Result) => {
 		return batch.lookups.map((lookup) => {
 			let inputData = new InputData(lookup);
 
-			inputData.add("city", "city");
-			inputData.add("state", "state");
-			inputData.add("zipcode", "zipCode");
+			for (let key in keyTranslationFormat) {
+				inputData.add(key, keyTranslationFormat[key]);
+			}
 
 			return inputData.data;
 		});
