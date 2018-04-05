@@ -6,7 +6,7 @@ const Client = require("../../src/us_street/Client");
 const Lookup = require("../../src/us_street/Lookup");
 const Candidate = require("../../src/us_street/Candidate");
 const Batch = require("../../src/Batch");
-const errors = require("../../src/errors");
+const errors = require("../../src/Errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 

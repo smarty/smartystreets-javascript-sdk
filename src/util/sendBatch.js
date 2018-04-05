@@ -1,7 +1,7 @@
 const InputData = require("../InputData");
 const Request = require("../Request");
 const Promise = require("promise");
-const Errors = require("../errors");
+const Errors = require("../Errors");
 
 module.exports = (batch, sender, Result, keyTranslationFormat) => {
 	if (batch.isEmpty()) throw new Errors.BatchEmptyError;

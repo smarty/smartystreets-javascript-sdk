@@ -1,7 +1,7 @@
 const Candidate = require("./Candidate");
 const Lookup = require("./Lookup");
 const Batch = require("../Batch");
-const Errors = require("../errors");
+const UndefinedLookupError = require("../Errors").UndefinedLookupError;
 const sendBatch = require("../util/sendBatch");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usStreet;
 
@@ -14,7 +14,7 @@ class Client {
 		const dataIsBatch = data instanceof Batch;
 		const dataIsLookup = data instanceof Lookup;
 
-		if (!dataIsLookup && !dataIsBatch) throw new Errors.UndefinedLookupError;
+		if (!dataIsLookup && !dataIsBatch) throw new UndefinedLookupError;
 
 		let batch;
 

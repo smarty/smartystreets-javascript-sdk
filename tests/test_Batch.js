@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const errors = require("../src/errors");
+const errors = require("../src/Errors");
 const Batch = require("../src/Batch");
 const Lookup = require("../src/us_street/Lookup");
 

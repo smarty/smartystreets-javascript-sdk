@@ -1,7 +1,7 @@
 const Lookup = require("./Lookup");
 const Result = require("./Result");
 const Batch = require("../Batch");
-const Errors = require("../errors");
+const UndefinedLookupError = require("../Errors").UndefinedLookupError;
 const sendBatch = require("../util/sendBatch");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usZipcode;
 
@@ -14,7 +14,7 @@ class Client {
 		const dataIsBatch = data instanceof Batch;
 		const dataIsLookup = data instanceof Lookup;
 
-		if (!dataIsLookup && !dataIsBatch) throw new Errors.UndefinedLookupError;
+		if (!dataIsLookup && !dataIsBatch) throw new UndefinedLookupError;
 
 		let batch;
 

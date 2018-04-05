@@ -4,7 +4,7 @@ const Request = require("../src/Request");
 const SigningSender = require("../src/SigningSender");
 const StaticCredentials = require("../src/StaticCredentials");
 const SharedCredentials = require("../src/SharedCredentials");
-const errors = require("../src/errors");
+const Errors = require("../src/Errors");
 
 describe("A signing sender", function () {
 	let mockAuthId = "testId";
@@ -51,6 +51,6 @@ describe("A signing sender", function () {
 		};
 		request.payload = mockRequestPayload;
 
-		expect(() => signingSender.send(request)).to.throw(errors.UnprocessableEntityError);
+		expect(() => signingSender.send(request)).to.throw(Errors.UnprocessableEntityError);
 	});
 });

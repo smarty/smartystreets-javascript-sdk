@@ -1,4 +1,4 @@
-const errors = require("./errors");
+const BatchFullError = require("./Errors").BatchFullError;
 
 class Batch {
 	constructor () {
@@ -7,7 +7,7 @@ class Batch {
 
 	add (lookup) {
 		if (this.lookupsHasRoomForLookup()) this.lookups.push(lookup);
-		else throw new errors.BatchFullError();
+		else throw new BatchFullError();
 	}
 
 	lookupsHasRoomForLookup() {

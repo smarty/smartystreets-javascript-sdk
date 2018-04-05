@@ -1,4 +1,4 @@
-const UnprocessableEntityError = require("../errors").UnprocessableEntityError;
+const UnprocessableEntityError = require("../Errors").UnprocessableEntityError;
 const messages = {
 	countryRequired: "Country field is required.",
 	freeformOrAddress1Required: "Either freeform or address1 is required.",

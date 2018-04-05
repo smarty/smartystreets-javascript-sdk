@@ -1,5 +1,5 @@
 const Promise = require("promise");
-const errors = require("./errors");
+const Errors = require("./Errors");
 
 class StatusCodeSender {
 	constructor(innerSender) {
@@ -13,39 +13,39 @@ class StatusCodeSender {
 				.catch(error => {
 					switch (error.statusCode) {
 						case 400:
-							error.error = new errors.BadRequestError();
+							error.error = new Errors.BadRequestError();
 							break;
 
 						case 401:
-							error.error = new errors.BadCredentialsError();
+							error.error = new Errors.BadCredentialsError();
 							break;
 
 						case 402:
-							error.error = new errors.PaymentRequiredError();
+							error.error = new Errors.PaymentRequiredError();
 							break;
 
 						case 413:
-							error.error = new errors.RequestEntityTooLargeError();
+							error.error = new Errors.RequestEntityTooLargeError();
 							break;
 
 						case 422:
-							error.error = new errors.UnprocessableEntityError("GET request lacked required fields.");
+							error.error = new Errors.UnprocessableEntityError("GET request lacked required fields.");
 							break;
 
 						case 429:
-							error.error = new errors.TooManyRequestsError();
+							error.error = new Errors.TooManyRequestsError();
 							break;
 
 						case 500:
-							error.error = new errors.InternalServerError();
+							error.error = new Errors.InternalServerError();
 							break;
 
 						case 503:
-							error.error = new errors.ServiceUnavailableError();
+							error.error = new Errors.ServiceUnavailableError();
 							break;
 
 						case 504:
-							error.error = new errors.GatewayTimeoutError();
+							error.error = new Errors.GatewayTimeoutError();
 							break;
 					}
 

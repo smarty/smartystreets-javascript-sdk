@@ -5,7 +5,7 @@ chai.use(chaiAsPromised);
 const Client = require("../../src/us_autocomplete/Client");
 const Lookup = require("../../src/us_autocomplete/Lookup");
 const Suggestion = require("../../src/us_autocomplete/Suggestion");
-const errors = require("../../src/errors");
+const errors = require("../../src/Errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 

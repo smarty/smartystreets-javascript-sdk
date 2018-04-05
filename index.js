@@ -4,7 +4,7 @@ module.exports = {
 		ClientBuilder: require("./src/ClientBuilder"),
 		SharedCredentials: require("./src/SharedCredentials"),
 		StaticCredentials: require("./src/StaticCredentials"),
-		Errors: require("./src/errors"),
+		Errors: require("./src/Errors"),
 	},
 	usStreet: {
 		Lookup: require("./src/us_street/Lookup"),

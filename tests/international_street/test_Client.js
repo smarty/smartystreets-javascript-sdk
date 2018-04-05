@@ -3,7 +3,7 @@ const expect = chai.expect;
 const Client = require("../../src/international_street/Client");
 const Lookup = require("../../src/international_street/Lookup");
 const Candidate = require("../../src/international_street/Candidate");
-const errors = require("../../src/errors");
+const errors = require("../../src/Errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 

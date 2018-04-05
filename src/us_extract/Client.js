@@ -1,4 +1,4 @@
-const errors = require("../errors");
+const Errors = require("../Errors");
 const Promise = require("promise");
 const Request = require("../Request");
 const Result = require("./Result");
@@ -9,7 +9,7 @@ class Client {
 	}
 
 	send(lookup) {
-		if (typeof lookup === "undefined") throw new errors.UndefinedLookupError();
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
 		let request = new Request(buildRequestPayload(lookup));
 

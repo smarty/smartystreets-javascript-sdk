@@ -7,7 +7,7 @@ const Lookup = require("../../src/us_extract/Lookup");
 const Result = require("../../src/us_extract/Result");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
-const errors = require("../../src/errors");
+const errors = require("../../src/Errors");
 
 describe("A US Extract Client", function () {
 	it("throws an error if sending without a lookup.", function () {

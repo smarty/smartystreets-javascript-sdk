@@ -3,7 +3,7 @@ const expect = chai.expect;
 const StatusCodeSender = require("../src/StatusCodeSender");
 const Response = require("../src/Response");
 const Request = require("../src/Request");
-const errors = require("../src/errors");
+const errors = require("../src/Errors");
 
 describe("A status code sender", function () {
 	it("doesn't attach an error on a 200.", function () {

@@ -1,5 +1,5 @@
 const Request = require("../Request");
-const errors = require("../errors");
+const Errors = require("../Errors");
 const Candidate = require("./Candidate");
 const Promise = require("promise");
 const InputData = require("../InputData");
@@ -10,7 +10,7 @@ class Client {
 	}
 
 	send(lookup) {
-		if (typeof lookup === "undefined") throw new errors.UndefinedLookupError();
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
 		let request = new Request();
 		request.parameters = generateRequestParameters(lookup);
