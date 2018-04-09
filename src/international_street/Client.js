@@ -28,8 +28,7 @@ class Client {
 
 		function attachLookupCandidates(response, lookup) {
 			response.payload.map(rawCandidate => {
-				let candidate = new Candidate(rawCandidate);
-				lookup.result.push(candidate);
+				lookup.result.push(new Candidate(rawCandidate));
 			});
 
 			return lookup;
