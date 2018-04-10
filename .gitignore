@@ -1,5 +1,4 @@
 .vagrant/
 .idea/
 node_modules/
-package-lock.json
 .nyc_output
