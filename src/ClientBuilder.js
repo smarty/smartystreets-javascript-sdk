@@ -3,8 +3,10 @@ const SigningSender = require("./SigningSender");
 const BaseUrlSender = require("./BaseUrlSender");
 const AgentSender = require("./AgentSender");
 const StaticCredentials = require("./StaticCredentials");
+const SharedCredentials = require("./SharedCredentials");
 const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
+const BadCredentialsError = require("./Errors").BadCredentialsError;
 
 //TODO: refactor this to work more cleanly with a bundler.
 const UsStreetClient = require("./us_street/Client");
@@ -20,7 +22,9 @@ const US_STREET_API_URL = "https://us-street.api.smartystreets.com/street-addres
 const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smartystreets.com/lookup";
 
 class ClientBuilder {
-	constructor(signer = new StaticCredentials()) {
+	constructor(signer) {
+		if (noValidCredentialsProvided()) throw new BadCredentialsError();
+
 		this.signer = signer;
 		this.httpSender = undefined;
 		this.maxRetries = 5;
@@ -28,6 +32,10 @@ class ClientBuilder {
 		this.baseUrl = undefined;
 		this.proxy = undefined;
 		this.customHeaders = {};
+
+		function noValidCredentialsProvided() {
+			return !signer instanceof StaticCredentials || !signer instanceof SharedCredentials;
+		}
 	}
 
 	withMaxRetries(retries) {
