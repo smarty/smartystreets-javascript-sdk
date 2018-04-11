@@ -23,7 +23,7 @@ const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smartystreets.com/lookup";
 
 class ClientBuilder {
 	constructor(signer) {
-		if (noValidCredentialsProvided()) throw new BadCredentialsError();
+		if (noCredentialsProvided()) throw new BadCredentialsError();
 
 		this.signer = signer;
 		this.httpSender = undefined;
@@ -33,7 +33,7 @@ class ClientBuilder {
 		this.proxy = undefined;
 		this.customHeaders = {};
 
-		function noValidCredentialsProvided() {
+		function noCredentialsProvided() {
 			return !signer instanceof StaticCredentials || !signer instanceof SharedCredentials;
 		}
 	}
