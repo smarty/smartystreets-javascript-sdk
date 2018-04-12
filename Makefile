@@ -6,11 +6,14 @@ tests:
 publish-patch:
 	npm version patch
 	npm publish
+	node browserify.js
 
 publish-minor:
 	npm version minor
 	npm publish
+	node browserify.js
 
 publish-major:
 	npm version major
 	npm publish
+	node browserify.js
