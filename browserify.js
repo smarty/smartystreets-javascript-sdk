@@ -19,8 +19,10 @@ function distFolderExists(error) {
 	};
 
 	let writeToDisk = fs.createWriteStream(minifiedFile);
-	let browserify = require("browserify")(sdkEntryPoint, options);
+	let browserify = require("browserify");
 
-	browserify.bundle()
+	browserify(sdkEntryPoint, options)
+		.transform("babelify", {presets: ["env"]})
+		.bundle()
 		.pipe(writeToDisk);
 }
