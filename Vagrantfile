@@ -8,5 +8,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # box-specific
   config.vm.provision "shell", inline: "sudo apt-get install -y npm"
   config.vm.provision "shell", inline: "sudo ln -s /usr/bin/nodejs /usr/bin/node"
+  config.vm.provision "shell", inline: "sudo npm install"
   config.vm.provision "shell", inline: "sudo npm install mocha -g"
+  config.vm.provision "shell", inline: "echo _auth = $NPM_AUTH_TOKEN > ~/.npmrc"
+  config.vm.provision "shell", inline: "echo email = $NPM_EMAIL >> ~/.npmrc"
 end

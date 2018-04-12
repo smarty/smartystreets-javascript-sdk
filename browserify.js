@@ -2,7 +2,7 @@ const fs = require("fs");
 const version = require("./package.json").version;
 const distFolder = __dirname + "/dist";
 const filePrefix = "smartystreets-sdk-";
-const minifiedFile = distFolder + "/" + filePrefix + version + ".js";
+const minifiedFile = distFolder + "/" + filePrefix + version + ".min.js";
 const sdkEntryPoint = "./index.js";
 const standaloneVariableName = "SmartyStreetsSDK";
 
