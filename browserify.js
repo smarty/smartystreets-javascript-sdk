@@ -1,27 +1,26 @@
 const fs = require("fs");
-const version = require("./package.json").version;
 const distFolder = __dirname + "/dist";
-const filePrefix = "smartystreets-sdk-";
-const minifiedFile = distFolder + "/" + filePrefix + version + ".min.js";
-const sdkEntryPoint = "./index.js";
-const standaloneVariableName = "SmartyStreetsSDK";
 
-const options = {
-	plugin: [
-		"tinyify",
-	],
-	standalone: standaloneVariableName,
-};
+fs.mkdir(distFolder, distFolderExists);
 
-fs.mkdir(distFolder, handleError);
-
-let writeToDisk = fs.createWriteStream(minifiedFile);
-
-let browserify = require("browserify")(sdkEntryPoint, options);
-
-browserify.bundle()
-	.pipe(writeToDisk);
-
-function handleError(error) {
+function distFolderExists(error) {
 	if (error) throw error;
+
+	const filePrefix = "smartystreets-sdk-";
+	const version = require("./package.json").version;
+	const minifiedFile = distFolder + "/" + filePrefix + version + ".min.js";
+	const sdkEntryPoint = "./index.js";
+	const standaloneVariableName = "SmartyStreetsSDK";
+	const options = {
+		plugin: [
+			"tinyify",
+		],
+		standalone: standaloneVariableName,
+	};
+
+	let writeToDisk = fs.createWriteStream(minifiedFile);
+	let browserify = require("browserify")(sdkEntryPoint, options);
+
+	browserify.bundle()
+		.pipe(writeToDisk);
 }
