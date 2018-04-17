@@ -8,21 +8,26 @@ function distFolderExists(error) {
 
 	const filePrefix = "smartystreets-sdk-";
 	const version = require("./package.json").version;
-	const minifiedFile = distFolder + "/" + filePrefix + version + ".min.js";
+	const fileName = distFolder + "/" + filePrefix + version;
+	const minifiedFile = fileName + ".min.js";
+	const standardFile = fileName + ".js";
 	const sdkEntryPoint = "./index.js";
 	const standaloneVariableName = "SmartyStreetsSDK";
 	const options = {
-		plugin: [
-			"tinyify",
-		],
 		standalone: standaloneVariableName,
 	};
 
-	let writeToDisk = fs.createWriteStream(minifiedFile);
+	let writeToDisk = (destination) => fs.createWriteStream(destination);
 	let browserify = require("browserify");
 
 	browserify(sdkEntryPoint, options)
 		.transform("babelify", {presets: ["env"]})
 		.bundle()
-		.pipe(writeToDisk);
+		.pipe(writeToDisk(standardFile));
+
+	browserify(sdkEntryPoint, options)
+		.transform("babelify", {presets: ["env"]})
+		.plugin("tinyify")
+		.bundle()
+		.pipe(writeToDisk(minifiedFile));
 }
