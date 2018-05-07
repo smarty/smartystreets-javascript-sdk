@@ -1,4 +1,4 @@
-# SmartyStreets Java SDK
+# SmartyStreets Javascript SDK
 
 The official client libraries for accessing SmartyStreets APIs with Javascript.
 
