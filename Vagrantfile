@@ -9,6 +9,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", inline: "apt-get update && apt-get install -y nodejs"
 
   config.vm.provision "shell", inline: "cd /vagrant && npm i"
-  config.vm.provision "shell", inline: "echo _auth = $NPM_AUTH_TOKEN > /home/vagrant/.npmrc"
-  config.vm.provision "shell", inline: "echo email = $NPM_EMAIL >> /home/vagrant/.npmrc"
 end
