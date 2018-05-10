@@ -1,6 +1,6 @@
 {
  "name": "smartystreets-javascript-sdk",
- "version": "0.0.5",
+ "version": "0.0.6",
  "description": "Quick and easy SmartyStreets address validation.",
  "main": "index.js",
  "scripts": {
