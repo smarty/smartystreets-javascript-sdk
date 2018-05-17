@@ -28,7 +28,7 @@ describe("A match candidate", function () {
 				city_name: "19",
 				default_city_name: "20",
 				state_abbreviation: "21",
-				zipCode: "22",
+				zipcode: "22",
 				plus4_code: "23",
 				delivery_point: "24",
 				delivery_point_check_digit: "25"

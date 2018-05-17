@@ -25,7 +25,7 @@ class Candidate {
 			this.components.cityName = responseData.components.city_name;
 			this.components.defaultCityName = responseData.components.default_city_name;
 			this.components.state = responseData.components.state_abbreviation;
-			this.components.zipCode = responseData.components.zipCode;
+			this.components.zipCode = responseData.components.zipcode;
 			this.components.plus4Code = responseData.components.plus4_code;
 			this.components.deliveryPoint = responseData.components.delivery_point;
 			this.components.deliveryPointCheckDigit = responseData.components.delivery_point_check_digit;
