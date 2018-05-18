@@ -2,6 +2,24 @@
  "name": "smartystreets-javascript-sdk",
  "version": "1.0.2",
  "description": "Quick and easy SmartyStreets address validation.",
+ "keywords": [
+  "smartystreets",
+  "address",
+  "validation",
+  "verification",
+  "verify",
+  "validate",
+  "street-address",
+  "geocoding",
+  "addresses",
+  "zipcode",
+  "autocomplete",
+  "autosuggest",
+  "suggestions",
+  "international",
+  "http",
+  "sdk"
+ ],
  "main": "index.js",
  "scripts": {
   "test": "mocha 'tests/**/*.js'"
