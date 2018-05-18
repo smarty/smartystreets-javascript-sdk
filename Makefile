@@ -3,19 +3,22 @@
 tests:
 	npm run test
 
-publish-patch:
+clean:
+	rm -rf ./dist
+
+publish-patch: clean
 	npm version patch
 	npm publish
 	node browserify.js
 	node s3.js
 
-publish-minor:
+publish-minor: clean
 	npm version minor
 	npm publish
 	node browserify.js
 	node s3.js
 
-publish-major:
+publish-major: clean
 	npm version major
 	npm publish
 	node browserify.js
