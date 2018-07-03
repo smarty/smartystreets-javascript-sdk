@@ -1,5 +1,8 @@
 const Candidate = require("../us_street/Candidate");
 
+/**
+ * @see <a href="https://smartystreets.com/docs/cloud/us-extract-api#http-response-status">SmartyStreets US Extract API docs</a>
+ */
 class Address {
 	constructor (responseData) {
 		this.text = responseData.text;

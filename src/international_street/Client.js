@@ -5,6 +5,10 @@ const Promise = require("promise");
 const buildInputData = require("../util/buildInputData");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").internationalStreet;
 
+/**
+ * This client sends lookups to the SmartyStreets International Street API, <br>
+ *     and attaches the results to the appropriate Lookup objects.
+ */
 class Client {
 	constructor(sender) {
 		this.sender = sender;

@@ -3,6 +3,10 @@ const Request = require("../Request");
 const Suggestion = require("./Suggestion");
 const Promise = require("promise");
 
+/**
+ * This client sends lookups to the SmartyStreets US Autocomplete API, <br>
+ *     and attaches the results to the appropriate Lookup objects.
+ */
 class Client {
 	constructor(sender) {
 		this.sender = sender;

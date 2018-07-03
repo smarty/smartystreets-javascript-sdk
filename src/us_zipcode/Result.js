@@ -1,3 +1,6 @@
+/**
+ * @see "https://smartystreets.com/docs/cloud/us-zipcode-api#root"
+ */
 class Result {
 	constructor(responseData) {
 		this.inputIndex = responseData.input_index;

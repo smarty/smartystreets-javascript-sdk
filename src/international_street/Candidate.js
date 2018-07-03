@@ -1,3 +1,9 @@
+/**
+ * A candidate is a possible match for an address that was submitted.<br>
+ *     A lookup can have multiple candidates if the address was ambiguous.
+ *
+ * @see "https://smartystreets.com/docs/cloud/international-street-api#root"
+ */
 class Candidate {
 	constructor(responseData) {
 		this.organization = responseData.organization;
