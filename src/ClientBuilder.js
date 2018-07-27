@@ -37,6 +37,7 @@ class ClientBuilder {
 		this.baseUrl = undefined;
 		this.proxy = undefined;
 		this.customHeaders = {};
+		this.debug = undefined;
 
 		function noCredentialsProvided() {
 			return !signer instanceof StaticCredentials || !signer instanceof SharedCredentials;
@@ -116,10 +117,21 @@ class ClientBuilder {
 		return this;
 	}
 
+	/**
+	 * Enables debug mode, which will print information about the HTTP request and response to console.log
+	 * @return Returns <b>this</b> to accommodate method chaining.
+	 */
+	withDebug() {
+		this.debug = true;
+
+		return this;
+	}
+
+
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
-		const httpSender = new HttpSender(this.maxTimeout, this.maxRetries, this.proxy);
+		const httpSender = new HttpSender(this.maxTimeout, this.maxRetries, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);
 		const signingSender = new SigningSender(statusCodeSender, this.signer);
 		const agentSender = new AgentSender(signingSender);

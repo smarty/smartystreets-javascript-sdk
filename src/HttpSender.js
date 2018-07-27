@@ -4,12 +4,13 @@ const axiosRetry = require("axios-retry");
 const Promise = require("promise");
 
 class HttpSender {
-	constructor(timeout = 10000, retries = 5, proxyConfig) {
+	constructor(timeout = 10000, retries = 5, proxyConfig, debug = false) {
 		axiosRetry(Axios, {
 			retries: retries,
 		});
 		this.timeout = timeout;
 		this.proxyConfig = proxyConfig;
+		if (debug) this.enableDebug();
 	}
 
 	buildRequestConfig({payload, parameters, headers, baseUrl}) {
@@ -52,6 +53,19 @@ class HttpSender {
 				})
 				.catch(error => reject(this.buildSmartyResponse(undefined, error)));
 		});
+	}
+
+	enableDebug() {
+		Axios.interceptors.request.use(request => {
+			console.log('Request:\r\n', request);
+			console.log('\r\n*******************************************\r\n');
+			return request
+		});
+
+		Axios.interceptors.response.use(response => {
+			console.log('Response:\r\n', response);
+			return response
+		})
 	}
 }
 
