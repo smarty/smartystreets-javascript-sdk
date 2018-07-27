@@ -63,7 +63,10 @@ class HttpSender {
 		});
 
 		Axios.interceptors.response.use(response => {
-			console.log('Response:\r\n', response);
+			console.log('Response:\r\n');
+			console.log('Status:', response.status, response.statusText);
+			console.log('Headers:', response.headers);
+			console.log('Data:', response.data);
 			return response
 		})
 	}
