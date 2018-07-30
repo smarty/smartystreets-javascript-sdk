@@ -75,6 +75,18 @@ describe("A US Autocomplete Client", function () {
 		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedError);
 	});
 
+	it("returns an empty array when no suggestions are returned.", () => {
+		let mockExpectedPayload = {suggestions: null};
+		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
+		let client = new Client(mockSender);
+		let lookup = new Lookup("Please let this be easy to test.");
+		let expectedSuggestion = [];
+
+		return client.send(lookup).then(response => {
+			expect(lookup.result).to.deep.equal(expectedSuggestion);
+		});
+	});
+
 	it("attaches suggestions from a response to a lookup.", function () {
 		const responseData = {
 			text: "a",
