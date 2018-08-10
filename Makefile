@@ -1,25 +1,42 @@
 #!/usr/bin/make -f
 
-tests:
+local-test:
 	npm run test
 
 clean:
 	rm -rf ./dist
 
-publish-patch: clean
+local-publish-patch: clean
 	npm version patch
 	npm publish
 	node browserify.js
 	node s3.js
+	git commit --tags
 
-publish-minor: clean
+local-publish-minor: clean
 	npm version minor
 	npm publish
 	node browserify.js
 	node s3.js
+	git commit --tags
 
-publish-major: clean
+local-publish-major: clean
 	npm version major
 	npm publish
 	node browserify.js
 	node s3.js
+	git commit --tags
+
+##############################################################
+
+publish-patch:
+	docker-compose run sdk make local-publish-patch
+
+publish-minor:
+	docker-compose run sdk make local-publish-minor
+
+publish-major:
+	docker-compose run sdk make local-publish-major	
+
+test:
+	docker-compose run sdk make local-test
