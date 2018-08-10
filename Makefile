@@ -32,14 +32,15 @@ shell:
 test:
 	docker-compose run sdk make local-test
 
-publish-patch: copy-gitconfig
+publish-patch: copy-files
 	docker-compose run sdk make version-patch && make local-publish
 
-publish-minor: copy-gitconfig
+publish-minor: copy-files
 	docker-compose run sdk make local-publish-minor
 
-publish-major: copy-gitconfig
+publish-major: copy-files
 	docker-compose run sdk make local-publish-major	
 
-copy-gitconfig:
+copy-files:
 	test -d .gitconfig || cp -r ~/.gitconfig .
+	test -d .ssh || cp -r ~/.ssh .
