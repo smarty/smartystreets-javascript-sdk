@@ -11,21 +11,21 @@ local-publish-patch: clean
 	npm publish
 	node browserify.js
 	node s3.js
-	git commit --tags
+	git push origin master --tags
 
 local-publish-minor: clean
 	npm version minor
 	npm publish
 	node browserify.js
 	node s3.js
-	git commit --tags
+	git push origin master --tags
 
 local-publish-major: clean
 	npm version major
 	npm publish
 	node browserify.js
 	node s3.js
-	git commit --tags
+	git push origin master --tags
 
 ##############################################################
 
