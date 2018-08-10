@@ -29,6 +29,12 @@ local-publish-major: clean
 
 ##############################################################
 
+nuke:
+	docker system prune -a
+
+test:
+	docker-compose run sdk make local-test
+
 publish-patch:
 	docker-compose run sdk make local-publish-patch
 
@@ -37,6 +43,3 @@ publish-minor:
 
 publish-major:
 	docker-compose run sdk make local-publish-major	
-
-test:
-	docker-compose run sdk make local-test
