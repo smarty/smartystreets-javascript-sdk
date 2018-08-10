@@ -6,22 +6,16 @@ local-test:
 clean:
 	rm -rf ./dist
 
-local-publish-patch: clean
+version-patch: clean
 	npm version patch
-	npm publish
-	node browserify.js
-	node s3.js
-	git push origin master --tags
 
-local-publish-minor: clean
+version-minor: clean
 	npm version minor
-	npm publish
-	node browserify.js
-	node s3.js
-	git push origin master --tags
 
-local-publish-major: clean
+version-major: clean
 	npm version major
+
+local-publish:
 	npm publish
 	node browserify.js
 	node s3.js
@@ -32,14 +26,20 @@ local-publish-major: clean
 nuke:
 	docker system prune -a
 
+shell:
+	docker-compose run sdk sh	
+
 test:
 	docker-compose run sdk make local-test
 
-publish-patch:
-	docker-compose run sdk make local-publish-patch
+publish-patch: copy-gitconfig
+	docker-compose run sdk make version-patch && make local-publish
 
-publish-minor:
+publish-minor: copy-gitconfig
 	docker-compose run sdk make local-publish-minor
 
-publish-major:
+publish-major: copy-gitconfig
 	docker-compose run sdk make local-publish-major	
+
+copy-gitconfig:
+	test -d .gitconfig || cp -r ~/.gitconfig .
