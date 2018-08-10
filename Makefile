@@ -12,13 +12,13 @@ local-publish-patch: clean
 	node browserify.js
 	node s3.js
 
-publish-minor: clean
+local-publish-minor: clean
 	npm version minor
 	npm publish
 	node browserify.js
 	node s3.js
 
-publish-major: clean
+local-publish-major: clean
 	npm version major
 	npm publish
 	node browserify.js
@@ -28,6 +28,12 @@ publish-major: clean
 
 publish-patch:
 	docker-compose run sdk make local-publish-patch
+
+publish-minor:
+	docker-compose run sdk make local-publish-minor
+
+publish-major:
+	docker-compose run sdk make local-publish-major	
 
 test:
 	docker-compose run sdk make local-test
