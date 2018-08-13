@@ -63,7 +63,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		let version = require("../package.json").version;
 
 		expect(requestConfig.hasOwnProperty("headers")).to.equal(true);
-		expect(requestConfig.headers["Content-Type"]).to.equal("application/json");
+		expect(requestConfig.headers["Content-Type"]).to.equal("application/json; charset=utf-8");
 	});
 
 	it ("has a response with the right status code.", function () {
