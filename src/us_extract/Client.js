@@ -15,7 +15,7 @@ class Client {
 	send(lookup) {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-		let request = new Request(buildRequestPayload(lookup));
+		let request = new Request(lookup.text);
 		request.parameters = buildRequestParams(lookup);
 
 		return new Promise((resolve, reject) => {
@@ -28,12 +28,6 @@ class Client {
 				})
 				.catch(reject);
 		});
-
-		function buildRequestPayload(lookup) {
-			return {
-				text: lookup.text,
-			};
-		}
 
 		function buildRequestParams(lookup) {
 			return {

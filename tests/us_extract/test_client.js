@@ -22,9 +22,7 @@ describe("A US Extract Client", function () {
 		let client = new Client(mockSender);
 		let mockText = "yump.";
 		let lookup = new Lookup(mockText);
-		let expectedPayload = {
-			text: mockText,
-		};
+		let expectedPayload = mockText;
 
 		client.send(lookup);
 
@@ -36,10 +34,7 @@ describe("A US Extract Client", function () {
 		let client = new Client(mockSender);
 		const mockText = "The flocculated scunge is subprime for human consumption.";
 		let lookup = new Lookup(mockText);
-
-		let expectedPayload = {
-			text: mockText,
-		};
+		let expectedPayload = mockText;
 
 		client.send(lookup);
 
