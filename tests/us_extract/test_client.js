@@ -24,10 +24,6 @@ describe("A US Extract Client", function () {
 		let lookup = new Lookup(mockText);
 		let expectedPayload = {
 			text: mockText,
-			html: undefined,
-			aggressive: undefined,
-			addr_line_breaks: undefined,
-			addr_per_line: undefined,
 		};
 
 		client.send(lookup);
@@ -35,7 +31,22 @@ describe("A US Extract Client", function () {
 		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
 	});
 
-	it("correctly builds parameters for a fully-populated lookup.", function () {
+	it("correctly builds a payload for a fully-populated lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		const mockText = "The flocculated scunge is subprime for human consumption.";
+		let lookup = new Lookup(mockText);
+
+		let expectedPayload = {
+			text: mockText,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+	});
+
+	it("correctly builds parameters for a lookup.", () => {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		const mockText = "The flocculated scunge is subprime for human consumption.";
@@ -45,8 +56,7 @@ describe("A US Extract Client", function () {
 		lookup.addressesHaveLineBreaks = 3;
 		lookup.addressesPerLine = 4;
 
-		let expectedPayload = {
-			text: mockText,
+		let expectedParams = {
 			html: 1,
 			aggressive: 2,
 			addr_line_breaks: 3,
@@ -55,7 +65,7 @@ describe("A US Extract Client", function () {
 
 		client.send(lookup);
 
-		expect(mockSender.request.payload).to.deep.equal(expectedPayload);
+		expect(mockSender.request.parameters).to.deep.equal(expectedParams);
 	});
 
 	it("rejects with an exception if the response comes back with an error.", function () {
