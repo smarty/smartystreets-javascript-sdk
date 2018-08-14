@@ -44,7 +44,7 @@ describe("A US Extract Client", function () {
 	it("correctly builds parameters for a lookup.", () => {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
-		const mockText = "The flocculated scunge is subprime for human consumption.";
+		const mockText = "Picard is coming back. All power to the engines.";
 		let lookup = new Lookup(mockText);
 		lookup.html = 1;
 		lookup.aggressive = 2;
