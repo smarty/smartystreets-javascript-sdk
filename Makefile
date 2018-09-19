@@ -36,6 +36,5 @@ release:
 		&& tagit -p \
 		&& git push origin master --tags
 
-
 # node_modules is a real directory target
 .PHONY: clean test publish workspace release
