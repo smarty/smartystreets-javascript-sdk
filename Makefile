@@ -9,10 +9,13 @@ test: node_modules
 node_modules:
 	npm install
 
-publish:
+publish: identity
 	npm publish
 	node browserify.js
 	node s3.js
+
+identity:
+	@echo "$(NPMRC)" > ~/.npmrc
 
 ##########################################################
 
@@ -20,7 +23,7 @@ workspace:
 	docker-compose run sdk /bin/sh
 
 release:
-	docker-compose run sdk tagit -p && make publish
+	docker-compose run sdk make publish
 
 # node_modules is a real directory target
 .PHONY: clean test publish workspace release
