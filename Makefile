@@ -1,46 +1,26 @@
 #!/usr/bin/make -f
 
-local-test:
-	npm run test
-
 clean:
 	rm -rf ./dist
 
-version-patch: clean
-	npm version patch
+test: node_modules
+	npm run test
 
-version-minor: clean
-	npm version minor
+node_modules:
+	npm install
 
-version-major: clean
-	npm version major
-
-local-publish:
+publish:
 	npm publish
 	node browserify.js
 	node s3.js
-	git push origin master --tags
 
-##############################################################
+##########################################################
 
-nuke:
-	docker system prune -a
+workspace:
+	docker-compose run sdk /bin/sh
 
-shell:
-	docker-compose run sdk sh	
+release:
+	docker-compose run sdk tagit -p && make publish
 
-test:
-	docker-compose run sdk make local-test
-
-publish-patch: copy-files
-	docker-compose run sdk make version-patch && make local-publish
-
-publish-minor: copy-files
-	docker-compose run sdk make local-publish-minor
-
-publish-major: copy-files
-	docker-compose run sdk make local-publish-major	
-
-copy-files:
-	test -d .gitconfig || cp -r ~/.gitconfig .
-	test -d .ssh || cp -r ~/.ssh .
+# node_modules is a real directory target
+.PHONY: clean test publish workspace release

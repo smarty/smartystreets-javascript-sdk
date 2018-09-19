@@ -1,7 +1,7 @@
-.vagrant/
-.idea/
-node_modules/
-.nyc_output
-dist/
-.gitconfig
-.ssh
+*DS_Store*
+*.swp
+__MACOSX
+/.idea/
+/workspace/
+/node_modules/
+/dist/
