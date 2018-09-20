@@ -14,12 +14,10 @@ test: node_modules
 node_modules:
 	npm install
 
-version:
-	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)"
-	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)"
-
-publish: clean test version
-	npm publish \
+publish: clean test
+	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)" \
+		&& sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)" \
+		&& npm publish \
 		&& node browserify.js && node s3.js \
 		&& git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
