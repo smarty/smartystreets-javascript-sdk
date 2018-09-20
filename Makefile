@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 
-VERSION_INCREMENT ?= -p
-VERSION           := $(shell tagit $(VERSION_INCREMENT) --dry-run)
+VERSION           := $(shell tagit -p --dry-run)
 VERSION_FILE1     := package.json
 VERSION_FILE2     := package-lock.json
 
