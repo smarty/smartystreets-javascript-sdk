@@ -1,7 +1,10 @@
 version: '3.7'
 services:
   sdk:
-    build: .
+    build:
+      context: .
+      args:
+        - NPMRC
     volumes: 
       - .:/code
     environment:
@@ -9,4 +12,3 @@ services:
       - SMARTY_AUTH_TOKEN
       - AWS_ACCESS_KEY
       - AWS_SECRET_KEY
-      - NPMRC

@@ -15,14 +15,11 @@ test: node_modules
 node_modules:
 	npm install
 
-identity:
-	@echo "$(NPMRC)" > ~/.npmrc
-
 version:
 	sed -i -E 's/^ "version": "\d+\.\d+\.\d+",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)"
 	sed -i -E 's/^ "version": "\d+\.\d+\.\d+",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)"
 
-publish: clean test identity version
+publish: clean test version
 	npm publish && node browserify.js && node s3.js
 
 ##########################################################
