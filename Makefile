@@ -17,8 +17,7 @@ node_modules:
 publish: clean test
 	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)" \
 		&& sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)" \
-		&& npm publish \
-		&& node browserify.js && node s3.js \
+		&& npm publish && node browserify.js && node s3.js \
 		&& git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
 ##########################################################
