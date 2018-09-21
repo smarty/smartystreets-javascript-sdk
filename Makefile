@@ -4,9 +4,8 @@ VERSION           := $(shell tagit -p --dry-run)
 VERSION_FILE1     := package.json
 VERSION_FILE2     := package-lock.json
 
-clean:
+clean: unversion
 	rm -rf ./dist
-	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
 test: node_modules
 	npm run test
@@ -14,11 +13,17 @@ test: node_modules
 node_modules:
 	npm install
 
-publish: clean test
-	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)" \
-		&& sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)" \
-		&& npm publish && node browserify.js && node s3.js \
-		&& git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
+publish: clean test version upload unversion
+
+upload:
+	npm publish && node browserify.js && node s3.js
+
+version:
+	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)"
+	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)"
+
+unversion:
+	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
 ##########################################################
 
@@ -29,4 +34,4 @@ release:
 	docker-compose run sdk make publish && tagit -p && git push origin --tags
 
 # node_modules is a real directory target
-.PHONY: clean test publish workspace release
+.PHONY: clean test publish upload version unversion workspace release
