@@ -1,46 +1,37 @@
 #!/usr/bin/make -f
 
-local-test:
-	npm run test
+VERSION           := $(shell tagit -p --dry-run)
+VERSION_FILE1     := package.json
+VERSION_FILE2     := package-lock.json
 
-clean:
+clean: unversion
 	rm -rf ./dist
 
-version-patch: clean
-	npm version patch
+test: node_modules
+	npm run test
 
-version-minor: clean
-	npm version minor
+node_modules:
+	npm install
 
-version-major: clean
-	npm version major
+publish: clean test version upload unversion
 
-local-publish:
-	npm publish
-	node browserify.js
-	node s3.js
-	git push origin master --tags
+upload:
+	npm publish && node browserify.js && node s3.js
 
-##############################################################
+version:
+	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)"
+	sed -i -E 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)"
 
-nuke:
-	docker system prune -a
+unversion:
+	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
-shell:
-	docker-compose run sdk sh	
+##########################################################
 
-test:
-	docker-compose run sdk make local-test
+workspace:
+	docker-compose run sdk /bin/sh
 
-publish-patch: copy-files
-	docker-compose run sdk make version-patch && make local-publish
+release:
+	docker-compose run sdk make publish && tagit -p && git push origin --tags
 
-publish-minor: copy-files
-	docker-compose run sdk make local-publish-minor
-
-publish-major: copy-files
-	docker-compose run sdk make local-publish-major	
-
-copy-files:
-	test -d .gitconfig || cp -r ~/.gitconfig .
-	test -d .ssh || cp -r ~/.ssh .
+# node_modules is a real directory target
+.PHONY: clean test publish upload version unversion workspace release
