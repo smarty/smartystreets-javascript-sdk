@@ -14,6 +14,8 @@ node_modules:
 	npm install
 
 publish: clean test version upload unversion
+	tagit -p
+	git push origin --tags
 
 upload:
 	npm publish && node browserify.js && node s3.js
@@ -25,13 +27,5 @@ version:
 unversion:
 	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
-##########################################################
-
-workspace:
-	docker-compose run sdk /bin/sh
-
-release:
-	docker-compose run sdk make publish && tagit -p && git push origin --tags
-
 # node_modules is a real directory target
-.PHONY: clean test publish upload version unversion workspace release
+.PHONY: clean test publish upload version unversion
