@@ -10,7 +10,7 @@ test: node_modules
 node_modules:
 	npm install
 
-publish: clean test version upload unversion
+publish: test version upload unversion
 	tagit -p
 	git push origin --tags
 
