@@ -4,9 +4,6 @@ VERSION           := $(shell tagit -p --dry-run)
 VERSION_FILE1     := package.json
 VERSION_FILE2     := package-lock.json
 
-clean: unversion
-	rm -rf ./dist
-
 test: node_modules
 	npm run test
 
@@ -28,4 +25,4 @@ unversion:
 	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
 # node_modules is a real directory target
-.PHONY: clean test publish upload version unversion
+.PHONY: test publish upload version unversion
