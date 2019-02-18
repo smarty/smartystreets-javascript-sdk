@@ -16,7 +16,7 @@ class Client {
 
 	/**
 	 * Sends up to 100 lookups for validation.
-	 * @param data May be a Lookup object, or a Batch which must contain between 1 and 100 Lookup objects
+	 * @param data may be a Lookup object, or a Batch which must contain between 1 and 100 Lookup objects
 	 * @throws SmartyException
 	 */
 	send(data) {

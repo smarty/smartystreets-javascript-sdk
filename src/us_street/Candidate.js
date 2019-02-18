@@ -56,6 +56,7 @@ class Candidate {
 			this.metadata.timeZone = responseData.metadata.time_zone;
 			this.metadata.utcOffset = responseData.metadata.utc_offset;
 			this.metadata.obeysDst = responseData.metadata.dst;
+			this.metadata.isEwsMatch = responseData.metadata.ews_match;
 		}
 
 		this.analysis = {};
@@ -65,7 +66,7 @@ class Candidate {
 			this.analysis.cmra = responseData.analysis.dpv_cmra;
 			this.analysis.vacant = responseData.analysis.dpv_vacant;
 			this.analysis.active = responseData.analysis.active;
-			this.analysis.isEwsMatch = responseData.analysis.ews_match;
+			this.analysis.isEwsMatch = false;
 			this.analysis.footnotes = responseData.analysis.footnotes;
 			this.analysis.lacsLinkCode = responseData.analysis.lacslink_code;
 			this.analysis.lacsLinkIndicator = responseData.analysis.lacslink_indicator;
