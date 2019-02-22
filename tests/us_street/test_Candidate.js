@@ -58,7 +58,6 @@ describe("A match candidate", function () {
 				dpv_cmra: "44",
 				dpv_vacant: "45",
 				active: "46",
-				ews_match: false,
 				footnotes: "48",
 				lacslink_code: "49",
 				lacslink_indicator: "50",
@@ -118,7 +117,6 @@ describe("A match candidate", function () {
 		expect(candidate.analysis.cmra).to.equal('44');
 		expect(candidate.analysis.vacant).to.equal('45');
 		expect(candidate.analysis.active).to.equal('46');
-		expect(candidate.analysis.isEwsMatch).to.equal(false);
 		expect(candidate.analysis.footnotes).to.equal('48');
 		expect(candidate.analysis.lacsLinkCode).to.equal('49');
 		expect(candidate.analysis.lacsLinkIndicator).to.equal('50');

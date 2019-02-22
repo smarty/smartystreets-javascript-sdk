@@ -66,7 +66,7 @@ class Candidate {
 			this.analysis.cmra = responseData.analysis.dpv_cmra;
 			this.analysis.vacant = responseData.analysis.dpv_vacant;
 			this.analysis.active = responseData.analysis.active;
-			this.analysis.isEwsMatch = false;
+			this.analysis.isEwsMatch = "Deprecated, refer to metadata.isEwsMatch";
 			this.analysis.footnotes = responseData.analysis.footnotes;
 			this.analysis.lacsLinkCode = responseData.analysis.lacslink_code;
 			this.analysis.lacsLinkIndicator = responseData.analysis.lacslink_indicator;
