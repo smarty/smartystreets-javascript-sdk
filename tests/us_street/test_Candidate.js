@@ -49,7 +49,8 @@ describe("A match candidate", function () {
 				precision: "38",
 				time_zone: "39",
 				utc_offset: 40.0,
-				dst: "41"
+				dst: "41",
+				ews_match: "47"
 			},
 			analysis: {
 				dpv_match_code: "42",
@@ -57,7 +58,6 @@ describe("A match candidate", function () {
 				dpv_cmra: "44",
 				dpv_vacant: "45",
 				active: "46",
-				ews_match: "47",
 				footnotes: "48",
 				lacslink_code: "49",
 				lacslink_indicator: "50",
@@ -110,13 +110,13 @@ describe("A match candidate", function () {
 		expect(candidate.metadata.timeZone).to.equal('39');
 		expect(candidate.metadata.utcOffset).to.equal(40.0);
 		expect(candidate.metadata.obeysDst).to.equal('41');
+		expect(candidate.metadata.isEwsMatch).to.equal('47');
 
 		expect(candidate.analysis.dpvMatchCode).to.equal('42');
 		expect(candidate.analysis.dpvFootnotes).to.equal('43');
 		expect(candidate.analysis.cmra).to.equal('44');
 		expect(candidate.analysis.vacant).to.equal('45');
 		expect(candidate.analysis.active).to.equal('46');
-		expect(candidate.analysis.isEwsMatch).to.equal('47');
 		expect(candidate.analysis.footnotes).to.equal('48');
 		expect(candidate.analysis.lacsLinkCode).to.equal('49');
 		expect(candidate.analysis.lacsLinkIndicator).to.equal('50');

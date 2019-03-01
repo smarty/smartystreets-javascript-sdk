@@ -11,6 +11,7 @@ let client = clientBuilder.buildUsStreetApiClient();
 let lookup1 = new Lookup();
 lookup1.street = "330 N 100 W";
 lookup1.zipCode = "84601";
+lookup1.match = "invalid";
 
 let lookup2 = new Lookup();
 lookup2.street = "1600 Amphitheater Pkwy";
