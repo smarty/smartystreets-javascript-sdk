@@ -8,10 +8,21 @@ let authToken = process.env.SMARTY_AUTH_TOKEN;
 let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.StaticCredentials(authId, authToken));
 let client = clientBuilder.buildInternationalStreetClient();
 
+// Documentation for input fields can be found at:
+// https://smartystreets.com/docs/cloud/international-street-api#http-input-fields
+
 let lookup1 = new Lookup("CA", "262 Browndale Cr, Richmond Hill, ON");
+
 let lookup2 = new Lookup();
+lookup2.inputId = "ID-8675309";
+lookup2.geocode = false;
+lookup2.organization = "John Doe";
+lookup2.address1 = "Rua Padre Antonio D'Angelo 121";
+lookup2.address2 = "Casa Verde";
+lookup2.locality = "Sao Paulo";
+lookup2.administrativeArea = "SP";
 lookup2.country = "Brazil";
-lookup2.freeform = "Rua Padre Antonio D’Angelo 121 Casa Verde, Sao Paulo";
+lookup2.postalCode = "02516-050";
 
 client.send(lookup1)
 	.then(displayResult)

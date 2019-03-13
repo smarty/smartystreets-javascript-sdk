@@ -8,16 +8,27 @@ let authToken = process.env.SMARTY_AUTH_TOKEN;
 let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.StaticCredentials(authId, authToken));
 let client = clientBuilder.buildUsZipcodeClient();
 
-let lookup1 = new Lookup();
-let lookup2 = new Lookup();
+// Documentation for input fields can be found at:
+// https://smartystreets.com/docs/us-zipcode-api#input-fields
 
+let lookup1 = new Lookup();
+lookup1.inputId = "01189998819991197253"; // Optional ID from your system
 lookup1.zipCode = "49786";
-lookup2.city = "Phoenix";
-lookup2.state = "AZ";
+
+let lookup2 = new Lookup();
+lookup2.inputId = "dfc33cb6-829e-4fea-aa1b-b6d6580f0817";
+lookup2.city = "Provo";
+lookup2.state = "UT";
+lookup2.zipCode = "84604";
+
+let lookup3 = new Lookup();
+lookup3.city = "Phoenix";
+lookup3.state = "AZ";
 
 let batch = new SmartyStreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
+batch.add(lookup3);
 
 client.send(batch)
 	.then(viewResults)
