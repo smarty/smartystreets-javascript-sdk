@@ -7,7 +7,14 @@ let authToken = process.env.SMARTY_AUTH_TOKEN;
 
 let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.StaticCredentials(authId, authToken));
 let client = clientBuilder.buildUsExtractClient();
+
+// Documentation for input fields can be found at:
+// https://smartystreets.com/docs/cloud/us-extract-api#http-request-input-fields
+
 let lookup = new Lookup("If you work at 1600 Pennsylvania Ave NW, Washington DC you're gonna have a hard time.");
+lookup.aggressive = true;
+lookup.addressesHaveLineBreaks = false;
+lookup.addressesPerLine = 1;
 
 client.send(lookup)
 	.then(logResult)
