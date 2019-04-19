@@ -4,7 +4,6 @@ class Request {
 		this.payload = payload;
 		this.headers = {
 			"Content-Type": "application/json; charset=utf-8",
-			"Accept-Encoding": "gzip",
 		};
 
 		this.parameters = {};

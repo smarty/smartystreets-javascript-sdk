@@ -64,7 +64,6 @@ describe ("An Axios implementation of a HTTP sender", function () {
 
 		expect(requestConfig.hasOwnProperty("headers")).to.equal(true);
 		expect(requestConfig.headers["Content-Type"]).to.equal("application/json; charset=utf-8");
-		expect(requestConfig.headers["Accept-Encoding"]).to.equal("gzip");
 	});
 
 	it ("has a response with the right status code.", function () {
