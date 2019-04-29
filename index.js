@@ -2,6 +2,7 @@ module.exports = {
 	core: {
 		Batch: require("./src/Batch"),
 		ClientBuilder: require("./src/ClientBuilder"),
+		buildClient: require("./src/util/buildClients"),
 		SharedCredentials: require("./src/SharedCredentials"),
 		StaticCredentials: require("./src/StaticCredentials"),
 		Errors: require("./src/Errors"),

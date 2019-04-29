@@ -3,14 +3,13 @@ const SmartyStreetsCore = SmartyStreetsSDK.core;
 const Lookup = SmartyStreetsSDK.usAutocomplete.Lookup;
 
 let websiteKey = "put your website key here.";
+const credentials = new SmartyStreetsCore.SharedCredentials(websiteKey);
 
 // let authId = process.env.SMARTY_AUTH_ID;
 // let authToken = process.env.SMARTY_AUTH_TOKEN;
+// const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
 
-let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.SharedCredentials(websiteKey));
-// let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.StaticCredentials(authId, authToken));
-
-let client = clientBuilder.buildUsAutocompleteClient();
+let client = SmartyStreetsCore.buildClient.usAutocomplete(credentials);
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/cloud/us-autocomplete-api#http-request-input-fields
