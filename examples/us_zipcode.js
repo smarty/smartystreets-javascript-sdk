@@ -4,9 +4,9 @@ const Lookup = SmartyStreetsSDK.usZipcode.Lookup;
 
 let authId = process.env.SMARTY_AUTH_ID;
 let authToken = process.env.SMARTY_AUTH_TOKEN;
+const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
 
-let clientBuilder = new SmartyStreetsCore.ClientBuilder(new SmartyStreetsCore.StaticCredentials(authId, authToken));
-let client = clientBuilder.buildUsZipcodeClient();
+let client = SmartyStreetsCore.buildClient.usZipcode(credentials);
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/us-zipcode-api#input-fields
