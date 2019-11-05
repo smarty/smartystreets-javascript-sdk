@@ -19,6 +19,10 @@ module.exports = {
 		Lookup: require("./src/us_autocomplete/Lookup"),
 		Suggestion: require("./src/us_autocomplete/Suggestion")
 	},
+	usAutocompletePro: {
+		Lookup: require("./src/us_autocomplete_pro/Lookup"),
+		Suggestion: require("./src/us_autocomplete_pro/Suggestion")
+	},
 	usExtract: {
 		Lookup: require("./src/us_extract/Lookup"),
 		Result: require("./src/us_extract/Result")
