@@ -12,11 +12,13 @@ const BadCredentialsError = require("./Errors").BadCredentialsError;
 const UsStreetClient = require("./us_street/Client");
 const UsZipcodeClient = require("./us_zipcode/Client");
 const UsAutocompleteClient = require("./us_autocomplete/Client");
+const UsAutocompleteProClient = require("./us_autocomplete_pro/Client");
 const UsExtractClient = require("./us_extract/Client");
 const InternationalStreetClient = require("./international_street/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smartystreets.com/verify";
 const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smartystreets.com/suggest";
+const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smartystreets.com/lookup";
 const US_EXTRACT_API_URL = "https://us-extract.api.smartystreets.com/";
 const US_STREET_API_URL = "https://us-street.api.smartystreets.com/street-address";
 const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smartystreets.com/lookup";
@@ -159,6 +161,10 @@ class ClientBuilder {
 
 	buildUsAutocompleteClient() {
 		return this.buildClient(US_AUTOCOMPLETE_API_URL, UsAutocompleteClient);
+	}
+
+	buildUsAutocompleteProClient() {
+		return this.buildClient(US_AUTOCOMPLETE_PRO_API_URL, UsAutocompleteProClient);
 	}
 
 	buildUsExtractClient() {

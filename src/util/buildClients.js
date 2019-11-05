@@ -12,6 +12,10 @@ function buildUsAutocompleteApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsAutocompleteClient();
 }
 
+function buildUsAutocompleteProApiClient(credentials) {
+	return instantiateClientBuilder(credentials).buildUsAutocompleteProClient();
+}
+
 function buildUsExtractApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsExtractClient();
 }
@@ -27,6 +31,7 @@ function buildInternationalStreetApiClient(credentials) {
 module.exports = {
 	usStreet: buildUsStreetApiClient,
 	usAutocomplete: buildUsAutocompleteApiClient,
+	usAutocompletePro: buildUsAutocompleteProApiClient,
 	usExtract: buildUsExtractApiClient,
 	usZipcode: buildUsZipcodeApiClient,
 	internationalStreet: buildInternationalStreetApiClient,
