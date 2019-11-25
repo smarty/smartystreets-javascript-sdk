@@ -22,7 +22,9 @@ lookup1.city = "Provo";
 lookup1.state = "Utah";
 lookup1.zipCode = "84601";
 lookup1.maxCandidates = 3;
-lookup1.match = "invalid";
+lookup1.match = "invalid"; // "invalid" is the most permissive match,
+						   // this will always return at least one result even if the address is invalid.
+						   // Refer to the documentation for additional MatchStrategy options.
 
 let lookup2 = new Lookup();
 lookup2.street = "1600 Amphitheater Pkwy";
