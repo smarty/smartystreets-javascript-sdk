@@ -1,4 +1,4 @@
-const SmartyStreetsSDK = require("../index");
+const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
 const SmartyStreetsCore = SmartyStreetsSDK.core;
 const Lookup = SmartyStreetsSDK.usAutocomplete.Lookup;
 
