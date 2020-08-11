@@ -6,6 +6,7 @@ const StaticCredentials = require("./StaticCredentials");
 const SharedCredentials = require("./SharedCredentials");
 const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
+const LicenseSender = require("./LicenseSender");
 const BadCredentialsError = require("./Errors").BadCredentialsError;
 
 //TODO: refactor this to work more cleanly with a bundler.
@@ -40,6 +41,7 @@ class ClientBuilder {
 		this.proxy = undefined;
 		this.customHeaders = {};
 		this.debug = undefined;
+		this.licenses = [];
 
 		function noCredentialsProvided() {
 			return !signer instanceof StaticCredentials || !signer instanceof SharedCredentials;
@@ -129,6 +131,12 @@ class ClientBuilder {
 		return this;
 	}
 
+	withLicense(license) {
+		this.licenses.push(license);
+
+		return this;
+	}
+
 
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
@@ -139,8 +147,9 @@ class ClientBuilder {
 		const agentSender = new AgentSender(signingSender);
 		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
+		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);
 
-		return baseUrlSender;
+		return licenseSender;
 	}
 
 	buildClient(baseUrl, Client) {

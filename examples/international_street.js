@@ -9,9 +9,10 @@ const Lookup = SmartyStreetsSDK.internationalStreet.Lookup;
 
 // for client-side requests (browser/mobile), use this code:
 let key = process.env.SMARTY_WEBSITE_KEY;
-const  credentials = new SmartyStreetsCore.SharedCredentials(key);
+const credentials = new SmartyStreetsCore.SharedCredentials(key);
 
 let client = SmartyStreetsCore.buildClient.internationalStreet(credentials);
+// .withLicense("us-street-cloud");
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/cloud/international-street-api#http-input-fields
@@ -30,16 +31,16 @@ lookup2.country = "Brazil";
 lookup2.postalCode = "02516-050";
 
 client.send(lookup1)
-	.then(displayResult)
-	.catch(handleError);
+    .then(displayResult)
+    .catch(handleError);
 client.send(lookup2)
-	.then(displayResult)
-	.catch(handleError);
+    .then(displayResult)
+    .catch(handleError);
 
 function displayResult(result) {
-	console.log(result.result[0].components);
+    console.log(result.result[0].components);
 }
 
 function handleError(error) {
-	console.log("ERROR:", error);
+    console.log("ERROR:", error);
 }
