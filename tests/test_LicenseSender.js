@@ -15,7 +15,6 @@ describe("A license sender", function () {
 			send: () => true
 		};
 		request = new Request();
-
 	});
 
 	it("appends licenses to parameters.", function () {
