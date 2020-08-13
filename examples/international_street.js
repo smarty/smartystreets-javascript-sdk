@@ -34,7 +34,7 @@ client.send(lookup1)
 	.then(displayResult)
 	.catch(handleError);
 client.send(lookup2)
-    .then(displayResult)
+	.then(displayResult)
 	.catch(handleError);
 
 function displayResult(result) {
