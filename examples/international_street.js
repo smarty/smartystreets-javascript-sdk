@@ -32,7 +32,7 @@ lookup2.postalCode = "02516-050";
 
 client.send(lookup1)
 	.then(displayResult)
-    .catch(handleError);
+	.catch(handleError);
 client.send(lookup2)
     .then(displayResult)
     .catch(handleError);
