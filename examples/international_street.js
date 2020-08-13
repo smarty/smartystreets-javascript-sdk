@@ -38,7 +38,7 @@ client.send(lookup2)
 	.catch(handleError);
 
 function displayResult(result) {
-    console.log(result.result[0].components);
+	console.log(result.result[0].components);
 }
 
 function handleError(error) {
