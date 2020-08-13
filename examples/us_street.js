@@ -11,7 +11,7 @@ const Lookup = SmartyStreetsSDK.usStreet.Lookup;
 let key = process.env.SMARTY_WEBSITE_KEY;
 const  credentials = new SmartyStreetsCore.SharedCredentials(key);
 let client = SmartyStreetsCore.buildClient.usStreet(credentials);
-	// .withLicense("us-street-cloud");
+	// .withLicense("us-core-cloud");
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/us-street-api#input-fields
