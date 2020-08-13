@@ -31,7 +31,7 @@ lookup2.country = "Brazil";
 lookup2.postalCode = "02516-050";
 
 client.send(lookup1)
-    .then(displayResult)
+	.then(displayResult)
     .catch(handleError);
 client.send(lookup2)
     .then(displayResult)
