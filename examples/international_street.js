@@ -12,7 +12,7 @@ let key = process.env.SMARTY_WEBSITE_KEY;
 const credentials = new SmartyStreetsCore.SharedCredentials(key);
 
 let client = SmartyStreetsCore.buildClient.internationalStreet(credentials);
- // .withLicenses(["international-select-plus-gbr-cloud"]);
+// .withLicenses(["international-select-plus-gbr-cloud"]);
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/cloud/international-street-api#http-input-fields
@@ -42,5 +42,5 @@ function displayResult(result) {
 }
 
 function handleError(error) {
-    console.log("ERROR:", error);
+	console.log("ERROR:", error);
 }
