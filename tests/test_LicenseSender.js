@@ -29,6 +29,7 @@ describe("A license sender", function () {
 		licenses = [];
 		licenseSender = new LicenseSender(innerSender, licenses);
 		licenseSender.send(request);
+		
 		expect(request.parameters).to.not.have.property("license");
 	});
 
