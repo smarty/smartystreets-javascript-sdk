@@ -131,8 +131,15 @@ class ClientBuilder {
 		return this;
 	}
 
-	withLicense(license) {
-		this.licenses.push(license);
+	/**
+	 * Allows the caller to specify the subscription license (aka "track") they wish to use.
+	 * @param licenses A String Array of licenses.
+	 * @returns Returns <b>this</b> to accommodate method chaining.
+	 */
+	withLicenses(licenses) {
+		for (const license in licenses) {
+			this.licenses.push(license);
+		}
 
 		return this;
 	}

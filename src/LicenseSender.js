@@ -8,7 +8,7 @@ class LicenseSender {
 
     send(request) {
         if (this.licenses.length !== 0) {
-            request.parameters["licenses"] = this.licenses.join(",");
+            request.parameters["license"] = this.licenses.join(",");
         }
 
         return new Promise((resolve, reject) => {

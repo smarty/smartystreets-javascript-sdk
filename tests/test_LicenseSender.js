@@ -23,14 +23,14 @@ describe("A license sender", function () {
 		licenseSender = new LicenseSender(innerSender, licenses);
 		licenseSender.send(request);
 
-		expect(request.parameters).contains({"licenses":"0,1,2"});
+		expect(request.parameters).contains({"license":"0,1,2"});
 	});
 
 	it("doesn't append license to query if array is empty.", function () {
 		licenses = [];
 		licenseSender = new LicenseSender(innerSender, licenses);
 		licenseSender.send(request);
-		expect(request.parameters).to.not.have.property("licenses");
+		expect(request.parameters).to.not.have.property("license");
 	});
 
 	it("returns a promise.", function () {
