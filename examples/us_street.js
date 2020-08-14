@@ -9,8 +9,9 @@ const Lookup = SmartyStreetsSDK.usStreet.Lookup;
 
 // for client-side requests (browser/mobile), use this code:
 let key = process.env.SMARTY_WEBSITE_KEY;
-const  credentials = new SmartyStreetsCore.SharedCredentials(key);
+const credentials = new SmartyStreetsCore.SharedCredentials(key);
 let client = SmartyStreetsCore.buildClient.usStreet(credentials);
+// .withLicenses(["us-core-cloud"]);
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/us-street-api#input-fields
@@ -27,8 +28,8 @@ lookup1.state = "Utah";
 lookup1.zipCode = "84601";
 lookup1.maxCandidates = 3;
 lookup1.match = "invalid"; // "invalid" is the most permissive match,
-						   // this will always return at least one result even if the address is invalid.
-						   // Refer to the documentation for additional MatchStrategy options.
+                           // this will always return at least one result even if the address is invalid.
+                           // Refer to the documentation for additional MatchStrategy options.
 
 let lookup2 = new Lookup();
 lookup2.street = "1600 Amphitheater Pkwy";
