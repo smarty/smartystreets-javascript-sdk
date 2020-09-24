@@ -1,4 +1,3 @@
-const Response = require("./SmartyResponse");
 const Request = require("../Request");
 const UndefinedLookupError = require("../Errors").UndefinedLookupError;
 const buildInputData = require("../util/buildInputData");
