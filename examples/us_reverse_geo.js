@@ -20,7 +20,7 @@ client.send(lookup1)
 	.catch(handleError);
 
 function displayResult(result) {
-	console.log(result.result[0].components);
+	console.log(result.result[0].address);
 }
 
 function handleError(error) {
