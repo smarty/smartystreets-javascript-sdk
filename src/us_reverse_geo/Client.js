@@ -1,10 +1,10 @@
 const Request = require("../Request");
-const UndefinedLookupError = require("../Errors").UndefinedLookupError;
+const SmartyResponse = require("SmartyResponse");
 const buildInputData = require("../util/buildInputData");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usReverseGeo;
 
 /**
- * This client sends lookups to the SmartyStreets US Street API, <br>
+ * This client sends lookups to the SmartyStreets US Reverse Geo API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
 class Client {
@@ -23,14 +23,14 @@ class Client {
 				.then(response => {
 					if (response.error) reject(response.error);
 
-					resolve(attachLookupCandidates(response, lookup));
+					resolve(attachLookupResults(response, lookup));
 				})
 				.catch(reject);
 		});
 
-		function attachLookupCandidates(response, lookup) {
-			response.payload.map(rawCandidate => {
-				lookup.result.push(new Candidate(rawCandidate));
+		function attachLookupResults(response, lookup) {
+			response.payload.forEach(rawData => {
+				lookup.result.push(new SmartyResponse(rawData));
 			});
 
 			return lookup;
