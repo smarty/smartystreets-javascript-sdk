@@ -9,5 +9,6 @@ describe("A US Reverse Geo lookup", function () {
 
 		expect(lookup.latitude).to.equal("44.88888889");
 		expect(lookup.longitude).to.equal("-111.11111111");
+		expect(lookup.response).to.deep.equal([]);
 	});
 });
