@@ -21,4 +21,7 @@ module.exports = {
 			});
 		}
 	},
+	MockSenderPromise: function () {
+		return new Promise();
+	}
 };
