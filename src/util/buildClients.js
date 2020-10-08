@@ -28,6 +28,10 @@ function buildInternationalStreetApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildInternationalStreetClient();
 }
 
+function buildUsReverseGeoApiClient(credentials) {
+	return instantiateClientBuilder(credentials).buildUsReverseGeoClient();
+}
+
 module.exports = {
 	usStreet: buildUsStreetApiClient,
 	usAutocomplete: buildUsAutocompleteApiClient,
@@ -35,4 +39,5 @@ module.exports = {
 	usExtract: buildUsExtractApiClient,
 	usZipcode: buildUsZipcodeApiClient,
 	internationalStreet: buildInternationalStreetApiClient,
+	usReverseGeo: buildUsReverseGeoApiClient,
 };

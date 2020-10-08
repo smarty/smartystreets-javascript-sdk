@@ -30,5 +30,9 @@ module.exports = {
 		"postal_code": "postalCode",
 		"geocode": "geocode",
 		"language": "language",
+	},
+	usReverseGeo: {
+		"latitude": "latitude",
+		"longitude": "longitude",
 	}
 };
