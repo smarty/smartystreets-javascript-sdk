@@ -1,5 +1,4 @@
 const Request = require("../Request");
-const SmartyResponse = require("./SmartyResponse");
 const buildInputData = require("../util/buildInputData");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usReverseGeo;
 const {UndefinedLookupError} = require("../Errors.js");

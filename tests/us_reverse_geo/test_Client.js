@@ -4,7 +4,6 @@ chai.use(chaiAsPromised);
 const expect = chai.expect;
 const Client = require("../../src/us_reverse_geo/Client");
 const Lookup = require("../../src/us_reverse_geo/Lookup");
-const SmartyResponse = require("../../src/us_reverse_geo/SmartyResponse");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
