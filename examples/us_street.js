@@ -3,13 +3,13 @@ const SmartyStreetsCore = SmartyStreetsSDK.core;
 const Lookup = SmartyStreetsSDK.usStreet.Lookup;
 
 // for Server-to-server requests, use this code:
-// let authId = process.env.SMARTY_AUTH_ID;
-// let authToken = process.env.SMARTY_AUTH_TOKEN;
-// const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
+let authId = process.env.SMARTY_AUTH_ID;
+let authToken = process.env.SMARTY_AUTH_TOKEN;
+const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
 
 // for client-side requests (browser/mobile), use this code:
-let key = process.env.SMARTY_WEBSITE_KEY;
-const credentials = new SmartyStreetsCore.SharedCredentials(key);
+// let key = process.env.SMARTY_WEBSITE_KEY;
+// const credentials = new SmartyStreetsCore.SharedCredentials(key);
 let client = SmartyStreetsCore.buildClient.usStreet(credentials);
 // .withLicenses(["us-rooftop-geo-cloud"]);
 
@@ -41,6 +41,7 @@ lookup3.inputId = "8675309";
 lookup3.street = "1600 Amphitheatre Parkway Mountain View, CA 94043";
 lookup3.maxCandidates = 1;
 
+// NOTE: batches are not supported when using SharedCredentials.
 let batch = new SmartyStreetsCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
