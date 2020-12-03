@@ -31,4 +31,7 @@ module.exports = {
 		Lookup: require("./src/international_street/Lookup"),
 		Candidate: require("./src/international_street/Candidate")
 	},
+	usReverseGeo: {
+		Lookup: require("./src/us_reverse_geo/Lookup")
+	},
 };
