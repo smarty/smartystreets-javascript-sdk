@@ -139,9 +139,7 @@ class ClientBuilder {
 	 * @returns Returns <b>this</b> to accommodate method chaining.
 	 */
 	withLicenses(licenses) {
-		for (const license in licenses) {
-			this.licenses.push(license);
-		}
+		this.licenses = licenses;
 
 		return this;
 	}
