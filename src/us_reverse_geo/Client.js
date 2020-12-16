@@ -1,4 +1,5 @@
 const Request = require("../Request");
+const Response = require("./Response");
 const buildInputData = require("../util/buildInputData");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usReverseGeo;
 const {UndefinedLookupError} = require("../Errors.js");
@@ -29,7 +30,7 @@ class Client {
 		});
 
 		function attachLookupResults(response, lookup) {
-			lookup.response = response.payload;
+			lookup.response = new Response(response.payload);
 
 			return lookup;
 		}

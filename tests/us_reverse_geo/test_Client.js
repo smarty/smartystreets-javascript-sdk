@@ -24,7 +24,7 @@ describe("A US Reverse Geo client", function () {
 						"latitude": 40.111111,
 						"longitude": -111.111111,
 						"accuracy": "Rooftop",
-						"license": 0
+						"license": "SmartyStreets"
 					},
 					"distance": 2.7207432,
 					"address": {
