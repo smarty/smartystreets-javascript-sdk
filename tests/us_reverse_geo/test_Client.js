@@ -6,6 +6,7 @@ const Client = require("../../src/us_reverse_geo/Client");
 const Lookup = require("../../src/us_reverse_geo/Lookup");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+const Response = require("../../src/us_reverse_geo/Response");
 
 describe("A US Reverse Geo client", function () {
 	it("has an inner sender.", function () {
@@ -40,8 +41,9 @@ describe("A US Reverse Geo client", function () {
 		const client = new Client(mockSender);
 		let lookup = new Lookup(44.888888888, -111.111111111);
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then(() => {
 			expect(lookup.response).to.deep.equal(expectedMockPayload);
+			expect(lookup.response).to.be.an.instanceOf(Response);
 		});
 	});
 });
