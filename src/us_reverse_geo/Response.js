@@ -7,7 +7,7 @@ class Response {
 	constructor(responseData) {
 		this.results = [];
 
-		if (responseData !== undefined)
+		if (responseData)
 			responseData.results.map(rawResult => {
 				this.results.push(new Result(rawResult));
 			});
