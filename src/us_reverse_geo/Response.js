@@ -6,9 +6,11 @@ const Result = require("./Result");
 class Response {
 	constructor(responseData) {
 		this.results = [];
-		responseData.results.map(rawResult => {
-			this.results.push(new Result(rawResult));
-		});
+
+		if (responseData !== undefined)
+			responseData.results.map(rawResult => {
+				this.results.push(new Result(rawResult));
+			});
 	}
 }
 
