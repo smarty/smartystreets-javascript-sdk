@@ -1,3 +1,5 @@
+const Response = require("./Response");
+
 /**
  * In addition to holding all of the input data for this lookup, this class also<br>
  *     will contain the result of the lookup after it comes back from the API.
@@ -7,7 +9,7 @@ class Lookup {
 	constructor(latitude, longitude) {
 		this.latitude = latitude.toFixed(8);
 		this.longitude = longitude.toFixed(8);
-		this.response = [];
+		this.response = new Response();
 	}
 }
 
