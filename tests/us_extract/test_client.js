@@ -128,6 +128,7 @@ describe("A US Extract Client", function () {
 								"dpv_footnotes": "AABB",
 								"dpv_cmra": "N",
 								"dpv_vacant": "N",
+								"dpv_no_stat": "N",
 								"active": "Y",
 								"footnotes": "N#"
 							}

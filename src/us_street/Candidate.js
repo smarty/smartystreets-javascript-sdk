@@ -65,6 +65,7 @@ class Candidate {
 			this.analysis.dpvFootnotes = responseData.analysis.dpv_footnotes;
 			this.analysis.cmra = responseData.analysis.dpv_cmra;
 			this.analysis.vacant = responseData.analysis.dpv_vacant;
+			this.analysis.noStat = responseData.analysis.dpv_no_stat;
 			this.analysis.active = responseData.analysis.active;
 			this.analysis.isEwsMatch = responseData.analysis.ews_match; // Deprecated, refer to metadata.ews_match
 			this.analysis.footnotes = responseData.analysis.footnotes;
