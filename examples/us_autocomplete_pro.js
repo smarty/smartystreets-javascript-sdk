@@ -4,7 +4,8 @@ const Lookup = SmartyStreetsSDK.usAutocompletePro.Lookup;
 
 // US Autocomplete Pro only supports using Website Keys
 let websiteKey = "put your website key here";
-const credentials = new SmartyStreetsCore.SharedCredentials(websiteKey);
+let hostname = "put your hostname here";
+const credentials = new SmartyStreetsCore.SharedCredentials(websiteKey, hostname);
 
 let client = SmartyStreetsCore.buildClient.usAutocompletePro(credentials);
 
