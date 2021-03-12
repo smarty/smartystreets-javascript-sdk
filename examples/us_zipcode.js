@@ -9,7 +9,8 @@ const Lookup = SmartyStreetsSDK.usZipcode.Lookup;
 
 // for client-side requests (browser/mobile), use this code:
 let key = process.env.SMARTY_WEBSITE_KEY;
-const  credentials = new SmartyStreetsCore.SharedCredentials(key);
+let hostname = process.env.SMARTY_AUTH_REFERER;
+const  credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 
 let client = SmartyStreetsCore.buildClient.usZipcode(credentials);
 
