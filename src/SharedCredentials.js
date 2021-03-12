@@ -6,7 +6,7 @@ class SharedCredentials {
 
 	sign(request) {
 		request.parameters["auth-id"] = this.authId;
-		if (this.hostName) request.headers["Referer"] = this.hostName;
+		if (this.hostName) request.headers["Referer"] = "https://" + this.hostName;
 	}
 }
 
