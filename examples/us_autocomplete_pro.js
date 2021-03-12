@@ -3,8 +3,9 @@ const SmartyStreetsCore = SmartyStreetsSDK.core;
 const Lookup = SmartyStreetsSDK.usAutocompletePro.Lookup;
 
 // US Autocomplete Pro only supports using Website Keys
-let websiteKey = "put your website key here";
-const credentials = new SmartyStreetsCore.SharedCredentials(websiteKey);
+let key = process.env.SMARTY_WEBSITE_KEY;
+let hostname = process.env.SMARTY_AUTH_REFERER;
+const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 
 let client = SmartyStreetsCore.buildClient.usAutocompletePro(credentials);
 

@@ -40,7 +40,7 @@ describe("A signing sender", function () {
 		expect(request.parameters.hasOwnProperty("auth-id")).to.equal(true);
 		expect(request.parameters["auth-id"]).to.equal(mockAuthId);
 		expect(request.headers.hasOwnProperty("Referer")).to.equal(true);
-		expect(request.headers["Referer"]).to.equal(mockHostName);
+		expect(request.headers["Referer"]).to.equal("https://" + mockHostName);
 	});
 
 	it("errors if signing a POST request with shared credentials.", function () {
