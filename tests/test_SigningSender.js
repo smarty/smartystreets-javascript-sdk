@@ -37,8 +37,8 @@ describe("A signing sender", function () {
 
 		signingSender.send(request);
 
-		expect(request.parameters.hasOwnProperty("auth-id")).to.equal(true);
-		expect(request.parameters["auth-id"]).to.equal(mockAuthId);
+		expect(request.parameters.hasOwnProperty("key")).to.equal(true);
+		expect(request.parameters["key"]).to.equal(mockAuthId);
 		expect(request.headers.hasOwnProperty("Referer")).to.equal(true);
 		expect(request.headers["Referer"]).to.equal("https://" + mockHostName);
 	});
