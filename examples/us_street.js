@@ -12,7 +12,7 @@ const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
 // let hostname = process.env.SMARTY_AUTH_REFERER;
 // const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 let client = SmartyStreetsCore.buildClient.usStreet(credentials);
-// .withLicenses(["us-rooftop-geo-cloud"]);
+// .withLicenses(["us-rooftop-geocoding-cloud"]);
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/us-street-api#input-fields
