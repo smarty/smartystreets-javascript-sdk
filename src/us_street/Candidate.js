@@ -52,6 +52,14 @@ class Candidate {
 			this.metadata.elotSort = responseData.metadata.elot_sort;
 			this.metadata.latitude = responseData.metadata.latitude;
 			this.metadata.longitude = responseData.metadata.longitude;
+			switch (responseData.metadata.coordinate_license)
+			{
+				case 1:
+					this.metadata.coordinateLicense = "Gateway Spatial, LLC";
+					break;
+				default:
+					this.metadata.coordinateLicense = "SmartyStreets";
+			}
 			this.metadata.precision = responseData.metadata.precision;
 			this.metadata.timeZone = responseData.metadata.time_zone;
 			this.metadata.utcOffset = responseData.metadata.utc_offset;

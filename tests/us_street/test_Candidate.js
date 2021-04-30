@@ -46,6 +46,7 @@ describe("A match candidate", function () {
 				elot_sort: "35",
 				latitude: 36.0,
 				longitude: 37.0,
+				coordinate_license: 1,
 				precision: "38",
 				time_zone: "39",
 				utc_offset: 40.0,
@@ -107,6 +108,7 @@ describe("A match candidate", function () {
 		expect(candidate.metadata.elotSort).to.equal('35');
 		expect(candidate.metadata.latitude).to.equal(36.0);
 		expect(candidate.metadata.longitude).to.equal(37.0);
+		expect(candidate.metadata.coordinateLicense).to.equal("Gateway Spatial, LLC");
 		expect(candidate.metadata.precision).to.equal('38');
 		expect(candidate.metadata.timeZone).to.equal('39');
 		expect(candidate.metadata.utcOffset).to.equal(40.0);
