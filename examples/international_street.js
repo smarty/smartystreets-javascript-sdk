@@ -12,8 +12,9 @@ let key = process.env.SMARTY_WEBSITE_KEY;
 let hostname = process.env.SMARTY_AUTH_REFERER;
 const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 
-let client = SmartyStreetsCore.buildClient.internationalStreet(credentials);
+let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials);
 // .withLicenses(["fake-license"]);
+let client = clientBuilder.buildInternationalStreetClient();
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/cloud/international-street-api#http-input-fields

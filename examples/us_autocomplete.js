@@ -12,7 +12,9 @@ let key = process.env.SMARTY_WEBSITE_KEY;
 let hostname = process.env.SMARTY_AUTH_REFERER;
 const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 
-let client = SmartyStreetsCore.buildClient.usAutocomplete(credentials);
+let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials);
+// .withBaseUrl("");
+let client = clientBuilder.buildUsAutocompleteClient();
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/cloud/us-autocomplete-api#http-request-input-fields

@@ -11,8 +11,9 @@ const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
 // let key = process.env.SMARTY_WEBSITE_KEY;
 // let hostname = process.env.SMARTY_AUTH_REFERER;
 // const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
-let client = SmartyStreetsCore.buildClient.usStreet(credentials);
+let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials).withBaseUrl("https://us-street-pilot.api.smartystreets.me/status");
 // .withLicenses(["us-rooftop-geocoding-cloud"]);
+let client = clientBuilder.buildUsStreetApiClient();
 
 // Documentation for input fields can be found at:
 // https://smartystreets.com/docs/us-street-api#input-fields

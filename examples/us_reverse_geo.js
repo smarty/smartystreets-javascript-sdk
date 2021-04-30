@@ -12,7 +12,9 @@ let key = process.env.SMARTY_WEBSITE_KEY;
 let hostname = process.env.SMARTY_AUTH_REFERER;
 const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 
-let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
+let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials);
+// .withBaseUrl("");
+let client = clientBuilder.buildUsReverseGeoClient();
 
 let lookup1 = new Lookup(40.27644, -111.65747);
 
