@@ -55,7 +55,7 @@ class Candidate {
 			switch (responseData.metadata.coordinate_license)
 			{
 				case 1:
-					this.metadata.coordinateLicense = "Gateway Spatial, LLC";
+					this.metadata.coordinateLicense = "SmartyStreets Proprietary";
 					break;
 				default:
 					this.metadata.coordinateLicense = "SmartyStreets";
