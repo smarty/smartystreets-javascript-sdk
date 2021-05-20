@@ -11,8 +11,11 @@ const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
 // let key = process.env.SMARTY_WEBSITE_KEY;
 // let hostname = process.env.SMARTY_AUTH_REFERER;
 // const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
-let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials).withBaseUrl("YOUR URL");
-// .withLicenses(["us-rooftop-geocoding-cloud"]);
+
+// The appropriate license values to be used for your subscriptions
+// can be found on the Subscription page of the account dashboard.
+// https://www.smartystreets.com/docs/cloud/licensing
+let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials).withBaseUrl("YOUR URL").withLicenses(["us-rooftop-geocoding-cloud"]);
 let client = clientBuilder.buildUsStreetApiClient();
 
 // Documentation for input fields can be found at:
