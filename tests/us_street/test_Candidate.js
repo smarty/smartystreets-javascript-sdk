@@ -63,7 +63,9 @@ describe("A match candidate", function () {
 				lacslink_code: "49",
 				lacslink_indicator: "50",
 				suitelink_match: "51",
-				dpv_no_stat: "52"
+				dpv_no_stat: "52",
+				match_mode: "53",
+				match_details: "54"
 			}
 		};
 		const candidate = new Candidate(sampleResponse);
