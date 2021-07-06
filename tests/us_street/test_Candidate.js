@@ -64,8 +64,7 @@ describe("A match candidate", function () {
 				lacslink_indicator: "50",
 				suitelink_match: "51",
 				dpv_no_stat: "52",
-				match_mode: "53",
-				match_details: "54"
+				enhanced_match: "53",
 			}
 		};
 		const candidate = new Candidate(sampleResponse);
@@ -127,5 +126,6 @@ describe("A match candidate", function () {
 		expect(candidate.analysis.lacsLinkIndicator).to.equal('50');
 		expect(candidate.analysis.isSuiteLinkMatch).to.equal('51');
 		expect(candidate.analysis.noStat).to.equal('52');
+		expect(candidate.analysis.enhancedMatch).to.equal('53');
 	});
 });

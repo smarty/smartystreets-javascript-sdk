@@ -80,8 +80,7 @@ class Candidate {
 			this.analysis.lacsLinkCode = responseData.analysis.lacslink_code;
 			this.analysis.lacsLinkIndicator = responseData.analysis.lacslink_indicator;
 			this.analysis.isSuiteLinkMatch = responseData.analysis.suitelink_match;
-			this.analysis.matchMode = responseData.analysis.match_mode;
-			this.analysis.matchDetails = responseData.analysis.match_details;
+			this.analysis.enhancedMatch = responseData.analysis.enhanced_match;
 		}
 	}
 }
