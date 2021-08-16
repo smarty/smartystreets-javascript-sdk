@@ -11,24 +11,17 @@ class Client {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
 		let request = new Request();
-		request.parameters = buildRequestParameters(lookup);
+		request.parameters = lookup;
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
 				.then(response => {
 					if (response.error) reject(response.error);
 
-					resolve(lookup);
+					resolve(response);
 				})
 				.catch(reject);
 		})
-
-		function buildRequestParameters(lookup) {
-			return {
-				country: lookup.country,
-				search: lookup.search,
-			};
-		}
 	}
 }
 
