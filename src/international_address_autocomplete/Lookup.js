@@ -1,6 +1,7 @@
 class Lookup {
-	constructor(search) {
+	constructor(search, country = "United States") {
 		this.search = search;
+		this.country = country;
 	}
 }
 
