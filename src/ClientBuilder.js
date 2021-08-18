@@ -101,13 +101,13 @@ class ClientBuilder {
 	withProxy(host, port, username, password) {
 		this.proxy = {
 			host: host,
-			port: port
+			port: port,
 		};
 
 		if (username && password) {
 			this.proxy.auth = {
 				username: username,
-				password: password
+				password: password,
 			};
 		}
 
@@ -145,7 +145,6 @@ class ClientBuilder {
 
 		return this;
 	}
-
 
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
@@ -198,7 +197,7 @@ class ClientBuilder {
 	}
 
 	buildInternationalAddressAutocompleteClient() {
-		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClient)
+		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClient);
 	}
 }
 
