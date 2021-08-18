@@ -26,7 +26,7 @@ class Client {
 					resolve(response);
 				})
 				.catch(reject);
-		})
+		});
 
 		function buildSuggestionsFromResponse(payload) {
 			if (payload.response === null) return [];

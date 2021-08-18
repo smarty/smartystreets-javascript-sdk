@@ -10,7 +10,7 @@ const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
 describe("An International Address Autocomplete Client", function () {
-	it ("correctly builds parameter", function () {
+	it("correctly builds parameter", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
@@ -22,15 +22,15 @@ describe("An International Address Autocomplete Client", function () {
 
 		client.send(lookup);
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
-	})
+	});
 
-	it ("builds parameters for different country", function () {
+	it("builds parameters for different country", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
 		let lookup = new Lookup(search);
 		lookup.search = search;
-		lookup.country = "Russia"
+		lookup.country = "Russia";
 		let expectedParameters = {
 			search: search,
 			country: "Russia",
@@ -38,7 +38,7 @@ describe("An International Address Autocomplete Client", function () {
 
 		client.send(lookup);
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
-	})
+	});
 
 	it("throws an error if sending without a lookup.", function () {
 		let mockSender = new MockSender();
@@ -46,13 +46,13 @@ describe("An International Address Autocomplete Client", function () {
 		expect(client.send).to.throw(errors.UndefinedLookupError);
 	});
 
-	it ("attaches suggestions from a response to a lookup", function () {
+	it("attaches suggestions from a response to a lookup", function () {
 		const responseData = {
 			"street": "L alleya",
 			"locality": "Novosibirsk",
 			"administrative_area": "Novosibirskaya oblast'",
 			"postal_code": "40000",
-			"country_iso3": "RUS"
+			"country_iso3": "RUS",
 		};
 
 		let mockExpectedPayload = {response: [responseData]};
@@ -61,8 +61,8 @@ describe("An International Address Autocomplete Client", function () {
 		let lookup = new Lookup("f");
 		let expectedSuggestion = new Suggestion(responseData);
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then(() => {
 			expect(lookup.result[0]).to.deep.equal(expectedSuggestion);
-		})
-	})
-})
+		});
+	});
+});
