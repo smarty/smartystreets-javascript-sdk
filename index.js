@@ -34,4 +34,8 @@ module.exports = {
 	usReverseGeo: {
 		Lookup: require("./src/us_reverse_geo/Lookup")
 	},
+	internationalAddressAutocomplete: {
+		Lookup: require("./src/international_address_autocomplete/Lookup"),
+		Suggestion: require("./src/international_address_autocomplete/Candidate")
+	},
 };
