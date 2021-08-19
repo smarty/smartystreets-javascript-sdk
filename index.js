@@ -36,6 +36,6 @@ module.exports = {
 	},
 	internationalAddressAutocomplete: {
 		Lookup: require("./src/international_address_autocomplete/Lookup"),
-		Suggestion: require("./src/international_address_autocomplete/Candidate"),
+		Suggestion: require("./src/international_address_autocomplete/Suggestion"),
 	},
 };
