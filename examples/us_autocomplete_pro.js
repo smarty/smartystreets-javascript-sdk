@@ -41,7 +41,7 @@ client.send(lookup)
 // *** Using 'selected' to Expand Secondaries ***
 lookup = new Lookup("4770 Lincoln");
 
-lookup.selected = "4770 N Lincoln Ave Ste 2 (3) Chicago, IL 60625"
+lookup.selected = "4770 N Lincoln Ave Ste 2 (3) Chicago, IL 60625";
 
 client.send(lookup)
 	.then(function(results) { logSuggestions(results, "Using 'selected' to Expand Secondaries") })

@@ -176,7 +176,7 @@ class ClientBuilder {
 		return this.buildClient(US_ZIP_CODE_API_URL, UsZipcodeClient);
 	}
 
-	buildUsAutocompleteClient() {
+	buildUsAutocompleteClient() { // Deprecated
 		return this.buildClient(US_AUTOCOMPLETE_API_URL, UsAutocompleteClient);
 	}
 
