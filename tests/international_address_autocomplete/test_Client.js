@@ -55,7 +55,7 @@ describe("An International Address Autocomplete Client", function () {
 			"country_iso3": "RUS",
 		};
 
-		let mockExpectedPayload = {response: [responseData]};
+		let mockExpectedPayload = [responseData];
 		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("f");
