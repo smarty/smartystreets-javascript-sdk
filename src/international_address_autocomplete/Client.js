@@ -23,7 +23,7 @@ class Client {
 					if (response.error) reject(response.error);
 
 					lookup.result = buildSuggestionsFromResponse(response.payload);
-					resolve(response);
+					resolve(lookup);
 				})
 				.catch(reject);
 		});
