@@ -20,4 +20,31 @@ describe("An International Address Autocomplete lookup", function () {
 		let lookup = new Lookup(expectedPrefix, country);
 		expect(lookup.country).to.equal(country);
 	});
+
+	it("Set include only administrative area param", function () {
+		const administrativeArea = "administrative area";
+		const expectedPrefix = "z";
+		let lookup = new Lookup(expectedPrefix, "Utah", administrativeArea);
+		expect(lookup.include_only_administrative_area).to.equal(administrativeArea);
+	});
+
+	it("Set include only locality param", function () {
+		const locality = "locality";
+		const expectedPrefix = "z";
+		let lookup = new Lookup(expectedPrefix, "Utah", "test", locality);
+		expect(lookup.include_only_locality).to.equal(locality);
+	});
+
+	it("Set include only postal code param", function () {
+		const postalCode = "locality";
+		const expectedPrefix = "z";
+		let lookup = new Lookup(expectedPrefix, "Utah", "test", "test", postalCode);
+		expect(lookup.include_only_postal_code).to.equal(postalCode);
+	});
+
+	it("Checking defaults of params on instantiation ", function () {
+		const defaultLookup = new Lookup("", "United States", "", "", "");
+		let lookup = new Lookup();
+		expect(lookup).to.eql(defaultLookup);
+	});
 });
