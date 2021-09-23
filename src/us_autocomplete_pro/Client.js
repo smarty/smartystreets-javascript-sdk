@@ -43,6 +43,7 @@ class Client {
 				prefer_zip_codes: joinFieldWith(lookup.preferZIPCodes, ";"),
 				prefer_ratio: lookup.preferRatio,
 				prefer_geolocation: lookup.preferGeolocation,
+				source: lookup.source,
 			};
 
 			function joinFieldWith(field, delimiter) {

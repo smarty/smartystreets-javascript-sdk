@@ -28,6 +28,7 @@ describe("A US Autocomplete Pro Client", function () {
 			prefer_zip_codes: undefined,
 			prefer_ratio: undefined,
 			prefer_geolocation: undefined,
+			source: undefined,
 		};
 
 		client.send(lookup);
@@ -51,6 +52,7 @@ describe("A US Autocomplete Pro Client", function () {
 		lookup.preferZIPCodes = ["q", "r"];
 		lookup.preferRatio = "s";
 		lookup.preferGeolocation = "t";
+		lookup.source = "all";
 
 		let expectedParameters = {
 			search: "1",
@@ -65,6 +67,7 @@ describe("A US Autocomplete Pro Client", function () {
 			prefer_zip_codes: "q;r",
 			prefer_ratio: "s",
 			prefer_geolocation: "t",
+			source: "all",
 		};
 
 		client.send(lookup);
