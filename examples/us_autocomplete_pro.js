@@ -32,6 +32,7 @@ lookup.maxResults = 10;
 lookup.includeOnlyCities = ["Chicago,La Grange,IL", "Blaine,WA"];
 lookup.preferStates = ["IL"];
 lookup.preferRatio = 33;
+lookup.source = "all";
 
 client.send(lookup)
 	.then(function(results) { logSuggestions(results, "Using Filter and Prefer") })

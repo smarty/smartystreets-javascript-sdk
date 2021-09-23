@@ -22,6 +22,7 @@ class Lookup {
 		this.preferZIPCodes = [];
 		this.preferRatio = undefined;
 		this.preferGeolocation = undefined;
+		this.source = undefined
 	}
 }
 
