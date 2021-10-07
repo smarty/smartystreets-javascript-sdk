@@ -48,18 +48,21 @@ describe("An International Address Autocomplete Client", function () {
 
 	it("attaches suggestions from a response to a lookup", function () {
 		const responseData = {
-			"street": "L alleya",
-			"locality": "Novosibirsk",
-			"administrative_area": "Novosibirskaya oblast'",
-			"postal_code": "40000",
-			"country_iso3": "RUS",
+			candidates: [
+				{
+					"street": "L alleya",
+					"locality": "Novosibirsk",
+					"administrative_area": "Novosibirskaya oblast'",
+					"postal_code": "40000",
+					"country_iso3": "RUS",
+				}
+			]
 		};
 
-		let mockExpectedPayload = [responseData];
-		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
+		let mockSender = new MockSenderWithResponse(responseData);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("f");
-		let expectedSuggestion = new Suggestion(responseData);
+		let expectedSuggestion = new Suggestion(responseData.candidates[0]);
 
 		return client.send(lookup).then(() => {
 			expect(lookup.result[0]).to.deep.equal(expectedSuggestion);

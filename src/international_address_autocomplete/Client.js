@@ -29,9 +29,9 @@ class Client {
 		});
 
 		function buildSuggestionsFromResponse(payload) {
-			if (payload === null) return [];
+			if (payload && payload.candidates === null) return [];
 
-			return payload.map(suggestion => new Suggestion(suggestion));
+			return payload.candidates.map(suggestion => new Suggestion(suggestion));
 		}
 	}
 }
