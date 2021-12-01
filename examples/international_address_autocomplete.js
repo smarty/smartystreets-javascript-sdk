@@ -28,7 +28,9 @@ client.send(lookup)
 lookup = new Lookup("Ave", "CAN");
 
 lookup.maxResults = 10;
+// lookup.include_only_administrative_area = "";
 lookup.include_only_locality = "Sherwood Park";
+// lookup.include_only_postal_code = "";
 
 client.send(lookup)
 	.then(function(results) { logSuggestions(results, "Using Filter and Prefer")})
