@@ -19,9 +19,7 @@ let client = clientBuilder.buildUsAutocompleteProClient();
 // *** Simple Lookup ***
 let lookup = new Lookup("4770 Lincoln");
 
-client.send(lookup)
-	.then(function(results) { logSuggestions(results, "Simple Lookup") })
-	.catch(console.log);
+await handleRequest(lookup, "Simple Lookup");
 
 // *** Using Filter and Prefer ***
 lookup = new Lookup("4770 Lincoln");
@@ -32,18 +30,14 @@ lookup.preferStates = ["IL"];
 lookup.preferRatio = 33;
 lookup.source = "all";
 
-client.send(lookup)
-	.then(function(results) { logSuggestions(results, "Using Filter and Prefer") })
-	.catch(console.log);
+await handleRequest(lookup, "Using Filter and Prefer");
 
 // *** Using 'selected' to Expand Secondaries ***
 lookup = new Lookup("4770 Lincoln");
 
 lookup.selected = "4770 N Lincoln Ave Ste 2 (3) Chicago, IL 60625";
 
-client.send(lookup)
-	.then(function(results) { logSuggestions(results, "Using 'selected' to Expand Secondaries") })
-	.catch(console.log);
+await handleRequest(lookup, "Using 'selected' to Expand Secondaries")
 
 // ************************************************
 
@@ -51,4 +45,13 @@ function logSuggestions(response, message) {
 	console.log(message);
 	console.log(response.result);
 	console.log("*********************");
+}
+
+async function handleRequest(lookup, lookupType) {
+	try {
+		const results = await client.send(lookup);
+		logSuggestions(results, lookupType);
+	} catch(err) {
+		console.log(err)
+	}
 }
