@@ -51,9 +51,7 @@ batch.add(lookup1);
 batch.add(lookup2);
 batch.add(lookup3);
 
-client.send(batch)
-	.then(handleSuccess)
-	.catch(handleError);
+await handleResponse(batch);
 
 function handleSuccess(response) {
 	response.lookups.map(lookup => console.log(lookup.result));
@@ -61,4 +59,13 @@ function handleSuccess(response) {
 
 function handleError(response) {
 	console.log(response);
+}
+
+async function handleResponse(lookup) {
+	try {
+		const result = await client.send(lookup);
+		handleSuccess(result);
+	} catch(err) {
+		handleError(err);
+	}
 }
