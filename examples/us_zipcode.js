@@ -37,13 +37,20 @@ batch.add(lookup1);
 batch.add(lookup2);
 batch.add(lookup3);
 
-client.send(batch)
-	.then(viewResults)
-	.catch(console.log);
+await handleResponse(batch);
 
 function viewResults(response) {
 	response.lookups.map(lookup => lookup.result.map(candidate => {
 		candidate.cities.map(city => console.log(city.city));
 		// candidate.zipcodes.map(zipcode => console.log(zipcode.zipcode));
 	}));
+}
+
+async function handleResponse(lookup) {
+	try {
+		const result = await client.send(lookup);
+		viewResults(result);
+	} catch(err) {
+		console.log(err);
+	}
 }
