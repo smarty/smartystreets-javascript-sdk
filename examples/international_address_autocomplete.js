@@ -17,7 +17,7 @@ let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 //www.smartystreets.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 
 let lookup = new Lookup("Ave", "CAN");
-await requestLookup(lookup, "Simple Request");
+await handleRequest(lookup, "Simple Request");
 
 // *** Using Filter and Prefer ***
 lookup = new Lookup("Ave", "CAN");
@@ -27,7 +27,7 @@ lookup.maxResults = 10;
 lookup.include_only_locality = "Sherwood Park";
 // lookup.include_only_postal_code = "";
 
-await requestLookup(lookup, "Using Filter and Prefer");
+await handleRequest(lookup, "Using Filter and Prefer");
 
 
 function logSuggestions(response, message) {
@@ -36,7 +36,7 @@ function logSuggestions(response, message) {
 	console.log("*********************");
 }
 
-async function requestLookup(lookup, lookupType) {
+async function handleRequest(lookup, lookupType) {
 	try {
 		const results = await client.send(lookup);
 		logSuggestions(results, lookupType);
