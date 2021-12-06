@@ -20,9 +20,7 @@ let client = clientBuilder.buildUsReverseGeoClient();
 
 let lookup1 = new Lookup(40.27644, -111.65747);
 
-client.send(lookup1)
-	.then(displayResult)
-	.catch(handleError);
+await handleResponse(lookup1);
 
 function displayResult(result) {
 	console.log(result.result[0].address);
@@ -30,4 +28,13 @@ function displayResult(result) {
 
 function handleError(error) {
 	console.log("ERROR:", error);
+}
+
+async function handleResponse(lookup) {
+	try {
+		const result = await client.send(lookup);
+		displayResult(result);
+	} catch(err) {
+		handleError(err);
+	}
 }
