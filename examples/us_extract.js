@@ -23,10 +23,17 @@ lookup.aggressive = true;
 lookup.addressesHaveLineBreaks = false;
 lookup.addressesPerLine = 1;
 
-client.send(lookup)
-	.then(logResult)
-	.catch(console.log);
+await handleRequest(lookup);
 
 function logResult(response) {
 	console.log(response.result);
+}
+
+async function handleRequest(lookup) {
+	try {
+		const response = await client.send(lookup);
+		logResult(response);
+	} catch(err) {
+		console.log(err);
+	}
 }
