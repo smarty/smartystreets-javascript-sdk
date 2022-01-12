@@ -28,6 +28,8 @@ class Client {
 		let batch;
 
 		if (dataIsLookup) {
+			if (data.maxCandidates == null && data.match == "enhanced")
+				data.maxCandidates = 5;
 			batch = new Batch();
 			batch.add(data);
 		} else {

@@ -52,6 +52,21 @@ describe("A US Street client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
+	it("defaults maxCandidates to 5 when match type is enhanced.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "enhanced";
+		let expectedParameters = {
+			match: "enhanced",
+			candidates: 5,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
 	it("doesn't send an empty batch.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
