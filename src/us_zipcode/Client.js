@@ -6,7 +6,7 @@ const sendBatch = require("../util/sendBatch");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usZipcode;
 
 /**
- * This client sends lookups to the SmartyStreets US ZIP Code API, <br>
+ * This client sends lookups to the Smarty US ZIP Code API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
 class Client {

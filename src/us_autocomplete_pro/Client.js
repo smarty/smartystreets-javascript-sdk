@@ -4,7 +4,7 @@ const Suggestion = require("./Suggestion");
 const Promise = require("promise");
 
 /**
- * This client sends lookups to the SmartyStreets US Autocomplete Pro API, <br>
+ * This client sends lookups to the Smarty US Autocomplete Pro API, <br>
  *     and attaches the suggestions to the appropriate Lookup objects.
  */
 class Client {

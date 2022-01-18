@@ -19,17 +19,17 @@ const InternationalStreetClient = require("./international_street/Client");
 const UsReverseGeoClient = require("./us_reverse_geo/Client");
 const InternationalAddressAutocompleteClient = require("./international_address_autocomplete/Client");
 
-const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smartystreets.com/verify";
-const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smartystreets.com/suggest";
-const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smartystreets.com/lookup";
-const US_EXTRACT_API_URL = "https://us-extract.api.smartystreets.com/";
-const US_STREET_API_URL = "https://us-street.api.smartystreets.com/street-address";
-const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smartystreets.com/lookup";
-const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smartystreets.com/lookup";
-const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smartystreets.com/lookup";
+const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
+const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smarty.com/suggest";
+const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
+const US_EXTRACT_API_URL = "https://us-extract.api.smarty.com/";
+const US_STREET_API_URL = "https://us-street.api.smarty.com/street-address";
+const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smarty.com/lookup";
+const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smarty.com/lookup";
+const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smarty.com/lookup";
 
 /**
- * The ClientBuilder class helps you build a client object for one of the supported SmartyStreets APIs.<br>
+ * The ClientBuilder class helps you build a client object for one of the supported Smarty APIs.<br>
  * You can use ClientBuilder's methods to customize settings like maximum retries or timeout duration. These methods<br>
  * are chainable, so you can usually get set up with one line of code.
  */
@@ -81,7 +81,7 @@ class ClientBuilder {
 	}
 
 	/**
-	 * This may be useful when using a local installation of the SmartyStreets APIs.
+	 * This may be useful when using a local installation of the Smarty APIs.
 	 * @param url Defaults to the URL for the API corresponding to the <b>Client</b> object being built.
 	 * @return Returns <b>this</b> to accommodate method chaining.
 	 */
