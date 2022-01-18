@@ -1,20 +1,20 @@
-const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
-const SmartyStreetsCore = SmartyStreetsSDK.core;
-const Lookup = SmartyStreetsSDK.usAutocompletePro.Lookup;
+const SmartySDK = require("smartystreets-javascript-sdk");
+const SmartyCore = SmartySDK.core;
+const Lookup = SmartySDK.usAutocompletePro.Lookup;
 
 // US Autocomplete Pro only supports using Website Keys
 let key = process.env.SMARTY_WEBSITE_KEY;
-const credentials = new SmartyStreetsCore.SharedCredentials(key);
+const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
-// https://www.smartystreets.com/docs/cloud/licensing
-let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials).withLicenses(["us-autocomplete-pro-cloud"]);
+// https://www.smarty.com/docs/cloud/licensing
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-autocomplete-pro-cloud"]);
 // .withBaseUrl("");
 let client = clientBuilder.buildUsAutocompleteProClient();
 
 // Documentation for input fields can be found at:
-// https://smartystreets.com/docs/cloud/us-autocomplete-api#pro-http-request-input-fields
+// https://www.smarty.com/docs/cloud/us-autocomplete-api#pro-http-request-input-fields
 
 // *** Simple Lookup ***
 let lookup = new Lookup("4770 Lincoln");

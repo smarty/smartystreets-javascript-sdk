@@ -1,20 +1,20 @@
-const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
-const SmartyStreetsCore = SmartyStreetsSDK.core;
-const Lookup = SmartyStreetsSDK.internationalAddressAutocomplete.Lookup;
+const SmartySDK = require("smartystreets-javascript-sdk");
+const SmartyCore = SmartySDK.core;
+const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
 
 // US Autocomplete Pro only supports using Website Keys
 let key = process.env.SMARTY_WEBSITE_KEY;
-const credentials = new SmartyStreetsCore.SharedCredentials(key);
+const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
-// https://www.smartystreets.com/docs/cloud/licensing
-let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-cloud"])
+// https://www.smarty.com/docs/cloud/licensing
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-cloud"])
 // .withBaseUrl("");
 let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 // Documentation for input fields can be found at:
-//www.smartystreets.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
+//www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 
 let lookup = new Lookup("Ave", "CAN");
 await handleRequest(lookup, "Simple Request");

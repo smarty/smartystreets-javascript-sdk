@@ -1,24 +1,24 @@
-const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
-const SmartyStreetsCore = SmartyStreetsSDK.core;
-const Lookup = SmartyStreetsSDK.usStreet.Lookup;
+const SmartySDK = require("smartystreets-javascript-sdk");
+const SmartyCore = SmartySDK.core;
+const Lookup = SmartySDK.usStreet.Lookup;
 
 // for Server-to-server requests, use this code:
 // let authId = process.env.SMARTY_AUTH_ID;
 // let authToken = process.env.SMARTY_AUTH_TOKEN;
-// const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
+// const credentials = new SmartyCore.StaticCredentials(authId, authToken);
 
 // for client-side requests (browser/mobile), use this code:
 let key = process.env.SMARTY_WEBSITE_KEY;
-const credentials = new SmartyStreetsCore.SharedCredentials(key);
+const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
-// https://www.smartystreets.com/docs/cloud/licensing
-let clientBuilder = new SmartyStreetsCore.ClientBuilder(credentials).withBaseUrl("YOUR URL").withLicenses(["us-rooftop-geocoding-cloud"]);
+// https://www.smarty.com/docs/cloud/licensing
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withBaseUrl("YOUR URL").withLicenses(["us-rooftop-geocoding-cloud"]);
 let client = clientBuilder.buildUsStreetApiClient();
 
 // Documentation for input fields can be found at:
-// https://smartystreets.com/docs/us-street-api#input-fields
+// https://www.smarty.com/docs/us-street-api#input-fields
 
 let lookup1 = new Lookup();
 lookup1.inputId = "24601";  // Optional ID from your system
@@ -46,7 +46,7 @@ lookup3.street = "1600 Amphitheatre Parkway Mountain View, CA 94043";
 lookup3.maxCandidates = 1;
 
 // NOTE: batches are not supported when using SharedCredentials.
-let batch = new SmartyStreetsCore.Batch();
+let batch = new SmartyCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);
 batch.add(lookup3);
