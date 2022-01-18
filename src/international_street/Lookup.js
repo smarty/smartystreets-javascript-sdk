@@ -13,7 +13,7 @@ const messages = {
  *     will contain the result of the lookup after it comes back from the API.
  *     <p><b>Note: </b><i>Lookups must have certain required fields set with non-blank values. <br>
  *         These can be found at the URL below.</i></p>
- *     @see "https://smartystreets.com/docs/cloud/international-street-api#http-input-fields"
+ *     @see "https://www.smarty.com/docs/cloud/international-street-api#http-input-fields"
  */
 class Lookup {
 	constructor(country, freeform) {

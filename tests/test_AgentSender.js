@@ -16,7 +16,7 @@ describe("An agent sender", function () {
 		let mockSender = new MockSender();
 		let agentSender = new AgentSender(mockSender);
 		let request = new Request();
-		let expectedAgentString = "smartystreets (sdk:javascript@" + require("../package.json").version + ")";
+		let expectedAgentString = "smarty (sdk:javascript@" + require("../package.json").version + ")";
 
 		agentSender.send(request);
 

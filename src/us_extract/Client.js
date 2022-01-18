@@ -4,7 +4,7 @@ const Request = require("../Request");
 const Result = require("./Result");
 
 /**
- * This client sends lookups to the SmartyStreets US Extract API, <br>
+ * This client sends lookups to the Smarty US Extract API, <br>
  *     and attaches the results to the Lookup objects.
  */
 class Client {

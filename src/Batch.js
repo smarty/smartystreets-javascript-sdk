@@ -1,7 +1,7 @@
 const BatchFullError = require("./Errors").BatchFullError;
 
 /**
- * This class contains a collection of up to 100 lookups to be sent to one of the SmartyStreets APIs<br>
+ * This class contains a collection of up to 100 lookups to be sent to one of the Smarty APIs<br>
  *     all at once. This is more efficient than sending them one at a time.
  */
 class Batch {

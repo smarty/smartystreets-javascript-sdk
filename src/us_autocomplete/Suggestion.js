@@ -1,5 +1,5 @@
 /**
- * @see "https://smartystreets.com/docs/cloud/us-autocomplete-api#http-response"
+ * @see "https://www.smarty.com/docs/cloud/us-autocomplete-api#http-response"
  */
 class Suggestion {
 	constructor(responseData) {

@@ -1,5 +1,5 @@
 /**
- * @see "https://smartystreets.com/docs/cloud/us-zipcode-api#root"
+ * @see "https://www.smarty.com/docs/cloud/us-zipcode-api#root"
  */
 class Result {
 	constructor(responseData) {

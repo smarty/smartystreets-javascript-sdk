@@ -6,7 +6,7 @@ const sendBatch = require("../util/sendBatch");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usStreet;
 
 /**
- * This client sends lookups to the SmartyStreets US Street API, <br>
+ * This client sends lookups to the Smarty US Street API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
 class Client {

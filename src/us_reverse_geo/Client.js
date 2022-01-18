@@ -5,7 +5,7 @@ const keyTranslationFormat = require("../util/apiToSDKKeyMap").usReverseGeo;
 const {UndefinedLookupError} = require("../Errors.js");
 
 /**
- * This client sends lookups to the SmartyStreets US Reverse Geo API, <br>
+ * This client sends lookups to the Smarty US Reverse Geo API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
 class Client {

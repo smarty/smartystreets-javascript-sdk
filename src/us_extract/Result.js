@@ -1,7 +1,7 @@
 const Address = require("./Address");
 
 /**
- * @see <a href="https://smartystreets.com/docs/cloud/us-extract-api#http-response-status">SmartyStreets US Extract API docs</a>
+ * @see <a href="https://www.smarty.com/docs/cloud/us-extract-api#http-response-status">Smarty US Extract API docs</a>
  */
 class Result {
 	constructor({meta, addresses}) {

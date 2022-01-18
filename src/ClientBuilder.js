@@ -29,7 +29,7 @@ const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smartystreets.com/loo
 const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smartystreets.com/lookup";
 
 /**
- * The ClientBuilder class helps you build a client object for one of the supported SmartyStreets APIs.<br>
+ * The ClientBuilder class helps you build a client object for one of the supported Smarty APIs.<br>
  * You can use ClientBuilder's methods to customize settings like maximum retries or timeout duration. These methods<br>
  * are chainable, so you can usually get set up with one line of code.
  */
@@ -81,7 +81,7 @@ class ClientBuilder {
 	}
 
 	/**
-	 * This may be useful when using a local installation of the SmartyStreets APIs.
+	 * This may be useful when using a local installation of the Smarty APIs.
 	 * @param url Defaults to the URL for the API corresponding to the <b>Client</b> object being built.
 	 * @return Returns <b>this</b> to accommodate method chaining.
 	 */

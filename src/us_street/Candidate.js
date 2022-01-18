@@ -3,7 +3,7 @@
  *     A lookup can have multiple candidates if the address was ambiguous, and<br>
  *     the maxCandidates field is set higher than 1.
  *
- * @see "https://smartystreets.com/docs/cloud/us-street-api#root"
+ * @see "https://www.smarty.com/docs/cloud/us-street-api#root"
  */
 class Candidate {
 	constructor(responseData) {
