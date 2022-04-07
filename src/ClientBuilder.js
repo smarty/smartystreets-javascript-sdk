@@ -94,6 +94,7 @@ class ClientBuilder {
 	 * Use this to specify a proxy through which to send all lookups.
 	 * @param host The host of the proxy server (do not include the port).
 	 * @param port The port on the proxy server to which you wish to connect.
+	 * @param protocol The protocol on the proxy server to which you wish to connect. If the proxy server uses HTTPS, then you must set the protocol to 'https'.
 	 * @param username The username to login to the proxy.
 	 * @param password The password to login to the proxy.
 	 * @return Returns <b>this</b> to accommodate method chaining.
