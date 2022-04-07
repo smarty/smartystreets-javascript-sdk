@@ -98,10 +98,11 @@ class ClientBuilder {
 	 * @param password The password to login to the proxy.
 	 * @return Returns <b>this</b> to accommodate method chaining.
 	 */
-	withProxy(host, port, username, password) {
+	withProxy(host, port, protocol, username, password) {
 		this.proxy = {
 			host: host,
 			port: port,
+			protocol: protocol,
 		};
 
 		if (username && password) {
