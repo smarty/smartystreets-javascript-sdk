@@ -1,5 +1,5 @@
 const Response = require("./Response");
-const Axios = require("axios-proxy-fix");
+const Axios = require("axios");
 const axiosRetry = require("axios-retry");
 const Promise = require("promise");
 
