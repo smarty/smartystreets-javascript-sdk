@@ -20,9 +20,6 @@ publish: clean test version upload unversion
 upload:
 	npm publish
 
-upload_s3:
-	node browserify.js && node s3.js
-
 version:
 	sed -i.bak -e 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)" && rm -f "$(VERSION_FILE1).bak"
 	sed -i.bak -e 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)" && rm -f "$(VERSION_FILE2).bak"
