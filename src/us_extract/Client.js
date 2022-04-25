@@ -1,5 +1,4 @@
 const Errors = require("../Errors");
-const Promise = require("promise");
 const Request = require("../Request");
 const Result = require("./Result");
 

@@ -1,6 +1,5 @@
 const Errors = require("../Errors");
 const Request = require("../Request");
-const Promise = require("promise");
 const Suggestion = require("./Suggestion");
 
 class Client {

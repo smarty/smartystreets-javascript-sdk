@@ -1,5 +1,3 @@
-const Promise = require("promise");
-
 class AgentSender {
 	constructor(innerSender) {
 		this.sender = innerSender;

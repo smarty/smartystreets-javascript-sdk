@@ -1,4 +1,3 @@
-const Promise = require("promise");
 const Response = require("../../src/Response");
 
 module.exports = {

@@ -1,4 +1,3 @@
-const Promise = require("promise");
 const UnprocessableEntityError = require("./Errors").UnprocessableEntityError;
 const SharedCredentials = require("./SharedCredentials");
 

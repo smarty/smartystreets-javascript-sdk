@@ -1,5 +1,3 @@
-const Promise = require("promise");
-
 class BaseUrlSender {
 	constructor(innerSender, urlOverride) {
 		this.urlOverride = urlOverride;

@@ -2,7 +2,6 @@ const chai = require("chai");
 const expect = chai.expect;
 const LicenseSender = require("../src/LicenseSender");
 const Request = require("../src/Request");
-const Promise = require("promise");
 
 describe("A license sender", function () {
 	let innerSender;

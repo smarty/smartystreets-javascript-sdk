@@ -7,7 +7,6 @@ const Lookup = require("../../src/us_zipcode/Lookup");
 const Result = require("../../src/us_zipcode/Result");
 const Batch = require("../../src/Batch");
 const errors = require("../../src/Errors");
-const Promise = require("promise");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 

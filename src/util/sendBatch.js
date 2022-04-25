@@ -1,5 +1,4 @@
 const Request = require("../Request");
-const Promise = require("promise");
 const Errors = require("../Errors");
 const buildInputData = require("../util/buildInputData");
 
