@@ -4,16 +4,13 @@ VERSION           := $(shell tagit -p --dry-run)
 VERSION_FILE1     := package.json
 VERSION_FILE2     := package-lock.json
 
-clean:
-	rm -rf dist/
-
-test: clean node_modules
+test: node_modules
 	npm run test
 
 node_modules:
 	npm install
 
-publish: clean test version upload unversion
+publish: test version upload unversion
 	tagit -p
 	git push origin --tags
 
@@ -28,4 +25,4 @@ unversion:
 	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
 
 # node_modules is a real directory target
-.PHONY: clean test publish upload version unversion
+.PHONY: test publish upload version unversion

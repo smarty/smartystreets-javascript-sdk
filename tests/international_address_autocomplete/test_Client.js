@@ -1,7 +1,5 @@
 const chai = require("chai");
 const expect = chai.expect;
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 const Client = require("../../src/international_address_autocomplete/Client");
 const Lookup = require("../../src/international_address_autocomplete/Lookup");
 const Suggestion = require("../../src/international_address_autocomplete/Suggestion");

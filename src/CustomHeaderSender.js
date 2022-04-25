@@ -1,5 +1,3 @@
-const Promise = require("promise");
-
 class CustomHeaderSender {
 	constructor(innerSender, customHeaders) {
 		this.sender = innerSender;

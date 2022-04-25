@@ -1,7 +1,6 @@
 const Request = require("../Request");
 const Errors = require("../Errors");
 const Candidate = require("./Candidate");
-const Promise = require("promise");
 const buildInputData = require("../util/buildInputData");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").internationalStreet;
 

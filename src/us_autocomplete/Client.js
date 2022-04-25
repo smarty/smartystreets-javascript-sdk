@@ -1,7 +1,6 @@
 const Errors = require("../Errors");
 const Request = require("../Request");
 const Suggestion = require("./Suggestion");
-const Promise = require("promise");
 
 /**
  * This client sends lookups to the Smarty US Autocomplete API, <br>

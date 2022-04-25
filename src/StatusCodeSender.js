@@ -1,4 +1,3 @@
-const Promise = require("promise");
 const Errors = require("./Errors");
 
 class StatusCodeSender {

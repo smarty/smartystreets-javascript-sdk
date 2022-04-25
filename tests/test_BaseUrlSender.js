@@ -2,7 +2,6 @@ const chai = require("chai");
 const expect = chai.expect;
 const BaseUrlSender = require("../src/BaseUrlSender");
 const Request = require("../src/Request");
-const Promise = require("promise");
 
 describe("A base url sender", function () {
 	let innerSender;

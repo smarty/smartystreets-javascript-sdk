@@ -1,6 +1,4 @@
 const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 const expect = chai.expect;
 const Client = require("../../src/us_reverse_geo/Client");
 const Lookup = require("../../src/us_reverse_geo/Lookup");

@@ -32,21 +32,11 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "aws-sdk": "^2.803.0",
-  "babel-core": "^6.26.0",
-  "babel-preset-env": "^1.6.1",
-  "babelify": "^8.0.0",
-  "browserify": "^16.5.2",
   "chai": "^4.2.0",
-  "chai-as-promised": "^7.1.1",
-  "mocha": "^9.2.1",
-  "s3-upload-stream": "^1.0.7",
-  "tinyify": "^2.5.2",
-  "zlib": "^1.0.5"
+  "mocha": "^9.2.1"
  },
  "dependencies": {
   "axios": "^0.26.1",
-  "axios-retry": "3.2.0",
-  "promise": "^8.1.0"
+  "axios-retry": "3.2.0"
  }
 }

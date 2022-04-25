@@ -1,5 +1,3 @@
-const Promise = require("promise");
-
 class LicenseSender {
 	constructor(innerSender, licenses) {
 		this.sender = innerSender;

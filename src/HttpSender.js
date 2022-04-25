@@ -1,7 +1,6 @@
 const Response = require("./Response");
 const Axios = require("axios");
 const axiosRetry = require("axios-retry");
-const Promise = require("promise");
 
 class HttpSender {
 	constructor(timeout = 10000, retries = 5, proxyConfig, debug = false) {

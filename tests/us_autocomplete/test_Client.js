@@ -1,7 +1,5 @@
 const chai = require("chai");
 const expect = chai.expect;
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 const Client = require("../../src/us_autocomplete/Client");
 const Lookup = require("../../src/us_autocomplete/Lookup");
 const Suggestion = require("../../src/us_autocomplete/Suggestion");
@@ -72,7 +70,7 @@ describe("A US Autocomplete Client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup("¯\\_(ツ)_/¯");
 
-		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedError);
+		return client.send(lookup).catch((e) => {expect(e).to.equal(expectedError);});
 	});
 
 	it("returns an empty array when no suggestions are returned.", () => {
