@@ -1,6 +1,4 @@
 let chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 const expect = chai.expect;
 const Client = require("../../src/us_zipcode/Client");
 const Lookup = require("../../src/us_zipcode/Lookup");
@@ -125,7 +123,7 @@ describe("A US Zipcode client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedMockError);
+		return client.send(lookup).catch((e) => {expect(e).to.equal(expectedMockError);});
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {

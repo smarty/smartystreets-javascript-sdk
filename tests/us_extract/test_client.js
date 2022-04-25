@@ -1,7 +1,5 @@
 const chai = require("chai");
 const expect = chai.expect;
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
 const Client = require("../../src/us_extract/Client");
 const Lookup = require("../../src/us_extract/Lookup");
 const Result = require("../../src/us_extract/Result");
@@ -69,7 +67,7 @@ describe("A US Extract Client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Shine on you crazy diamond.");
 
-		return expect(client.send(lookup)).to.eventually.be.rejectedWith(expectedError);
+		return client.send(lookup).catch((e) => {expect(e).to.equal(expectedError);});
 	});
 
 	it("attaches result from a response to a lookup.", function () {
