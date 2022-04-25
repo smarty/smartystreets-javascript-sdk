@@ -32,7 +32,6 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "aws-sdk": "^2.803.0",
   "babel-core": "^6.26.0",
   "babel-preset-env": "^1.6.1",
   "babelify": "^8.0.0",
