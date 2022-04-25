@@ -32,13 +32,9 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "babel-core": "^6.26.0",
-  "babel-preset-env": "^1.6.1",
-  "babelify": "^8.0.0",
   "chai": "^4.2.0",
   "chai-as-promised": "^7.1.1",
-  "mocha": "^9.2.1",
-  "tinyify": "^2.5.2"
+  "mocha": "^9.2.1"
  },
  "dependencies": {
   "axios": "^0.26.1",
