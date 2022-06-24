@@ -2,6 +2,7 @@ const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
 
+
 // US Autocomplete Pro only supports using Website Keys
 let key = process.env.SMARTY_WEBSITE_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
