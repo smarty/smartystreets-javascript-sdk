@@ -2,8 +2,8 @@ const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.usAutocompletePro.Lookup;
 
-// US Autocomplete Pro only supports using Website Keys
-let key = process.env.SMARTY_WEBSITE_KEY;
+// US Autocomplete Pro only supports using Embedded Keys
+let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions

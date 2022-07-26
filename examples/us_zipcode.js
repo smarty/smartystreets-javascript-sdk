@@ -8,7 +8,7 @@ const Lookup = SmartySDK.usZipcode.Lookup;
 // const credentials = new SmartyCore.StaticCredentials(authId, authToken);
 
 // for client-side requests (browser/mobile), use this code:
-let key = process.env.SMARTY_WEBSITE_KEY;
+let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 let clientBuilder = new SmartyCore.ClientBuilder(credentials);

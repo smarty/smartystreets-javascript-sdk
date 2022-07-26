@@ -54,7 +54,7 @@ class UnprocessableEntityError extends SmartyError {
 
 class TooManyRequestsError extends SmartyError {
 	constructor() {
-		super("When using the public 'website key' authentication, we restrict the number of requests coming from a given source over too short of a time.");
+		super("When using the public 'embedded key' authentication, we restrict the number of requests coming from a given source over too short of a time.");
 	}
 }
 

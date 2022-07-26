@@ -8,7 +8,7 @@ const Lookup = SmartySDK.usReverseGeo.Lookup;
 // const credentials = new SmartyCore.StaticCredentials(authId, authToken);
 
 // for client-side requests (browser/mobile), use this code:
-let key = process.env.SMARTY_WEBSITE_KEY;
+let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
