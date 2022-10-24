@@ -32,8 +32,9 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "chai": "^4.2.0",
-  "mocha": "^9.2.1"
+  "chai": "^4.3.6",
+  "mocha": "^9.2.2",
+  "nyc": "^15.1.0"
  },
  "dependencies": {
   "axios": "^0.26.1",
