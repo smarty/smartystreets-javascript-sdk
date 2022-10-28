@@ -10,7 +10,7 @@ class FailingSender {
 
 	send(request) {
 		let mockResponse = {
-			status: this.statusCodes,
+			status: this.statusCodes[this.currentStatusCodeIndex],
 			headers: this.headers,
 			error: this.error,
 		};

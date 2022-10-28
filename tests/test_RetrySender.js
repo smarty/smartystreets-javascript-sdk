@@ -7,7 +7,7 @@ const Request = require("../src/Request.js");
 function sendWithRetry(retries, inner) {
 	const request = new Request();
 	const sender = new RetrySender(retries, inner);
-	sender.send(request);
+	return sender.send(request);
 }
 
 describe ("Retry Sender tests", function () {
@@ -24,4 +24,22 @@ describe ("Retry Sender tests", function () {
 
 		expect(1).to.equal(inner.currentStatusCodeIndex);
 	});
+
+	it("test will retry until success", function () {
+		let inner =  new FailingSender(["500", "500", "500", "200", "500"]);
+		sendWithRetry(10, inner);
+
+		expect(4).to.equal(inner.currentStatusCodeIndex);
+	});
+
+	// it("test return response if retry limit exceeded", function () {
+	// 	const inner = new FailingSender(["500", "500", "500", "500", "500"]);
+	// 	const response = sendWithRetry(4, inner);
+	//
+	// })
+
+	// it("test backoff does not exceed max", function () {
+	// 	let inner = new FailingSender(["500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "200"]);
+	//
+	// })
 });

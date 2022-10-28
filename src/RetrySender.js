@@ -10,7 +10,7 @@ class RetrySender {
 	send(request) {
 		let response = this.inner.send(request);
 
-		for (let i = 0; i < this.maxRetries - 1; i++) {
+		for (let i = 0; i < this.maxRetries; i++) {
 			// break if the retry shouldn't handle the response
 			if (!this.statusToRetry.includes(parseInt(response.statusCode))) {
 				break;
@@ -36,7 +36,7 @@ class RetrySender {
 
 	backoff(attempt) {
 		const backoffDuration = Math.min(attempt, this.maxBackoffDuration);
-		console.log(`There was an error processing the request. Retrying in ${backoffDuration/1000} seconds...`);
+		console.log(`There was an error processing the request. Retrying in ${backoffDuration} seconds...`);
 		// todo sleep
 	};
 
