@@ -1,52 +1,27 @@
 const chai = require("chai");
 const expect = chai.expect;
 const RetrySender = require("../src/RetrySender");
+const FailingSender = require("./FailingSender");
+const Request = require("../src/Request.js");
 
-describe ("An Axios implementation of a Retry Sender", function () {
-	it("has a response with the right status code.", function () {
-		let sender = new RetrySender();
-		let mockResponse = {
-			status: 200
-		};
-		// let smartyResponse = sender.buildSmartyResponse(mockResponse);
-		for (let i = 0; i < 5; i++) {
-			const mockResult = sender.retry(mockResponse, i);
-			if (!mockResult) break;
-		}
+function sendWithRetry(retries, inner) {
+	const request = new Request();
+	const sender = new RetrySender(retries, inner);
+	sender.send(request);
+}
 
-		// expect(smartyResponse.hasOwnProperty("statusCode")).to.equal(true);
-		// expect(smartyResponse.statusCode).to.equal(200);
+describe ("Retry Sender tests", function () {
+	it("test success will not retry", function () {
+		let inner = new FailingSender("200");
+		sendWithRetry(5, inner);
+
+		expect(1).to.equal(inner.currentStatusCodeIndex);
 	});
 
-	it("has a response with a 408 code", function () {
-		let sender = new RetrySender();
-		let mockResponse = {
-			status: 408
-		};
-		// let smartyResponse = sender.buildSmartyResponse(mockResponse);
-		for (let i = 0; i < 5; i++) {
-			const mockResult = sender.retry(mockResponse, i);
-			if (!mockResult) break;
-		}
-		// expect(smartyResponse.hasOwnProperty("statusCode")).to.equal(true);
-		// expect(smartyResponse.statusCode).to.equal(408);
-	})
+	it("test with code that should not retry", function () {
+		let inner = new FailingSender("422");
+		sendWithRetry(5, inner);
 
-	it("has a response with a 429 code", function () {
-		let sender = new RetrySender();
-		let mockResponse = {
-			status: 429,
-			headers: {
-				"Retry-After": 3000
-			}
-		};
-		// let smartyResponse = sender.buildSmartyResponse(mockResponse);
-		for (let i = 0; i < 5; i++) {
-			const mockResult = sender.retry(mockResponse, i);
-			if (!mockResult) break;
-		}
-		console.log("Færdig");
-		// expect(smartyResponse.hasOwnProperty("statusCode")).to.equal(true);
-		// expect(smartyResponse.statusCode).to.equal(408);
-	})
+		expect(1).to.equal(inner.currentStatusCodeIndex);
+	});
 });
