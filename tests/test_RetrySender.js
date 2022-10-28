@@ -37,7 +37,7 @@ describe ("An Axios implementation of a Retry Sender", function () {
 		let mockResponse = {
 			status: 429,
 			headers: {
-				"Retry-After": 7000
+				"Retry-After": 3000
 			}
 		};
 		// let smartyResponse = sender.buildSmartyResponse(mockResponse);

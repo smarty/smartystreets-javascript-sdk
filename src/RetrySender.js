@@ -31,42 +31,42 @@ class RetrySender {
 		return config;
 	}
 
-	buildSmartyResponse(response, error) {
-		if (response) return new Response(response.status, response.data);
-		return new Response(undefined, undefined, error)
-	}
+	// buildSmartyResponse(response, error) {
+	// 	if (response) return new Response(response.status, response.data);
+	// 	return new Response(undefined, undefined, error)
+	// }
 
-	rateLimitBackoff(backoffDuration) {
+	async rateLimitBackoff(backoffDuration) {
 		console.log(`Rate limit reached. Retrying in ${backoffDuration/1000} seconds...`);
-		console.log("\x1b[35m%s\x1b[0m", "backoffduration in ratelimit: ", backoffDuration/1000);
-		return new Promise(resolve => setTimeout(resolve, backoffDuration));
+		// console.log("\x1b[35m%s\x1b[0m", "backoffduration in ratelimit: ", backoffDuration/1000);
+		return await new Promise(resolve => setTimeout(resolve, backoffDuration));
 	}
 
-	backoff(attempt) {
+	async backoff(attempt) {
 		let backoffDuration = Math.min(attempt,this.maxBackoffDuration);
 		console.log(`There was an error processing the request. Retrying in ${backoffDuration} seconds...`);
-		console.log("\x1b[36m%s\x1b[0m" ,"backoffduration in backoff: ", backoffDuration);
-		return new Promise(resolve => setTimeout(resolve, backoffDuration*1000));
+		// console.log("\x1b[36m%s\x1b[0m" ,"backoffduration in backoff: ", backoffDuration);
+		return await new Promise(resolve => setTimeout(resolve, backoffDuration*1000));
 	}
 
 	async retry(response, i) {
-		console.log("in retry function. Status: ", response);
+		// console.log("in retry function. Status: ", response);
 		if (!this.statusToRetry.includes(response.status)) {
-			console.log("not a retry status");
+			// console.log("not a retry status");
 			return undefined;
 		} else if (response.status === this.statusTooManyRequests) {
-			console.log("too many requests");
+			// console.log("too many requests");
 			let secondsToBackoff = 10;
 			if (response.headers) {
-				console.log("has headers");
+				// console.log("has headers");
 				if (response.headers["Retry-After"]) {
-					console.log("retry after");
+					// console.log("retry after");
 					secondsToBackoff = parseInt(response.headers["Retry-After"]);
 				}
 			}
 			await this.rateLimitBackoff(secondsToBackoff);
 		} else {
-			console.log("Status not too many. Attempt: ", i);
+			// console.log("Status not too many. Attempt: ", i);
 			await this.backoff(i);
 		}
 	}
