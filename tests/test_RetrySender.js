@@ -34,7 +34,7 @@ describe ("Retry Sender tests", function () {
 	});
 
 	it("test return response if retry limit exceeded", function () {
-		const inner = new FailingSender(["500", "500", "500", "500", "500"]);
+		let inner = new FailingSender(["500", "500", "500", "500", "500"]);
 		const sleeper = new FakeSleeper();
 		const response = sendWithRetry(4, inner, sleeper);
 
@@ -44,7 +44,19 @@ describe ("Retry Sender tests", function () {
 		expect(sleeper.sleepDurations).to.deep.equal([0, 1, 2, 3]);
 	});
 
-	// it("test backoff does not exceed max", function () {
-	// 	let inner = new FailingSender(["500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "200"]);
-	// });
+	it("test backoff does not exceed max", function () {
+		let inner = new FailingSender(["500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "200"]);
+		const sleeper = new FakeSleeper();
+
+		sendWithRetry(20, inner, sleeper);
+
+		expect(sleeper.sleepDurations).to.deep.equal([0,1,2,3,4,5,6,7,8,9,10,10,10]);
+	});
+
+	it("test empty status does not retry", function () {
+		let inner = new FailingSender([]);
+		sendWithRetry(5, inner, new FakeSleeper());
+
+		expect(inner.currentStatusCodeIndex).to.equal(1);
+	});
 });
