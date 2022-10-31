@@ -1,10 +1,11 @@
 class RetrySender {
-	constructor(maxRetires = 5, inner) {
+	constructor(maxRetires = 5, inner, sleeper) {
 		this.maxRetries = maxRetires;
 		this.statusToRetry = [408, 429, 500, 502, 503, 504];
 		this.statusTooManyRequests = 429;
 		this.maxBackoffDuration = 10;
 		this.inner = inner;
+		this.sleeper = sleeper;
 	}
 
 	send(request) {
@@ -37,16 +38,12 @@ class RetrySender {
 	async backoff(attempt) {
 		const backoffDuration = Math.min(attempt, this.maxBackoffDuration);
 		console.log(`There was an error processing the request. Retrying in ${backoffDuration} seconds...`);
-		await this.sleep(backoffDuration*1000);
+		await this.sleeper.sleep(backoffDuration*1000);
 	};
 
 	async rateLimitBackOff(backoffDuration) {
 		console.log(`Rate limit reached. Retrying in ${backoffDuration/1000} seconds...`);
-		await this.sleep(backoffDuration);
-	};
-
-	sleep(ms) {
-		return new Promise(resolve => setTimeout(resolve, ms));
+		await this.sleeper.sleep(backoffDuration);
 	};
 }
 
