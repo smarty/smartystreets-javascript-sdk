@@ -1,7 +1,7 @@
 const {buildSmartyResponse} = require("../src/util/buildSmartySender.js");
 
 class FailingSender {
-	constructor(statusCodes, headers= undefined, error = undefined) {
+	constructor(statusCodes, headers = undefined, error = undefined) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;

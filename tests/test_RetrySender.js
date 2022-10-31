@@ -13,14 +13,14 @@ function sendWithRetry(retries, inner, sleeper) {
 
 describe ("Retry Sender tests", function () {
 	it("test success does not retry", function () {
-		let inner = new FailingSender("200");
+		let inner = new FailingSender(["200"]);
 		sendWithRetry(5, inner, new FakeSleeper());
 
 		expect(inner.currentStatusCodeIndex).to.equal(1);
 	});
 
 	it("test client error does not retry", function () {
-		let inner = new FailingSender("422");
+		let inner = new FailingSender(["422"]);
 		sendWithRetry(5, inner, new FakeSleeper());
 
 		expect(inner.currentStatusCodeIndex).to.equal(1);
@@ -59,4 +59,24 @@ describe ("Retry Sender tests", function () {
 
 		expect(inner.currentStatusCodeIndex).to.equal(1);
 	});
+
+	it("test sleep on rate limit", function () {
+		let inner = new FailingSender(["429", "200"]);
+		const sleeper = new FakeSleeper();
+
+		sendWithRetry(5, inner, sleeper);
+
+		expect(sleeper.sleepDurations).to.deep.equal([10]);
+	});
+
+	// it("test rate limit error return", function () {
+	// 	let inner = new FailingSender(["429"], {"Retry-After": 7});
+	// 	const sleeper = new FakeSleeper();
+	//
+	// 	sendWithRetry(10, inner, sleeper);
+	//
+	// 	expect(sleeper.sleepDurations).to.deep.equal([7]);
+	// });
+
+
 });

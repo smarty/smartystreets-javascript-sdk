@@ -20,8 +20,10 @@ class RetrySender {
 			if (parseInt(response.statusCode) === this.statusTooManyRequests) {
 				let secondsToBackoff = 10;
 				// look for the retry after seconds
-				if (response.headers["Retry-After"]) {
-					secondsToBackoff = parseInt(response.headers["Retry-After"]);
+				if(response.headers) {
+					if (parseInt(response.headers["Retry-After"])) {
+						secondsToBackoff = parseInt(response.headers["Retry-After"]);
+					}
 				}
 				// try again, 429 case
 				this.rateLimitBackOff(secondsToBackoff)
@@ -38,11 +40,11 @@ class RetrySender {
 	async backoff(attempt) {
 		const backoffDuration = Math.min(attempt, this.maxBackoffDuration);
 		console.log(`There was an error processing the request. Retrying in ${backoffDuration} seconds...`);
-		await this.sleeper.sleep(backoffDuration*1000);
+		await this.sleeper.sleep(backoffDuration);
 	};
 
 	async rateLimitBackOff(backoffDuration) {
-		console.log(`Rate limit reached. Retrying in ${backoffDuration/1000} seconds...`);
+		console.log(`Rate limit reached. Retrying in ${backoffDuration} seconds...`);
 		await this.sleeper.sleep(backoffDuration);
 	};
 }

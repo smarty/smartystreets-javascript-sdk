@@ -3,8 +3,7 @@ class FakeSleeper {
 		this.sleepDurations = [];
 	}
 	sleep(ms) {
-		const seconds = ms/1000;
-		this.sleepDurations.push(seconds);
+		this.sleepDurations.push(ms);
 		// return new Promise(resolve => setTimeout(resolve, ms));
 	}
 }
