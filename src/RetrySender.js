@@ -34,15 +34,19 @@ class RetrySender {
 		return response;
 	};
 
-	backoff(attempt) {
+	async backoff(attempt) {
 		const backoffDuration = Math.min(attempt, this.maxBackoffDuration);
 		console.log(`There was an error processing the request. Retrying in ${backoffDuration} seconds...`);
-		// todo sleep
+		await this.sleep(backoffDuration*1000);
 	};
 
-	rateLimitBackOff(backoffDuration) {
+	async rateLimitBackOff(backoffDuration) {
 		console.log(`Rate limit reached. Retrying in ${backoffDuration/1000} seconds...`);
-		// todo sleep
+		await this.sleep(backoffDuration);
+	};
+
+	sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
 	};
 }
 
