@@ -20,8 +20,8 @@ class RetrySender {
 			if (parseInt(response.statusCode) === this.statusTooManyRequests) {
 				let secondsToBackoff = 10;
 				if(response.headers) {
-					if (parseInt(response.headers["Retry-After"])) {
-						secondsToBackoff = parseInt(response.headers["Retry-After"]);
+					if (Number.isInteger(response.headers["Retry-After"])) {
+						secondsToBackoff = response.headers["Retry-After"];
 					}
 				}
 				await this.rateLimitBackOff(secondsToBackoff)
