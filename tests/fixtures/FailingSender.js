@@ -1,4 +1,4 @@
-const {buildSmartyResponse} = require("../src/util/buildSmartySender.js");
+const {buildSmartyResponse} = require("../../src/util/buildSmartyResponse.js");
 
 class FailingSender {
 	constructor(statusCodes, headers = undefined, error = undefined) {

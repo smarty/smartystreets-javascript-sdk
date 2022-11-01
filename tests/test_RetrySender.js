@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 const RetrySender = require("../src/RetrySender");
-const FailingSender = require("./FailingSender");
+const FailingSender = require("./fixtures/FailingSender");
 const Request = require("../src/Request.js");
 const FakeSleeper = require("../src/util/FakeSleeper");
 
@@ -69,14 +69,14 @@ describe ("Retry Sender tests", function () {
 		expect(sleeper.sleepDurations).to.deep.equal([10]);
 	});
 
-	// it("test rate limit error return", function () {
-	// 	let inner = new FailingSender(["429"], {"Retry-After": 7});
-	// 	const sleeper = new FakeSleeper();
-	//
-	// 	sendWithRetry(10, inner, sleeper);
-	//
-	// 	expect(sleeper.sleepDurations).to.deep.equal([7]);
-	// });
+	it("test rate limit error return", function () {
+		let inner = new FailingSender(["429"], {"Retry-After": 7});
+		const sleeper = new FakeSleeper();
+
+		sendWithRetry(10, inner, sleeper);
+
+		expect(sleeper.sleepDurations).to.deep.equal([7]);
+	});
 
 
 });
