@@ -8,7 +8,7 @@ class RetrySender {
 		this.sleeper = sleeper;
 	}
 
-	send(request) {
+	async send(request) {
 		let response = this.inner.send(request);
 
 		for (let i = 0; i < this.maxRetries; i++) {
@@ -24,9 +24,9 @@ class RetrySender {
 						secondsToBackoff = parseInt(response.headers["Retry-After"]);
 					}
 				}
-				this.rateLimitBackOff(secondsToBackoff)
+				await this.rateLimitBackOff(secondsToBackoff)
 			} else {
-				this.backoff(i)
+				await this.backoff(i)
 			}
 			response = this.inner.send(request);
 		}
