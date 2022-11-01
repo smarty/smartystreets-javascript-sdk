@@ -78,5 +78,21 @@ describe ("Retry Sender tests", function () {
 		expect(sleeper.sleepDurations).to.deep.equal([7]);
 	});
 
+	it("test retry after invalid value", function () {
+		let inner = new FailingSender(["429"], {"Retry-After": "a"});
+		const sleeper = new FakeSleeper();
 
+		sendWithRetry(10, inner, sleeper);
+
+		expect(sleeper.sleepDurations).to.deep.equal([10]);
+	});
+
+	it("test retry error", function () {
+		let inner = new FailingSender(["429"], undefined, "Big Bad");
+		const sleeper = new FakeSleeper();
+
+		const response = sendWithRetry(10, inner, sleeper);
+
+		expect(response.error).to.equal("Big Bad");
+	});
 });
