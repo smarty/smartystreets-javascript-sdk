@@ -25,6 +25,7 @@ class Lookup {
 		this.address2 = undefined;
 		this.address3 = undefined;
 		this.address4 = undefined;
+		this.unit = undefined;
 		this.organization = undefined;
 		this.locality = undefined;
 		this.administrativeArea = undefined;

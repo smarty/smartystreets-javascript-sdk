@@ -30,6 +30,7 @@ describe("An International Street client", function () {
 		lookup.address2 = "d";
 		lookup.address3 = "e";
 		lookup.address4 = "f";
+		lookup.unit = "f.1";
 		lookup.organization = "g";
 		lookup.locality = "h";
 		lookup.administrativeArea = "i";
@@ -43,6 +44,7 @@ describe("An International Street client", function () {
 			address2: "d",
 			address3: "e",
 			address4: "f",
+			unit: "f.1",
 			organization: "g",
 			locality: "h",
 			administrative_area: "i",

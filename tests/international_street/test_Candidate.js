@@ -22,6 +22,8 @@ describe("An International match candidate", function () {
 				country_iso_3: "14",
 				super_administrative_area: "15",
 				administrative_area: "16",
+				administrative_area_short: "16.1",
+				administrative_area_long: "16.2",
 				sub_administrative_area: "17",
 				dependent_locality: "18",
 				dependent_locality_name: "19",
@@ -55,6 +57,8 @@ describe("An International match candidate", function () {
 				sub_building_number: "46",
 				sub_building_name: "47",
 				sub_building: "48",
+				level_type: "48.1",
+				level_number: "48.2",
 				post_box: "49",
 				post_box_type: "50",
 				post_box_number: "51",
@@ -88,6 +92,8 @@ describe("An International match candidate", function () {
 						country_iso_3: "73",
 						super_administrative_area: "74",
 						administrative_area: "75",
+						administrative_area_short: "75.1",
+						administrative_area_long: "75.2",
 						sub_administrative_area: "76",
 						dependent_locality: "77",
 						dependent_locality_name: "78",
@@ -121,6 +127,8 @@ describe("An International match candidate", function () {
 						sub_building_number: "106",
 						sub_building_name: "107",
 						sub_building: "108",
+						level_type: "108.1",
+						level_number: "108.2",
 						post_box: "109",
 						post_box_type: "110",
 						post_box_number: "111",
@@ -148,6 +156,8 @@ describe("An International match candidate", function () {
 		expect(components.countryIso3).to.equal("14");
 		expect(components.superAdministrativeArea).to.equal("15");
 		expect(components.administrativeArea).to.equal("16");
+		expect(components.administrativeAreaShort).to.equal("16.1");
+		expect(components.administrativeAreaLong).to.equal("16.2");
 		expect(components.subAdministrativeArea).to.equal("17");
 		expect(components.dependentLocality).to.equal("18");
 		expect(components.dependentLocalityName).to.equal("19");
@@ -181,6 +191,8 @@ describe("An International match candidate", function () {
 		expect(components.subBuildingNumber).to.equal("46");
 		expect(components.subBuildingName).to.equal("47");
 		expect(components.subBuilding).to.equal("48");
+		expect(components.levelType).to.equal("48.1");
+		expect(components.levelNumber).to.equal("48.2");
 		expect(components.postBox).to.equal("49");
 		expect(components.postBoxType).to.equal("50");
 		expect(components.postBoxNumber).to.equal("51");
@@ -212,6 +224,8 @@ describe("An International match candidate", function () {
 		expect(ccomponents.countryIso3).to.equal("73");
 		expect(ccomponents.superAdministrativeArea).to.equal("74");
 		expect(ccomponents.administrativeArea).to.equal("75");
+		expect(ccomponents.administrativeAreaShort).to.equal("75.1");
+		expect(ccomponents.administrativeAreaLong).to.equal("75.2");
 		expect(ccomponents.subAdministrativeArea).to.equal("76");
 		expect(ccomponents.dependentLocality).to.equal("77");
 		expect(ccomponents.dependentLocalityName).to.equal("78");
@@ -245,6 +259,8 @@ describe("An International match candidate", function () {
 		expect(ccomponents.subBuildingNumber).to.equal("106");
 		expect(ccomponents.subBuildingName).to.equal("107");
 		expect(ccomponents.subBuilding).to.equal("108");
+		expect(ccomponents.levelType).to.equal("108.1");
+		expect(ccomponents.levelNumber).to.equal("108.2");
 		expect(ccomponents.postBox).to.equal("109");
 		expect(ccomponents.postBoxType).to.equal("110");
 		expect(ccomponents.postBoxNumber).to.equal("111");
