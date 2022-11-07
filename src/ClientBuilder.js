@@ -153,12 +153,12 @@ class ClientBuilder {
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
-		const httpSender = new HttpSender(this.maxTimeout, this.maxRetries, this.proxy, this.debug);
+		const httpSender = new HttpSender(this.maxTimeout, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);
 		const signingSender = new SigningSender(statusCodeSender, this.signer);
-		const retrySender = new RetrySender(this.maxRetries, signingSender, new Sleeper());
 		let agentSender = new AgentSender(signingSender);
 		if (this.maxRetries > 0) {
+			const retrySender = new RetrySender(this.maxRetries, signingSender, new Sleeper());
 			agentSender = new AgentSender(retrySender);
 		}
 		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);

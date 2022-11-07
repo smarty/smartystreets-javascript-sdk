@@ -4,7 +4,6 @@ class FakeSleeper {
 	}
 	sleep(ms) {
 		this.sleepDurations.push(ms);
-		// return new Promise(resolve => setTimeout(resolve, ms));
 	}
 }
 

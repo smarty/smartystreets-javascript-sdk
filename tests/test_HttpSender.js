@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const Request = require("../src/Request");
 const HttpSender = require("../src/HttpSender");
+const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
 
 describe ("An Axios implementation of a HTTP sender", function () {
 	it("adds a data payload to the HTTP request config.", function () {
@@ -71,7 +72,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		let mockResponse = {
 			status: 200
 		};
-		let smartyResponse = sender.buildSmartyResponse(mockResponse);
+		let smartyResponse = buildSmartyResponse(mockResponse);
 
 		expect(smartyResponse.hasOwnProperty("statusCode")).to.equal(true);
 		expect(smartyResponse.statusCode).to.equal(200);
@@ -84,7 +85,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 			status: 200,
 			data: mockData
 		};
-		let smartyResponse = sender.buildSmartyResponse(mockResponse);
+		let smartyResponse = buildSmartyResponse(mockResponse);
 
 		expect(smartyResponse.hasOwnProperty("payload")).to.equal(true);
 		expect(smartyResponse.payload).to.equal(mockData);
