@@ -9,7 +9,7 @@ class RetrySender {
 	}
 
 	async send(request) {
-		let response = this.inner.send(request);
+		let response = await this.inner.send(request);
 
 		for (let i = 0; i < this.maxRetries; i++) {
 
@@ -19,16 +19,15 @@ class RetrySender {
 
 			if (parseInt(response.statusCode) === this.statusTooManyRequests) {
 				let secondsToBackoff = 10;
-				if(response.headers) {
-					if (Number.isInteger(response.headers["Retry-After"])) {
-						secondsToBackoff = response.headers["Retry-After"];
-					}
+				const retryAfterHeader = response?.headers?.["Retry-After"];
+				if (Number.isInteger(retryAfterHeader)) {
+					secondsToBackoff = retryAfterHeader;
 				}
-				await this.rateLimitBackOff(secondsToBackoff)
+				await this.rateLimitBackOff(secondsToBackoff);
 			} else {
-				await this.backoff(i)
+				await this.backoff(i);
 			}
-			response = this.inner.send(request);
+			response = await this.inner.send(request);
 		}
 
 		return response;
