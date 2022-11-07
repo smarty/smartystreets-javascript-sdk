@@ -1,7 +1,7 @@
 class Sleeper {
 	constructor () {}
-	sleep(ms) {
-		return new Promise(resolve => setTimeout(resolve, ms));
+	sleep(seconds) {
+		return new Promise(resolve => setTimeout(resolve, seconds*1000));
 	}
 }
 

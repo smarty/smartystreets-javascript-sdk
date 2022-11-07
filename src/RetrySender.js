@@ -19,9 +19,11 @@ class RetrySender {
 
 			if (parseInt(response.statusCode) === this.statusTooManyRequests) {
 				let secondsToBackoff = 10;
-				const retryAfterHeader = response?.headers?.["Retry-After"];
-				if (Number.isInteger(retryAfterHeader)) {
-					secondsToBackoff = retryAfterHeader;
+				if (response.headers) {
+					const retryAfterHeader = response.headers["Retry-After"];
+					if (Number.isInteger(retryAfterHeader)) {
+						secondsToBackoff = retryAfterHeader;
+					}
 				}
 				await this.rateLimitBackOff(secondsToBackoff);
 			} else {
