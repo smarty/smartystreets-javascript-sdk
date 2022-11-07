@@ -1,4 +1,4 @@
-class FakeSleeper {
+class MockSleeper {
 	constructor() {
 		this.sleepDurations = [];
 	}
@@ -7,4 +7,4 @@ class FakeSleeper {
 	}
 }
 
-module.exports = FakeSleeper;
+module.exports = MockSleeper;
