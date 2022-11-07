@@ -8,6 +8,8 @@ const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
 const BadCredentialsError = require("./Errors").BadCredentialsError;
+const RetrySender = require("./RetrySender.js");
+const Sleeper = require("./util/Sleeper.js");
 
 //TODO: refactor this to work more cleanly with a bundler.
 const UsStreetClient = require("./us_street/Client");
@@ -151,10 +153,14 @@ class ClientBuilder {
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
-		const httpSender = new HttpSender(this.maxTimeout, this.maxRetries, this.proxy, this.debug);
+		const httpSender = new HttpSender(this.maxTimeout, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);
 		const signingSender = new SigningSender(statusCodeSender, this.signer);
-		const agentSender = new AgentSender(signingSender);
+		let agentSender = new AgentSender(signingSender);
+		if (this.maxRetries > 0) {
+			const retrySender = new RetrySender(this.maxRetries, signingSender, new Sleeper());
+			agentSender = new AgentSender(retrySender);
+		}
 		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);

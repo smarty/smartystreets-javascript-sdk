@@ -1,12 +1,9 @@
 const Response = require("./Response");
 const Axios = require("axios");
-const axiosRetry = require("axios-retry");
+const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
 
 class HttpSender {
-	constructor(timeout = 10000, retries = 5, proxyConfig, debug = false) {
-		axiosRetry(Axios, {
-			retries: retries,
-		});
+	constructor(timeout = 10000, proxyConfig, debug = false) {
 		this.timeout = timeout;
 		this.proxyConfig = proxyConfig;
 		if (debug) this.enableDebug();
@@ -33,24 +30,19 @@ class HttpSender {
 		return config;
 	}
 
-	buildSmartyResponse(response, error) {
-		if (response) return new Response(response.status, response.data);
-		return new Response(undefined, undefined, error)
-	}
-
 	send(request) {
 		return new Promise((resolve, reject) => {
 			let requestConfig = this.buildRequestConfig(request);
 
 			Axios(requestConfig)
 				.then(response => {
-					let smartyResponse = this.buildSmartyResponse(response);
+					let smartyResponse = buildSmartyResponse(response);
 
 					if (smartyResponse.statusCode >= 400) reject(smartyResponse);
 
 					resolve(smartyResponse);
 				})
-				.catch(error => reject(this.buildSmartyResponse(undefined, error)));
+				.catch(error => reject(buildSmartyResponse(undefined, error)));
 		});
 	}
 
