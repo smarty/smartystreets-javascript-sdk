@@ -25,6 +25,8 @@ class Candidate {
 			this.components.countryIso3 = responseData.components.country_iso_3;
 			this.components.superAdministrativeArea = responseData.components.super_administrative_area;
 			this.components.administrativeArea = responseData.components.administrative_area;
+			this.components.administrativeAreaShort = responseData.components.administrative_area_short;
+			this.components.administrativeAreaLong = responseData.components.administrative_area_long;
 			this.components.subAdministrativeArea = responseData.components.sub_administrative_area;
 			this.components.dependentLocality = responseData.components.dependent_locality;
 			this.components.dependentLocalityName = responseData.components.dependent_locality_name;
@@ -58,6 +60,8 @@ class Candidate {
 			this.components.subBuildingNumber = responseData.components.sub_building_number;
 			this.components.subBuildingName = responseData.components.sub_building_name;
 			this.components.subBuilding = responseData.components.sub_building;
+			this.components.levelType = responseData.components.level_type;
+			this.components.levelNumber = responseData.components.level_number;
 			this.components.postBox = responseData.components.post_box;
 			this.components.postBoxType = responseData.components.post_box_type;
 			this.components.postBoxNumber = responseData.components.post_box_number;
@@ -90,6 +94,8 @@ class Candidate {
 					this.analysis.changes.components.countryIso3 = responseData.analysis.changes.components.country_iso_3;
 					this.analysis.changes.components.superAdministrativeArea = responseData.analysis.changes.components.super_administrative_area;
 					this.analysis.changes.components.administrativeArea = responseData.analysis.changes.components.administrative_area;
+					this.analysis.changes.components.administrativeAreaShort = responseData.analysis.changes.components.administrative_area_short;
+					this.analysis.changes.components.administrativeAreaLong = responseData.analysis.changes.components.administrative_area_long;
 					this.analysis.changes.components.subAdministrativeArea = responseData.analysis.changes.components.sub_administrative_area;
 					this.analysis.changes.components.dependentLocality = responseData.analysis.changes.components.dependent_locality;
 					this.analysis.changes.components.dependentLocalityName = responseData.analysis.changes.components.dependent_locality_name;
@@ -123,6 +129,8 @@ class Candidate {
 					this.analysis.changes.components.subBuildingNumber = responseData.analysis.changes.components.sub_building_number;
 					this.analysis.changes.components.subBuildingName = responseData.analysis.changes.components.sub_building_name;
 					this.analysis.changes.components.subBuilding = responseData.analysis.changes.components.sub_building;
+					this.analysis.changes.components.levelType = responseData.analysis.changes.components.level_type;
+					this.analysis.changes.components.levelNumber = responseData.analysis.changes.components.level_number;
 					this.analysis.changes.components.postBox = responseData.analysis.changes.components.post_box;
 					this.analysis.changes.components.postBoxType = responseData.analysis.changes.components.post_box_type;
 					this.analysis.changes.components.postBoxNumber = responseData.analysis.changes.components.post_box_number;
