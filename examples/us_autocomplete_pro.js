@@ -2,7 +2,12 @@ const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.usAutocompletePro.Lookup;
 
-// US Autocomplete Pro only supports using Embedded Keys
+// for Server-to-server requests, use this code:
+// let authId = process.env.SMARTY_AUTH_ID;
+// let authToken = process.env.SMARTY_AUTH_TOKEN;
+// const credentials = new SmartyCore.StaticCredentials(authId, authToken);
+
+// for client-side requests (browser/mobile), use this code:
 let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
