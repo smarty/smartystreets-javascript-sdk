@@ -23,35 +23,35 @@ describe("A status code sender", function () {
 		});
 	});
 
+	it("gives an error code that contains 400.", function () {
+		return expectedErrorForStatusCode(errors.fourHundredError, 400)
+	})
+
 	it("gives a Bad Credentials error on a 401.", function () {
-		return expectedErrorForStatusCode(errors.BadCredentialsError, 401);
+		return expectedErrorForStatusCode(errors.fourHundredError, 401);
 	});
 
 	it("gives a Payment Required error on a 402.", function () {
-		return expectedErrorForStatusCode(errors.PaymentRequiredError, 402);
+		return expectedErrorForStatusCode(errors.fourHundredError, 402);
 	});
 
 	it("gives a Request Entity Too Large error on a 413.", function () {
-		return expectedErrorForStatusCode(errors.RequestEntityTooLargeError, 413);
-	});
-
-	it("gives a Bad Request error on a 400.", function () {
-		return expectedErrorForStatusCode(errors.BadRequestError, 400);
+		return expectedErrorForStatusCode(errors.fourHundredError, 413);
 	});
 
 	it("gives an Unprocessable Entity error on a 422.", function () {
-		return expectedErrorForStatusCode(errors.UnprocessableEntityError, 422);
+		return expectedErrorForStatusCode(errors.fourHundredError, 422);
 	});
 
 	it("gives a Too Many Requests error on a 429.", function () {
-		return expectedErrorForStatusCode(errors.TooManyRequestsError, 429);
+		return expectedErrorForStatusCode(errors.fourHundredError, 429);
 	});
 
-	it("gives an Internal Server Error error on a 500.", function () {
+	it("gives an Internal Server Error on a 500.", function () {
 		return expectedErrorForStatusCode(errors.InternalServerError, 500);
 	});
 
-	it("gives an Service Unvailable error on a 503.", function () {
+	it("gives an Service Unavailable error on a 503.", function () {
 		return expectedErrorForStatusCode(errors.ServiceUnavailableError, 503);
 	});
 
@@ -65,7 +65,7 @@ function expectedErrorForStatusCode(expectedError, errorCode) {
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
-	return statusCodeSender.send(request).then(response => {
+	return statusCodeSender.send(request).then(() => {
 	}, error => {
 		expect(error.error).to.be.an.instanceOf(expectedError);
 	})

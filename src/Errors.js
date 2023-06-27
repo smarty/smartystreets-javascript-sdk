@@ -4,6 +4,12 @@ class SmartyError extends Error {
 	}
 }
 
+class fourHundredError extends SmartyError {
+	constructor(error) {
+		super(error);
+	}
+}
+
 class BatchFullError extends SmartyError {
 	constructor() {
 		super("A batch can contain a max of 100 lookups.");
@@ -88,5 +94,6 @@ module.exports = {
 	TooManyRequestsError: TooManyRequestsError,
 	InternalServerError: InternalServerError,
 	ServiceUnavailableError: ServiceUnavailableError,
-	GatewayTimeoutError: GatewayTimeoutError
+	GatewayTimeoutError: GatewayTimeoutError,
+	fourHundredError: fourHundredError
 };

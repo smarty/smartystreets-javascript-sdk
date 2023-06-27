@@ -11,30 +11,6 @@ class StatusCodeSender {
 				.then(resolve)
 				.catch(error => {
 					switch (error.statusCode) {
-						case 400:
-							error.error = new Errors.BadRequestError();
-							break;
-
-						case 401:
-							error.error = new Errors.BadCredentialsError();
-							break;
-
-						case 402:
-							error.error = new Errors.PaymentRequiredError();
-							break;
-
-						case 413:
-							error.error = new Errors.RequestEntityTooLargeError();
-							break;
-
-						case 422:
-							error.error = new Errors.UnprocessableEntityError("GET request lacked required fields.");
-							break;
-
-						case 429:
-							error.error = new Errors.TooManyRequestsError();
-							break;
-
 						case 500:
 							error.error = new Errors.InternalServerError();
 							break;
@@ -46,8 +22,10 @@ class StatusCodeSender {
 						case 504:
 							error.error = new Errors.GatewayTimeoutError();
 							break;
-					}
 
+						default:
+							error.error = new Errors.fourHundredError("gives an error code that contains 400.")
+					}
 					reject(error);
 				});
 		});
