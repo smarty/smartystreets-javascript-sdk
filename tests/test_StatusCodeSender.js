@@ -28,8 +28,8 @@ describe("A status code sender", function () {
 			errors: [
 				{message: "custom message"}
 			]
-		}
-		return expectedDefaultError(400, payload)
+		};
+		return expectedDefaultError(400, payload);
 	})
 
 	it("returns an error message if payload is undefined", function () {
