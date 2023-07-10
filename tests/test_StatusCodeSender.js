@@ -28,8 +28,8 @@ describe("A status code sender", function () {
 			errors: [
 				{message: "custom message"}
 			]
-		}
-		return expectedDefaultError(400, payload)
+		};
+		return expectedDefaultError(400, payload);
 	})
 
 	it("gives an Internal Server Error on a 500.", function () {
