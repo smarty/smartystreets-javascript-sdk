@@ -23,13 +23,22 @@ describe("A status code sender", function () {
 		});
 	});
 
-	it("gives the message from the body as ", function () {
+	it("gives a custom message for 400", function () {
 		const payload = {
 			errors: [
 				{message: "custom message"}
 			]
 		}
 		return expectedDefaultError(400, payload)
+	})
+
+	it("returns an error message if payload is undefined", function () {
+		const payload = {
+			errors: [
+				{message: "unexpected error"}
+			]
+		}
+		return expectedDefaultError(undefined, payload)
 	})
 
 	it("gives an Internal Server Error on a 500.", function () {
