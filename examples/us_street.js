@@ -1,4 +1,4 @@
-const SmartySDK = require("../index.js");
+const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.usStreet.Lookup;
 
@@ -9,12 +9,12 @@ const Lookup = SmartySDK.usStreet.Lookup;
 
 // for client-side requests (browser/mobile), use this code:
 let key = process.env.SMARTY_EMBEDDED_KEY;
-const credentials = new SmartyCore.SharedCredentials("");
+const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-let clientBuilder = new SmartyCore.ClientBuilder(credentials);
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withBaseUrl("YOUR URL").withLicenses(["us-rooftop-geocoding-cloud"]);
 let client = clientBuilder.buildUsStreetApiClient();
 
 // Documentation for input fields can be found at:
@@ -48,10 +48,10 @@ lookup3.maxCandidates = 1;
 // NOTE: batches are not supported when using SharedCredentials.
 let batch = new SmartyCore.Batch();
 batch.add(lookup1);
-// batch.add(lookup2);
-// batch.add(lookup3);
+batch.add(lookup2);
+batch.add(lookup3);
 
-(async () => handleResponse(batch))()
+await handleResponse(batch);
 
 function handleSuccess(response) {
 	response.lookups.map(lookup => console.log(lookup.result));
