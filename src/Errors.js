@@ -4,9 +4,9 @@ class SmartyError extends Error {
 	}
 }
 
-class fourHundredError extends SmartyError {
-	constructor(error) {
-		super(error);
+class DefaultError extends SmartyError {
+	constructor(message) {
+		super(message);
 	}
 }
 
@@ -95,5 +95,5 @@ module.exports = {
 	InternalServerError: InternalServerError,
 	ServiceUnavailableError: ServiceUnavailableError,
 	GatewayTimeoutError: GatewayTimeoutError,
-	fourHundredError: fourHundredError
+	DefaultError: DefaultError
 };

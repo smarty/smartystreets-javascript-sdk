@@ -23,29 +23,14 @@ describe("A status code sender", function () {
 		});
 	});
 
-	it("gives an error code that contains 400.", function () {
-		return expectedErrorForStatusCode(errors.fourHundredError, 400)
+	it("gives the message from the body as ", function () {
+		const payload = {
+			errors: [
+				{message: "custom message"}
+			]
+		}
+		return expectedDefaultError(400, payload)
 	})
-
-	it("gives a Bad Credentials error on a 401.", function () {
-		return expectedErrorForStatusCode(errors.fourHundredError, 401);
-	});
-
-	it("gives a Payment Required error on a 402.", function () {
-		return expectedErrorForStatusCode(errors.fourHundredError, 402);
-	});
-
-	it("gives a Request Entity Too Large error on a 413.", function () {
-		return expectedErrorForStatusCode(errors.fourHundredError, 413);
-	});
-
-	it("gives an Unprocessable Entity error on a 422.", function () {
-		return expectedErrorForStatusCode(errors.fourHundredError, 422);
-	});
-
-	it("gives a Too Many Requests error on a 429.", function () {
-		return expectedErrorForStatusCode(errors.fourHundredError, 429);
-	});
 
 	it("gives an Internal Server Error on a 500.", function () {
 		return expectedErrorForStatusCode(errors.InternalServerError, 500);
@@ -60,8 +45,21 @@ describe("A status code sender", function () {
 	});
 });
 
-function expectedErrorForStatusCode(expectedError, errorCode) {
-	let mockSender = generateMockSender(errorCode);
+const expectedDefaultError = (errorCode, payload) => {
+	let mockSender = generateMockSender(errorCode, payload);
+	let statusCodeSender = new StatusCodeSender(mockSender);
+	let request = new Request();
+
+	return statusCodeSender.send(request).then(() => {
+	}, error => {
+		console.log(error.error)
+		expect(error.error).to.be.an.instanceOf(errors.DefaultError);
+		expect(error.error.message).to.be.equal(payload.errors[0].message);
+	})
+}
+
+function expectedErrorForStatusCode(expectedError, errorCode, payload) {
+	let mockSender = generateMockSender(errorCode, payload);
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
@@ -71,11 +69,11 @@ function expectedErrorForStatusCode(expectedError, errorCode) {
 	})
 }
 
-function generateMockSender(errorCode) {
+function generateMockSender(errorCode, payload) {
 	return {
 		send: () => {
 			return new Promise((resolve, reject) => {
-				reject(new Response(errorCode))
+				reject(new Response(errorCode, payload))
 			});
 		}
 	};

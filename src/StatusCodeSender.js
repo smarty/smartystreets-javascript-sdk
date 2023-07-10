@@ -24,7 +24,7 @@ class StatusCodeSender {
 							break;
 
 						default:
-							error.error = new Errors.fourHundredError("gives an error code that contains 400.")
+							error.error = new Errors.DefaultError(error.payload.errors[0].message)
 					}
 					reject(error);
 				});
