@@ -23,8 +23,8 @@ class StatusCodeSender {
 							error.error = new Errors.GatewayTimeoutError();
 							break;
 
-					default:
-							error.error = new Errors.DefaultError(error && error.payload && error.payload.errors[0] && error.payload.errors[0].message)
+						default:
+								error.error = new Errors.DefaultError(error && error.payload && error.payload.errors[0] && error.payload.errors[0].message)
 					}
 					reject(error);
 				});

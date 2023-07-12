@@ -5,7 +5,7 @@ class SmartyError extends Error {
 }
 
 class DefaultError extends SmartyError {
-	constructor(message) {
+	constructor(message = "unexpected error") {
 		super(message);
 	}
 }

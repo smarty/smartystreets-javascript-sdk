@@ -26,19 +26,14 @@ describe("A status code sender", function () {
 	it("gives a custom message for 400", function () {
 		const payload = {
 			errors: [
-				{message: "custom message"}
+				{message: "unexpected error"}
 			]
 		};
-		return expectedDefaultError(400, payload);
+		return expectedDefaultError(400, payload.errors[0].message);
 	})
 
 	it("returns an error message if payload is undefined", function () {
-		const payload = {
-			errors: [
-				{message: "unexpected error"}
-			]
-		}
-		return expectedDefaultError(undefined, payload)
+		return expectedDefaultError(undefined, "unexpected error")
 	})
 
 	it("gives an Internal Server Error on a 500.", function () {
@@ -54,21 +49,20 @@ describe("A status code sender", function () {
 	});
 });
 
-const expectedDefaultError = (errorCode, payload) => {
-	let mockSender = generateMockSender(errorCode, payload);
+const expectedDefaultError = (errorCode, errorMessage) => {
+	let mockSender = generateMockSender(errorCode);
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
 	return statusCodeSender.send(request).then(() => {
 	}, error => {
-		console.log(error.error)
 		expect(error.error).to.be.an.instanceOf(errors.DefaultError);
-		expect(error.error.message).to.be.equal(payload.errors[0].message);
+		expect(error.error.message).to.be.equal(errorMessage);
 	})
 }
 
-function expectedErrorForStatusCode(expectedError, errorCode, payload) {
-	let mockSender = generateMockSender(errorCode, payload);
+function expectedErrorForStatusCode(expectedError, errorCode) {
+	let mockSender = generateMockSender(errorCode);
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
@@ -78,11 +72,11 @@ function expectedErrorForStatusCode(expectedError, errorCode, payload) {
 	})
 }
 
-function generateMockSender(errorCode, payload) {
+function generateMockSender(errorCode) {
 	return {
 		send: () => {
 			return new Promise((resolve, reject) => {
-				reject(new Response(errorCode, payload))
+				reject(new Response(errorCode))
 			});
 		}
 	};
