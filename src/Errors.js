@@ -5,9 +5,10 @@ class SmartyError extends Error {
 }
 
 class DefaultError extends SmartyError {
-	constructor(message = "unexpected error") {
+	constructor(message) {
 		super(message);
 	}
+
 }
 
 class BatchFullError extends SmartyError {
