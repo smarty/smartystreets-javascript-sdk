@@ -1,7 +1,14 @@
 class SmartyError extends Error {
+	constructor(message = "unexpected error") {
+		super(message);
+	}
+}
+
+class DefaultError extends SmartyError {
 	constructor(message) {
 		super(message);
 	}
+
 }
 
 class BatchFullError extends SmartyError {
@@ -88,5 +95,6 @@ module.exports = {
 	TooManyRequestsError: TooManyRequestsError,
 	InternalServerError: InternalServerError,
 	ServiceUnavailableError: ServiceUnavailableError,
-	GatewayTimeoutError: GatewayTimeoutError
+	GatewayTimeoutError: GatewayTimeoutError,
+	DefaultError: DefaultError
 };
