@@ -14,6 +14,7 @@ class Candidate {
 		this.deliveryLine2 = responseData.delivery_line_2;
 		this.lastLine = responseData.last_line;
 		this.deliveryPointBarcode = responseData.delivery_point_barcode;
+		this.smartyKey = responseData.smarty_key;
 
 		this.components = {};
 		if (responseData.components !== undefined) {
