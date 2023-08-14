@@ -6,9 +6,10 @@ const Response = require("./Response");
  *     @see "https://www.smarty.com/docs/cloud/us-street-api#input-fields"
  */
 class Lookup {
-	constructor(latitude, longitude) {
+	constructor(latitude, longitude, source="") {
 		this.latitude = latitude.toFixed(8);
 		this.longitude = longitude.toFixed(8);
+		this.source = source;
 		this.response = new Response();
 	}
 }

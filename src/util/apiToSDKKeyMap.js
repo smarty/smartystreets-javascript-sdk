@@ -34,5 +34,6 @@ module.exports = {
 	usReverseGeo: {
 		"latitude": "latitude",
 		"longitude": "longitude",
+		"source": "source"
 	}
 };
