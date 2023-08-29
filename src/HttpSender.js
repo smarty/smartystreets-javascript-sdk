@@ -34,15 +34,43 @@ class HttpSender {
 		return new Promise((resolve, reject) => {
 			let requestConfig = this.buildRequestConfig(request);
 
-			this.axiosInstance(requestConfig)
-				.then(response => {
-					let smartyResponse = buildSmartyResponse(response);
+			this.logRequestIfDebugIsEnabled(requestConfig);
 
-					if (smartyResponse.statusCode >= 400) reject(smartyResponse);
+			try{
+				function buildUrl(requestConfig) {
+					let queryParams = requestConfig.params;
+					let queryString = Object.keys(queryParams)
+					.map(function(key) {
+						return key + '=' + encodeURIComponent(queryParams[key]);
+					})
+					.join('&');
+	
+					return requestConfig.baseURL + '?' + queryString;
+				}
 
-					resolve(smartyResponse);
-				})
-				.catch(error => reject(buildSmartyResponse(undefined, error)));
+				let options = {method: requestConfig.method, contentType: requestConfig.headers.contentType}
+
+				if(requestConfig.data !== undefined){
+					options.payload = JSON.stringify(requestConfig.data);
+				}
+				let r = UrlFetchApp.fetch(buildUrl(requestConfig), options);
+				let response = {headers: r.getHeaders(), status: r.getResponseCode()}
+				if(response.status === 200){
+					let data = JSON.parse(r.getContentText());
+					response.data = data;
+				} else {
+					let data = JSON.parse(r.getContentText());
+					response.error = {code: r.getResponseCode(), message: data.message};
+				}
+				let smartyResponse = buildSmartyResponse(response);
+
+				if (smartyResponse.statusCode >= 400) reject(smartyResponse);
+
+				resolve(smartyResponse)
+
+			} catch (e) {
+				reject(buildSmartyResponse(undefined, error))
+			}
 		});
 	}
 
