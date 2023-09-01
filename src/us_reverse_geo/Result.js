@@ -14,6 +14,7 @@ class Result {
 			this.address.city = responseData.address.city;
 			this.address.state_abbreviation = responseData.address.state_abbreviation;
 			this.address.zipcode = responseData.address.zipcode;
+			this.address.source = responseData.address.source
 		}
 
 		this.coordinate = {};

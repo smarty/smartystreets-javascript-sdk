@@ -30,14 +30,15 @@ describe("A US Reverse Geo client", function () {
 						"street": "2335 S State St",
 						"city": "Provo",
 						"state_abbreviation": "UT",
-						"zipcode": "84606"
+						"zipcode": "84606",
+						"source": "postal"
 					}
 				},
 			]
 		};
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
-		let lookup = new Lookup(44.888888888, -111.111111111);
+		let lookup = new Lookup(44.888888888, -111.111111111, "postal");
 
 		return client.send(lookup).then(() => {
 			expect(lookup.response).to.deep.equal(expectedMockPayload);
