@@ -9,6 +9,10 @@ class Suggestion {
 		this.state = responseData.state;
 		this.zipcode = responseData.zipcode;
 		this.entries = responseData.entries;
+
+		if (responseData.source) {
+			this.source = responseData.source;
+		}
 	}
 }
 

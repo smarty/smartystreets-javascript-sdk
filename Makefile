@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-VERSION           := $(shell tagit -p --dry-run)
+VERSION           := $(shell tagit -m --dry-run)
 VERSION_FILE1     := package.json
 VERSION_FILE2     := package-lock.json
 
@@ -11,7 +11,7 @@ node_modules:
 	npm install
 
 publish: test version upload unversion
-	tagit -p
+	tagit -m
 	git push origin --tags
 
 upload:
