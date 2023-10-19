@@ -15,9 +15,9 @@ class Lookup {
 		this.addressee = addressee;
 		this.urbanization = urbanization;
 		this.match = match;
-		this.format = format;
 		this.maxCandidates = maxCandidates;
 		this.inputId = inputId;
+		this.format = format;
 		this.result = [];
 	}
 }
