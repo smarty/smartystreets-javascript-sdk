@@ -29,7 +29,8 @@ const US_EXTRACT_API_URL = "https://us-extract.api.smarty.com/";
 const US_STREET_API_URL = "https://us-street.api.smarty.com/street-address";
 const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smarty.com/lookup";
 const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smarty.com/lookup";
-const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smarty.com/lookup";
+const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smarty.com/v2/lookup";
+const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL_DEPRECATED = "https://international-autocomplete.api.smarty.com/lookup";
 
 /**
  * The ClientBuilder class helps you build a client object for one of the supported Smarty APIs.<br>
@@ -210,7 +211,7 @@ class ClientBuilder {
 	}
 
 	buildInternationalAddressAutocompleteClientDeprecated() {
-		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClientDeprecated);
+		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL_DEPRECATED, InternationalAddressAutocompleteClientDeprecated);
 	}
 }
 
