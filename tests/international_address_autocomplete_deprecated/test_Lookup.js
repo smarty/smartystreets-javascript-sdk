@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const Lookup = require("../../src/international_address_autocomplete/Lookup");
+const Lookup = require("../../src/international_address_autocomplete_deprecated/Lookup");
 
 describe("An International Address Autocomplete lookup", function () {
 	it("Can be newed up with a prefix", function () {

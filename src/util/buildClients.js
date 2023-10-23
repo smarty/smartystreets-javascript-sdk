@@ -36,6 +36,10 @@ function buildInternationalAddressAutocompleteApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildInternationalAddressAutocompleteClient();
 }
 
+function buildInternationalAddressAutocompleteApiClientDeprecated(credentials) {
+	return instantiateClientBuilder(credentials).buildInternationalAddressAutocompleteClientDeprecated();
+}
+
 module.exports = {
 	usStreet: buildUsStreetApiClient,
 	usAutocomplete: buildUsAutocompleteApiClient,
@@ -45,4 +49,5 @@ module.exports = {
 	internationalStreet: buildInternationalStreetApiClient,
 	usReverseGeo: buildUsReverseGeoApiClient,
 	internationalAddressAutocomplete: buildInternationalAddressAutocompleteApiClient,
+	internationalAddressAutocompleteDeprecated: buildInternationalAddressAutocompleteApiClientDeprecated,
 };

@@ -1,6 +1,6 @@
 const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
-const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
+const Lookup = SmartySDK.internationalAddressAutocompleteDeprecated.Lookup;
 
 // US Autocomplete Pro only supports using Embedded Keys
 let key = process.env.SMARTY_EMBEDDED_KEY;

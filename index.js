@@ -38,4 +38,8 @@ module.exports = {
 		Lookup: require("./src/international_address_autocomplete/Lookup"),
 		Suggestion: require("./src/international_address_autocomplete/Suggestion"),
 	},
+	internationalAddressAutocompleteDeprecated: {
+		Lookup: require("./src/international_address_autocomplete_deprecated/Lookup"),
+		Suggestion: require("./src/international_address_autocomplete_deprecated/Suggestion"),
+	},
 };

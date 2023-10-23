@@ -20,6 +20,7 @@ const UsExtractClient = require("./us_extract/Client");
 const InternationalStreetClient = require("./international_street/Client");
 const UsReverseGeoClient = require("./us_reverse_geo/Client");
 const InternationalAddressAutocompleteClient = require("./international_address_autocomplete/Client");
+const InternationalAddressAutocompleteClientDeprecated = require("./international_address_autocomplete_deprecated/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smarty.com/suggest";
@@ -206,6 +207,10 @@ class ClientBuilder {
 
 	buildInternationalAddressAutocompleteClient() {
 		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClient);
+	}
+
+	buildInternationalAddressAutocompleteClientDeprecated() {
+		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClientDeprecated);
 	}
 }
 
