@@ -15,13 +15,10 @@ class Client {
 			search: lookup.search,
 			country: lookup.country,
 			max_results: lookup.max_results,
+			include_only_administrative_area: lookup.include_only_administrative_area,
 			include_only_locality: lookup.include_only_locality,
 			include_only_postal_code: lookup.include_only_postal_code,
 		};
-
-		if (lookup.address_id) {
-			request.addressId = "/" + lookup.address_id;
-		}
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
