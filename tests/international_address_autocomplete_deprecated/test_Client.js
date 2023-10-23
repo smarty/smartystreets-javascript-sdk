@@ -7,7 +7,7 @@ const errors = require("../../src/Errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
 
-describe("An International Address Autocomplete Client", function () {
+describe("An International Address Autocomplete Client (Deprecated)", function () {
 	it("correctly builds parameter", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
