@@ -24,7 +24,7 @@ lookup = new Lookup("Ave", "CAN");
 
 lookup.maxResults = 10;
 // lookup.include_only_administrative_area = "";
-lookup.include_only_locality = "Sherwood Park";
+lookup.includeOnlyLocality = "Sherwood Park";
 // lookup.include_only_postal_code = "";
 
 await handleRequest(lookup, "Using Filter and Prefer");

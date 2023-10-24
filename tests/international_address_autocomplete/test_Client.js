@@ -12,14 +12,13 @@ describe("An International Address Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
-		let lookup = new Lookup(search);
+		let lookup = new Lookup({search});
 		let expectedParameters = {
-			search: search,
-			max_results: undefined,
-			include_only_administrative_area: "",
-			include_only_locality: "",
-			include_only_postal_code: "",
-			country: "United States",
+			country: undefined,
+			include_only_locality: undefined,
+			include_only_postal_code: undefined,
+			max_results: 5,
+			search: "(",
 		};
 
 		client.send(lookup);
@@ -30,15 +29,14 @@ describe("An International Address Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
-		let lookup = new Lookup(search);
+		let lookup = new Lookup({search});
 		lookup.search = search;
 		lookup.country = "Russia";
 		let expectedParameters = {
 			country: "Russia",
-			max_results: undefined,
-			include_only_administrative_area: "",
-			include_only_locality: "",
-			include_only_postal_code: "",
+			max_results: 5,
+			include_only_locality: undefined,
+			include_only_postal_code: undefined,
 			search: search,
 		};
 
@@ -50,15 +48,14 @@ describe("An International Address Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
-		let lookup = new Lookup(search);
+		let lookup = new Lookup({search});
 		lookup.search = search;
-		lookup.max_results = 10;
+		lookup.maxResults = 10;
 		let expectedParameters = {
-			country: "United States",
+			country: undefined,
 			max_results: 10,
-			include_only_administrative_area: "",
-			include_only_locality: "",
-			include_only_postal_code: "",
+			include_only_locality: undefined,
+			include_only_postal_code: undefined,
 			search: search,
 		};
 
@@ -87,7 +84,7 @@ describe("An International Address Autocomplete Client", function () {
 
 		let mockSender = new MockSenderWithResponse(responseData);
 		let client = new Client(mockSender);
-		let lookup = new Lookup("f");
+		let lookup = new Lookup({search: "f"});
 		let expectedSuggestion = new Suggestion(responseData.candidates[0]);
 
 		return client.send(lookup).then(() => {
