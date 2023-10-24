@@ -9,30 +9,34 @@ describe("An International Address Autocomplete lookup", function () {
 		expect(lookup.search).to.equal(expectedPrefix);
 	});
 
-	it("Default max results parameter should be 5", function () {
-		let lookup = new Lookup({search: "z"});
-		expect(lookup.maxResults).to.equal(5);
+	it("Set address ID", function () {
+		const addressId = "111";
+		let lookup = new Lookup({addressId});
+		expect(lookup.addressId).to.equal(addressId);
 	});
 
-	it("Manually set lookup to be another country", function () {
+	it("Set country", function () {
 		const country = "Russia";
-		const expectedPrefix = "z";
-		let lookup = new Lookup({search: expectedPrefix, country});
+		let lookup = new Lookup({country});
 		expect(lookup.country).to.equal(country);
 	});
 
-	it("Set include only locality param", function () {
-		const locality = "locality";
-		const expectedPrefix = "z";
-		let lookup = new Lookup({search: expectedPrefix, includeOnlyLocality: locality});
-		expect(lookup.includeOnlyLocality).to.equal(locality);
+	it("Set max results", function () {
+		const maxResults = 10000;
+		let lookup = new Lookup({maxResults});
+		expect(lookup.maxResults).to.equal(maxResults);
 	});
 
-	it("Set include only postal code param", function () {
-		const postalCode = "locality";
-		const expectedPrefix = "z";
-		let lookup = new Lookup({search: expectedPrefix, includeOnlyPostalCode: postalCode});
-		expect(lookup.includeOnlyPostalCode).to.equal(postalCode);
+	it("Set include only include locality param", function () {
+		const onlyIncludeLocality = "locality";
+		let lookup = new Lookup({includeOnlyLocality: onlyIncludeLocality});
+		expect(lookup.includeOnlyLocality).to.equal(onlyIncludeLocality);
+	});
+
+	it("Set include only include postal code param", function () {
+		const onlyIncludePostalCode = "post code";
+		let lookup = new Lookup({includeOnlyPostalCode: onlyIncludePostalCode});
+		expect(lookup.includeOnlyPostalCode).to.equal(onlyIncludePostalCode);
 	});
 
 	it("Checking defaults of params on instantiation ", function () {
