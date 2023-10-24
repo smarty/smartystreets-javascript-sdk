@@ -36,13 +36,15 @@ describe("An International Address Autocomplete lookup", function () {
 	});
 
 	it("Checking defaults of params on instantiation ", function () {
-		const defaultLookup = new Lookup({
+		const defaultLookup = {
+			result: [],
+			search: undefined,
+			addressId: undefined,
 			country: undefined,
+			maxResults: 5,
 			includeOnlyLocality: undefined,
 			includeOnlyPostalCode: undefined,
-			max_results: 5,
-			search: undefined,
-		});
+		};
 		let lookup = new Lookup();
 		expect(lookup).to.deep.equal(defaultLookup);
 	});

@@ -43,7 +43,15 @@ describe("An International Address Autocomplete lookup (Deprecated)", function (
 	});
 
 	it("Checking defaults of params on instantiation ", function () {
-		const defaultLookup = new Lookup("", "United States", undefined, "", "", "");
+		const defaultLookup = {
+			result: [],
+			search: "",
+			country: "United States",
+			max_results: undefined,
+			include_only_administrative_area: "",
+			include_only_locality: "",
+			include_only_postal_code: "",
+		};
 		let lookup = new Lookup();
 		expect(lookup).to.deep.equal(defaultLookup);
 	});
