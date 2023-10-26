@@ -10,6 +10,7 @@ module.exports = {
 		"addressee": "addressee",
 		"urbanization": "urbanization",
 		"match": "match",
+		"format": "format",
 		"candidates": "maxCandidates",
 	},
 	usZipcode: {
