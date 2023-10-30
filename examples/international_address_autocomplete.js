@@ -4,7 +4,8 @@ const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
 
 // US Autocomplete Pro only supports using Embedded Keys
 let key = process.env.SMARTY_EMBEDDED_KEY;
-const credentials = new SmartyCore.SharedCredentials(key);
+let hostname = process.env.SMARTY_HOSTNAME;
+const credentials = new SmartyCore.SharedCredentials(key, hostname);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
@@ -16,30 +17,34 @@ let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 // Documentation for input fields can be found at:
 //www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 
-let lookup = new Lookup("Ave", "CAN");
-await handleRequest(lookup, "Simple Request");
+let lookup = new Lookup({search: "Ave", country: "CAN"});
 
-// *** Using Filter and Prefer ***
-lookup = new Lookup("Ave", "CAN");
+console.log("Example request using the first result address_id in each subsequent request until results are refined to a single suggestion.");
+console.log("*".repeat(20) + "\n");
 
-lookup.maxResults = 10;
-// lookup.include_only_administrative_area = "";
-lookup.includeOnlyLocality = "Sherwood Park";
-// lookup.include_only_postal_code = "";
+console.log("Performing simple request...");
+lookup = await handleRequest(lookup);
+logSuggestions(lookup);
+lookup.address_id = lookup.result[0].addressId;
 
-await handleRequest(lookup, "Using Filter and Prefer");
+console.log("Performing new request with refined address_id");
+lookup = await handleRequest(lookup);
+logSuggestions(lookup);
+lookup.address_id = lookup.result[0].addressId;
 
+console.log("Performing new request with refined address_id");
+lookup = await handleRequest(lookup);
+console.log("final result refined to address data: ", lookup.result);
 
-function logSuggestions(response, message) {
-	console.log(message);
+function logSuggestions(response) {
 	console.log(response.result);
-	console.log("*********************");
+	console.log("*".repeat(20));
+	console.log("\nusing first result with address_id:", response.result[0].addressId, "for next lookup...")
 }
 
-async function handleRequest(lookup, lookupType) {
+async function handleRequest(lookup) {
 	try {
-		const results = await client.send(lookup);
-		logSuggestions(results, lookupType);
+		return await client.send(lookup);
 	} catch(err) {
 		console.log(err)
 	}
