@@ -4,7 +4,7 @@ const Lookup = require("../../src/us_street/Lookup");
 
 describe ("A US Street lookup", function () {
 	it ("correctly populates fields.", function () {
-		const lookup = new Lookup("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
+		const lookup = new Lookup("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
 
 		expect(lookup.street).to.equal("a");
 		expect(lookup.street2).to.equal("b");
@@ -18,6 +18,7 @@ describe ("A US Street lookup", function () {
 		expect(lookup.match).to.equal("j");
 		expect(lookup.maxCandidates).to.equal("k");
 		expect(lookup.inputId).to.equal("l");
+		expect(lookup.format).to.equal("m");
 	});
 
 	it ("has a result array.", function () {

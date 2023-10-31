@@ -4,7 +4,7 @@
  *     @see "https://www.smarty.com/docs/cloud/us-street-api#input-fields"
  */
 class Lookup {
-	constructor(street, street2, secondary, city, state, zipCode, lastLine, addressee, urbanization, match, maxCandidates, inputId) {
+	constructor(street, street2, secondary, city, state, zipCode, lastLine, addressee, urbanization, match, maxCandidates, inputId, format) {
 		this.street = street;
 		this.street2 = street2;
 		this.secondary = secondary;
@@ -17,6 +17,7 @@ class Lookup {
 		this.match = match;
 		this.maxCandidates = maxCandidates;
 		this.inputId = inputId;
+		this.format = format;
 		this.result = [];
 	}
 }
