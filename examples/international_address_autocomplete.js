@@ -19,27 +19,27 @@ let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 let lookup = new Lookup({search: "Louis", country: "FRA"});
 
-console.log("Example request using the first result address_id in each subsequent request until results are refined to a single suggestion.");
+console.log("Example request using the first result addressId in each subsequent request until results are refined to a single suggestion.");
 console.log("*".repeat(20) + "\n");
 
 console.log("Performing simple request...");
 lookup = await handleRequest(lookup);
 logSuggestions(lookup);
-lookup.address_id = lookup.result[0].addressId;
+lookup.addressId = lookup.result[0].addressId;
 
-console.log("Performing new request with refined address_id");
+console.log("Performing new request with refined addressId");
 lookup = await handleRequest(lookup);
 logSuggestions(lookup);
-lookup.address_id = lookup.result[0].addressId;
+lookup.addressId = lookup.result[0].addressId;
 
-console.log("Performing new request with refined address_id");
+console.log("Performing new request with refined addressId");
 lookup = await handleRequest(lookup);
 console.log("final result refined to address data: ", lookup.result);
 
 function logSuggestions(response) {
 	console.log(response.result);
 	console.log("*".repeat(20));
-	console.log("\nusing first result with address_id:", response.result[0].addressId, "for next lookup...")
+	console.log("\nusing first result with addressId:", response.result[0].addressId, "for next lookup...")
 }
 
 async function handleRequest(lookup) {

@@ -19,8 +19,8 @@ class Client {
 			include_only_postal_code: lookup.includeOnlyPostalCode,
 		};
 
-		if (lookup.address_id) {
-			request.urlParams = lookup.address_id;
+		if (lookup.addressId) {
+			request.urlParams = lookup.addressId;
 		}
 
 		return new Promise((resolve, reject) => {
