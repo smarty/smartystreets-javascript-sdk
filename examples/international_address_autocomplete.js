@@ -10,14 +10,14 @@ const credentials = new SmartyCore.SharedCredentials(key, hostname);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-cloud"])
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-v2-cloud"])
 // .withBaseUrl("");
 let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 // Documentation for input fields can be found at:
 //www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 
-let lookup = new Lookup({search: "Ave", country: "CAN"});
+let lookup = new Lookup({search: "Louis", country: "FRA"});
 
 console.log("Example request using the first result address_id in each subsequent request until results are refined to a single suggestion.");
 console.log("*".repeat(20) + "\n");
