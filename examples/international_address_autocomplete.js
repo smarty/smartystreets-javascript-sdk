@@ -1,11 +1,10 @@
-const SmartySDK = require("smartystreets-javascript-sdk");
+const SmartySDK = require("../index.js");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
 
 // US Autocomplete Pro only supports using Embedded Keys
 let key = process.env.SMARTY_EMBEDDED_KEY;
-let hostname = process.env.SMARTY_HOSTNAME;
-const credentials = new SmartyCore.SharedCredentials(key, hostname);
+const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
@@ -19,22 +18,25 @@ let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 let lookup = new Lookup({search: "Louis", country: "FRA"});
 
-console.log("Example request using the first result address_id in each subsequent request until results are refined to a single suggestion.");
-console.log("*".repeat(20) + "\n");
+(async () => {
+	console.log("Example request using the first result address_id in each subsequent request until results are refined to a single suggestion.");
+	console.log("*".repeat(20) + "\n");
 
-console.log("Performing simple request...");
-lookup = await handleRequest(lookup);
-logSuggestions(lookup);
-lookup.address_id = lookup.result[0].addressId;
+	console.log("Performing simple request...");
+	lookup = await handleRequest(lookup);
+	logSuggestions(lookup);
+	lookup.address_id = lookup.result[0].addressId;
 
-console.log("Performing new request with refined address_id");
-lookup = await handleRequest(lookup);
-logSuggestions(lookup);
-lookup.address_id = lookup.result[0].addressId;
+	console.log("Performing new request with refined address_id");
+	lookup = await handleRequest(lookup);
+	logSuggestions(lookup);
+	lookup.address_id = lookup.result[0].addressId;
 
-console.log("Performing new request with refined address_id");
-lookup = await handleRequest(lookup);
-console.log("final result refined to address data: ", lookup.result);
+	console.log("Performing new request with refined address_id");
+	lookup = await handleRequest(lookup);
+	console.log("final result refined to address data: ", lookup.result);
+})();
+
 
 function logSuggestions(response) {
 	console.log(response.result);
