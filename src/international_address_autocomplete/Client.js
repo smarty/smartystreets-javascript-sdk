@@ -20,7 +20,7 @@ class Client {
 		};
 
 		if (lookup.address_id) {
-			request.addressId = "/" + lookup.address_id;
+			request.addressId = lookup.address_id;
 		}
 
 		return new Promise((resolve, reject) => {

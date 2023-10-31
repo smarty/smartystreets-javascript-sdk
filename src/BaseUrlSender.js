@@ -6,7 +6,7 @@ class BaseUrlSender {
 
 	send(request) {
 		return new Promise((resolve, reject) => {
-			request.baseUrl = this.urlOverride + (request.addressId ?? "");
+			request.baseUrl = this.urlOverride + (request.addressId ? `/${request.addressId}` : "");
 
 			this.sender.send(request)
 				.then(resolve)
