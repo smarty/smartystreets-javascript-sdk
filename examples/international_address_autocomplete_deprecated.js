@@ -11,7 +11,7 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // https://www.smarty.com/docs/cloud/licensing
 let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-cloud"])
 // .withBaseUrl("");
-let client = clientBuilder.buildInternationalAddressAutocompleteClient();
+let client = clientBuilder.internationalAddressAutocompleteDeprecated();
 
 // Documentation for input fields can be found at:
 // www.smarty.com/docs/cloud/international-address-autocomplete-api-deprecated#pro-http-request-input-fields
