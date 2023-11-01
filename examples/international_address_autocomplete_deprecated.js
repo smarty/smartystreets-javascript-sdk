@@ -14,7 +14,7 @@ let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["int
 let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 // Documentation for input fields can be found at:
-//www.smarty.com/docs/cloud/international-address-autocomplete-api-deprecated#pro-http-request-input-fields
+// www.smarty.com/docs/cloud/international-address-autocomplete-api-deprecated#pro-http-request-input-fields
 
 let lookup = new Lookup("Ave", "CAN");
 await handleRequest(lookup, "Simple Request");

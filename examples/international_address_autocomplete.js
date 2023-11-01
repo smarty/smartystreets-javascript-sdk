@@ -14,7 +14,7 @@ const clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["i
 const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 // Documentation for input fields can be found at:
-//www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
+// www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 const country = "CAN";
 
 const summaryLookup = new Lookup({search: "123 Anson", country});
