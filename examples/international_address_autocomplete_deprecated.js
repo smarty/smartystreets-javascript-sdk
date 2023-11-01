@@ -2,7 +2,7 @@ const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.internationalAddressAutocompleteDeprecated.Lookup;
 
-// US Autocomplete Pro only supports using Embedded Keys
+// International Autocomplete only supports using Embedded Keys
 let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
@@ -14,7 +14,7 @@ let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["int
 let client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 // Documentation for input fields can be found at:
-//www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
+//www.smarty.com/docs/cloud/international-address-autocomplete-api-deprecated#pro-http-request-input-fields
 
 let lookup = new Lookup("Ave", "CAN");
 await handleRequest(lookup, "Simple Request");
