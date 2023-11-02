@@ -20,7 +20,7 @@ class Client {
 		};
 
 		if (lookup.addressId) {
-			request.urlParams = lookup.addressId;
+			request.baseUrlParams = lookup.addressId;
 		}
 
 		return new Promise((resolve, reject) => {
