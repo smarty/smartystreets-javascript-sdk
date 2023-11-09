@@ -1,7 +1,7 @@
 class Request {
 	constructor(payload) {
 		this.baseUrl = "";
-		this.baseUrlParams = "";
+		this.baseUrlParam = "";
 		this.payload = payload;
 		this.headers = {
 			"Content-Type": "application/json; charset=utf-8",
