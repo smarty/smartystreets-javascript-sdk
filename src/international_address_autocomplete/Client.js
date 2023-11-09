@@ -1,6 +1,8 @@
 const Errors = require("../Errors");
 const Request = require("../Request");
 const Suggestion = require("./Suggestion");
+const buildInputData = require("../util/buildInputData");
+const keyTranslationFormat = require("../util/apiToSDKKeyMap").internationalAddressAutocomplete;
 
 class Client {
 	constructor(sender) {
@@ -11,14 +13,7 @@ class Client {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
 		let request = new Request();
-		request.parameters = {
-			search: lookup.search,
-			country: lookup.country,
-			max_results: lookup.max_results,
-			include_only_administrative_area: lookup.include_only_administrative_area,
-			include_only_locality: lookup.include_only_locality,
-			include_only_postal_code: lookup.include_only_postal_code,
-		};
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
