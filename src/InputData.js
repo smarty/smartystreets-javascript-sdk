@@ -10,6 +10,7 @@ class InputData {
 
 	formatData(field) {
 		if (Array.isArray(field)) return field.join(";")
+		else return field;
 	}
 
 	lookupFieldIsPopulated(lookupField) {

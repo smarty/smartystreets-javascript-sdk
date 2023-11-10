@@ -15,18 +15,13 @@ describe("A US Autocomplete Pro Client", function () {
 		let lookup = new Lookup(search);
 		let expectedParameters = {
 			search: search,
-			selected: undefined,
-			max_results: undefined,
-			include_only_cities: undefined,
-			include_only_states: undefined,
-			include_only_zip_codes: undefined,
-			exclude_states: undefined,
-			prefer_cities: undefined,
-			prefer_states: undefined,
-			prefer_zip_codes: undefined,
-			prefer_ratio: undefined,
-			prefer_geolocation: undefined,
-			source: undefined,
+			include_only_cities: "",
+			include_only_states: "",
+			include_only_zip_codes: "",
+			exclude_states: "",
+			prefer_cities: "",
+			prefer_states: "",
+			prefer_zip_codes: "",
 		};
 
 		client.send(lookup);

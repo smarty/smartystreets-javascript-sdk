@@ -11,35 +11,18 @@ describe("An International Address Autocomplete Client", function () {
 	it("correctly builds parameter", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
-		let search = "(";
-		let lookup = new Lookup(search);
+		let lookup = new Lookup("a", "b");
+		lookup.maxResults = 10;
+		lookup.includeOnlyAdministrativeArea = "c";
+		lookup.includeOnlyLocality = "d";
+		lookup.includeOnlyPostalCode = "e";
 		let expectedParameters = {
-			search: search,
-			max_results: undefined,
-			include_only_administrative_area: "",
-			include_only_locality: "",
-			include_only_postal_code: "",
-			country: "United States",
-		};
-
-		client.send(lookup);
-		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
-	});
-
-	it("builds parameters for different country", function () {
-		let mockSender = new MockSender();
-		let client = new Client(mockSender);
-		let search = "(";
-		let lookup = new Lookup(search);
-		lookup.search = search;
-		lookup.country = "Russia";
-		let expectedParameters = {
-			country: "Russia",
-			max_results: undefined,
-			include_only_administrative_area: "",
-			include_only_locality: "",
-			include_only_postal_code: "",
-			search: search,
+			search: "a",
+			country: "b",
+			max_results: 10,
+			include_only_administrative_area: "c",
+			include_only_locality: "d",
+			include_only_postal_code: "e",
 		};
 
 		client.send(lookup);
@@ -52,13 +35,10 @@ describe("An International Address Autocomplete Client", function () {
 		let search = "(";
 		let lookup = new Lookup(search);
 		lookup.search = search;
-		lookup.max_results = 10;
+		lookup.maxResults = 10;
 		let expectedParameters = {
 			country: "United States",
 			max_results: 10,
-			include_only_administrative_area: "",
-			include_only_locality: "",
-			include_only_postal_code: "",
 			search: search,
 		};
 
