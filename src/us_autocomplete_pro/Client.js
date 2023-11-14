@@ -1,6 +1,8 @@
 const Errors = require("../Errors");
 const Request = require("../Request");
 const Suggestion = require("./Suggestion");
+const buildInputData = require("../util/buildInputData");
+const keyTranslationFormat = require("../util/apiToSDKKeyMap").usAutocompletePro;
 
 /**
  * This client sends lookups to the Smarty US Autocomplete Pro API, <br>
@@ -15,7 +17,7 @@ class Client {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
 		let request = new Request();
-		request.parameters = buildRequestParameters(lookup);
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
@@ -27,28 +29,6 @@ class Client {
 				})
 				.catch(reject);
 		});
-
-		function buildRequestParameters(lookup) {
-			return {
-				search: lookup.search,
-				selected: lookup.selected,
-				max_results: lookup.maxResults,
-				include_only_cities: joinFieldWith(lookup.includeOnlyCities, ";"),
-				include_only_states: joinFieldWith(lookup.includeOnlyStates, ";"),
-				include_only_zip_codes: joinFieldWith(lookup.includeOnlyZIPCodes, ";"),
-				exclude_states: joinFieldWith(lookup.excludeStates, ";"),
-				prefer_cities: joinFieldWith(lookup.preferCities, ";"),
-				prefer_states: joinFieldWith(lookup.preferStates, ";"),
-				prefer_zip_codes: joinFieldWith(lookup.preferZIPCodes, ";"),
-				prefer_ratio: lookup.preferRatio,
-				prefer_geolocation: lookup.preferGeolocation,
-				source: lookup.source,
-			};
-
-			function joinFieldWith(field, delimiter) {
-				if (field.length) return field.join(delimiter);
-			}
-		}
 
 		function buildSuggestionsFromResponse(payload) {
 			if (payload.suggestions === null) return [];

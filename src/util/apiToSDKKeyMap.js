@@ -13,6 +13,21 @@ module.exports = {
 		"format": "format",
 		"candidates": "maxCandidates",
 	},
+	usAutocompletePro: {
+		search: "search",
+		selected: "selected",
+		max_results: "maxResults",
+		include_only_cities: "includeOnlyCities",
+		include_only_states: "includeOnlyStates",
+		include_only_zip_codes: "includeOnlyZIPCodes",
+		exclude_states: "excludeStates",
+		prefer_cities: "preferCities",
+		prefer_states: "preferStates",
+		prefer_zip_codes: "preferZIPCodes",
+		prefer_ratio: "preferRatio",
+		prefer_geolocation: "preferGeolocation",
+		source: "source",
+	},
 	usZipcode: {
 		"city": "city",
 		"state": "state",
@@ -32,9 +47,23 @@ module.exports = {
 		"geocode": "geocode",
 		"language": "language",
 	},
+	internationalAddressAutocomplete: {
+		search: "search",
+		country: "country",
+		max_results: "maxResults",
+		include_only_administrative_area: "includeOnlyAdministrativeArea",
+		include_only_locality: "includeOnlyLocality",
+		include_only_postal_code: "includeOnlyPostalCode",
+	},
 	usReverseGeo: {
 		"latitude": "latitude",
 		"longitude": "longitude",
 		"source": "source"
+	},
+	usExtract: {
+		html: "html",
+		aggressive: "aggressive",
+		addr_line_breaks: "addressesHaveLineBreaks",
+		addr_per_line: "addressesPerLine",
 	}
 };
