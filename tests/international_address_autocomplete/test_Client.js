@@ -14,9 +14,6 @@ describe("An International Address Autocomplete Client", function () {
 		let search = "(";
 		let lookup = new Lookup({search});
 		let expectedParameters = {
-			country: undefined,
-			include_only_locality: undefined,
-			include_only_postal_code: undefined,
 			max_results: 5,
 			search: "(",
 		};
@@ -35,8 +32,6 @@ describe("An International Address Autocomplete Client", function () {
 		let expectedParameters = {
 			country: "Russia",
 			max_results: 5,
-			include_only_locality: undefined,
-			include_only_postal_code: undefined,
 			search: search,
 		};
 
@@ -52,10 +47,7 @@ describe("An International Address Autocomplete Client", function () {
 		lookup.search = search;
 		lookup.maxResults = 10;
 		let expectedParameters = {
-			country: undefined,
 			max_results: 10,
-			include_only_locality: undefined,
-			include_only_postal_code: undefined,
 			search: search,
 		};
 
