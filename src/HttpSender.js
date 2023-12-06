@@ -3,7 +3,7 @@ const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
 
 class HttpSender {
 	constructor(timeout = 10000, proxyConfig, debug = false) {
-		this.axiosInstance = Axios.create();
+		this.axiosInstance = Axios.default.create();
 		this.timeout = timeout;
 		this.proxyConfig = proxyConfig;
 		if (debug) this.enableDebug();
