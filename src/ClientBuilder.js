@@ -14,7 +14,6 @@ const Sleeper = require("./util/Sleeper.js");
 //TODO: refactor this to work more cleanly with a bundler.
 const UsStreetClient = require("./us_street/Client");
 const UsZipcodeClient = require("./us_zipcode/Client");
-const UsAutocompleteClient = require("./us_autocomplete/Client");
 const UsAutocompleteProClient = require("./us_autocomplete_pro/Client");
 const UsExtractClient = require("./us_extract/Client");
 const InternationalStreetClient = require("./international_street/Client");
@@ -22,7 +21,6 @@ const UsReverseGeoClient = require("./us_reverse_geo/Client");
 const InternationalAddressAutocompleteClient = require("./international_address_autocomplete/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
-const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smarty.com/suggest";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
 const US_EXTRACT_API_URL = "https://us-extract.api.smarty.com/";
 const US_STREET_API_URL = "https://us-street.api.smarty.com/street-address";
@@ -182,10 +180,6 @@ class ClientBuilder {
 
 	buildUsZipcodeClient() {
 		return this.buildClient(US_ZIP_CODE_API_URL, UsZipcodeClient);
-	}
-
-	buildUsAutocompleteClient() { // Deprecated
-		return this.buildClient(US_AUTOCOMPLETE_API_URL, UsAutocompleteClient);
 	}
 
 	buildUsAutocompleteProClient() {
