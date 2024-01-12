@@ -15,10 +15,6 @@ module.exports = {
 		Lookup: require("./src/us_zipcode/Lookup"),
 		Result: require("./src/us_zipcode/Result"),
 	},
-	usAutocomplete: {
-		Lookup: require("./src/us_autocomplete/Lookup"),
-		Suggestion: require("./src/us_autocomplete/Suggestion"),
-	},
 	usAutocompletePro: {
 		Lookup: require("./src/us_autocomplete_pro/Lookup"),
 		Suggestion: require("./src/us_autocomplete_pro/Suggestion"),
