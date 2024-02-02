@@ -16,7 +16,7 @@ describe("Extract example test", () => {
 
             const usExtractClient = clientBuilder.buildUsExtractClient();
 
-            const lookup = new SmartySDK.usExtract.Lookup("1115 W 1130 N, Orem, UT\n3393 Crestwood Dr., Salt Lake City, UT");
+            const lookup = new SmartySDK.usExtract.Lookup("1476 Sandhill Rd, Orem, UT\n417 W 1300 S, Orem, UT");
 
             lookup.addressesHaveLineBreaks = true;
             lookup.addressesPerLine = 1;
