@@ -16,7 +16,7 @@ class Client {
 	send(lookup) {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-		let request = new Request(lookup.text);
+		let request = new Request(lookup.text, {"Content-Type": "text/plain"});
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
