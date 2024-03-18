@@ -65,5 +65,11 @@ module.exports = {
 		aggressive: "aggressive",
 		addr_line_breaks: "addressesHaveLineBreaks",
 		addr_per_line: "addressesPerLine",
+	},
+	usEnrichment: {
+		include: "include",
+		exclude: "exclude",
+		dataset: "dataset",
+		data_subset: "dataSubset",
 	}
 };

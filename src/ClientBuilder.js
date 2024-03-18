@@ -19,6 +19,7 @@ const UsExtractClient = require("./us_extract/Client");
 const InternationalStreetClient = require("./international_street/Client");
 const UsReverseGeoClient = require("./us_reverse_geo/Client");
 const InternationalAddressAutocompleteClient = require("./international_address_autocomplete/Client");
+const UsEnrichmentClient = require("./us_enrichment/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
@@ -27,6 +28,7 @@ const US_STREET_API_URL = "https://us-street.api.smarty.com/street-address";
 const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smarty.com/lookup";
 const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smarty.com/lookup";
 const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smarty.com/v2/lookup";
+const US_ENRICHMENT_API_URL = "https://us-enrichment.api.smarty.com/lookup";
 
 /**
  * The ClientBuilder class helps you build a client object for one of the supported Smarty APIs.<br>
@@ -200,6 +202,10 @@ class ClientBuilder {
 
 	buildInternationalAddressAutocompleteClient() {
 		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClient);
+	}
+
+	buildUsEnrichmentClient() {
+		return this.buildClient(US_ENRICHMENT_API_URL, UsEnrichmentClient);
 	}
 }
 
