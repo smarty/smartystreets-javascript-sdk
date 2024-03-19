@@ -2,7 +2,6 @@ const Errors = require("../Errors");
 const Request = require("../Request");
 const buildInputData = require("../util/buildInputData");
 const {usEnrichment: keyTranslationFormat} = require("../util/apiToSDKKeyMap");
-const {Response, FinancialResponse, GeoResponse} = require("./Response.js");
 
 class Client {
     constructor(sender) {
