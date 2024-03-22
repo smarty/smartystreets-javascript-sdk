@@ -34,4 +34,8 @@ module.exports = {
 		Lookup: require("./src/international_address_autocomplete/Lookup"),
 		Suggestion: require("./src/international_address_autocomplete/Suggestion"),
 	},
+	usEnrichment: {
+		Lookup: require("./src/us_enrichment/Lookup"),
+		Response: require("./src/us_enrichment/Response"),
+	},
 };
