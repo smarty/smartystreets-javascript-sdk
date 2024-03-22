@@ -5,10 +5,9 @@ const Lookup = require("../../src/us_enrichment/Lookup");
 const errors = require("../../src/Errors");
 const MockSender = require("../fixtures/mock_senders").MockSender;
 const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
-const Attributes = require("../../src/us_enrichment/Response.js")
 const {Response, FinancialResponse, GeoResponse} = require("../../src/us_enrichment/Response");
 
-describe("A US Autocomplete Pro Client", function () {
+describe("A US Enrichment Client", function () {
     it("correctly builds parameters for a smartyKey only principal lookup.", function () {
         let mockSender = new MockSender();
         let client = new Client(mockSender);
