@@ -6,12 +6,14 @@ module.exports = {
 		let request = {
 			payload: undefined,
 			parameters: undefined,
+			baseUrlParam: undefined,
 		};
 		this.request = request;
 
 		this.send = function (clientRequest) {
 			request.payload = clientRequest.payload;
 			request.parameters = clientRequest.parameters;
+			request.baseUrlParam = clientRequest.baseUrlParam;
 		}
 	},
 	MockSenderWithResponse: function (expectedPayload, expectedError) {

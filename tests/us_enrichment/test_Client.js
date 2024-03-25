@@ -8,6 +8,39 @@ const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWit
 const {Response, FinancialResponse, GeoResponse} = require("../../src/us_enrichment/Response");
 
 describe("A US Enrichment Client", function () {
+    it("composes principal url path properly", function () {
+        let mockSender = new MockSender();
+        let client = new Client(mockSender);
+        let smartyKey = "0";
+        let lookup = new Lookup(smartyKey);
+
+        client.sendPrincipal(lookup);
+
+        expect(mockSender.request.baseUrlParam).to.deep.equal("0/property/principal");
+    })
+
+    it("composes financial url path properly", function () {
+        let mockSender = new MockSender();
+        let client = new Client(mockSender);
+        let smartyKey = "0";
+        let lookup = new Lookup(smartyKey);
+
+        client.sendFinancial(lookup);
+
+        expect(mockSender.request.baseUrlParam).to.deep.equal("0/property/financial");
+    })
+
+    it("composes geo url path properly", function () {
+        let mockSender = new MockSender();
+        let client = new Client(mockSender);
+        let smartyKey = "0";
+        let lookup = new Lookup(smartyKey);
+
+        client.sendGeo(lookup);
+
+        expect(mockSender.request.baseUrlParam).to.deep.equal("0/geo-reference");
+    })
+
     it("correctly builds parameters for a smartyKey only principal lookup.", function () {
         let mockSender = new MockSender();
         let client = new Client(mockSender);

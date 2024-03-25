@@ -14,11 +14,7 @@ class Client {
         let request = new Request();
         request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        if (lookup.smartyKey) {
-            request.baseUrlParam = lookup.smartyKey;
-        }
-
-        request.baseUrlParam = "property/principal";
+        request.baseUrlParam = lookup.smartyKey + "/property/principal";
 
         return new Promise((resolve, reject) => {
             this.sender.send(request)
@@ -38,11 +34,7 @@ class Client {
         let request = new Request();
         request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        if (lookup.smartyKey) {
-            request.baseUrlParam = lookup.smartyKey;
-        }
-
-        request.baseUrlParam = "property/financial";
+        request.baseUrlParam = lookup.smartyKey + "/property/financial";
 
         return new Promise((resolve, reject) => {
             this.sender.send(request)
@@ -62,11 +54,7 @@ class Client {
         let request = new Request();
         request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        if (lookup.smartyKey) {
-            request.baseUrlParam = lookup.smartyKey;
-        }
-
-        request.baseUrlParam = "geo-reference";
+        request.baseUrlParam = lookup.smartyKey + "/geo-reference";
 
         return new Promise((resolve, reject) => {
             this.sender.send(request)
