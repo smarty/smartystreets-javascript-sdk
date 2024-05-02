@@ -15,6 +15,8 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
 let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-property-data-principal-cloud"]);
+    // .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+
 let client = clientBuilder.buildUsEnrichmentClient();
 
 // Documentation for input fields can be found at:
