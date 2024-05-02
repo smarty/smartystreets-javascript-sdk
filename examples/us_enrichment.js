@@ -15,7 +15,7 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
 let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-property-data-principal-cloud"]);
-    // .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildUsEnrichmentClient();
 
@@ -27,10 +27,10 @@ let lookup = new Lookup("334968275");
 handleResponse(lookup).then();
 
 async function handleResponse(lookup) {
-    try {
-        const result = await client.sendPrincipal(lookup);
-        console.log(result.response);
-    } catch(err) {
-        console.log(err);
-    }
+	try {
+		const result = await client.sendPrincipal(lookup);
+		console.log(result.response);
+	} catch (err) {
+		console.log(err);
+	}
 }
