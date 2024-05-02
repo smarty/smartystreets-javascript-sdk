@@ -15,7 +15,8 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
 const clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-v2-cloud"])
-// .withBaseUrl("");
+	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+
 const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
 // Documentation for input fields can be found at:

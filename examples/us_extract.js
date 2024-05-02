@@ -12,7 +12,8 @@ let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 let clientBuilder = new SmartyCore.ClientBuilder(credentials);
-// .withBaseUrl("");
+	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+
 let client = clientBuilder.buildUsExtractClient();
 
 // Documentation for input fields can be found at:
