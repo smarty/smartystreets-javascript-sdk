@@ -21,8 +21,18 @@
   "http",
   "sdk"
  ],
- "main": "index.js",
+ "files": [
+  "dist"
+ ],
+ "main": "dist/index.js",
+ "exports": {
+  ".": {
+   "import": "./dist/index.es.js",
+   "default": "./dist/index.js"
+  }
+ },
  "scripts": {
+  "build": "rollup --config",
   "test": "mocha 'tests/**/*.js'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
@@ -32,8 +42,13 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
+  "@rollup/plugin-commonjs": "^26.0.1",
+  "@rollup/plugin-json": "^6.1.0",
+  "@rollup/plugin-terser": "^0.4.4",
   "chai": "^4.3.6",
-  "mocha": "^10.2.0"
+  "mocha": "^10.2.0",
+  "rollup": "^4.21.3",
+  "rollup-plugin-delete": "^2.1.0"
  },
  "dependencies": {
   "axios": "^1.7.4",
