@@ -21,14 +21,12 @@
   "http",
   "sdk"
  ],
- "files": [
-  "dist"
- ],
- "main": "dist/index.js",
+ "main": "dist/cjs/index.js",
+ "module": "dist/esm/index.js",
  "exports": {
   ".": {
-   "import": "./dist/index.es.js",
-   "default": "./dist/index.js"
+   "import": "./dist/esm/index.js",
+   "default": "./dist/cjs/index.js"
   }
  },
  "scripts": {
@@ -42,12 +40,15 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "@rollup/plugin-commonjs": "^26.0.1",
+  "@babel/preset-env": "^7.25.4",
+  "@rollup/plugin-babel": "^6.0.4",
+  "@rollup/plugin-commonjs": "^26.0.3",
   "@rollup/plugin-json": "^6.1.0",
+  "@rollup/plugin-node-resolve": "^15.3.0",
   "@rollup/plugin-terser": "^0.4.4",
   "chai": "^4.3.6",
   "mocha": "^10.2.0",
-  "rollup": "^4.21.3",
+  "rollup": "^4.22.5",
   "rollup-plugin-delete": "^2.1.0"
  },
  "dependencies": {
