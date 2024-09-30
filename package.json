@@ -31,7 +31,7 @@
  },
  "scripts": {
   "build": "rollup --config",
-  "test": "mocha 'tests/**/*.js'"
+  "test": "mocha 'tests/**/*.mjs' && mocha 'tests/**/*.js'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
  "license": "Apache-2.0",
