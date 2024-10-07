@@ -67,6 +67,46 @@ class Client {
                 .catch(reject);
         });
     }
+
+    sendSecondary(lookup) {
+        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+
+        let request = new Request();
+        request.parameters = buildInputData(lookup, keyTranslationFormat);
+
+        request.baseUrlParam = lookup.smartyKey + "/secondary";
+
+        return new Promise((resolve, reject) => {
+            this.sender.send(request)
+                .then(response => {
+                    if (response.error) reject(response.error);
+
+                    lookup.response = response.payload;
+                    resolve(lookup);
+                })
+                .catch(reject);
+        });
+    }
+
+    sendSecondaryCount(lookup) {
+        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+
+        let request = new Request();
+        request.parameters = buildInputData(lookup, keyTranslationFormat);
+
+        request.baseUrlParam = lookup.smartyKey + "/secondary/count";
+
+        return new Promise((resolve, reject) => {
+            this.sender.send(request)
+                .then(response => {
+                    if (response.error) reject(response.error);
+
+                    lookup.response = response.payload;
+                    resolve(lookup);
+                })
+                .catch(reject);
+        });
+    }
 }
 
 module.exports = Client;
