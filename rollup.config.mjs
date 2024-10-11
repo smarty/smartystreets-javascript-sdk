@@ -28,7 +28,9 @@ export default {
   plugins: [
     del({ targets: "dist/*" }),
     nodeResolve(),
-    commonjs(),
+    commonjs({
+      esmExternals: true,
+    }),
     json(),
     terser(),
   ],
