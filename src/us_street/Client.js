@@ -1,15 +1,15 @@
-const Candidate = require("./Candidate");
-const Lookup = require("./Lookup");
-const Batch = require("../Batch");
-const UndefinedLookupError = require("../Errors").UndefinedLookupError;
-const sendBatch = require("../util/sendBatch");
-const keyTranslationFormat = require("../util/apiToSDKKeyMap").usStreet;
+import {Batch} from "../Batch.js";
+import {Lookup} from "./Lookup.js";
+import {UndefinedLookupError} from "../Errors.js";
+import {sendBatch} from "../util/sendBatch.js";
+import {Candidate} from "./Candidate.js";
+import {apiToSDKKeyMap} from "../util/apiToSDKKeyMap.js";
 
 /**
  * This client sends lookups to the Smarty US Street API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
-class Client {
+export class Client {
 	constructor(sender) {
 		this.sender = sender;
 	}
@@ -28,7 +28,7 @@ class Client {
 		let batch;
 
 		if (dataIsLookup) {
-			if (data.maxCandidates == null && data.match == "enhanced")
+			if (data.maxCandidates == null && data.match === "enhanced")
 				data.maxCandidates = 5;
 			batch = new Batch();
 			batch.add(data);
@@ -36,8 +36,6 @@ class Client {
 			batch = data;
 		}
 
-		return sendBatch(batch, this.sender, Candidate, keyTranslationFormat);
+		return sendBatch(batch, this.sender, Candidate, apiToSDKKeyMap.usStreet);
 	}
 }
-
-module.exports = Client;

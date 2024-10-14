@@ -1,7 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Lookup = require("../../src/international_street/Lookup");
-const errors = require("../../src/Errors");
+import {Lookup} from "../../src/international_street/Lookup.js";
+import {UnprocessableEntityError} from "../../src/Errors.js";
+import { expect } from "chai";
 
 describe("An International Street lookup", function () {
 	const messages = {
@@ -94,7 +93,7 @@ describe("An International Street lookup", function () {
 	});
 
 	function ensureValidationThrows(callback, message) {
-		let expectedError = new errors.UnprocessableEntityError(message);
+		let expectedError = new UnprocessableEntityError(message);
 
 		try {
 			callback();
@@ -102,7 +101,7 @@ describe("An International Street lookup", function () {
 		}
 		catch (error) {
 			expect(error.message).to.equal(expectedError.message);
-			expect(error).to.be.an.instanceOf(errors.UnprocessableEntityError);
+			expect(error).to.be.an.instanceOf(UnprocessableEntityError);
 		}
 	}
 });

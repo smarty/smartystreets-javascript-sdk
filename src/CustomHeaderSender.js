@@ -1,4 +1,4 @@
-class CustomHeaderSender {
+export class CustomHeaderSender {
 	constructor(innerSender, customHeaders) {
 		this.sender = innerSender;
 		this.customHeaders = customHeaders;
@@ -16,5 +16,3 @@ class CustomHeaderSender {
 		});
 	}
 }
-
-module.exports = CustomHeaderSender;

@@ -1,15 +1,14 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_autocomplete_pro/Client");
-const Lookup = require("../../src/us_autocomplete_pro/Lookup");
-const Suggestion = require("../../src/us_autocomplete_pro/Suggestion");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import {mockSenders} from "../fixtures/mock_senders.js";
+import {Lookup} from "../../src/us_autocomplete_pro/Lookup.js";
+import {UndefinedLookupError} from "../../src/Errors.js";
+import {Suggestion} from "../../src/us_autocomplete_pro/Suggestion.js";
+import { Client} from "../../src/us_autocomplete_pro/Client.js";
+import { expect } from "chai";
+
 
 describe("A US Autocomplete Pro Client", function () {
 	it("correctly builds parameters for a prefix only lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let search = '(>")>#';
 		let lookup = new Lookup(search);
@@ -30,7 +29,7 @@ describe("A US Autocomplete Pro Client", function () {
 	});
 
 	it("correctly builds parameters for a fully-populated lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 		lookup.search = "1";
@@ -68,14 +67,14 @@ describe("A US Autocomplete Pro Client", function () {
 	});
 
 	it("throws an error if sending without a lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
-		expect(client.send).to.throw(errors.UndefinedLookupError);
+		expect(client.send).to.throw(UndefinedLookupError);
 	});
 
 	it("rejects with an exception if the response comes back with an error.", function () {
 		let expectedError = new Error("I'm the error.");
-		let mockSender = new MockSenderWithResponse("", expectedError);
+		let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("¯\\_(ツ)_/¯");
 
@@ -84,7 +83,7 @@ describe("A US Autocomplete Pro Client", function () {
 
 	it("returns an empty array when no suggestions are returned.", () => {
 		let mockExpectedPayload = {suggestions: null};
-		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
+		let mockSender = new mockSenders.MockSenderWithResponse(mockExpectedPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Please let this be easy to test.");
 		let expectedSuggestion = [];
@@ -104,7 +103,7 @@ describe("A US Autocomplete Pro Client", function () {
 			entries: "f",
 		};
 		let mockExpectedPayload = {suggestions: [responseData]};
-		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
+		let mockSender = new mockSenders.MockSenderWithResponse(mockExpectedPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Trevor the Vampire");
 		let expectedSuggestion = new Suggestion(responseData);

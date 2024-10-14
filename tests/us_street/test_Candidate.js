@@ -1,6 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Candidate = require("../../src/us_street/Candidate");
+import {Candidate} from "../../src/us_street/Candidate.js";
+import { expect } from "chai";
+
 
 describe("A match candidate", function () {
 	it("has populated fields.", function () {

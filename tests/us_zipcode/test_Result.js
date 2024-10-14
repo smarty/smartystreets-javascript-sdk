@@ -1,6 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Result = require("../../src/us_zipcode/Result");
+import {Result} from "../../src/us_zipcode/Result.js";
+import { expect } from "chai";
+
 
 describe("A US Zipcode result", function () {
 	it("populates accurately on a valid lookup.", function () {

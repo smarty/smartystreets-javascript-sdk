@@ -1,10 +1,9 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Request = require("../src/Request");
-const SigningSender = require("../src/SigningSender");
-const StaticCredentials = require("../src/StaticCredentials");
-const SharedCredentials = require("../src/SharedCredentials");
-const Errors = require("../src/Errors");
+import {SigningSender} from "../src/SigningSender.js";
+import {StaticCredentials} from "../src/StaticCredentials.js";
+import {SharedCredentials} from "../src/SharedCredentials.js";
+import {Request} from "../src/Request.js";
+import {UnprocessableEntityError} from "../src/Errors.js";
+import { expect } from "chai";
 
 describe("A signing sender", function () {
 	let mockAuthId = "testId";
@@ -51,6 +50,6 @@ describe("A signing sender", function () {
 		};
 		request.payload = mockRequestPayload;
 
-		expect(() => signingSender.send(request)).to.throw(Errors.UnprocessableEntityError);
+		expect(() => signingSender.send(request)).to.throw(UnprocessableEntityError);
 	});
 });

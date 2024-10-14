@@ -1,8 +1,8 @@
-const chai = require("chai");
-const expect = chai.expect;
-const errors = require("../src/Errors");
-const Batch = require("../src/Batch");
-const Lookup = require("../src/us_street/Lookup");
+import {Batch} from "../src/Batch.js";
+import {BatchFullError} from "../src/Errors.js";
+import {Lookup} from "../src/us_street/Lookup.js";
+import { expect } from "chai";
+
 
 describe("A batch", function () {
 	let batch;
@@ -28,7 +28,7 @@ describe("A batch", function () {
 			batch.add(lookup);
 		}
 
-		expect(() => batch.add({})).to.throw(errors.BatchFullError);
+		expect(() => batch.add({})).to.throw(BatchFullError);
 	});
 
 	it ("can be cleared.", function () {

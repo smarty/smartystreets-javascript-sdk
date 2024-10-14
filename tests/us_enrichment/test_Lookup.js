@@ -1,6 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Lookup = require("../../src/us_enrichment/Lookup");
+import {Lookup} from "../../src/us_enrichment/Lookup.js";
+import { expect } from "chai";
+
 
 describe("A US Enrichment Lookup", function () {
     it("can be newed up with all basic fields.", function () {

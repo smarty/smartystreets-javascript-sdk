@@ -1,6 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const SmartySDK = require("../index");
+import * as SmartySDK from "../index.js";
+import { expect } from "chai";
+
 
 describe("Extract example test", () => {
     const authId = "";

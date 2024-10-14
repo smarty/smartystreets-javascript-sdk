@@ -1,14 +1,14 @@
-const Request = require("../Request");
-const Response = require("./Response");
-const buildInputData = require("../util/buildInputData");
-const keyTranslationFormat = require("../util/apiToSDKKeyMap").usReverseGeo;
-const {UndefinedLookupError} = require("../Errors.js");
+import {UndefinedLookupError} from "../Errors.js";
+import {buildInputData} from "../util/buildInputData.js";
+import {apiToSDKKeyMap} from "../util/apiToSDKKeyMap.js";
+import { Request } from "../Request.js";
+import { Response} from "./Response.js";
 
 /**
  * This client sends lookups to the Smarty US Reverse Geo API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
-class Client {
+export class Client {
 	constructor(sender) {
 		this.sender = sender;
 	}
@@ -17,7 +17,7 @@ class Client {
 		if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
 		let request = new Request();
-		request.parameters = buildInputData(lookup, keyTranslationFormat);
+		request.parameters = buildInputData(lookup, apiToSDKKeyMap.usReverseGeo);
 
 		return new Promise((resolve, reject) => {
 			this.sender.send(request)
@@ -36,5 +36,3 @@ class Client {
 		}
 	}
 }
-
-module.exports = Client;

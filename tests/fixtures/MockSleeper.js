@@ -1,4 +1,4 @@
-class MockSleeper {
+export class MockSleeper {
 	constructor() {
 		this.sleepDurations = [];
 	}
@@ -6,5 +6,3 @@ class MockSleeper {
 		this.sleepDurations.push(ms);
 	}
 }
-
-module.exports = MockSleeper;

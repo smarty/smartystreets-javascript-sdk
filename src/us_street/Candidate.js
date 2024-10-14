@@ -5,7 +5,7 @@
  *
  * @see "https://www.smarty.com/docs/cloud/us-street-api#root"
  */
-class Candidate {
+export class Candidate {
 	constructor(responseData) {
 		this.inputIndex = responseData.input_index;
 		this.candidateIndex = responseData.candidate_index;
@@ -85,5 +85,3 @@ class Candidate {
 		}
 	}
 }
-
-module.exports = Candidate;

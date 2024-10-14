@@ -1,4 +1,4 @@
-class RetrySender {
+export class RetrySender {
 	constructor(maxRetires = 5, inner, sleeper) {
 		this.maxRetries = maxRetires;
 		this.statusToRetry = [408, 429, 500, 502, 503, 504];
@@ -46,5 +46,3 @@ class RetrySender {
 		await this.sleeper.sleep(backoffDuration);
 	};
 }
-
-module.exports = RetrySender;

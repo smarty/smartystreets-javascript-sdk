@@ -1,12 +1,11 @@
-let chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_zipcode/Client");
-const Lookup = require("../../src/us_zipcode/Lookup");
-const Result = require("../../src/us_zipcode/Result");
-const Batch = require("../../src/Batch");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import {Lookup} from "../../src/us_zipcode/Lookup.js";
+import {mockSenders} from "../fixtures/mock_senders.js";
+import {Batch} from "../../src/Batch.js";
+import {BatchEmptyError, UndefinedLookupError} from "../../src/Errors.js";
+import {Result} from "../../src/us_zipcode/Result.js";
+import { Client} from "../../src/us_zipcode/Client.js";
+import { expect } from "chai";
+
 
 describe("A US Zipcode client", function () {
 	it("calls its inner sender's send function.", function () {
@@ -29,15 +28,15 @@ describe("A US Zipcode client", function () {
 	});
 
 	it("doesn't send an empty batch.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		const client = new Client(mockSender);
 		let batch = new Batch();
 
-		expect(() => client.send(batch)).to.throw(errors.BatchEmptyError);
+		expect(() => client.send(batch)).to.throw(BatchEmptyError);
 	});
 
 	it("builds a request for a batch lookup with the correct JSON payload.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		const client = new Client(mockSender);
 		let lookup0 = new Lookup("lookup0");
 		let lookup1 = new Lookup("lookup1");
@@ -60,7 +59,7 @@ describe("A US Zipcode client", function () {
 
 	it("attaches a match candidate from a response to a lookup.", function () {
 		const expectedMockPayload = [{input_index: 0}];
-		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		let mockSender = new mockSenders.MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
 		let expectedResult = new Result({input_index: 0});
@@ -77,7 +76,7 @@ describe("A US Zipcode client", function () {
 			{city: "City 1", input_index: 1},
 			{city: "City 3", input_index: 3},
 		]);
-		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		let mockSender = new mockSenders.MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
 		let lookup0 = new Lookup();
 		let lookup1 = new Lookup();
@@ -100,7 +99,7 @@ describe("A US Zipcode client", function () {
 	});
 
 	it("attaches request parameters for batches with a single lookup and a request payload for batches with more than 1 lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let lookup1 = new Lookup("a");
 		let lookup2 = new Lookup("b");
@@ -119,7 +118,7 @@ describe("A US Zipcode client", function () {
 
 	it("rejects with an exception if the response comes back with an error.", function () {
 		const expectedMockError = new Error("Stamn! She's a tough one!");
-		let mockSender = new MockSenderWithResponse([], expectedMockError);
+		let mockSender = new mockSenders.MockSenderWithResponse([], expectedMockError);
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
@@ -127,14 +126,14 @@ describe("A US Zipcode client", function () {
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.send()).to.throw(errors.UndefinedLookupError);
+		expect(() => client.send()).to.throw(UndefinedLookupError);
 	});
 
 	it("builds a request for a single lookup with the correct request parameters.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup("4", "5", "6");
 		let expectedParameters = {

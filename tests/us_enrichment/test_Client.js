@@ -1,15 +1,15 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_enrichment/Client");
-const Lookup = require("../../src/us_enrichment/Lookup");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
-const {Response, FinancialResponse, GeoResponse} = require("../../src/us_enrichment/Response");
+import {mockSenders} from "../fixtures/mock_senders.js";
+import {Lookup} from "../../src/us_enrichment/Lookup.js";
+import {UndefinedLookupError} from "../../src/Errors.js";
+import {FinancialResponse, GeoResponse} from "../../src/us_enrichment/Response.js";
+import { Response} from "../../src/Response.js";
+import { Client} from "../../src/us_enrichment/Client.js";
+import { expect } from "chai";
+
 
 describe("A US Enrichment Client", function () {
     it("composes principal url path properly", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = "0";
         let lookup = new Lookup(smartyKey);
@@ -20,7 +20,7 @@ describe("A US Enrichment Client", function () {
     })
 
     it("composes financial url path properly", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = "0";
         let lookup = new Lookup(smartyKey);
@@ -31,7 +31,7 @@ describe("A US Enrichment Client", function () {
     })
 
     it("composes geo url path properly", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = "0";
         let lookup = new Lookup(smartyKey);
@@ -42,7 +42,7 @@ describe("A US Enrichment Client", function () {
     })
 
     it("composes secondary url path properly", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = "0";
         let lookup = new Lookup(smartyKey);
@@ -53,7 +53,7 @@ describe("A US Enrichment Client", function () {
     })
 
     it("composes secondary count url path properly", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = "0";
         let lookup = new Lookup(smartyKey);
@@ -64,7 +64,7 @@ describe("A US Enrichment Client", function () {
     })
 
     it("correctly builds parameters for a smartyKey only principal lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = '(>")>#';
         let include = "1";
@@ -79,7 +79,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a smartyKey only financial lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = '(>")>#';
         let include = "1";
@@ -94,7 +94,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a smartyKey only geo lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = '(>")>#';
         let include = "1";
@@ -109,7 +109,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a smartyKey only secondary lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = '(>")>#';
         let include = "1";
@@ -124,7 +124,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a smartyKey only secondary count lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let smartyKey = '(>")>#';
         let include = "1";
@@ -139,7 +139,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a fully-populated principal lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let lookup = new Lookup("0", "1", "2", "3", "4");
 
@@ -155,7 +155,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a fully-populated financial lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let lookup = new Lookup("0", "1", "2", "3", "4");
 
@@ -171,7 +171,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a fully-populated geo lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let lookup = new Lookup("0", "1", "2", "3", "4");
 
@@ -187,7 +187,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a fully-populated secondary lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let lookup = new Lookup("0", "1", "2", "3", "4");
 
@@ -203,7 +203,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("correctly builds parameters for a fully-populated secondary count lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
         let lookup = new Lookup("0", "1", "2", "3", "4");
 
@@ -219,38 +219,38 @@ describe("A US Enrichment Client", function () {
     });
 
     it("throws an error if sending without a principal lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
-        expect(client.sendPrincipal).to.throw(errors.UndefinedLookupError);
+        expect(client.sendPrincipal).to.throw(UndefinedLookupError);
     });
 
     it("throws an error if sending without a financial lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
-        expect(client.sendFinancial).to.throw(errors.UndefinedLookupError);
+        expect(client.sendFinancial).to.throw(UndefinedLookupError);
     });
 
     it("throws an error if sending without a geo lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
-        expect(client.sendGeo).to.throw(errors.UndefinedLookupError);
+        expect(client.sendGeo).to.throw(UndefinedLookupError);
     });
 
     it("throws an error if sending without a secondary lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
-        expect(client.sendSecondary).to.throw(errors.UndefinedLookupError);
+        expect(client.sendSecondary).to.throw(UndefinedLookupError);
     });
 
     it("throws an error if sending without a secondary count lookup.", function () {
-        let mockSender = new MockSender();
+        let mockSender = new mockSenders.MockSender();
         let client = new Client(mockSender);
-        expect(client.sendSecondaryCount).to.throw(errors.UndefinedLookupError);
+        expect(client.sendSecondaryCount).to.throw(UndefinedLookupError);
     });
 
     it("rejects with an exception if the principal response comes back with an error.", function () {
         let expectedError = new Error("I'm the error.");
-        let mockSender = new MockSenderWithResponse("", expectedError);
+        let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
         let client = new Client(mockSender);
         let lookup = new Lookup("¯\\_(ツ)_/¯");
 
@@ -261,7 +261,7 @@ describe("A US Enrichment Client", function () {
 
     it("rejects with an exception if the financial response comes back with an error.", function () {
         let expectedError = new Error("I'm the error.");
-        let mockSender = new MockSenderWithResponse("", expectedError);
+        let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
         let client = new Client(mockSender);
         let lookup = new Lookup("¯\\_(ツ)_/¯");
 
@@ -272,7 +272,7 @@ describe("A US Enrichment Client", function () {
 
     it("rejects with an exception if the geo response comes back with an error.", function () {
         let expectedError = new Error("I'm the error.");
-        let mockSender = new MockSenderWithResponse("", expectedError);
+        let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
         let client = new Client(mockSender);
         let lookup = new Lookup("¯\\_(ツ)_/¯");
 
@@ -283,7 +283,7 @@ describe("A US Enrichment Client", function () {
 
     it("rejects with an exception if the secondary response comes back with an error.", function () {
         let expectedError = new Error("I'm the error.");
-        let mockSender = new MockSenderWithResponse("", expectedError);
+        let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
         let client = new Client(mockSender);
         let lookup = new Lookup("¯\\_(ツ)_/¯");
 
@@ -294,7 +294,7 @@ describe("A US Enrichment Client", function () {
 
     it("rejects with an exception if the secondary count response comes back with an error.", function () {
         let expectedError = new Error("I'm the error.");
-        let mockSender = new MockSenderWithResponse("", expectedError);
+        let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
         let client = new Client(mockSender);
         let lookup = new Lookup("¯\\_(ツ)_/¯");
 
@@ -304,7 +304,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("returns an empty array when no principal respo are returned.", () => {
-        let mockSender = new MockSenderWithResponse({});
+        let mockSender = new mockSenders.MockSenderWithResponse({});
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -314,7 +314,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("returns an empty array when no financial suggestions are returned.", () => {
-        let mockSender = new MockSenderWithResponse({});
+        let mockSender = new mockSenders.MockSenderWithResponse({});
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -324,7 +324,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("returns an empty array when no geo suggestions are returned.", () => {
-        let mockSender = new MockSenderWithResponse({});
+        let mockSender = new mockSenders.MockSenderWithResponse({});
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -334,7 +334,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("returns an empty array when no secondary suggestions are returned.", () => {
-        let mockSender = new MockSenderWithResponse({});
+        let mockSender = new mockSenders.MockSenderWithResponse({});
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -344,7 +344,7 @@ describe("A US Enrichment Client", function () {
     });
 
     it("returns an empty array when no secondary count suggestions are returned.", () => {
-        let mockSender = new MockSenderWithResponse({});
+        let mockSender = new mockSenders.MockSenderWithResponse({});
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -364,7 +364,7 @@ describe("A US Enrichment Client", function () {
         };
         let mockResponse = new Response(rawMockResponse);
 
-        let mockSender = new MockSenderWithResponse(mockResponse);
+        let mockSender = new mockSenders.MockSenderWithResponse(mockResponse);
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -384,7 +384,7 @@ describe("A US Enrichment Client", function () {
         };
         let mockResponse = new FinancialResponse(rawMockResponse);
 
-        let mockSender = new MockSenderWithResponse(mockResponse);
+        let mockSender = new mockSenders.MockSenderWithResponse(mockResponse);
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -404,7 +404,7 @@ describe("A US Enrichment Client", function () {
         };
         let mockResponse = new GeoResponse(rawMockResponse);
 
-        let mockSender = new MockSenderWithResponse(mockResponse);
+        let mockSender = new mockSenders.MockSenderWithResponse(mockResponse);
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -424,7 +424,7 @@ describe("A US Enrichment Client", function () {
         };
         let mockResponse = new Response(rawMockResponse);
 
-        let mockSender = new MockSenderWithResponse(mockResponse);
+        let mockSender = new mockSenders.MockSenderWithResponse(mockResponse);
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 
@@ -444,7 +444,7 @@ describe("A US Enrichment Client", function () {
         };
         let mockResponse = new Response(rawMockResponse);
 
-        let mockSender = new MockSenderWithResponse(mockResponse);
+        let mockSender = new mockSenders.MockSenderWithResponse(mockResponse);
         let client = new Client(mockSender);
         let lookup = new Lookup("smartyKey");
 

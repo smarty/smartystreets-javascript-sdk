@@ -1,25 +1,25 @@
-const HttpSender = require("./HttpSender");
-const SigningSender = require("./SigningSender");
-const BaseUrlSender = require("./BaseUrlSender");
-const AgentSender = require("./AgentSender");
-const StaticCredentials = require("./StaticCredentials");
-const SharedCredentials = require("./SharedCredentials");
-const CustomHeaderSender = require("./CustomHeaderSender");
-const StatusCodeSender = require("./StatusCodeSender");
-const LicenseSender = require("./LicenseSender");
-const BadCredentialsError = require("./Errors").BadCredentialsError;
-const RetrySender = require("./RetrySender.js");
-const Sleeper = require("./util/Sleeper.js");
+import {HttpSender} from "./HttpSender.js";
+import {StatusCodeSender} from "./StatusCodeSender.js";
+import {SigningSender} from "./SigningSender.js";
+import {AgentSender} from "./AgentSender.js";
+import {RetrySender} from "./RetrySender.js";
+import {Sleeper} from "./util/Sleeper.js";
+import {CustomHeaderSender} from "./CustomHeaderSender.js";
+import {BaseUrlSender} from "./BaseUrlSender.js";
+import {LicenseSender} from "./LicenseSender.js";
+import {BadCredentialsError} from "./Errors.js";
+import {StaticCredentials} from "./StaticCredentials.js";
+import {SharedCredentials} from "./SharedCredentials.js";
 
-//TODO: refactor this to work more cleanly with a bundler.
-const UsStreetClient = require("./us_street/Client");
-const UsZipcodeClient = require("./us_zipcode/Client");
-const UsAutocompleteProClient = require("./us_autocomplete_pro/Client");
-const UsExtractClient = require("./us_extract/Client");
-const InternationalStreetClient = require("./international_street/Client");
-const UsReverseGeoClient = require("./us_reverse_geo/Client");
-const InternationalAddressAutocompleteClient = require("./international_address_autocomplete/Client");
-const UsEnrichmentClient = require("./us_enrichment/Client");
+import { Client as UsStreetClient } from "./us_street/Client.js";
+import { Client as UsZipcodeClient } from "./us_zipcode/Client.js";
+import { Client as UsAutocompleteProClient } from "./us_autocomplete_pro/Client.js";
+import { Client as UsExtractClient } from "./us_extract/Client.js";
+import { Client as InternationalStreetClient } from "./international_street/Client.js";
+import { Client as UsReverseGeoClient } from "./us_reverse_geo/Client.js";
+import { Client as InternationalAddressAutocompleteClient } from "./international_address_autocomplete/Client.js";
+import { Client as UsEnrichmentClient } from "./us_enrichment/Client.js";
+
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
@@ -35,7 +35,7 @@ const US_ENRICHMENT_API_URL = "https://us-enrichment.api.smarty.com/lookup";
  * You can use ClientBuilder's methods to customize settings like maximum retries or timeout duration. These methods<br>
  * are chainable, so you can usually get set up with one line of code.
  */
-class ClientBuilder {
+export class ClientBuilder {
 	constructor(signer) {
 		if (noCredentialsProvided()) throw new BadCredentialsError();
 
@@ -208,5 +208,3 @@ class ClientBuilder {
 		return this.buildClient(US_ENRICHMENT_API_URL, UsEnrichmentClient);
 	}
 }
-
-module.exports = ClientBuilder;

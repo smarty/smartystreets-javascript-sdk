@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Suggestion = require("../../src/us_autocomplete_pro/Suggestion");
+import {Suggestion} from "../../src/us_autocomplete_pro/Suggestion.js";
+import { expect } from "chai";
 
 describe("A US Autocomplete Pro Suggestion", function () {
 	it("is initialized correctly with API response data.", function () {

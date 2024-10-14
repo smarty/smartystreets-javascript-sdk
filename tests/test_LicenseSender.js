@@ -1,7 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const LicenseSender = require("../src/LicenseSender");
-const Request = require("../src/Request");
+import {LicenseSender} from "../src/LicenseSender.js";
+import {Request} from "../src/Request.js";
+import { expect } from "chai";
 
 describe("A license sender", function () {
 	let innerSender;

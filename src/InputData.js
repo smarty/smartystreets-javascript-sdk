@@ -1,4 +1,4 @@
-class InputData {
+export class InputData {
 	constructor(lookup) {
 		this.lookup = lookup;
 		this.data = {};
@@ -17,5 +17,3 @@ class InputData {
 		return this.lookup[lookupField] !== "" && this.lookup[lookupField] !== undefined;
 	}
 }
-
-module.exports = InputData;

@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const {Response} = require("../../src/us_enrichment/Response.js");
+import { Response} from "../../src/us_enrichment/Response.js";
+import { expect } from "chai";
 
 describe("A US Enrichment Response", function () {
     it("is initialized correctly with API response data.", function () {

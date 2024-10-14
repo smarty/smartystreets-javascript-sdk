@@ -1,7 +1,8 @@
-const {buildSmartyResponse} = require("../../src/util/buildSmartyResponse.js");
-const Response = require("../../src/Response");
+import {buildSmartyResponse} from "../../src/util/buildSmartyResponse.js";
+import { Response} from "../../src/Response.js";
 
-module.exports = {
+
+export const mockSenders = {
 	MockSender: function () {
 		let request = {
 			payload: undefined,

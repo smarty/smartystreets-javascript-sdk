@@ -1,4 +1,5 @@
-const UnprocessableEntityError = require("../Errors").UnprocessableEntityError;
+import {UnprocessableEntityError} from "../Errors.js";
+
 const messages = {
 	countryRequired: "Country field is required.",
 	freeformOrAddress1Required: "Either freeform or address1 is required.",
@@ -15,7 +16,7 @@ const messages = {
  *         These can be found at the URL below.</i></p>
  *     @see "https://www.smarty.com/docs/cloud/international-street-api#http-input-fields"
  */
-class Lookup {
+export class Lookup {
 	constructor(country, freeform) {
 		this.result = [];
 
@@ -81,5 +82,3 @@ function fieldIsMissing (field) {
 function fieldIsSet (field) {
 	return !fieldIsMissing(field);
 }
-
-module.exports = Lookup;

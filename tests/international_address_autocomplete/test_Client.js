@@ -1,15 +1,14 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/international_address_autocomplete/Client");
-const Lookup = require("../../src/international_address_autocomplete/Lookup");
-const Suggestion = require("../../src/international_address_autocomplete/Suggestion");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import {mockSenders} from "../fixtures/mock_senders.js";
+import { Client} from "../../src/international_address_autocomplete/Client.js";
+import { Lookup} from "../../src/international_address_autocomplete/Lookup.js";
+import {UndefinedLookupError} from "../../src/Errors.js";
+import {Suggestion} from "../../src/international_address_autocomplete/Suggestion.js";
+import { expect } from "chai";
+
 
 describe("An International Address Autocomplete Client", function () {
 	it("correctly builds parameter", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
 		let lookup = new Lookup({search});
@@ -23,7 +22,7 @@ describe("An International Address Autocomplete Client", function () {
 	});
 
 	it("builds parameters for different country", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
 		let lookup = new Lookup({search});
@@ -40,7 +39,7 @@ describe("An International Address Autocomplete Client", function () {
 	});
 
 	it("builds parameters with different max results", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
 		let lookup = new Lookup({search});
@@ -56,9 +55,9 @@ describe("An International Address Autocomplete Client", function () {
 	});
 
 	it("throws an error if sending without a lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
-		expect(client.send).to.throw(errors.UndefinedLookupError);
+		expect(client.send).to.throw(UndefinedLookupError);
 	});
 
 	it("attaches suggestions from a response to a lookup", function () {
@@ -74,7 +73,7 @@ describe("An International Address Autocomplete Client", function () {
 			]
 		};
 
-		let mockSender = new MockSenderWithResponse(responseData);
+		let mockSender = new mockSenders.MockSenderWithResponse(responseData);
 		let client = new Client(mockSender);
 		let lookup = new Lookup({search: "f"});
 		let expectedSuggestion = new Suggestion(responseData.candidates[0]);

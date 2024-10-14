@@ -3,7 +3,7 @@
  *     will contain the result of the lookup after it comes back from the API.
  *     @see "https://www.smarty.com/docs/cloud/us-street-api#input-fields"
  */
-class Lookup {
+export class Lookup {
 	constructor(street, street2, secondary, city, state, zipCode, lastLine, addressee, urbanization, match, maxCandidates, inputId, format) {
 		this.street = street;
 		this.street2 = street2;
@@ -21,5 +21,3 @@ class Lookup {
 		this.result = [];
 	}
 }
-
-module.exports = Lookup;

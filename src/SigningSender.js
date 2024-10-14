@@ -1,7 +1,7 @@
-const UnprocessableEntityError = require("./Errors").UnprocessableEntityError;
-const SharedCredentials = require("./SharedCredentials");
+import {SharedCredentials} from "./SharedCredentials.js";
+import {UnprocessableEntityError} from "./Errors.js";
 
-class SigningSender {
+export class SigningSender {
 	constructor(innerSender, signer) {
 		this.signer = signer;
 		this.sender = innerSender;
@@ -22,5 +22,3 @@ class SigningSender {
 		});
 	}
 }
-
-module.exports = SigningSender;

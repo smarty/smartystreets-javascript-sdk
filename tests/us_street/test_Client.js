@@ -1,13 +1,11 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_street/Client");
-const ClientBuilder = require("../../src/ClientBuilder");
-const Lookup = require("../../src/us_street/Lookup");
-const Candidate = require("../../src/us_street/Candidate");
-const Batch = require("../../src/Batch");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import {Lookup} from "../../src/us_street/Lookup.js";
+import {mockSenders} from "../fixtures/mock_senders.js";
+import {Batch} from "../../src/Batch.js";
+import {BatchEmptyError, UndefinedLookupError} from "../../src/Errors.js";
+import {Candidate} from "../../src/us_street/Candidate.js";
+import { Client} from "../../src/us_street/Client.js";
+import { expect } from "chai";
+
 
 describe("A US Street client", function () {
 	it("calls its inner sender's send function.", function () {
@@ -28,7 +26,7 @@ describe("A US Street client", function () {
 	});
 
 	it("builds a request for a single lookup with the correct request parameters.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
 		let expectedParameters = {
@@ -51,7 +49,7 @@ describe("A US Street client", function () {
 	});
 
 	it("defaults maxCandidates to 5 when match type is enhanced.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
 		lookup.match = "enhanced";
@@ -66,16 +64,16 @@ describe("A US Street client", function () {
 	});
 
 	it("doesn't send an empty batch.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		const client = new Client(mockSender);
 		let batch = new Batch();
 
-		expect(() => client.send(batch)).to.throw(errors.BatchEmptyError);
+		expect(() => client.send(batch)).to.throw(BatchEmptyError);
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
 		const expectedMockPayload = [{delivery_line_1: "An address", input_index: 0}];
-		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		let mockSender = new mockSenders.MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
 		let expectedResult = new Candidate({delivery_line_1: "An address", input_index: 0});
@@ -92,7 +90,7 @@ describe("A US Street client", function () {
 			{delivery_line_1: "Address 1", input_index: 1},
 			{delivery_line_1: "Address 3", input_index: 3},
 		]);
-		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		let mockSender = new mockSenders.MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
 		let lookup0 = new Lookup();
 		let lookup1 = new Lookup();
@@ -116,7 +114,7 @@ describe("A US Street client", function () {
 
 	it("rejects with an exception if the response comes back with an error.", function () {
 		const expectedMockError = new Error("Stamn! She's a tough one!");
-		let mockSender = new MockSenderWithResponse([], expectedMockError);
+		let mockSender = new mockSenders.MockSenderWithResponse([], expectedMockError);
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
@@ -124,14 +122,14 @@ describe("A US Street client", function () {
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.send()).to.throw(errors.UndefinedLookupError);
+		expect(() => client.send()).to.throw(UndefinedLookupError);
 	});
 
 	it("attaches request parameters for batches with a single lookup and a request payload for batches with more than 1 lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let lookup1 = new Lookup("a");
 		let lookup2 = new Lookup("b");

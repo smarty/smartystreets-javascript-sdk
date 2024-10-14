@@ -1,9 +1,9 @@
-const Candidate = require("../us_street/Candidate");
+import {Candidate} from "../us_street/Candidate.js";
 
 /**
  * @see <a href="https://www.smarty.com/docs/cloud/us-extract-api#http-response-status">Smarty US Extract API docs</a>
  */
-class Address {
+export class Address {
 	constructor (responseData) {
 		this.text = responseData.text;
 		this.verified = responseData.verified;
@@ -14,4 +14,3 @@ class Address {
 	}
 }
 
-module.exports = Address;

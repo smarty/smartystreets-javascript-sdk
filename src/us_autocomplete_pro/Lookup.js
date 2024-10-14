@@ -3,7 +3,7 @@
  *     will contain the result of the lookup after it comes back from the API.
  *     @see "https://www.smarty.com/docs/cloud/us-autocomplete-api#pro-http-request-input-fields"
  */
-class Lookup {
+export class Lookup {
 	/**
 	 * @param search The beginning of an address. This is required to be set.
 	 */
@@ -25,5 +25,3 @@ class Lookup {
 		this.source = undefined
 	}
 }
-
-module.exports = Lookup;

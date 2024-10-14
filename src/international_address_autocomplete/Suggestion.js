@@ -1,4 +1,4 @@
-class Suggestion {
+export class Suggestion {
 	constructor(responseData) {
 		this.street = responseData.street;
 		this.locality = responseData.locality;
@@ -10,5 +10,3 @@ class Suggestion {
 		this.addressId = responseData.address_id;
 	}
 }
-
-module.exports = Suggestion;

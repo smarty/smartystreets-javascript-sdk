@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Lookup = require("../../src/us_extract/Lookup");
+import {Lookup} from "../../src/us_extract/Lookup.js";
+import { expect } from "chai";
 
 describe("A US Extract Lookup", function () {
 	it("correctly populates fields.", function () {

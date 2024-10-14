@@ -1,9 +1,9 @@
-const Address = require("./Address");
+import {Address} from "./Address.js";
 
 /**
  * @see <a href="https://www.smarty.com/docs/cloud/us-extract-api#http-response-status">Smarty US Extract API docs</a>
  */
-class Result {
+export class Result {
 	constructor({meta, addresses}) {
 		this.meta = {
 			lines: meta.lines,
@@ -17,5 +17,3 @@ class Result {
 		this.addresses = addresses.map(rawAddress => new Address(rawAddress));
 	}
 }
-
-module.exports = Result;

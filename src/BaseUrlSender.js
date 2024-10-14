@@ -1,4 +1,4 @@
-class BaseUrlSender {
+export class BaseUrlSender {
 	constructor(innerSender, urlOverride) {
 		this.urlOverride = urlOverride;
 		this.sender = innerSender;
@@ -14,5 +14,3 @@ class BaseUrlSender {
 		});
 	}
 }
-
-module.exports = BaseUrlSender;

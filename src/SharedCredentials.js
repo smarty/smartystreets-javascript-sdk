@@ -1,4 +1,4 @@
-class SharedCredentials {
+export class SharedCredentials {
 	constructor(authId, hostName) {
 		this.authId = authId;
 		this.hostName = hostName;
@@ -9,5 +9,3 @@ class SharedCredentials {
 		if (this.hostName) request.headers["Referer"] = "https://" + this.hostName;
 	}
 }
-
-module.exports = SharedCredentials;

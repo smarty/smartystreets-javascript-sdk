@@ -1,15 +1,15 @@
-const Lookup = require("./Lookup");
-const Result = require("./Result");
-const Batch = require("../Batch");
-const UndefinedLookupError = require("../Errors").UndefinedLookupError;
-const sendBatch = require("../util/sendBatch");
-const keyTranslationFormat = require("../util/apiToSDKKeyMap").usZipcode;
+import {Batch} from "../Batch.js";
+import {Lookup} from "./Lookup.js";
+import {UndefinedLookupError} from "../Errors.js";
+import {sendBatch} from "../util/sendBatch.js";
+import {Result} from "./Result.js";
+import {apiToSDKKeyMap} from "../util/apiToSDKKeyMap.js";
 
 /**
  * This client sends lookups to the Smarty US ZIP Code API, <br>
  *     and attaches the results to the appropriate Lookup objects.
  */
-class Client {
+export class Client {
 	constructor(sender) {
 		this.sender = sender;
 	}
@@ -32,8 +32,6 @@ class Client {
 			batch.add(data);
 		} else batch = data;
 
-		return sendBatch(batch, this.sender, Result, keyTranslationFormat);
+		return sendBatch(batch, this.sender, Result, apiToSDKKeyMap.usZipcode);
 	}
 }
-
-module.exports = Client;

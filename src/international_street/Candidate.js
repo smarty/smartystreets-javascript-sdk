@@ -4,7 +4,7 @@
  *
  * @see "https://www.smarty.com/docs/cloud/international-street-api#root"
  */
-class Candidate {
+export class Candidate {
 	constructor(responseData) {
 		this.organization = responseData.organization;
 		this.address1 = responseData.address1;
@@ -149,5 +149,3 @@ class Candidate {
 		}
 	}
 }
-
-module.exports = Candidate;

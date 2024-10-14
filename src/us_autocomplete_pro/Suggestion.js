@@ -1,7 +1,7 @@
 /**
  * @see "https://www.smarty.com/docs/cloud/us-autocomplete-api#pro-http-response"
  */
-class Suggestion {
+export class Suggestion {
 	constructor(responseData) {
 		this.streetLine = responseData.street_line;
 		this.secondary = responseData.secondary;
@@ -15,5 +15,3 @@ class Suggestion {
 		}
 	}
 }
-
-module.exports = Suggestion;

@@ -1,8 +1,8 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Request = require("../src/Request");
-const HttpSender = require("../src/HttpSender");
-const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
+import { Request } from "../src/Request.js";
+import { HttpSender } from "../src/HttpSender.js";
+import { buildSmartyResponse } from "../src/util/buildSmartyResponse.js";
+import info from "../package.json" assert {type: "json"};
+import { expect } from "chai";
 
 describe ("An Axios implementation of a HTTP sender", function () {
 	it("adds a data payload to the HTTP request config.", function () {
@@ -61,7 +61,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		let request = new Request("");
 		let sender = new HttpSender();
 		let requestConfig = sender.buildRequestConfig(request);
-		let version = require("../package.json").version;
+		let version = info.version;
 
 		expect(requestConfig.hasOwnProperty("headers")).to.equal(true);
 		expect(requestConfig.headers["Content-Type"]).to.equal("application/json; charset=utf-8");

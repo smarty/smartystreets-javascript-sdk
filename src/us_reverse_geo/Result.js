@@ -4,7 +4,7 @@
  *
  * @see "https://www.smarty.com/docs/cloud/us-reverse-geo-api#result"
  */
-class Result {
+export class Result {
 	constructor(responseData) {
 		this.distance = responseData.distance;
 
@@ -32,5 +32,3 @@ class Result {
 		}
 	}
 }
-
-module.exports = Result;

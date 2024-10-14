@@ -1,9 +1,9 @@
-const chai = require("chai");
-const expect = chai.expect;
-const StatusCodeSender = require("../src/StatusCodeSender");
-const Response = require("../src/Response");
-const Request = require("../src/Request");
-const errors = require("../src/Errors");
+import { Response } from "../src/Response.js";
+import {StatusCodeSender} from "../src/StatusCodeSender.js";
+import {DefaultError, GatewayTimeoutError, InternalServerError, ServiceUnavailableError} from "../src/Errors.js";
+import { Request} from "../src/Request.js";
+import { expect } from "chai";
+
 
 describe("A status code sender", function () {
 	it("doesn't attach an error on a 200.", function () {
@@ -37,15 +37,15 @@ describe("A status code sender", function () {
 	})
 
 	it("gives an Internal Server Error on a 500.", function () {
-		return expectedErrorForStatusCode(errors.InternalServerError, 500);
+		return expectedErrorForStatusCode(InternalServerError, 500);
 	});
 
 	it("gives an Service Unavailable error on a 503.", function () {
-		return expectedErrorForStatusCode(errors.ServiceUnavailableError, 503);
+		return expectedErrorForStatusCode(ServiceUnavailableError, 503);
 	});
 
 	it("gives an Gateway Timeout error on a 504.", function () {
-		return expectedErrorForStatusCode(errors.GatewayTimeoutError, 504);
+		return expectedErrorForStatusCode(GatewayTimeoutError, 504);
 	});
 });
 
@@ -56,7 +56,7 @@ const expectedErrorWithPayloadMessage = (errorCode, payload) => {
 
 	return statusCodeSender.send(request).then(() => {
 	}, error => {
-		expect(error.error).to.be.an.instanceOf(errors.DefaultError);
+		expect(error.error).to.be.an.instanceOf(DefaultError);
 		expect(error.error.message).to.be.equal(payload.errors[0].message);
 	})
 }
@@ -68,7 +68,7 @@ const expectedDefaultError = () => {
 
 	return statusCodeSender.send(request).then(() => {
 	}, error => {
-		expect(error.error).to.be.an.instanceOf(errors.DefaultError);
+		expect(error.error).to.be.an.instanceOf(DefaultError);
 		expect(error.error.message).to.be.equal("unexpected error");
 	})
 }

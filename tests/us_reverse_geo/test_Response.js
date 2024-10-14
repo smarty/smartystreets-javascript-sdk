@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Response = require("../../src/us_reverse_geo/Response");
+import {Response} from "../../src/us_reverse_geo/Response.js";
+import { expect } from "chai";
 
 describe("A US Reverse Geo match response", function () {
 	it("populates with the appropriate fields.", function () {

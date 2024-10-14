@@ -1,22 +1,21 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_extract/Client");
-const Lookup = require("../../src/us_extract/Lookup");
-const Result = require("../../src/us_extract/Result");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
-const errors = require("../../src/Errors");
+import {mockSenders} from "../fixtures/mock_senders.js";
+import {UndefinedLookupError} from "../../src/Errors.js";
+import {Lookup} from "../../src/us_extract/Lookup.js";
+import {Result} from "../../src/us_extract/Result.js";
+import { Client} from "../../src/us_extract/Client.js";
+import { expect } from "chai";
+
 
 describe("A US Extract Client", function () {
 	it("throws an error if sending without a lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 
-		expect(client.send).to.throw(errors.UndefinedLookupError);
+		expect(client.send).to.throw(UndefinedLookupError);
 	});
 
 	it("correctly builds a payload for a text only lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		let mockText = "yump.";
 		let lookup = new Lookup(mockText);
@@ -28,7 +27,7 @@ describe("A US Extract Client", function () {
 	});
 
 	it("correctly builds a payload for a fully-populated lookup.", function () {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		const mockText = "The flocculated scunge is subprime for human consumption.";
 		let lookup = new Lookup(mockText);
@@ -40,7 +39,7 @@ describe("A US Extract Client", function () {
 	});
 
 	it("correctly builds parameters for a lookup.", () => {
-		let mockSender = new MockSender();
+		let mockSender = new mockSenders.MockSender();
 		let client = new Client(mockSender);
 		const mockText = "Picard is coming back. All power to the engines.";
 		let lookup = new Lookup(mockText);
@@ -63,7 +62,7 @@ describe("A US Extract Client", function () {
 
 	it("rejects with an exception if the response comes back with an error.", function () {
 		let expectedError = new Error("I'm the error.");
-		let mockSender = new MockSenderWithResponse("", expectedError);
+		let mockSender = new mockSenders.MockSenderWithResponse("", expectedError);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Shine on you crazy diamond.");
 
@@ -136,7 +135,7 @@ describe("A US Extract Client", function () {
 			]
 		};
 
-		let mockSender = new MockSenderWithResponse(responseData);
+		let mockSender = new mockSenders.MockSenderWithResponse(responseData);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Sometimes when you're testing this field doesn't matter too much.");
 		let expectedResult = new Result(responseData);

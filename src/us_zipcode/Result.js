@@ -1,7 +1,7 @@
 /**
  * @see "https://www.smarty.com/docs/cloud/us-zipcode-api#root"
  */
-class Result {
+export class Result {
 	constructor(responseData) {
 		this.inputIndex = responseData.input_index;
 		this.status = responseData.status;
@@ -41,5 +41,3 @@ class Result {
 		});
 	}
 }
-
-module.exports = Result;

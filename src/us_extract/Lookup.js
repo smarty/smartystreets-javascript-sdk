@@ -3,7 +3,7 @@
  *     will contain the result of the lookup after it comes back from the API.
  *     @see "https://www.smarty.com/docs/cloud/us-extract-api#http-request-input-fields"
  */
-class Lookup {
+export class Lookup {
 	/**
 	 * @param text The text that is to have addresses extracted out of it for verification (required)
 	 */
@@ -20,5 +20,3 @@ class Lookup {
 		this.addressesPerLine = undefined;
 	}
 }
-
-module.exports = Lookup;

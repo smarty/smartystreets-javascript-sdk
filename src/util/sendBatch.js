@@ -1,9 +1,9 @@
-const Request = require("../Request");
-const Errors = require("../Errors");
-const buildInputData = require("../util/buildInputData");
+import {BatchEmptyError} from "../Errors.js";
+import {buildInputData} from "./buildInputData.js";
+import { Request } from "../Request.js";
 
-module.exports = (batch, sender, Result, keyTranslationFormat) => {
-	if (batch.isEmpty()) throw new Errors.BatchEmptyError;
+export function sendBatch(batch, sender, Result, keyTranslationFormat) {
+	if (batch.isEmpty()) throw new BatchEmptyError;
 
 	let request = new Request();
 
@@ -36,4 +36,4 @@ module.exports = (batch, sender, Result, keyTranslationFormat) => {
 
 		return batch;
 	}
-};
+}

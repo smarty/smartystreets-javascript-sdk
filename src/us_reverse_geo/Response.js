@@ -1,9 +1,9 @@
-const Result = require("./Result");
+import {Result} from "./Result.js";
 
 /**
  * The SmartyResponse contains the response from a call to the US Reverse Geo API.
  */
-class Response {
+export class Response {
 	constructor(responseData) {
 		this.results = [];
 
@@ -13,5 +13,3 @@ class Response {
 			});
 	}
 }
-
-module.exports = Response;

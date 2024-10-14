@@ -1,4 +1,4 @@
-class LicenseSender {
+export class LicenseSender {
 	constructor(innerSender, licenses) {
 		this.sender = innerSender;
 		this.licenses = licenses;
@@ -16,5 +16,3 @@ class LicenseSender {
 		});
 	}
 }
-
-module.exports = LicenseSender;

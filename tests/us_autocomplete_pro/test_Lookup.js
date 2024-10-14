@@ -1,6 +1,6 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Lookup = require("../../src/us_autocomplete_pro/Lookup");
+import {Lookup} from "../../src/us_autocomplete_pro/Lookup.js";
+import { expect } from "chai";
+
 
 describe("A US Autocomplete Pro Lookup", function () {
 	it("can be newed up with a prefix.", function () {

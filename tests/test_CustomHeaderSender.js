@@ -1,7 +1,7 @@
-const chai = require("chai");
-const expect = chai.expect;
-const CustomHeaderSender = require("../src/CustomHeaderSender");
-const Request = require("../src/Request");
+import {CustomHeaderSender} from "../src/CustomHeaderSender.js";
+import {Request} from "../src/Request.js";
+import { expect } from "chai";
+
 
 describe("A custom header sender", function () {
 	it ("adds custom headers to the request.", function () {

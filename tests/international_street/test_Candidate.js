@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Candidate = require("../../src/international_street/Candidate");
+import {Candidate} from "../../src/international_street/Candidate.js";
+import { expect } from "chai";
 
 describe("An International match candidate", function () {
 	it("populates with the appropriate fields.", function () {

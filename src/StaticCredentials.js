@@ -1,4 +1,4 @@
-class StaticCredentials {
+export class StaticCredentials {
 	constructor (authId, authToken) {
 		this.authId = authId;
 		this.authToken = authToken;
@@ -9,5 +9,3 @@ class StaticCredentials {
 		request.parameters["auth-token"] = this.authToken;
 	}
 }
-
-module.exports = StaticCredentials;

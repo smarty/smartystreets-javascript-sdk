@@ -1,6 +1,6 @@
-const InputData = require("../InputData");
+import {InputData} from "../InputData.js";
 
-module.exports = (lookup, keyTranslationFormat) => {
+export function buildInputData(lookup, keyTranslationFormat)  {
 	let inputData = new InputData(lookup);
 
 	for (let key in keyTranslationFormat) {
@@ -8,4 +8,4 @@ module.exports = (lookup, keyTranslationFormat) => {
 	}
 
 	return inputData.data;
-};
+}

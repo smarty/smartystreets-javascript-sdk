@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Lookup = require("../../src/international_address_autocomplete/Lookup");
+import {Lookup} from "../../src/international_address_autocomplete/Lookup.js";
+import { expect } from "chai";
 
 describe("An International Address Autocomplete lookup", function () {
 	it("Can be newed up with a prefix", function () {

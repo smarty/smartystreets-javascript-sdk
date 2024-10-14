@@ -1,7 +1,7 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Address = require("../../src/us_extract/Address");
-const Candidate = require("../../src/us_street/Candidate");
+import {Address} from "../../src/us_extract/Address.js";
+import {Candidate} from "../../src/us_street/Candidate.js";
+import { expect } from "chai";
+
 
 describe("A US Extract Address", function () {
 	it("populates fields correctly.", function () {

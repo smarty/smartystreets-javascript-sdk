@@ -1,18 +1,18 @@
-const Errors = require("../Errors");
-const Request = require("../Request");
-const buildInputData = require("../util/buildInputData");
-const {usEnrichment: keyTranslationFormat} = require("../util/apiToSDKKeyMap");
+import {apiToSDKKeyMap} from "../util/apiToSDKKeyMap.js";
+import {buildInputData} from "../util/buildInputData.js";
+import {UndefinedLookupError} from "../Errors.js";
+import { Request} from "../Request.js";
 
-class Client {
+export class Client {
     constructor(sender) {
         this.sender = sender;
     }
 
     sendPrincipal(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+        if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
         let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+        request.parameters = buildInputData(lookup, apiToSDKKeyMap.usEnrichment);
 
         request.baseUrlParam = lookup.smartyKey + "/property/principal";
 
@@ -29,10 +29,10 @@ class Client {
     }
 
     sendFinancial(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+        if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
         let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+        request.parameters = buildInputData(lookup, apiToSDKKeyMap.usEnrichment);
 
         request.baseUrlParam = lookup.smartyKey + "/property/financial";
 
@@ -49,10 +49,10 @@ class Client {
     }
 
     sendGeo(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+        if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
         let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+        request.parameters = buildInputData(lookup, apiToSDKKeyMap.usEnrichment);
 
         request.baseUrlParam = lookup.smartyKey + "/geo-reference";
 
@@ -69,10 +69,10 @@ class Client {
     }
 
     sendSecondary(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+        if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
         let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+        request.parameters = buildInputData(lookup, apiToSDKKeyMap.usEnrichment);
 
         request.baseUrlParam = lookup.smartyKey + "/secondary";
 
@@ -89,10 +89,10 @@ class Client {
     }
 
     sendSecondaryCount(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+        if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
         let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+        request.parameters = buildInputData(lookup, apiToSDKKeyMap.usEnrichment);
 
         request.baseUrlParam = lookup.smartyKey + "/secondary/count";
 
@@ -108,5 +108,3 @@ class Client {
         });
     }
 }
-
-module.exports = Client;

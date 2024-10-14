@@ -1,48 +1,37 @@
-const ClientBuilder = require("../ClientBuilder");
+import {ClientBuilder} from "../ClientBuilder.js";
 
-function instantiateClientBuilder(credentials) {
+export function instantiateClientBuilder(credentials) {
 	return new ClientBuilder(credentials);
 }
 
-function buildUsStreetApiClient(credentials) {
+export function buildUsStreetApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsStreetApiClient();
 }
 
-function buildUsAutocompleteProApiClient(credentials) {
+export function buildUsAutocompleteProApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsAutocompleteProClient();
 }
 
-function buildUsExtractApiClient(credentials) {
+export function buildUsExtractApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsExtractClient();
 }
 
-function buildUsZipcodeApiClient(credentials) {
+export function buildUsZipcodeApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsZipcodeClient();
 }
 
-function buildInternationalStreetApiClient(credentials) {
+export function buildInternationalStreetApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildInternationalStreetClient();
 }
 
-function buildUsReverseGeoApiClient(credentials) {
+export function buildUsReverseGeoApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsReverseGeoClient();
 }
 
-function buildInternationalAddressAutocompleteApiClient(credentials) {
+export function buildInternationalAddressAutocompleteApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildInternationalAddressAutocompleteClient();
 }
 
-function buildUsEnrichmentApiClient(credentials) {
+export function buildUsEnrichmentApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsEnrichmentClient();
 }
-
-module.exports = {
-	usStreet: buildUsStreetApiClient,
-	usAutocompletePro: buildUsAutocompleteProApiClient,
-	usExtract: buildUsExtractApiClient,
-	usZipcode: buildUsZipcodeApiClient,
-	internationalStreet: buildInternationalStreetApiClient,
-	usReverseGeo: buildUsReverseGeoApiClient,
-	internationalAddressAutocomplete: buildInternationalAddressAutocompleteApiClient,
-	usEnrichment: buildUsEnrichmentApiClient,
-};

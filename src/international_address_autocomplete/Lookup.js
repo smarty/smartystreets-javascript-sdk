@@ -1,4 +1,4 @@
-class Lookup {
+export class Lookup {
 	constructor({search, addressId, country, maxResults = 5, includeOnlyLocality, includeOnlyPostalCode} = {}) {
 		this.result = [];
 
@@ -10,5 +10,3 @@ class Lookup {
 		this.includeOnlyPostalCode = includeOnlyPostalCode;
 	}
 }
-
-module.exports = Lookup;

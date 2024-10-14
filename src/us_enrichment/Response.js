@@ -1,4 +1,4 @@
-class Response {
+export class Response {
     constructor(responseData) {
         this.smartyKey = responseData.smarty_key;
         this.dataSetName = responseData.data_set_name;
@@ -372,7 +372,7 @@ class Response {
     }
 }
 
-class FinancialResponse {
+export class FinancialResponse {
     constructor(responseData) {
         this.smartyKey = responseData.smarty_key;
         this.dataSetName = responseData.data_set_name;
@@ -510,7 +510,7 @@ class FinancialResponse {
     }
 }
 
-class GeoResponse {
+export class GeoResponse {
     constructor(responseData) {
         this.smartyKey = responseData.smarty_key;
         this.dataSetName = responseData.data_set_name;
@@ -551,9 +551,3 @@ class GeoResponse {
         }
     }
 }
-
-module.exports = {
-    Response,
-    FinancialResponse,
-    GeoResponse,
-};

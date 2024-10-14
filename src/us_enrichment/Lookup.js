@@ -1,4 +1,4 @@
-class Lookup {
+export class Lookup {
     constructor(smartyKey, include, exclude, dataset, dataSubset) {
         this.smartyKey = smartyKey;
         this.include = include;
@@ -9,5 +9,3 @@ class Lookup {
         this.response = {};
     };
 }
-
-module.exports = Lookup;

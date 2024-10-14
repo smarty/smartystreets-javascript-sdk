@@ -1,4 +1,4 @@
-module.exports = {
+export const apiToSDKKeyMap = {
 	usStreet: {
 		"street": "street",
 		"street2": "street2",

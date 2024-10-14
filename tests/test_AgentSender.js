@@ -1,7 +1,8 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Request = require("../src/Request");
-const AgentSender = require("../src/AgentSender");
+import {AgentSender} from "../src/AgentSender.js";
+import info from "../package.json" assert {type: "json"};
+import { Request } from "../src/Request.js";
+import { expect } from "chai";
+
 
 describe("An agent sender", function () {
 	it ("attaches an 'agent' parameter to the request config.", function () {
@@ -16,7 +17,7 @@ describe("An agent sender", function () {
 		let mockSender = new MockSender();
 		let agentSender = new AgentSender(mockSender);
 		let request = new Request();
-		let expectedAgentString = "smarty (sdk:javascript@" + require("../package.json").version + ")";
+		let expectedAgentString = "smarty (sdk:javascript@" + info.version + ")";
 
 		agentSender.send(request);
 

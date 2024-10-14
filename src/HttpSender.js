@@ -1,9 +1,8 @@
-const Axios = require("axios").default;
-const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
+import axios from "axios";
 
-class HttpSender {
+export class HttpSender {
 	constructor(timeout = 10000, proxyConfig, debug = false) {
-		this.axiosInstance = Axios.create();
+		this.axiosInstance = axios.create();
 		this.timeout = timeout;
 		this.proxyConfig = proxyConfig;
 		if (debug) this.enableDebug();
@@ -62,5 +61,3 @@ class HttpSender {
 		})
 	}
 }
-
-module.exports = HttpSender;
