@@ -1,11 +1,11 @@
-import {InputData} from "../InputData.js";
+import { InputData } from "../InputData.js";
 
-export function buildInputData(lookup, keyTranslationFormat)  {
-	let inputData = new InputData(lookup);
+export function buildInputData(lookup, keyTranslationFormat) {
+  let inputData = new InputData(lookup);
 
-	for (let key in keyTranslationFormat) {
-		inputData.add(key, keyTranslationFormat[key]);
-	}
+  for (let key in keyTranslationFormat) {
+    inputData.add(key, keyTranslationFormat[key]);
+  }
 
-	return inputData.data;
+  return inputData.data;
 }

@@ -14,8 +14,10 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-global-plus-cloud"]);
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses([
+  "international-global-plus-cloud",
+]);
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildInternationalStreetClient();
 
@@ -35,22 +37,22 @@ lookup2.administrativeArea = "SP";
 lookup2.country = "Brazil";
 lookup2.postalCode = "02516-050";
 
-await handleRequest(lookup1)
-await handleRequest(lookup2)
+await handleRequest(lookup1);
+await handleRequest(lookup2);
 
 function displayResult(result) {
-	console.log(result.result[0].components);
+  console.log(result.result[0].components);
 }
 
 function handleError(error) {
-	console.log("ERROR:", error);
+  console.log("ERROR:", error);
 }
 
 async function handleRequest(lookup) {
-	try {
-		const result = await client.send(lookup);
-		displayResult(result);
-	} catch(err) {
-		handleError(err);
-	}
+  try {
+    const result = await client.send(lookup);
+    displayResult(result);
+  } catch (err) {
+    handleError(err);
+  }
 }

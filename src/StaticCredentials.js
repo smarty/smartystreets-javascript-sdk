@@ -1,11 +1,11 @@
 export class StaticCredentials {
-	constructor (authId, authToken) {
-		this.authId = authId;
-		this.authToken = authToken;
-	}
+  constructor(authId, authToken) {
+    this.authId = authId;
+    this.authToken = authToken;
+  }
 
-	sign (request) {
-		request.parameters["auth-id"] = this.authId;
-		request.parameters["auth-token"] = this.authToken;
-	}
+  sign(request) {
+    request.parameters["auth-id"] = this.authId;
+    request.parameters["auth-token"] = this.authToken;
+  }
 }

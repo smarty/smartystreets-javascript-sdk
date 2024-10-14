@@ -4,11 +4,11 @@
  *     @see "https://www.smarty.com/docs/cloud/us-zipcode-api#http-request-input-fields"
  */
 export class Lookup {
-	constructor(city, state, zipCode, inputId) {
-		this.city = city;
-		this.state = state;
-		this.zipCode = zipCode;
-		this.inputId = inputId;
-		this.result = [];
-	}
+  constructor(city, state, zipCode, inputId) {
+    this.city = city;
+    this.state = state;
+    this.zipCode = zipCode;
+    this.inputId = inputId;
+    this.result = [];
+  }
 }

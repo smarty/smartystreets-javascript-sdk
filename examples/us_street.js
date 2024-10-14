@@ -14,8 +14,10 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-rooftop-geocoding-cloud"]);
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses([
+  "us-rooftop-geocoding-cloud",
+]);
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildUsStreetApiClient();
 
@@ -23,19 +25,19 @@ let client = clientBuilder.buildUsStreetApiClient();
 // https://www.smarty.com/docs/us-street-api#input-fields
 
 let lookup1 = new Lookup();
-lookup1.inputId = "24601";  // Optional ID from your system
+lookup1.inputId = "24601"; // Optional ID from your system
 lookup1.addressee = "John Doe";
 lookup1.street = "330 N 100 W";
 lookup1.street2 = "closet under the stairs";
 lookup1.secondary = "APT 2";
-lookup1.urbanization = "";  // Only applies to Puerto Rico addresses
+lookup1.urbanization = ""; // Only applies to Puerto Rico addresses
 lookup1.city = "Provo";
 lookup1.state = "Utah";
 lookup1.zipCode = "84601";
 lookup1.maxCandidates = 3;
 lookup1.match = "invalid"; // "invalid" is the most permissive match,
-                           // this will always return at least one result even if the address is invalid.
-                           // Refer to the documentation for additional MatchStrategy options.
+// this will always return at least one result even if the address is invalid.
+// Refer to the documentation for additional MatchStrategy options.
 
 let lookup2 = new Lookup();
 lookup2.street = "1600 Amphitheater Pkwy";
@@ -56,18 +58,18 @@ batch.add(lookup3);
 await handleResponse(batch);
 
 function handleSuccess(response) {
-	response.lookups.map(lookup => console.log(lookup.result));
+  response.lookups.map((lookup) => console.log(lookup.result));
 }
 
 function handleError(response) {
-	console.log(response);
+  console.log(response);
 }
 
 async function handleResponse(lookup) {
-	try {
-		const result = await client.send(lookup);
-		handleSuccess(result);
-	} catch(err) {
-		handleError(err);
-	}
+  try {
+    const result = await client.send(lookup);
+    handleSuccess(result);
+  } catch (err) {
+    handleError(err);
+  }
 }

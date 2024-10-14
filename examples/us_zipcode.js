@@ -12,7 +12,7 @@ let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 let clientBuilder = new SmartyCore.ClientBuilder(credentials);
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildUsZipcodeClient();
 
@@ -41,17 +41,19 @@ batch.add(lookup3);
 await handleResponse(batch);
 
 function viewResults(response) {
-	response.lookups.map(lookup => lookup.result.map(candidate => {
-		candidate.cities.map(city => console.log(city.city));
-		// candidate.zipcodes.map(zipcode => console.log(zipcode.zipcode));
-	}));
+  response.lookups.map((lookup) =>
+    lookup.result.map((candidate) => {
+      candidate.cities.map((city) => console.log(city.city));
+      // candidate.zipcodes.map(zipcode => console.log(zipcode.zipcode));
+    }),
+  );
 }
 
 async function handleResponse(lookup) {
-	try {
-		const result = await client.send(lookup);
-		viewResults(result);
-	} catch(err) {
-		console.log(err);
-	}
+  try {
+    const result = await client.send(lookup);
+    viewResults(result);
+  } catch (err) {
+    console.log(err);
+  }
 }

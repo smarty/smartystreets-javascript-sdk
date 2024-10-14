@@ -14,8 +14,10 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-const clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-v2-cloud"])
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+const clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses([
+  "international-autocomplete-v2-cloud",
+]);
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
@@ -23,36 +25,42 @@ const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 // www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 const country = "CAN";
 
-const summaryLookup = new Lookup({search: "123 Anson", country});
+const summaryLookup = new Lookup({ search: "123 Anson", country });
 await handleRequest(summaryLookup, "Response of summary results");
 
-const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});
-await handleRequest(detailedLookup, "Response using an address ID to get detailed results");
+const detailedLookup = new Lookup({
+  addressId: summaryLookup.result[0].addressId,
+  country,
+});
+await handleRequest(
+  detailedLookup,
+  "Response using an address ID to get detailed results",
+);
 
 function logSuggestions(response, message) {
-	console.log("*** " + message + " ***");
+  console.log("*** " + message + " ***");
 
-	response.result.forEach(suggestion => {
-		if (suggestion.addressText) {
-			console.log("Entries: ", suggestion.entries);
-			console.log("Address Text: ", suggestion.addressText);
-			console.log("Address ID: ", suggestion.addressId);
-		} else {
-			console.log("Street: ", suggestion.street);
-			console.log("Locality: ", suggestion.locality);
-			console.log("Administrative Area: ", suggestion.administrativeArea);
-			console.log("Postal Code: ", suggestion.postalCode);
-			console.log("Country: ", suggestion.countryIso3);
-		}
-	});
-	console.log("\n");
+  response.result.forEach((suggestion) => {
+    if (suggestion.addressText) {
+      console.log("Entries: ", suggestion.entries);
+      console.log("Address Text: ", suggestion.addressText);
+      console.log("Address ID: ", suggestion.addressId);
+    } else {
+      console.log("Street: ", suggestion.street);
+      console.log("Locality: ", suggestion.locality);
+      console.log("Administrative Area: ", suggestion.administrativeArea);
+      console.log("Postal Code: ", suggestion.postalCode);
+      console.log("Country: ", suggestion.countryIso3);
+    }
+  });
+  console.log("\n");
 }
 
 async function handleRequest(lookup, lookupType) {
-	try {
-		const results = await client.send(lookup);
-		logSuggestions(results, lookupType);
-	} catch(err) {
-		console.log(err)
-	}
+  try {
+    const results = await client.send(lookup);
+    logSuggestions(results, lookupType);
+  } catch (err) {
+    console.log(err);
+  }
 }

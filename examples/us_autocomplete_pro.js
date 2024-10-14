@@ -14,8 +14,10 @@ const credentials = new SmartyCore.SharedCredentials(key);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-autocomplete-pro-cloud"]);
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses([
+  "us-autocomplete-pro-cloud",
+]);
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildUsAutocompleteProClient();
 
@@ -43,21 +45,21 @@ lookup = new Lookup("4770 Lincoln");
 
 lookup.selected = "4770 N Lincoln Ave Ste 2 (3) Chicago, IL 60625";
 
-await handleRequest(lookup, "Using 'selected' to Expand Secondaries")
+await handleRequest(lookup, "Using 'selected' to Expand Secondaries");
 
 // ************************************************
 
 function logSuggestions(response, message) {
-	console.log(message);
-	console.log(response.result);
-	console.log("*********************");
+  console.log(message);
+  console.log(response.result);
+  console.log("*********************");
 }
 
 async function handleRequest(lookup, lookupType) {
-	try {
-		const results = await client.send(lookup);
-		logSuggestions(results, lookupType);
-	} catch(err) {
-		console.log(err)
-	}
+  try {
+    const results = await client.send(lookup);
+    logSuggestions(results, lookupType);
+  } catch (err) {
+    console.log(err);
+  }
 }
