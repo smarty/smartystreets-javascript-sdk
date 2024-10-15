@@ -1,6 +1,6 @@
 {
   "name": "smartystreets-javascript-sdk",
-  "version": "0.0.0",
+  "version": "5.2.0",
   "description": "Quick and easy Smarty address validation.",
   "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
   "license": "Apache-2.0",
