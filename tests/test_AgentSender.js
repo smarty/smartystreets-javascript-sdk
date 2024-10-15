@@ -1,7 +1,7 @@
 import { AgentSender } from "../src/AgentSender.js";
 import { Request } from "../src/Request.js";
 import { expect } from "chai";
-import {VERSION} from "axios";
+import {VERSION} from "../src/util/constants.js";
 
 describe("An agent sender", function () {
   it("attaches an 'agent' parameter to the request config.", function () {
