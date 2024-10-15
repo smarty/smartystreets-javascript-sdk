@@ -1,4 +1,4 @@
-import {VERSION} from "./util/constants.js";
+import { VERSION } from "./util/constants.js";
 
 export class AgentSender {
   constructor(innerSender) {
