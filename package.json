@@ -2,7 +2,12 @@
   "name": "smartystreets-javascript-sdk",
   "version": "0.0.0",
   "description": "Quick and easy Smarty address validation.",
-  "packageManager": "pnpm@9.12.0",
+  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "github:smartystreets/smartystreets-javascript-sdk"
+  },
   "keywords": [
     "smarty",
     "smartystreets",
@@ -22,22 +27,30 @@
     "http",
     "sdk"
   ],
-  "main": "index.js",
+  "packageManager": "pnpm@9.12.0",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
   "type": "module",
+  "export": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "vite build",
     "test": "mocha 'tests/**/*.js'",
     "format": "prettier --write ."
-  },
-  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "github:smartystreets/smartystreets-javascript-sdk"
   },
   "devDependencies": {
     "chai": "^4.3.6",
     "mocha": "^10.2.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "vite": "^5.4.9",
+    "vite-plugin-dts": "^4.2.4"
   },
   "dependencies": {
     "axios": "^1.7.7",
