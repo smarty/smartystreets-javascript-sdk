@@ -1,7 +1,7 @@
 import { AgentSender } from "../src/AgentSender.js";
-import info from "../package.json" assert { type: "json" };
 import { Request } from "../src/Request.js";
 import { expect } from "chai";
+import {VERSION} from "axios";
 
 describe("An agent sender", function () {
   it("attaches an 'agent' parameter to the request config.", function () {
@@ -16,7 +16,7 @@ describe("An agent sender", function () {
     let mockSender = new MockSender();
     let agentSender = new AgentSender(mockSender);
     let request = new Request();
-    let expectedAgentString = "smarty (sdk:javascript@" + info.version + ")";
+    let expectedAgentString = "smarty (sdk:javascript@" + VERSION + ")";
 
     agentSender.send(request);
 

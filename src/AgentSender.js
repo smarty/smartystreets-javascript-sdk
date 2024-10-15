@@ -1,4 +1,4 @@
-import info from "../package.json" assert { type: "json" };
+import {VERSION} from "./util/constants.js";
 
 export class AgentSender {
   constructor(innerSender) {
@@ -6,7 +6,7 @@ export class AgentSender {
   }
 
   send(request) {
-    request.parameters.agent = "smarty (sdk:javascript@" + info.version + ")";
+    request.parameters.agent = "smarty (sdk:javascript@" + VERSION + ")";
     return new Promise((resolve, reject) => {
       this.sender.send(request).then(resolve).catch(reject);
     });

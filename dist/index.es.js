@@ -46,7 +46,7 @@ class ve extends C {
     );
   }
 }
-class ke extends C {
+class Le extends C {
   constructor() {
     super(
       "Bad Request (Malformed Payload): A GET request lacked a street field or the request body of a POST request contained malformed JSON."
@@ -58,7 +58,7 @@ class B extends C {
     super(t);
   }
 }
-class Le extends C {
+class ke extends C {
   constructor() {
     super(
       "When using the public 'embedded key' authentication, we restrict the number of requests coming from a given source over too short of a time."
@@ -85,7 +85,7 @@ class Wt extends C {
 const qe = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   BadCredentialsError: Jt,
-  BadRequestError: ke,
+  BadRequestError: Le,
   BatchEmptyError: Vt,
   BatchFullError: $t,
   DefaultError: jt,
@@ -95,7 +95,7 @@ const qe = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   RequestEntityTooLargeError: ve,
   ServiceUnavailableError: Gt,
   SmartyError: C,
-  TooManyRequestsError: Le,
+  TooManyRequestsError: ke,
   UndefinedLookupError: A,
   UnprocessableEntityError: B
 }, Symbol.toStringTag, { value: "Module" }));
@@ -138,11 +138,11 @@ function Zt(e, t) {
 const { toString: Ue } = Object.prototype, { getPrototypeOf: gt } = Object, st = /* @__PURE__ */ ((e) => (t) => {
   const i = Ue.call(t);
   return e[i] || (e[i] = i.slice(8, -1).toLowerCase());
-})(/* @__PURE__ */ Object.create(null)), k = (e) => (e = e.toLowerCase(), (t) => st(t) === e), rt = (e) => (t) => typeof t === e, { isArray: j } = Array, W = rt("undefined");
+})(/* @__PURE__ */ Object.create(null)), L = (e) => (e = e.toLowerCase(), (t) => st(t) === e), rt = (e) => (t) => typeof t === e, { isArray: j } = Array, W = rt("undefined");
 function Ie(e) {
   return e !== null && !W(e) && e.constructor !== null && !W(e.constructor) && P(e.constructor.isBuffer) && e.constructor.isBuffer(e);
 }
-const Xt = k("ArrayBuffer");
+const Xt = L("ArrayBuffer");
 function Fe(e) {
   let t;
   return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? t = ArrayBuffer.isView(e) : t = e && e.buffer && Xt(e.buffer), t;
@@ -152,11 +152,11 @@ const Be = rt("string"), P = rt("function"), Yt = rt("number"), nt = (e) => e !=
     return !1;
   const t = gt(e);
   return (t === null || t === Object.prototype || Object.getPrototypeOf(t) === null) && !(Symbol.toStringTag in e) && !(Symbol.iterator in e);
-}, Me = k("Date"), He = k("File"), je = k("Blob"), $e = k("FileList"), Ve = (e) => nt(e) && P(e.pipe), Je = (e) => {
+}, Me = L("Date"), He = L("File"), je = L("Blob"), $e = L("FileList"), Ve = (e) => nt(e) && P(e.pipe), Je = (e) => {
   let t;
   return e && (typeof FormData == "function" && e instanceof FormData || P(e.append) && ((t = st(e)) === "formdata" || // detect form-data instance
   t === "object" && P(e.toString) && e.toString() === "[object FormData]"));
-}, Ke = k("URLSearchParams"), [Ge, We, Ze, Xe] = ["ReadableStream", "Request", "Response", "Headers"].map(k), Ye = (e) => e.trim ? e.trim() : e.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+}, Ke = L("URLSearchParams"), [Ge, We, Ze, Xe] = ["ReadableStream", "Request", "Response", "Headers"].map(L), Ye = (e) => e.trim ? e.trim() : e.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
 function Z(e, t, { allOwnKeys: i = !1 } = {}) {
   if (e === null || typeof e > "u")
     return;
@@ -232,12 +232,12 @@ const Qe = (e, t, i, { allOwnKeys: s } = {}) => (Z(t, (r, n) => {
   for (; (i = e.exec(t)) !== null; )
     s.push(i);
   return s;
-}, oi = k("HTMLFormElement"), ui = (e) => e.toLowerCase().replace(
+}, oi = L("HTMLFormElement"), ui = (e) => e.toLowerCase().replace(
   /[-_\s]([a-z\d])(\w*)/g,
   function(i, s, r) {
     return s.toUpperCase() + r;
   }
-), At = (({ hasOwnProperty: e }) => (t, i) => e.call(t, i))(Object.prototype), ci = k("RegExp"), te = (e, t) => {
+), At = (({ hasOwnProperty: e }) => (t, i) => e.call(t, i))(Object.prototype), ci = L("RegExp"), te = (e, t) => {
   const i = Object.getOwnPropertyDescriptors(e), s = {};
   Z(i, (r, n) => {
     let a;
@@ -297,7 +297,7 @@ const _i = (e) => {
     return s;
   };
   return i(e, 0);
-}, yi = k("AsyncFunction"), pi = (e) => e && (nt(e) || P(e)) && P(e.then) && P(e.catch), ie = ((e, t) => e ? setImmediate : t ? ((i, s) => (z.addEventListener("message", ({ source: r, data: n }) => {
+}, yi = L("AsyncFunction"), pi = (e) => e && (nt(e) || P(e)) && P(e.then) && P(e.catch), ie = ((e, t) => e ? setImmediate : t ? ((i, s) => (z.addEventListener("message", ({ source: r, data: n }) => {
   r === z && n === i && s.length && s.shift()();
 }, !1), (r) => {
   s.push(r), z.postMessage(i, "*");
@@ -337,7 +337,7 @@ const _i = (e) => {
   inherits: ti,
   toFlatObject: ei,
   kindOf: st,
-  kindOfTest: k,
+  kindOfTest: L,
   endsWith: ii,
   toArray: si,
   forEachEntry: ni,
@@ -459,10 +459,10 @@ function at(e, t, i) {
       if (o.endsWith(_, "{}"))
         _ = s ? _ : _.slice(0, -2), m = JSON.stringify(m);
       else if (o.isArray(m) && Si(m) || (o.isFileList(m) || o.endsWith(_, "[]")) && (g = o.toArray(m)))
-        return _ = ne(_), g.forEach(function(x, L) {
+        return _ = ne(_), g.forEach(function(x, k) {
           !(o.isUndefined(x) || x === null) && t.append(
             // eslint-disable-next-line no-nested-ternary
-            a === !0 ? Ot([_], L, n) : a === null ? _ : _ + "[]",
+            a === !0 ? Ot([_], k, n) : a === null ? _ : _ + "[]",
             c(x)
           );
         }), !1;
@@ -614,14 +614,14 @@ self instanceof WorkerGlobalScope && typeof self.importScripts == "function", Ni
   ...vi,
   ...Ai
 };
-function ki(e, t) {
+function Li(e, t) {
   return at(e, new E.classes.URLSearchParams(), Object.assign({
     visitor: function(i, s, r, n) {
       return E.isNode && o.isBuffer(i) ? (this.append(s, i.toString("base64")), !1) : n.defaultVisitor.apply(this, arguments);
     }
   }, t));
 }
-function Li(e) {
+function ki(e) {
   return o.matchAll(/\w+|\[(\w*)]/g, e).map((t) => t[0] === "[]" ? "" : t[1] || t[0]);
 }
 function qi(e) {
@@ -643,7 +643,7 @@ function ce(e) {
   if (o.isFormData(e) && o.isFunction(e.entries)) {
     const i = {};
     return o.forEachEntry(e, (s, r) => {
-      t(Li(s), r, i, 0);
+      t(ki(s), r, i, 0);
     }), i;
   }
   return null;
@@ -674,7 +674,7 @@ const X = {
     let u;
     if (n) {
       if (s.indexOf("application/x-www-form-urlencoded") > -1)
-        return ki(t, this.formSerializer).toString();
+        return Li(t, this.formSerializer).toString();
       if ((u = o.isFileList(t)) || s.indexOf("multipart/form-data") > -1) {
         const l = this.env && this.env.FormData;
         return at(
@@ -752,7 +752,7 @@ const Ii = o.toObjectSet([
 `).forEach(function(a) {
     r = a.indexOf(":"), i = a.substring(0, r).trim().toLowerCase(), s = a.substring(r + 1).trim(), !(!i || t[i] && Ii[i]) && (i === "set-cookie" ? t[i] ? t[i].push(s) : t[i] = [s] : t[i] = t[i] ? t[i] + ", " + s : s);
   }), t;
-}, kt = Symbol("internals");
+}, Lt = Symbol("internals");
 function V(e) {
   return e && String(e).trim().toLowerCase();
 }
@@ -899,7 +899,7 @@ class T {
     return i.forEach((r) => s.set(r)), s;
   }
   static accessor(t) {
-    const s = (this[kt] = this[kt] = {
+    const s = (this[Lt] = this[Lt] = {
       accessors: {}
     }).accessors, r = this.prototype;
     function n(a) {
@@ -997,7 +997,7 @@ const et = (e, t, i = 3) => {
     };
     e(h);
   }, i);
-}, Lt = (e, t) => {
+}, kt = (e, t) => {
   const i = e != null;
   return [(s) => t[0]({
     lengthComputable: i,
@@ -1194,16 +1194,16 @@ const me = (e) => {
     }, b.onerror = function() {
       s(new f("Network Error", f.ERR_NETWORK, e, b)), b = null;
     }, b.ontimeout = function() {
-      let L = r.timeout ? "timeout of " + r.timeout + "ms exceeded" : "timeout exceeded";
+      let k = r.timeout ? "timeout of " + r.timeout + "ms exceeded" : "timeout exceeded";
       const R = r.transitional || ue;
-      r.timeoutErrorMessage && (L = r.timeoutErrorMessage), s(new f(
-        L,
+      r.timeoutErrorMessage && (k = r.timeoutErrorMessage), s(new f(
+        k,
         R.clarifyTimeoutError ? f.ETIMEDOUT : f.ECONNABORTED,
         e,
         b
       )), b = null;
-    }, n === void 0 && a.setContentType(null), "setRequestHeader" in b && o.forEach(a.toJSON(), function(L, R) {
-      b.setRequestHeader(R, L);
+    }, n === void 0 && a.setContentType(null), "setRequestHeader" in b && o.forEach(a.toJSON(), function(k, R) {
+      b.setRequestHeader(R, k);
     }), o.isUndefined(r.withCredentials) || (b.withCredentials = !!r.withCredentials), u && u !== "json" && (b.responseType = r.responseType), c && ([y, m] = et(c, !0), b.addEventListener("progress", y)), l && b.upload && ([h, p] = et(l), b.upload.addEventListener("progress", h), b.upload.addEventListener("loadend", p)), (r.cancelToken || r.signal) && (d = (x) => {
       b && (s(!x || x.type ? new $(null, e, b) : x), b.abort(), b = null);
     }, r.cancelToken && r.cancelToken.subscribe(d), r.signal && (r.signal.aborted ? d() : r.signal.addEventListener("abort", d)));
@@ -1366,7 +1366,7 @@ const ss = async (e) => {
         duplex: "half"
       }), U;
       if (o.isFormData(s) && (U = R.headers.get("content-type")) && d.setContentType(U), R.body) {
-        const [F, Y] = Lt(
+        const [F, Y] = kt(
           b,
           et(qt(l))
         );
@@ -1391,7 +1391,7 @@ const ss = async (e) => {
       ["status", "statusText", "headers"].forEach((Ct) => {
         R[Ct] = S[Ct];
       });
-      const U = o.toFiniteNumber(S.headers.get("content-length")), [F, Y] = u && Lt(
+      const U = o.toFiniteNumber(S.headers.get("content-length")), [F, Y] = u && kt(
         U,
         et(qt(u), !0)
       ) || [];
@@ -1403,10 +1403,10 @@ const ss = async (e) => {
       );
     }
     c = c || "text";
-    let L = await it[o.findKey(it, c) || "text"](S, e);
+    let k = await it[o.findKey(it, c) || "text"](S, e);
     return !x && _ && _(), await new Promise((R, U) => {
       le(R, U, {
-        data: L,
+        data: k,
         headers: T.from(S.headers),
         status: S.status,
         statusText: S.statusText,
@@ -1914,76 +1914,18 @@ class hs {
     });
   }
 }
-const ms = "smartystreets-javascript-sdk", bs = "0.0.0", fs = "Quick and easy Smarty address validation.", _s = "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)", ys = "Apache-2.0", ps = {
-  type: "git",
-  url: "github:smartystreets/smartystreets-javascript-sdk"
-}, gs = [
-  "smarty",
-  "smartystreets",
-  "address",
-  "validation",
-  "verification",
-  "verify",
-  "validate",
-  "street-address",
-  "geocoding",
-  "addresses",
-  "zipcode",
-  "autocomplete",
-  "autosuggest",
-  "suggestions",
-  "international",
-  "http",
-  "sdk"
-], ws = "pnpm@9.12.0", Ss = "dist/index.umd.js", xs = "dist/index.es.js", Rs = "module", Es = [
-  "dist"
-], Ts = {
-  build: "vite build",
-  test: "mocha 'tests/**/*.js'",
-  format: "prettier --write ."
-}, Cs = {
-  chai: "^4.3.6",
-  mocha: "^10.2.0",
-  prettier: "^3.3.3",
-  vite: "^5.4.9",
-  "vite-plugin-dts": "^4.2.4"
-}, As = {
-  axios: "^1.7.7",
-  "axios-retry": "4.5.0"
-}, Ps = {
-  name: ms,
-  version: bs,
-  description: fs,
-  author: _s,
-  license: ys,
-  repository: ps,
-  keywords: gs,
-  packageManager: ws,
-  main: Ss,
-  module: xs,
-  type: Rs,
-  export: {
-    ".": {
-      import: "./dist/index.es.js",
-      require: "./dist/index.umd.js"
-    }
-  },
-  files: Es,
-  scripts: Ts,
-  devDependencies: Cs,
-  dependencies: As
-};
+const ms = "5.2.0";
 class Ht {
   constructor(t) {
     this.sender = t;
   }
   send(t) {
-    return t.parameters.agent = "smarty (sdk:javascript@" + Ps.version + ")", new Promise((i, s) => {
+    return t.parameters.agent = "smarty (sdk:javascript@" + ms + ")", new Promise((i, s) => {
       this.sender.send(t).then(i).catch(s);
     });
   }
 }
-class Os {
+class bs {
   constructor(t = 5, i, s) {
     this.maxRetries = t, this.statusToRetry = [408, 429, 500, 502, 503, 504], this.statusTooManyRequests = 429, this.maxBackoffDuration = 10, this.inner = i, this.sleeper = s;
   }
@@ -2015,14 +1957,14 @@ class Os {
     ), await this.sleeper.sleep(t);
   }
 }
-class Ns {
+class fs {
   constructor() {
   }
   sleep(t) {
     return new Promise((i) => setTimeout(i, t * 1e3));
   }
 }
-class vs {
+class _s {
   constructor(t, i) {
     this.sender = t, this.customHeaders = i;
   }
@@ -2034,7 +1976,7 @@ class vs {
     });
   }
 }
-class ks {
+class ys {
   constructor(t, i) {
     this.urlOverride = i, this.sender = t;
   }
@@ -2044,7 +1986,7 @@ class ks {
     });
   }
 }
-class Ls {
+class ps {
   constructor(t, i) {
     this.sender = t, this.licenses = i;
   }
@@ -2067,7 +2009,7 @@ let we = class {
     this.street = t, this.street2 = i, this.secondary = s, this.city = r, this.state = n, this.zipCode = a, this.lastLine = u, this.addressee = l, this.urbanization = c, this.match = d, this.maxCandidates = h, this.inputId = y, this.format = p, this.result = [];
   }
 };
-class qs {
+class gs {
   constructor(t) {
     this.lookup = t, this.data = {};
   }
@@ -2082,7 +2024,7 @@ class qs {
   }
 }
 function N(e, t) {
-  let i = new qs(e);
+  let i = new gs(e);
   for (let s in t)
     i.add(s, t[s]);
   return i.data;
@@ -2200,7 +2142,7 @@ const O = {
     data_subset: "dataSubset"
   }
 };
-let Us = class {
+let ws = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2245,7 +2187,7 @@ let Us = class {
       })) : []
     })) : [];
   }
-}, Is = class {
+}, Ss = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2264,7 +2206,7 @@ let Us = class {
   constructor(t) {
     this.streetLine = t.street_line, this.secondary = t.secondary, this.city = t.city, this.state = t.state, this.zipcode = t.zipcode, this.entries = t.entries, t.source && (this.source = t.source);
   }
-}, Fs = class {
+}, xs = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2286,7 +2228,7 @@ let Us = class {
     }
   }
 };
-class Bs {
+class Rs {
   constructor(t) {
     this.text = t.text, this.verified = t.verified, this.line = t.line, this.start = t.start, this.end = t.end, this.candidates = t.api_output.map(
       (i) => new Tt(i)
@@ -2302,9 +2244,9 @@ let Te = class {
       verifiedCount: t.verified_count,
       bytes: t.bytes,
       characterCount: t.character_count
-    }, this.addresses = i.map((s) => new Bs(s));
+    }, this.addresses = i.map((s) => new Rs(s));
   }
-}, zs = class {
+}, Es = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2325,7 +2267,7 @@ class Ce {
     this.organization = t.organization, this.address1 = t.address1, this.address2 = t.address2, this.address3 = t.address3, this.address4 = t.address4, this.address5 = t.address5, this.address6 = t.address6, this.address7 = t.address7, this.address8 = t.address8, this.address9 = t.address9, this.address10 = t.address10, this.address11 = t.address11, this.address12 = t.address12, this.components = {}, t.components !== void 0 && (this.components.countryIso3 = t.components.country_iso_3, this.components.superAdministrativeArea = t.components.super_administrative_area, this.components.administrativeArea = t.components.administrative_area, this.components.administrativeAreaShort = t.components.administrative_area_short, this.components.administrativeAreaLong = t.components.administrative_area_long, this.components.subAdministrativeArea = t.components.sub_administrative_area, this.components.dependentLocality = t.components.dependent_locality, this.components.dependentLocalityName = t.components.dependent_locality_name, this.components.doubleDependentLocality = t.components.double_dependent_locality, this.components.locality = t.components.locality, this.components.postalCode = t.components.postal_code, this.components.postalCodeShort = t.components.postal_code_short, this.components.postalCodeExtra = t.components.postal_code_extra, this.components.premise = t.components.premise, this.components.premiseExtra = t.components.premise_extra, this.components.premisePrefixNumber = t.components.premise_prefix_number, this.components.premiseNumber = t.components.premise_number, this.components.premiseType = t.components.premise_type, this.components.thoroughfare = t.components.thoroughfare, this.components.thoroughfarePredirection = t.components.thoroughfare_predirection, this.components.thoroughfarePostdirection = t.components.thoroughfare_postdirection, this.components.thoroughfareName = t.components.thoroughfare_name, this.components.thoroughfareTrailingType = t.components.thoroughfare_trailing_type, this.components.thoroughfareType = t.components.thoroughfare_type, this.components.dependentThoroughfare = t.components.dependent_thoroughfare, this.components.dependentThoroughfarePredirection = t.components.dependent_thoroughfare_predirection, this.components.dependentThoroughfarePostdirection = t.components.dependent_thoroughfare_postdirection, this.components.dependentThoroughfareName = t.components.dependent_thoroughfare_name, this.components.dependentThoroughfareTrailingType = t.components.dependent_thoroughfare_trailing_type, this.components.dependentThoroughfareType = t.components.dependent_thoroughfare_type, this.components.building = t.components.building, this.components.buildingLeadingType = t.components.building_leading_type, this.components.buildingName = t.components.building_name, this.components.buildingTrailingType = t.components.building_trailing_type, this.components.subBuildingType = t.components.sub_building_type, this.components.subBuildingNumber = t.components.sub_building_number, this.components.subBuildingName = t.components.sub_building_name, this.components.subBuilding = t.components.sub_building, this.components.levelType = t.components.level_type, this.components.levelNumber = t.components.level_number, this.components.postBox = t.components.post_box, this.components.postBoxType = t.components.post_box_type, this.components.postBoxNumber = t.components.post_box_number), this.analysis = {}, t.analysis !== void 0 && (this.analysis.verificationStatus = t.analysis.verification_status, this.analysis.addressPrecision = t.analysis.address_precision, this.analysis.maxAddressPrecision = t.analysis.max_address_precision, this.analysis.changes = {}, t.analysis.changes !== void 0 && (this.analysis.changes.organization = t.analysis.changes.organization, this.analysis.changes.address1 = t.analysis.changes.address1, this.analysis.changes.address2 = t.analysis.changes.address2, this.analysis.changes.address3 = t.analysis.changes.address3, this.analysis.changes.address4 = t.analysis.changes.address4, this.analysis.changes.address5 = t.analysis.changes.address5, this.analysis.changes.address6 = t.analysis.changes.address6, this.analysis.changes.address7 = t.analysis.changes.address7, this.analysis.changes.address8 = t.analysis.changes.address8, this.analysis.changes.address9 = t.analysis.changes.address9, this.analysis.changes.address10 = t.analysis.changes.address10, this.analysis.changes.address11 = t.analysis.changes.address11, this.analysis.changes.address12 = t.analysis.changes.address12, this.analysis.changes.components = {}, t.analysis.changes.components !== void 0 && (this.analysis.changes.components.countryIso3 = t.analysis.changes.components.country_iso_3, this.analysis.changes.components.superAdministrativeArea = t.analysis.changes.components.super_administrative_area, this.analysis.changes.components.administrativeArea = t.analysis.changes.components.administrative_area, this.analysis.changes.components.administrativeAreaShort = t.analysis.changes.components.administrative_area_short, this.analysis.changes.components.administrativeAreaLong = t.analysis.changes.components.administrative_area_long, this.analysis.changes.components.subAdministrativeArea = t.analysis.changes.components.sub_administrative_area, this.analysis.changes.components.dependentLocality = t.analysis.changes.components.dependent_locality, this.analysis.changes.components.dependentLocalityName = t.analysis.changes.components.dependent_locality_name, this.analysis.changes.components.doubleDependentLocality = t.analysis.changes.components.double_dependent_locality, this.analysis.changes.components.locality = t.analysis.changes.components.locality, this.analysis.changes.components.postalCode = t.analysis.changes.components.postal_code, this.analysis.changes.components.postalCodeShort = t.analysis.changes.components.postal_code_short, this.analysis.changes.components.postalCodeExtra = t.analysis.changes.components.postal_code_extra, this.analysis.changes.components.premise = t.analysis.changes.components.premise, this.analysis.changes.components.premiseExtra = t.analysis.changes.components.premise_extra, this.analysis.changes.components.premisePrefixNumber = t.analysis.changes.components.premise_prefix_number, this.analysis.changes.components.premiseNumber = t.analysis.changes.components.premise_number, this.analysis.changes.components.premiseType = t.analysis.changes.components.premise_type, this.analysis.changes.components.thoroughfare = t.analysis.changes.components.thoroughfare, this.analysis.changes.components.thoroughfarePredirection = t.analysis.changes.components.thoroughfare_predirection, this.analysis.changes.components.thoroughfarePostdirection = t.analysis.changes.components.thoroughfare_postdirection, this.analysis.changes.components.thoroughfareName = t.analysis.changes.components.thoroughfare_name, this.analysis.changes.components.thoroughfareTrailingType = t.analysis.changes.components.thoroughfare_trailing_type, this.analysis.changes.components.thoroughfareType = t.analysis.changes.components.thoroughfare_type, this.analysis.changes.components.dependentThoroughfare = t.analysis.changes.components.dependent_thoroughfare, this.analysis.changes.components.dependentThoroughfarePredirection = t.analysis.changes.components.dependent_thoroughfare_predirection, this.analysis.changes.components.dependentThoroughfarePostdirection = t.analysis.changes.components.dependent_thoroughfare_postdirection, this.analysis.changes.components.dependentThoroughfareName = t.analysis.changes.components.dependent_thoroughfare_name, this.analysis.changes.components.dependentThoroughfareTrailingType = t.analysis.changes.components.dependent_thoroughfare_trailing_type, this.analysis.changes.components.dependentThoroughfareType = t.analysis.changes.components.dependent_thoroughfare_type, this.analysis.changes.components.building = t.analysis.changes.components.building, this.analysis.changes.components.buildingLeadingType = t.analysis.changes.components.building_leading_type, this.analysis.changes.components.buildingName = t.analysis.changes.components.building_name, this.analysis.changes.components.buildingTrailingType = t.analysis.changes.components.building_trailing_type, this.analysis.changes.components.subBuildingType = t.analysis.changes.components.sub_building_type, this.analysis.changes.components.subBuildingNumber = t.analysis.changes.components.sub_building_number, this.analysis.changes.components.subBuildingName = t.analysis.changes.components.sub_building_name, this.analysis.changes.components.subBuilding = t.analysis.changes.components.sub_building, this.analysis.changes.components.levelType = t.analysis.changes.components.level_type, this.analysis.changes.components.levelNumber = t.analysis.changes.components.level_number, this.analysis.changes.components.postBox = t.analysis.changes.components.post_box, this.analysis.changes.components.postBoxType = t.analysis.changes.components.post_box_type, this.analysis.changes.components.postBoxNumber = t.analysis.changes.components.post_box_number))), this.metadata = {}, t.metadata !== void 0 && (this.metadata.latitude = t.metadata.latitude, this.metadata.longitude = t.metadata.longitude, this.metadata.geocodePrecision = t.metadata.geocode_precision, this.metadata.maxGeocodePrecision = t.metadata.max_geocode_precision, this.metadata.addressFormat = t.metadata.address_format);
   }
 }
-let Ms = class {
+let Ts = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2347,7 +2289,7 @@ let Ms = class {
     }
   }
 };
-class Hs {
+class Cs {
   constructor(t) {
     if (this.distance = t.distance, this.address = {}, t.address && (this.address.street = t.address.street, this.address.city = t.address.city, this.address.state_abbreviation = t.address.state_abbreviation, this.address.zipcode = t.address.zipcode, this.address.source = t.address.source), this.coordinate = {}, t.coordinate)
       switch (this.coordinate.latitude = t.coordinate.latitude, this.coordinate.longitude = t.coordinate.longitude, this.coordinate.accuracy = t.coordinate.accuracy, t.coordinate.license) {
@@ -2362,10 +2304,10 @@ class Hs {
 let Ae = class {
   constructor(t) {
     this.results = [], t && t.results.map((i) => {
-      this.results.push(new Hs(i));
+      this.results.push(new Cs(i));
     });
   }
-}, js = class {
+}, As = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2387,7 +2329,7 @@ class Pe {
     this.street = t.street, this.locality = t.locality, this.administrativeArea = t.administrative_area, this.postalCode = t.postal_code, this.countryIso3 = t.country_iso3, this.entries = t.entries, this.addressText = t.address_text, this.addressId = t.address_id;
   }
 }
-let $s = class {
+let Ps = class {
   constructor(t) {
     this.sender = t;
   }
@@ -2407,7 +2349,7 @@ let $s = class {
     }
   }
 };
-class Vs {
+class Os {
   constructor(t) {
     this.sender = t;
   }
@@ -2457,7 +2399,7 @@ class Vs {
     });
   }
 }
-const Js = "https://international-street.api.smarty.com/verify", Ks = "https://us-autocomplete-pro.api.smarty.com/lookup", Gs = "https://us-extract.api.smarty.com/", Ws = "https://us-street.api.smarty.com/street-address", Zs = "https://us-zipcode.api.smarty.com/lookup", Xs = "https://us-reverse-geo.api.smarty.com/lookup", Ys = "https://international-autocomplete.api.smarty.com/v2/lookup", Qs = "https://us-enrichment.api.smarty.com/lookup";
+const Ns = "https://international-street.api.smarty.com/verify", vs = "https://us-autocomplete-pro.api.smarty.com/lookup", Ls = "https://us-extract.api.smarty.com/", ks = "https://us-street.api.smarty.com/street-address", qs = "https://us-zipcode.api.smarty.com/lookup", Us = "https://us-reverse-geo.api.smarty.com/lookup", Is = "https://international-autocomplete.api.smarty.com/v2/lookup", Fs = "https://us-enrichment.api.smarty.com/lookup";
 class Oe {
   constructor(t) {
     if (i()) throw new Jt();
@@ -2543,105 +2485,105 @@ class Oe {
     const t = new ds(this.maxTimeout, this.proxy, this.debug), i = new ls(t), s = new hs(i, this.signer);
     let r = new Ht(s);
     if (this.maxRetries > 0) {
-      const l = new Os(
+      const l = new bs(
         this.maxRetries,
         s,
-        new Ns()
+        new fs()
       );
       r = new Ht(l);
     }
-    const n = new vs(
+    const n = new _s(
       r,
       this.customHeaders
-    ), a = new ks(n, this.baseUrl);
-    return new Ls(a, this.licenses);
+    ), a = new ys(n, this.baseUrl);
+    return new ps(a, this.licenses);
   }
   buildClient(t, i) {
     return this.baseUrl || (this.baseUrl = t), new i(this.buildSender());
   }
   buildUsStreetApiClient() {
-    return this.buildClient(Ws, Us);
+    return this.buildClient(ks, ws);
   }
   buildUsZipcodeClient() {
-    return this.buildClient(Zs, Is);
+    return this.buildClient(qs, Ss);
   }
   buildUsAutocompleteProClient() {
     return this.buildClient(
-      Ks,
-      Fs
+      vs,
+      xs
     );
   }
   buildUsExtractClient() {
-    return this.buildClient(Gs, zs);
+    return this.buildClient(Ls, Es);
   }
   buildInternationalStreetClient() {
     return this.buildClient(
-      Js,
-      Ms
+      Ns,
+      Ts
     );
   }
   buildUsReverseGeoClient() {
-    return this.buildClient(Xs, js);
+    return this.buildClient(Us, As);
   }
   buildInternationalAddressAutocompleteClient() {
     return this.buildClient(
-      Ys,
-      $s
+      Is,
+      Ps
     );
   }
   buildUsEnrichmentClient() {
-    return this.buildClient(Qs, Vs);
+    return this.buildClient(Fs, Os);
   }
 }
 function q(e) {
   return new Oe(e);
 }
-function Ds(e) {
+function Bs(e) {
   return q(e).buildUsStreetApiClient();
 }
-function tr(e) {
+function zs(e) {
   return q(e).buildUsAutocompleteProClient();
 }
-function er(e) {
+function Ms(e) {
   return q(e).buildUsExtractClient();
 }
-function ir(e) {
+function Hs(e) {
   return q(e).buildUsZipcodeClient();
 }
-function sr(e) {
+function js(e) {
   return q(e).buildInternationalStreetClient();
 }
-function rr(e) {
+function $s(e) {
   return q(e).buildUsReverseGeoClient();
 }
-function nr(e) {
+function Vs(e) {
   return q(
     e
   ).buildInternationalAddressAutocompleteClient();
 }
-function ar(e) {
+function Js(e) {
   return q(e).buildUsEnrichmentClient();
 }
-const or = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const Ks = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  buildInternationalAddressAutocompleteApiClient: nr,
-  buildInternationalStreetApiClient: sr,
-  buildUsAutocompleteProApiClient: tr,
-  buildUsEnrichmentApiClient: ar,
-  buildUsExtractApiClient: er,
-  buildUsReverseGeoApiClient: rr,
-  buildUsStreetApiClient: Ds,
-  buildUsZipcodeApiClient: ir,
+  buildInternationalAddressAutocompleteApiClient: Vs,
+  buildInternationalStreetApiClient: js,
+  buildUsAutocompleteProApiClient: zs,
+  buildUsEnrichmentApiClient: Js,
+  buildUsExtractApiClient: Ms,
+  buildUsReverseGeoApiClient: $s,
+  buildUsStreetApiClient: Bs,
+  buildUsZipcodeApiClient: Hs,
   instantiateClientBuilder: q
 }, Symbol.toStringTag, { value: "Module" }));
-let ur = class {
+let Gs = class {
   /**
    * @param search The beginning of an address. This is required to be set.
    */
   constructor(t) {
     this.result = [], this.search = t, this.selected = void 0, this.maxResults = void 0, this.includeOnlyCities = [], this.includeOnlyStates = [], this.includeOnlyZIPCodes = [], this.excludeStates = [], this.preferCities = [], this.preferStates = [], this.preferZIPCodes = [], this.preferRatio = void 0, this.preferGeolocation = void 0, this.source = void 0;
   }
-}, cr = class {
+}, Ws = class {
   /**
    * @param text The text that is to have addresses extracted out of it for verification (required)
    */
@@ -2659,7 +2601,7 @@ const J = {
   badGeocode: "Invalid input: geocode can only be set to 'true' (default is 'false'.",
   invalidLanguage: "Invalid input: language can only be set to 'latin' or 'native'. When not set, the the output language will match the language of the input values."
 };
-let dr = class {
+let Zs = class {
   constructor(t, i) {
     this.result = [], this.country = t, this.freeform = i, this.address1 = void 0, this.address2 = void 0, this.address3 = void 0, this.address4 = void 0, this.organization = void 0, this.locality = void 0, this.administrativeArea = void 0, this.postalCode = void 0, this.geocode = void 0, this.language = void 0, this.inputId = void 0, this.ensureEnoughInfo = this.ensureEnoughInfo.bind(this), this.ensureValidData = this.ensureValidData.bind(this);
   }
@@ -2694,11 +2636,11 @@ function K(e) {
 function Q(e) {
   return !K(e);
 }
-let lr = class {
+let Xs = class {
   constructor(t, i, s = "") {
     this.latitude = t.toFixed(8), this.longitude = i.toFixed(8), this.source = s, this.response = new Ae();
   }
-}, hr = class {
+}, Ys = class {
   constructor({
     search: t,
     addressId: i,
@@ -2710,67 +2652,67 @@ let lr = class {
     this.result = [], this.search = t, this.addressId = i, this.country = s, this.maxResults = r, this.includeOnlyLocality = n, this.includeOnlyPostalCode = a;
   }
 };
-class mr {
+class Qs {
   constructor(t, i, s, r, n) {
     this.smartyKey = t, this.include = i, this.exclude = s, this.dataset = r, this.dataSubset = n, this.response = {};
   }
 }
-let br = class {
+let Ds = class {
   constructor(t) {
     this.smartyKey = t.smarty_key, this.dataSetName = t.data_set_name, this.dataSubsetName = t.data_subset_name, this.attributes = {}, t.attributes && (this.attributes.firstFloorSqft = t.attributes["1st_floor_sqft"], this.attributes.secondFlootSqft = t.attributes["2nd_floor_sqft"], this.attributes.acres = t.attributes.acres, this.attributes.addressInfoPrivacy = t.attributes.address_info_privacy, this.attributes.airConditioner = t.attributes.air_conditioner, this.attributes.arborPergola = t.attributes.arbor_pergola, this.attributes.assessedImprovementPercent = t.attributes.assessed_improvement_percent, this.attributes.assessedImprovementValue = t.attributes.assessed_improvement_value, this.attributes.assessedLandValue = t.attributes.assessed_land_value, this.attributes.assessedValue = t.attributes.assessed_value, this.attributes.assessorLastUpdate = t.attributes.assessor_last_update, this.attributes.assessorTaxrollUpdate = t.attributes.assessor_taxroll_update, this.attributes.atticArea = t.attributes.attic_area, this.attributes.atticFlag = t.attributes.attic_flag, this.attributes.balcony = t.attributes.balcony, this.attributes.balconyArea = t.attributes.balcony_area, this.attributes.basementSqft = t.attributes.basement_sqft, this.attributes.basementSqftFinished = t.attributes.basement_sqft_finished, this.attributes.basementsqftUnfinished = t.attributes.basement_sqft_unfinished, this.attributes.bathHouse = t.attributes.bath_house, this.attributes.bathHouseSqft = t.attributes.bath_house_sqft, this.attributes.bathroomsPartial = t.attributes.bathrooms_partial, this.attributes.bathroomsTotal = t.attributes.bathrooms_total, this.attributes.bedrooms = t.attributes.bedrooms, this.attributes.block1 = t.attributes.block_1, this.attributes.block2 = t.attributes.block_2, this.attributes.boatAccess = t.attributes.boat_access, this.attributes.boatHouse = t.attributes.boat_house, this.attributes.boatHouseSqft = t.attributes.boat_house_sqft, this.attributes.boatLift = t.attributes.boat_lift, this.attributes.bonusRoom = t.attributes.bonus_room, this.attributes.breakfastNook = t.attributes.breakfast_nook, this.attributes.breezeway = t.attributes.breezeway, this.attributes.buildingDefinitionCode = t.attributes.building_definition, this.attributes.buildingSqft = t.attributes.building_sqft, this.attributes.cabin = t.attributes.cabin, this.attributes.cabinSqft = t.attributes.cabin_sqft, this.attributes.canopy = t.attributes.canopy, this.attributes.canopySqft = t.attributes.canopy_sqft, this.attributes.carport = t.attributes.carport, this.attributes.carportSqft = t.attributes.carport_sqft, this.attributes.cbsaCode = t.attributes.cbsa_code, this.attributes.cbsaName = t.attributes.cbsa_name, this.attributes.cellar = t.attributes.cellar, this.attributes.censusBlock = t.attributes.census_block, this.attributes.censusTract = t.attributes.census_tract, this.attributes.censusBlockGroup = t.attributes.census_block_group, this.attributes.censusFipsPlaceCode = t.attributes.census_fips_place_code, this.attributes.censusTract = t.attributes.census_tract, this.attributes.centralVacuum = t.attributes.central_vacuum, this.attributes.codeTitleCompany = t.attributes.code_title_company, this.attributes.combinedStatisticalArea = t.attributes.combined_statistical_area, this.attributes.communityRec = t.attributes.community_rec, this.attributes.companyFlag = t.attributes.company_flag, this.attributes.congressionalDistrict = t.attributes.congressional_district, this.attributes.constructionType = t.attributes.construction_type, this.attributes.contactCity = t.attributes.contact_city, this.attributes.contactCrrt = t.attributes.contact_crrt, this.attributes.contactFullAddress = t.attributes.contact_full_address, this.attributes.contactHouseNumber = t.attributes.contact_house_number, this.attributes.contactMailInfoFormat = t.attributes.contact_main_info_format, this.attributes.contactMailInfoPrivacy = t.attributes.contact_mail_info_privacy, this.attributes.contactMailingCounty = t.attributes.contact_mailing_county, this.attributes.contactMailingFips = t.attributes.contact_mailing_fips, this.attributes.contactPostDirection = t.attributes.contact_post_direction, this.attributes.contactPreDirection = t.attributes.contact_pre_direction, this.attributes.contactState = t.attributes.contact_state, this.attributes.contactStreetName = t.attributes.contact_street_name, this.attributes.contactSuffix = t.attributes.contact_suffix, this.attributes.contactUnitDesignator = t.attributes.contact_unit_designator, this.attributes.contactValue = t.attributes.contact_value, this.attributes.contactZip = t.attributes.contact_zip, this.attributes.contactZip4 = t.attributes.contact_zip4, this.attributes.courtyard = t.attributes.courtyard, this.attributes.courtyardArea = t.attributes.courtyard_area, this.attributes.deck = t.attributes.deck, this.attributes.deckArea = t.attributes.deck_area, this.attributes.deedDocumentPage = t.attributes.deed_document_page, this.attributes.deedDocumentBook = t.attributes.deed_document_book, this.attributes.deedDocumentNumber = t.attributes.deed_document_number, this.attributes.deedOwnerFirstName = t.attributes.deed_owner_first_name, this.attributes.deedOwnerFirstName2 = t.attributes.deed_owner_first_name2, this.attributes.deedOwnerFirstName3 = t.attributes.deed_owner_first_name3, this.attributes.deedOwnerFirstName4 = t.attributes.deed_owner_first_name4, this.attributes.deedOwnerFullName = t.attributes.deed_owner_full_name, this.attributes.deedOwnerFullName2 = t.attributes.deed_owner_full_name2, this.attributes.deedOwnerFullName3 = t.attributes.deed_owner_full_name3, this.attributes.deedOwnerFullName4 = t.attributes.deed_owner_full_name4, this.attributes.deedOwnerLastName = t.attributes.deed_owner_last_name, this.attributes.deedOwnerLastName2 = t.attributes.deed_owner_last_name2, this.attributes.deedOwnerLastName3 = t.attributes.deed_owner_last_name3, this.attributes.deedOwnerLastName4 = t.attributes.deed_owner_last_name4, this.attributes.deedOwnerMiddleName = t.attributes.deed_owner_middle_name, this.attributes.deedOwnerMiddleName2 = t.attributes.deed_owner_middle_name2, this.attributes.deedOwnerMiddleName3 = t.attributes.deed_owner_middle_name3, this.attributes.deedOwnerMiddleName4 = t.attributes.deed_owner_middle_name4, this.attributes.deedOwnerSuffix = t.attributes.deed_owner_suffix, this.attributes.deedOwnerSuffix2 = t.attributes.deed_owner_suffix2, this.attributes.deedOwnerSuffix3 = t.attributes.deed_owner_suffix3, this.attributes.deedOwnerSuffix4 = t.attributes.deed_owner_suffix4, this.attributes.deedSaleDate = t.attributes.deed_sale_date, this.attributes.deedSalePrice = t.attributes.deed_sale_price, this.attributes.deedTransactionId = t.attributes.deed_transaction_id, this.attributes.depthLinearFootage = t.attributes.depth_linear_footage, this.attributes.disabledTaxExemption = t.attributes.disabled_tax_exemption, this.attributes.drivewaySqft = t.attributes.driveway_sqft, this.attributes.drivewayType = t.attributes.driveway_type, this.attributes.effectiveYearBuilt = t.attributes.effective_year_built, this.attributes.elevationFeet = t.attributes.elevation_feet, this.attributes.elevator = t.attributes.elevator, this.attributes.equestrianArena = t.attributes.equestrian_arena, this.attributes.escalator = t.attributes.escalator, this.attributes.exerciseRoom = t.attributes.exercise_room, this.attributes.exteriorWalls = t.attributes.exterior_walls, this.attributes.familyRoom = t.attributes.family_room, this.attributes.fence = t.attributes.fence, this.attributes.fenceArea = t.attributes.fence_area, this.attributes.fipsCode = t.attributes.fips_code, this.attributes.fireResistanceCode = t.attributes.fire_resistance_code, this.attributes.fireSprinklersFlag = t.attributes.fire_sprinkler_flag, this.attributes.fireplace = t.attributes.fireplace, this.attributes.fireplaceNumber = t.attributes.fireplace_number, this.attributes.firstName = t.attributes.first_name, this.attributes.firstName2 = t.attributes.first_name2, this.attributes.firstName3 = t.attributes.first_name3, this.attributes.firstName4 = t.attributes.first_name4, this.attributes.flooring = t.attributes.flooring, this.attributes.foundation = t.attributes.foundation, this.attributes.gameRoom = t.attributes.game_room, this.attributes.garage = t.attributes.garage, this.attributes.garageSqft = t.attributes.garage_sqft, this.attributes.gazebo = t.attributes.gazebo, this.attributes.gazeboSqft = t.attributes.gazebo_sqft, this.attributes.golfCourse = t.attributes.golf_course, this.attributes.grainery = t.attributes.grainery, this.attributes.grainerySqft = t.attributes.grainery_sqft, this.attributes.greatRoom = t.attributes.great_room, this.attributes.greenhouse = t.attributes.greenhouse, this.attributes.greenhouseSqft = t.attributes.greenhouse_sqft, this.attributes.grossSqft = t.attributes.gross_sqft, this.attributes.guesthouse = t.attributes.guesthouse, this.attributes.guesthouseSqft = t.attributes.guesthouse_sqft, this.attributes.handicapAccessibility = t.attributes.handicap_accessibility, this.attributes.heat = t.attributes.heat, this.attributes.heatFuelType = t.attributes.heat_fuel_type, this.attributes.hobbyRoom = t.attributes.hobby_room, this.attributes.homeownerTaxExemption = t.attributes.homeowner_tax_exemption, this.attributes.instrumentDate = t.attributes.instrument_date, this.attributes.intercomSystem = t.attributes.intercom_system, this.attributes.interestRateType2 = t.attributes.interest_rate_type_2, this.attributes.interiorStructure = t.attributes.interior_structure, this.attributes.kennel = t.attributes.kennel, this.attributes.kennelSqft = t.attributes.kennel_sqft, this.attributes.landUseCode = t.attributes.land_use_code, this.attributes.landUseGroup = t.attributes.land_use_group, this.attributes.landUseStandard = t.attributes.land_use_standard, this.attributes.lastName = t.attributes.last_name, this.attributes.lastName2 = t.attributes.last_name_2, this.attributes.lastName3 = t.attributes.last_name_3, this.attributes.lastName4 = t.attributes.last_name_4, this.attributes.latitude = t.attributes.latitude, this.attributes.laundry = t.attributes.laundry, this.attributes.leanTo = t.attributes.lean_to, this.attributes.leanToSqft = t.attributes.lean_to_sqft, this.attributes.legalDescription = t.attributes.legal_description, this.attributes.legalUnit = t.attributes.legal_unit, this.attributes.lenderAddress = t.attributes.lender_address, this.attributes.lenderAddress2 = t.attributes.lender_address_2, this.attributes.lenderCity = t.attributes.lender_city, this.attributes.lenderCity2 = t.attributes.lender_city_2, this.attributes.lenderCode = t.attributes.lender_code, this.attributes.lenderCode2 = t.attributes.lender_code_2, this.attributes.lenderFirstName = t.attributes.lender_first_name, this.attributes.lenderFirstName2 = t.attributes.lender_first_name_2, this.attributes.lenderLastName = t.attributes.lender_last_name, this.attributes.lenderLastName2 = t.attributes.lender_last_name_2, this.attributes.lenderName = t.attributes.lender_name, this.attributes.lenderName2 = t.attributes.lender_name_2, this.attributes.lenderSellerCarryBack = t.attributes.lender_seller_carry_back, this.attributes.lenderSellerCarryBack2 = t.attributes.lender_seller_carry_back_2, this.attributes.lenderState = t.attributes.lender_state, this.attributes.lenderState2 = t.attributes.lender_state_2, this.attributes.lenderZip = t.attributes.lender_zip, this.attributes.lenderZip2 = t.attributes.lender_zip_2, this.attributes.lenderZipExtended = t.attributes.lender_zip_extended, this.attributes.lenderZipExtended2 = t.attributes.lender_zip_extended_2, this.attributes.loadingPlatform = t.attributes.loading_platform, this.attributes.loadingPlatformSqft = t.attributes.loading_platform_sqft, this.attributes.longitude = t.attributes.longitude, this.attributes.lot1 = t.attributes.lot_1, this.attributes.lot2 = t.attributes.lot_2, this.attributes.lot3 = t.attributes.lot_3, this.attributes.lotSqft = t.attributes.lot_sqft, this.attributes.marketImprovementPercent = t.attributes.market_improvement_percent, this.attributes.marketImprovementValue = t.attributes.market_improvement_value, this.attributes.marketLandValue = t.attributes.market_land_value, this.attributes.marketValueYear = t.attributes.market_value_year, this.attributes.matchType = t.attributes.match_type, this.attributes.mediaRoom = t.attributes.media_room, this.attributes.metroDivision = t.attributes.metro_division, this.attributes.middleName = t.attributes.middle_name, this.attributes.middleName2 = t.attributes.middle_name_2, this.attributes.middleName3 = t.attributes.middle_name_3, this.attributes.middleName4 = t.attributes.middle_name_4, this.attributes.milkhouse = t.attributes.milkhouse, this.attributes.milkhouseSqft = t.attributes.milkhouse_sqft, this.attributes.minorCivilDivisionCode = t.attributes.minor_civil_division_code, this.attributes.minorCivilDivisionName = t.attributes.minor_civil_division_name, this.attributes.mobileHomeHookup = t.attributes.mobile_home_hookup, this.attributes.mortgageAmount = t.attributes.mortgage_amount, this.attributes.mortgageAmount2 = t.attributes.mortgage_amount_2, this.attributes.mortgageDueDate = t.attributes.mortgage_due_date, this.attributes.mortgageDueDate2 = t.attributes.mortgage_due_date_2, this.attributes.mortgageInterestRate = t.attributes.mortgage_interest_rate, this.attributes.mortgageInterestRateType = t.attributes.mortgage_interest_rate_type, this.attributes.mortgageLenderCode = t.attributes.mortgage_lender_code, this.attributes.mortgageRate2 = t.attributes.mortgage_rate_2, this.attributes.mortgageRecordingDate = t.attributes.mortgage_recording_date, this.attributes.mortgageRecordingDate2 = t.attributes.mortgage_recording_date_2, this.attributes.mortgageTerm = t.attributes.mortgage_term, this.attributes.mortgageTerm2 = t.attributes.mortgage_term_2, this.attributes.mortgageTermType = t.attributes.mortgage_term_type, this.attributes.mortgageTermType2 = t.attributes.mortgage_term_type_2, this.attributes.mortgageType = t.attributes.mortgage_type, this.attributes.mortgageType2 = t.attributes.mortgage_type_2, this.attributes.msaCode = t.attributes.msa_code, this.attributes.msaName = t.attributes.msa_name, this.attributes.mudRoom = t.attributes.mud_room, this.attributes.multiParcelFlag = t.attributes.multi_parcel_flag, this.attributes.nameTitleCompany = t.attributes.name_title_company, this.attributes.neighborhoodCode = t.attributes.neighborhood_code, this.attributes.numberOfBuildings = t.attributes.number_of_buildings, this.attributes.office = t.attributes.office, this.attributes.officeSqft = t.attributes.office_sqft, this.attributes.otherTaxExemption = t.attributes.other_tax_exemption, this.attributes.outdoorKitchenFireplace = t.attributes.outdoor_kitchen_fireplace, this.attributes.overheadDoor = t.attributes.overhead_door, this.attributes.ownerFullName = t.attributes.owner_full_name, this.attributes.ownerFullName2 = t.attributes.owner_full_name_2, this.attributes.ownerFullName3 = t.attributes.owner_full_name_3, this.attributes.ownerFullName4 = t.attributes.owner_full_name_4, this.attributes.ownerOccupancyStatus = t.attributes.owner_occupancy_status, this.attributes.ownershipTransferDate = t.attributes.ownership_transfer_date, this.attributes.ownershipTransferDocNumber = t.attributes.ownership_transfer_doc_number, this.attributes.ownershipTransferTransactionId = t.attributes.ownership_transfer_transaction_id, this.attributes.ownershipType = t.attributes.ownership_type, this.attributes.ownershipType2 = t.attributes.ownership_type_2, this.attributes.ownershipVestingRelationCode = t.attributes.ownership_vesting_relation_code, this.attributes.parcelAccountNumber = t.attributes.parcel_account_number, this.attributes.parcelMapBook = t.attributes.parcel_map_book, this.attributes.parcelMapPage = t.attributes.parcel_map_page, this.attributes.parcelNumberAlternate = t.attributes.parcel_number_alternate, this.attributes.parcelNumberFormatted = t.attributes.parcel_number_formatted, this.attributes.parcelNumberPrevious = t.attributes.parcel_number_previous, this.attributes.parcelNumberYearAdded = t.attributes.parcel_number_year_added, this.attributes.parcelNumberYearChange = t.attributes.parcel_number_year_change, this.attributes.parcelRawNumber = t.attributes.parcel_raw_number, this.attributes.parcelShellRecord = t.attributes.parcel_shell_record, this.attributes.parkingSpaces = t.attributes.parking_spaces, this.attributes.patioArea = t.attributes.patio_area, this.attributes.phaseName = t.attributes.phase_name, this.attributes.plumbingFixturesCount = t.attributes.plumbing_fixtures_count, this.attributes.poleStruct = t.attributes.pole_struct, this.attributes.poleStructSqft = t.attributes.pole_struct_sqft, this.attributes.pond = t.attributes.pond, this.attributes.pool = t.attributes.pool, this.attributes.poolArea = t.attributes.pool_area, this.attributes.poolhouse = t.attributes.poolhouse, this.attributes.poolhouseSqft = t.attributes.poolhouse_sqft, this.attributes.porch = t.attributes.porch, this.attributes.porchArea = t.attributes.porch_area, this.attributes.poultryHouse = t.attributes.poultry_house, this.attributes.poultryHouseSqft = t.attributes.poultry_house_sqft, this.attributes.previousAssessedValue = t.attributes.previous_assessed_value, this.attributes.priorSaleAmount = t.attributes.prior_sale_amount, this.attributes.priorSaleDate = t.attributes.prior_sale_date, this.attributes.propertyAddressCarrierRouteCode = t.attributes.property_address_carrier_route_code, this.attributes.propertyAddressCity = t.attributes.property_address_city, this.attributes.propertyAddressFull = t.attributes.property_address_full, this.attributes.propertyAddressHouseNumber = t.attributes.property_address_house_number, this.attributes.propertyAddressPostDirection = t.attributes.property_address_post_direction, this.attributes.propertyAddressPreDirection = t.attributes.property_address_pre_direction, this.attributes.propertyAddressState = t.attributes.property_address_state, this.attributes.propertyAddressStreetName = t.attributes.property_address_street_name, this.attributes.propertyAddressStreetSuffix = t.attributes.property_address_street_suffix, this.attributes.propertyAddressUnitDesignator = t.attributes.property_address_unit_designator, this.attributes.propertyAddressUnitValue = t.attributes.property_address_unit_value, this.attributes.propertyAddressZip4 = t.attributes.property_address_zip_4, this.attributes.propertyAddressZipcode = t.attributes.property_address_zipcode, this.attributes.publicationDate = t.attributes.publication_date, this.attributes.quarter = t.attributes.quarter, this.attributes.quarterQuarter = t.attributes.quarter_quarter, this.attributes.quonset = t.attributes.quonset, this.attributes.quonsetSqft = t.attributes.quonset_sqft, this.attributes.range = t.attributes.range, this.attributes.recordingDate = t.attributes.recording_date, this.attributes.roofCover = t.attributes.roof_cover, this.attributes.roofFrame = t.attributes.roof_frame, this.attributes.rooms = t.attributes.rooms, this.attributes.rvParking = t.attributes.rv_parking, this.attributes.safeRoom = t.attributes.safe_room, this.attributes.saleAmount = t.attributes.sale_amount, this.attributes.saleDate = t.attributes.sale_date, this.attributes.sauna = t.attributes.sauna, this.attributes.section = t.attributes.section, this.attributes.securityAlarm = t.attributes.security_alarm, this.attributes.seniorTaxExemption = t.attributes.senior_tax_exemption, this.attributes.sewerType = t.attributes.sewer_type, this.attributes.shed = t.attributes.shed, this.attributes.shedSqft = t.attributes.shed_sqft, this.attributes.silo = t.attributes.silo, this.attributes.siloSqft = t.attributes.silo_sqft, this.attributes.sittingRoom = t.attributes.sitting_room, this.attributes.situsCounty = t.attributes.situs_county, this.attributes.situsState = t.attributes.situs_state, this.attributes.soundSystem = t.attributes.sound_system, this.attributes.sportsCourt = t.attributes.sports_court, this.attributes.sprinklers = t.attributes.sprinklers, this.attributes.stable = t.attributes.stable, this.attributes.stableSqft = t.attributes.stable_sqft, this.attributes.storageBuilding = t.attributes.storage_building, this.attributes.storageBuildingSqft = t.attributes.storage_buildling_sqft, this.attributes.storiesNumber = t.attributes.stories_number, this.attributes.stormShelter = t.attributes.storm_shelter, this.attributes.stormShutter = t.attributes.storm_shutter, this.attributes.structureStyle = t.attributes.structure_style, this.attributes.study = t.attributes.study, this.attributes.subdivision = t.attributes.subdivision, this.attributes.suffix = t.attributes.suffix, this.attributes.suffix2 = t.attributes.suffix_2, this.attributes.suffix3 = t.attributes.suffix_3, this.attributes.suffix4 = t.attributes.suffix_4, this.attributes.sunroom = t.attributes.sunroom, this.attributes.taxAssessYear = t.attributes.tax_assess_year, this.attributes.taxBilledAmount = t.attributes.tax_billed_amount, this.attributes.taxDelinquentYear = t.attributes.tax_delinquent_year, this.attributes.taxFiscalYear = t.attributes.tax_fiscal_year, this.attributes.taxJurisdiction = t.attributes.tax_jurisdiction, this.attributes.taxRateArea = t.attributes.tax_rate_area, this.attributes.tennisCourt = t.attributes.tennis_court, this.attributes.topographyCode = t.attributes.topography_code, this.attributes.totalMarketValue = t.attributes.total_market_value, this.attributes.township = t.attributes.township, this.attributes.tractNumber = t.attributes.tract_number, this.attributes.transferAmount = t.attributes.transfer_amount, this.attributes.trustDescription = t.attributes.trust_description, this.attributes.unitCount = t.attributes.unit_count, this.attributes.upperFloorsSqft = t.attributes.upper_floors_sqft, this.attributes.utility = t.attributes.utility, this.attributes.utilityBuilding = t.attributes.utility_building, this.attributes.utilityBuildingSqft = t.attributes.utility_building_sqft, this.attributes.utilitySqft = t.attributes.utility_sqft, this.attributes.veteranTaxExemption = t.attributes.veteran_tax_exemption, this.attributes.viewDescription = t.attributes.view_description, this.attributes.waterFeature = t.attributes.water_feature, this.attributes.waterServiceType = t.attributes.water_service_type, this.attributes.wetBar = t.attributes.wet_bar, this.attributes.widowTaxExemption = t.attributes.widow_tax_exemption, this.attributes.widthLinearFootage = t.attributes.width_linear_footage, this.attributes.wineCellar = t.attributes.wine_cellar, this.attributes.yearBuilt = t.attributes.year_built, this.attributes.zoning = t.attributes.zoning);
   }
 };
-const fr = {
+const tr = {
   Batch: G,
   ClientBuilder: Oe,
-  buildClient: or,
+  buildClient: Ks,
   SharedCredentials: Et,
   StaticCredentials: ge,
   Errors: qe
-}, _r = {
+}, er = {
   Lookup: we,
   Candidate: Tt
-}, yr = {
+}, ir = {
   Lookup: xe,
   Result: Re
-}, pr = {
-  Lookup: ur,
+}, sr = {
+  Lookup: Gs,
   Suggestion: Ee
-}, gr = {
-  Lookup: cr,
+}, rr = {
+  Lookup: Ws,
   Result: Te
-}, wr = {
-  Lookup: dr,
+}, nr = {
+  Lookup: Zs,
   Candidate: Ce
-}, Sr = {
-  Lookup: lr
-}, xr = {
-  Lookup: hr,
+}, ar = {
+  Lookup: Xs
+}, or = {
+  Lookup: Ys,
   Suggestion: Pe
-}, Rr = {
-  Lookup: mr,
-  Response: br
-}, Jr = {
-  core: fr,
-  usStreet: _r,
-  usZipcode: yr,
-  usAutocompletePro: pr,
-  usExtract: gr,
-  internationalStreet: wr,
-  usReverseGeo: Sr,
-  internationalAddressAutocomplete: xr,
-  usEnrichment: Rr
+}, ur = {
+  Lookup: Qs,
+  Response: Ds
+}, Nr = {
+  core: tr,
+  usStreet: er,
+  usZipcode: ir,
+  usAutocompletePro: sr,
+  usExtract: rr,
+  internationalStreet: nr,
+  usReverseGeo: ar,
+  internationalAddressAutocomplete: or,
+  usEnrichment: ur
 };
 export {
-  fr as core,
-  Jr as default,
-  xr as internationalAddressAutocomplete,
-  wr as internationalStreet,
-  pr as usAutocompletePro,
-  Rr as usEnrichment,
-  gr as usExtract,
-  Sr as usReverseGeo,
-  _r as usStreet,
-  yr as usZipcode
+  tr as core,
+  Nr as default,
+  or as internationalAddressAutocomplete,
+  nr as internationalStreet,
+  sr as usAutocompletePro,
+  ur as usEnrichment,
+  rr as usExtract,
+  ar as usReverseGeo,
+  er as usStreet,
+  ir as usZipcode
 };
 //# sourceMappingURL=index.es.js.map

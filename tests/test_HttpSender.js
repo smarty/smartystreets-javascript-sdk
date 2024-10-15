@@ -1,7 +1,6 @@
 import { Request } from "../src/Request.js";
 import { HttpSender } from "../src/HttpSender.js";
 import { buildSmartyResponse } from "../src/util/buildSmartyResponse.js";
-import info from "../package.json" assert { type: "json" };
 import { expect } from "chai";
 
 describe("An Axios implementation of a HTTP sender", function () {
@@ -62,7 +61,6 @@ describe("An Axios implementation of a HTTP sender", function () {
     let request = new Request("");
     let sender = new HttpSender();
     let requestConfig = sender.buildRequestConfig(request);
-    let version = info.version;
 
     expect(requestConfig.hasOwnProperty("headers")).to.equal(true);
     expect(requestConfig.headers["Content-Type"]).to.equal(
