@@ -65,6 +65,13 @@ class Candidate {
 			this.components.postBox = responseData.components.post_box;
 			this.components.postBoxType = responseData.components.post_box_type;
 			this.components.postBoxNumber = responseData.components.post_box_number;
+			this.components.additionalContent = responseData.components.additional_content;
+			this.components.deliveryInstallation = responseData.components.delivery_installation;
+			this.components.deliveryInstallationType = responseData.components.delivery_installation_type;
+			this.components.deliveryInstallationQualifierName = responseData.components.delivery_installation_qualifier_name;
+			this.components.route = responseData.components.route;
+			this.components.routeNumber = responseData.components.route_number;
+			this.components.routeType = responseData.components.route_type;
 		}
 
 		this.analysis = {};
