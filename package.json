@@ -21,6 +21,11 @@
   "http",
   "sdk"
  ],
+ "files": [
+  "dist",
+  "README.md",
+  "LICENSE"
+ ],
  "main": "dist/cjs/index.cjs",
  "module": "dist/esm/index.mjs",
  "exports": {
@@ -40,12 +45,12 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "@babel/preset-env": "^7.25.4",
-  "@rollup/plugin-commonjs": "^26.0.3",
+  "@babel/preset-env": "^7.25.8",
+  "@rollup/plugin-commonjs": "^28.0.1",
   "@rollup/plugin-json": "^6.1.0",
   "@rollup/plugin-node-resolve": "^15.3.0",
   "@rollup/plugin-terser": "^0.4.4",
-  "chai": "^4.3.6",
+  "chai": "^5.1.1",
   "mocha": "^10.2.0",
   "rollup": "^4.22.5",
   "rollup-plugin-delete": "^2.1.0"

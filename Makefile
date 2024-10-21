@@ -13,7 +13,7 @@ node_modules:
 build:
 	npm run build
 
-publish: test version upload unversion
+publish: test version build upload unversion
 	tagit -p
 	git push origin --tags
 
