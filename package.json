@@ -21,9 +21,22 @@
   "http",
   "sdk"
  ],
- "main": "index.js",
+ "files": [
+  "dist",
+  "README.md",
+  "LICENSE"
+ ],
+ "main": "dist/cjs/index.cjs",
+ "module": "dist/esm/index.mjs",
+ "exports": {
+  ".": {
+   "import": "./dist/esm/index.mjs",
+   "default": "./dist/cjs/index.cjs"
+  }
+ },
  "scripts": {
-  "test": "mocha 'tests/**/*.js'"
+  "build": "rollup --config",
+  "test": "mocha 'tests/**/*.{mjs,js}'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
  "license": "Apache-2.0",
@@ -32,11 +45,18 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
+  "@babel/preset-env": "^7.25.8",
+  "@rollup/plugin-commonjs": "^28.0.1",
+  "@rollup/plugin-json": "^6.1.0",
+  "@rollup/plugin-node-resolve": "^15.3.0",
+  "@rollup/plugin-terser": "^0.4.4",
   "chai": "^4.3.6",
-  "mocha": "^10.2.0"
+  "mocha": "^10.2.0",
+  "rollup": "^4.22.5",
+  "rollup-plugin-delete": "^2.1.0"
  },
  "dependencies": {
-  "axios": "^1.7.4",
-  "axios-retry": "4.0.0"
+  "axios": "^1.7.7",
+  "axios-retry": "^4.5.0"
  }
 }
