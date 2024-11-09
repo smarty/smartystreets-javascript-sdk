@@ -4,7 +4,7 @@ const Request = require("../src/Request");
 const HttpSender = require("../src/HttpSender");
 const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
 
-describe ("An Axios implementation of a HTTP sender", function () {
+describe ("A fetch implementation of a HTTP sender", function () {
 	it("adds a data payload to the HTTP request config.", function () {
 		let expectedPayload = "test payload";
 		let request = new Request(expectedPayload);

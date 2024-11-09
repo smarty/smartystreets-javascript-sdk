@@ -1,9 +1,9 @@
-const Axios = require("axios").default;
 const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
+const {newAxiosAdapter} = require("./util/axiosAdapter");
 
 class HttpSender {
 	constructor(timeout = 10000, proxyConfig, debug = false) {
-		this.axiosInstance = Axios.create();
+		this.httpSender = newAxiosAdapter();
 		this.timeout = timeout;
 		this.proxyConfig = proxyConfig;
 		if (debug) this.enableDebug();
@@ -34,7 +34,7 @@ class HttpSender {
 		return new Promise((resolve, reject) => {
 			let requestConfig = this.buildRequestConfig(request);
 
-			this.axiosInstance(requestConfig)
+			this.httpSender(requestConfig)
 				.then(response => {
 					let smartyResponse = buildSmartyResponse(response);
 
@@ -47,13 +47,13 @@ class HttpSender {
 	}
 
 	enableDebug() {
-		this.axiosInstance.interceptors.request.use(request => {
+		this.httpSender.interceptors.request.use(request => {
 			console.log('Request:\r\n', request);
 			console.log('\r\n*******************************************\r\n');
 			return request
 		});
 
-		this.axiosInstance.interceptors.response.use(response => {
+		this.httpSender.interceptors.response.use(response => {
 			console.log('Response:\r\n');
 			console.log('Status:', response.status, response.statusText);
 			console.log('Headers:', response.headers);

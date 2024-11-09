@@ -6,7 +6,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
   input: "index.mjs",
-  external: ["axios", "axios-retry"],
   output: [
     {
       dir: "dist/cjs",
