@@ -8,6 +8,10 @@ class InputData {
 		if (this.lookupFieldIsPopulated(lookupField)) this.data[apiField] = this.formatData(this.lookup[lookupField]);
 	}
 
+	addCustomParameter(key, value) {
+		this.data[key] = value;
+	}
+
 	formatData(field) {
 		if (Array.isArray(field)) return field.join(";");
 		else return field;

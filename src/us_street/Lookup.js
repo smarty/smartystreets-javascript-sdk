@@ -19,7 +19,13 @@ class Lookup {
 		this.inputId = inputId;
 		this.format = format;
 		this.result = [];
+		this.customParameters = {};
 	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
+	}
+
 }
 
 module.exports = Lookup;
