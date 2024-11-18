@@ -11,6 +11,11 @@ class Lookup {
 		this.longitude = longitude.toFixed(8);
 		this.source = source;
 		this.response = new Response();
+		this.customParameters = {};
+	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
 	}
 }
 
