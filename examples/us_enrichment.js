@@ -1,4 +1,4 @@
-const SmartySDK = require("smartystreets-javascript-sdk");
+const SmartySDK = require("../dist/cjs/index.cjs");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.usEnrichment.Lookup;
 
@@ -22,7 +22,10 @@ let client = clientBuilder.buildUsEnrichmentClient();
 // Documentation for input fields can be found at:
 // https://www.smarty.com/docs/us-street-api#input-fields
 
-let lookup = new Lookup("334968275");
+let lookup = new Lookup();
+lookup.smartyKey = "334968275";
+
+lookup.addCustomParameter("include", "group_financial");
 
 handleResponse(lookup).then();
 
