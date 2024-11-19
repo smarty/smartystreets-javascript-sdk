@@ -24,10 +24,14 @@ const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 const country = "CAN";
 
 const summaryLookup = new Lookup({search: "123 Anson", country});
-await handleRequest(summaryLookup, "Response of summary results");
+summaryLookup.addCustomParameter("max_results", 1);
 
-const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});
-await handleRequest(detailedLookup, "Response using an address ID to get detailed results");
+(async () => {
+	await handleRequest(summaryLookup, "Response of summary results");
+})();
+
+// const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});
+// await handleRequest(detailedLookup, "Response using an address ID to get detailed results");
 
 function logSuggestions(response, message) {
 	console.log("*** " + message + " ***");

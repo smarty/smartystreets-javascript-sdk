@@ -22,7 +22,12 @@ class Lookup {
 		this.preferZIPCodes = [];
 		this.preferRatio = undefined;
 		this.preferGeolocation = undefined;
-		this.source = undefined
+		this.source = undefined;
+		this.customParameters = {};
+	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
 	}
 }
 

@@ -3,7 +3,7 @@ const InputData = require("../InputData");
 module.exports = (lookup, keyTranslationFormat) => {
 	let inputData = new InputData(lookup);
 
-	const hasCustomParameters = Object.keys(lookup.customParameters).length > 0;
+	const hasCustomParameters = Object.keys(lookup.customParameters ?? {}).length > 0;
 
 	for (let key in keyTranslationFormat) {
 		inputData.add(key, keyTranslationFormat[key]);

@@ -25,7 +25,11 @@ let client = clientBuilder.buildUsAutocompleteProClient();
 // *** Simple Lookup ***
 let lookup = new Lookup("4770 Lincoln");
 
-await handleRequest(lookup, "Simple Lookup");
+lookup.addCustomParameter("max_results", 3);
+
+(async () => {
+	await handleRequest(lookup, "Simple Lookup");
+})();
 
 // *** Using Filter and Prefer ***
 lookup = new Lookup("4770 Lincoln");
@@ -36,14 +40,14 @@ lookup.preferStates = ["IL"];
 lookup.preferRatio = 33;
 lookup.source = "all";
 
-await handleRequest(lookup, "Using Filter and Prefer");
+// await handleRequest(lookup, "Using Filter and Prefer");
 
 // *** Using 'selected' to Expand Secondaries ***
 lookup = new Lookup("4770 Lincoln");
 
 lookup.selected = "4770 N Lincoln Ave Ste 2 (3) Chicago, IL 60625";
 
-await handleRequest(lookup, "Using 'selected' to Expand Secondaries")
+// await handleRequest(lookup, "Using 'selected' to Expand Secondaries")
 
 // ************************************************
 
