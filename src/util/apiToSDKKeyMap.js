@@ -12,6 +12,7 @@ module.exports = {
 		"match": "match",
 		"format": "format",
 		"candidates": "maxCandidates",
+		"county_source": "countySource"
 	},
 	usAutocompletePro: {
 		search: "search",
