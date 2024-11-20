@@ -1,4 +1,4 @@
-const SmartySDK = require("../dist/cjs/index.cjs");
+const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.internationalStreet.Lookup;
 
@@ -23,26 +23,25 @@ let client = clientBuilder.buildInternationalStreetClient();
 // https://www.smarty.com/docs/cloud/international-street-api#http-input-fields
 
 let lookup1 = new Lookup("CA", "262 Browndale Cr, Richmond Hill, ON");
+// uncomment the following line to add a custom parameter
 // lookup1.addCustomParameter("input_id", 1234);
-// lookup1.addCustomParameter("geocode", true);
 
-// let lookup2 = new Lookup();
-// lookup2.geocode = false;
-// lookup2.organization = "John Doe";
-// lookup2.address1 = "Rua Padre Antonio D'Angelo 121";
-// lookup2.address2 = "Casa Verde";
-// lookup2.locality = "Sao Paulo";
-// lookup2.administrativeArea = "SP";
-// lookup2.country = "Brazil";
-// lookup2.postalCode = "02516-050";
+let lookup2 = new Lookup();
+lookup2.inputId = "ID-8675309";
+lookup2.geocode = false;
+lookup2.organization = "John Doe";
+lookup2.address1 = "Rua Padre Antonio D'Angelo 121";
+lookup2.address2 = "Casa Verde";
+lookup2.locality = "Sao Paulo";
+lookup2.administrativeArea = "SP";
+lookup2.country = "Brazil";
+lookup2.postalCode = "02516-050";
 
-(async () => {
-	await handleRequest(lookup1);
-})();
-// await handleRequest(lookup2)
+await handleRequest(lookup1)
+await handleRequest(lookup2)
 
 function displayResult(result) {
-	// console.log(result);
+	console.log(result.result[0].components);
 }
 
 function handleError(error) {

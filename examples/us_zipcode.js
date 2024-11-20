@@ -1,4 +1,4 @@
-const SmartySDK = require("../dist/cjs/index.cjs");
+const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.usZipcode.Lookup;
 
@@ -8,7 +8,7 @@ const Lookup = SmartySDK.usZipcode.Lookup;
 // const credentials = new SmartyCore.StaticCredentials(authId, authToken);
 
 // for client-side requests (browser/mobile), use this code:
-let key = "your key";
+let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 let clientBuilder = new SmartyCore.ClientBuilder(credentials);
@@ -21,20 +21,33 @@ let client = clientBuilder.buildUsZipcodeClient();
 
 let lookup1 = new Lookup();
 lookup1.inputId = "01189998819991197253"; // Optional ID from your system
-lookup1.city = "Provo";
-lookup1.state = "Utah";
+lookup1.zipCode = "49786";
 
-lookup1.addCustomParameter("zipcode", "84601");
+let lookup2 = new Lookup();
+lookup2.inputId = "dfc33cb6-829e-4fea-aa1b-b6d6580f0817";
+lookup2.city = "Provo";
+lookup2.state = "UT";
+lookup2.zipCode = "84604";
 
-(async () => {
-	await handleResponse(lookup1);
-})();
+let lookup3 = new Lookup();
+lookup3.city = "Phoenix";
+lookup3.state = "AZ";
 
+// uncomment the following line to add a custom parameter
+// lookup3.addCustomParameter("input_id", 1234);
+
+let batch = new SmartyCore.Batch();
+batch.add(lookup1);
+batch.add(lookup2);
+batch.add(lookup3);
+
+await handleResponse(batch);
 
 function viewResults(response) {
-	response.lookups.map((lookup, i) => {
-		console.log("zipcodes count: ", lookup.result[0].zipcodes.length) 
-	})
+	response.lookups.map(lookup => lookup.result.map(candidate => {
+		candidate.cities.map(city => console.log(city.city));
+		// candidate.zipcodes.map(zipcode => console.log(zipcode.zipcode));
+	}));
 }
 
 async function handleResponse(lookup) {

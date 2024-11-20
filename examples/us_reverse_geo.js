@@ -8,7 +8,7 @@ const Lookup = SmartySDK.usReverseGeo.Lookup;
 // const credentials = new SmartyCore.StaticCredentials(authId, authToken);
 
 // for client-side requests (browser/mobile), use this code:
-let key = "your key";
+let key = process.env.SMARTY_EMBEDDED_KEY;
 const credentials = new SmartyCore.SharedCredentials(key);
 
 // The appropriate license values to be used for your subscriptions
@@ -19,12 +19,10 @@ let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-
 let client = clientBuilder.buildUsReverseGeoClient();
 
 let lookup1 = new Lookup(40.27644, -111.65747);
+// uncomment the following line to add a custom parameter
+// lookup1.addCustomParameter("source", "all");
 
-lookup1.addCustomParameter("source", "all");
-
-(async () => {
-	await handleResponse(lookup1);
-})();
+await handleResponse(lookup1);
 
 function displayResult(result) {
 	console.log(result.response.results[0].address);

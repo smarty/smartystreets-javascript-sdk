@@ -24,14 +24,13 @@ const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 const country = "CAN";
 
 const summaryLookup = new Lookup({search: "123 Anson", country});
-summaryLookup.addCustomParameter("max_results", 1);
+// uncomment the following line to add a custom parameter
+// summaryLookup.addCustomParameter("max_results", 1);
 
-(async () => {
-	await handleRequest(summaryLookup, "Response of summary results");
-})();
+await handleRequest(summaryLookup, "Response of summary results");
 
-// const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});
-// await handleRequest(detailedLookup, "Response using an address ID to get detailed results");
+const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});
+await handleRequest(detailedLookup, "Response using an address ID to get detailed results");
 
 function logSuggestions(response, message) {
 	console.log("*** " + message + " ***");
