@@ -48,6 +48,7 @@ describe("An International Address Autocomplete lookup", function () {
 			maxResults: 5,
 			includeOnlyLocality: undefined,
 			includeOnlyPostalCode: undefined,
+			customParameters: {},
 		};
 		let lookup = new Lookup();
 		expect(lookup).to.deep.equal(defaultLookup);
