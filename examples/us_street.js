@@ -45,7 +45,9 @@ lookup2.maxCandidates = 5;
 let lookup3 = new Lookup();
 lookup3.inputId = "8675309";
 lookup3.street = "1600 Amphitheatre Parkway Mountain View, CA 94043";
-lookup3.maxCandidates = 1;
+
+// uncomment the following line to add a custom parameter
+// lookup3.addCustomParameter("max_candidates", 1);
 
 // NOTE: batches are not supported when using SharedCredentials.
 let batch = new SmartyCore.Batch();

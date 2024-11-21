@@ -7,7 +7,12 @@ class Lookup {
         this.dataSubset = dataSubset;
 
         this.response = {};
+        this.customParameters = {};
     };
+
+    addCustomParameter(key, value) {
+		this.customParameters[key] = value;
+	}
 }
 
 module.exports = Lookup;

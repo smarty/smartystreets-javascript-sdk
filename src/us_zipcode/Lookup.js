@@ -10,6 +10,11 @@ class Lookup {
 		this.zipCode = zipCode;
 		this.inputId = inputId;
 		this.result = [];
+		this.customParameters = {};
+	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
 	}
 }
 

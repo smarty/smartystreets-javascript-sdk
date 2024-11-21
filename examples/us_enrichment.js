@@ -23,6 +23,8 @@ let client = clientBuilder.buildUsEnrichmentClient();
 // https://www.smarty.com/docs/us-street-api#input-fields
 
 let lookup = new Lookup("334968275");
+// uncomment the following line to add a custom parameter
+// lookup.addCustomParameter("include", "group_financial");
 
 handleResponse(lookup).then();
 

@@ -8,6 +8,11 @@ class Lookup {
 		this.maxResults = maxResults;
 		this.includeOnlyLocality = includeOnlyLocality;
 		this.includeOnlyPostalCode = includeOnlyPostalCode;
+		this.customParameters = {};
+	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
 	}
 }
 

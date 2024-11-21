@@ -33,6 +33,9 @@ let lookup3 = new Lookup();
 lookup3.city = "Phoenix";
 lookup3.state = "AZ";
 
+// uncomment the following line to add a custom parameter
+// lookup3.addCustomParameter("input_id", 1234);
+
 let batch = new SmartyCore.Batch();
 batch.add(lookup1);
 batch.add(lookup2);

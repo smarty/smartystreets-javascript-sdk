@@ -35,7 +35,13 @@ class Lookup {
 		this.format = format;
 		this.countySource = countySource;
 		this.result = [];
+		this.customParameters = {};
 	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
+	}
+
 }
 
 module.exports = Lookup;

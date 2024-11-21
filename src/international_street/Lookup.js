@@ -35,6 +35,11 @@ class Lookup {
 
 		this.ensureEnoughInfo = this.ensureEnoughInfo.bind(this);
 		this.ensureValidData = this.ensureValidData.bind(this);
+		this.customParameters = {};
+	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
 	}
 
 	ensureEnoughInfo() {

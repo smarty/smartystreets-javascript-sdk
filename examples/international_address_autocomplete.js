@@ -24,6 +24,9 @@ const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 const country = "CAN";
 
 const summaryLookup = new Lookup({search: "123 Anson", country});
+// uncomment the following line to add a custom parameter
+// summaryLookup.addCustomParameter("max_results", 1);
+
 await handleRequest(summaryLookup, "Response of summary results");
 
 const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});

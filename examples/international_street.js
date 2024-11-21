@@ -23,6 +23,8 @@ let client = clientBuilder.buildInternationalStreetClient();
 // https://www.smarty.com/docs/cloud/international-street-api#http-input-fields
 
 let lookup1 = new Lookup("CA", "262 Browndale Cr, Richmond Hill, ON");
+// uncomment the following line to add a custom parameter
+// lookup1.addCustomParameter("input_id", 1234);
 
 let lookup2 = new Lookup();
 lookup2.inputId = "ID-8675309";

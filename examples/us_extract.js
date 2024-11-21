@@ -24,6 +24,9 @@ lookup.aggressive = true;
 lookup.addressesHaveLineBreaks = false;
 lookup.addressesPerLine = 1;
 
+// uncomment the following line to add a custom parameter
+// lookup.addCustomParameter("addr_line_breaks", false);
+
 await handleRequest(lookup);
 
 function logResult(response) {

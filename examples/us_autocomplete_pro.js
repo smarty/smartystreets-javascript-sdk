@@ -24,6 +24,8 @@ let client = clientBuilder.buildUsAutocompleteProClient();
 
 // *** Simple Lookup ***
 let lookup = new Lookup("4770 Lincoln");
+// uncomment the following line to add a custom parameter
+// lookup.addCustomParameter("max_results", 3);
 
 await handleRequest(lookup, "Simple Lookup");
 

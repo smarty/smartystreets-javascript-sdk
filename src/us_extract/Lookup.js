@@ -18,6 +18,11 @@ class Lookup {
 		this.aggressive = undefined;
 		this.addressesHaveLineBreaks = undefined;
 		this.addressesPerLine = undefined;
+		this.customParameters = {};
+	}
+
+	addCustomParameter(key, value) {
+		this.customParameters[key] = value;
 	}
 }
 

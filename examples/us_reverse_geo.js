@@ -18,7 +18,9 @@ let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["us-
 	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 let client = clientBuilder.buildUsReverseGeoClient();
 
-let lookup1 = new Lookup(40.27644, -111.65747, "all");
+let lookup1 = new Lookup(40.27644, -111.65747);
+// uncomment the following line to add a custom parameter
+// lookup1.addCustomParameter("source", "all");
 
 await handleResponse(lookup1);
 
