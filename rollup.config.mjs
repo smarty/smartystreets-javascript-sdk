@@ -2,27 +2,28 @@ import del from "rollup-plugin-delete";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import terser from "@rollup/plugin-terser";
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
 
 export default {
   input: "index.mjs",
   external: ["axios", "axios-retry"],
   output: [
     {
-      dir: "dist/cjs",
-      format: "cjs",
-      preserveModules: true,
-      preserveModulesRoot: "src",
-      exports: "named",
-      entryFileNames: "[name].cjs",
-    },
-    {
-      dir: "dist/esm",
+      dir: "dist",
       format: "esm",
       preserveModules: true,
       preserveModulesRoot: "src",
       exports: "named",
-      entryFileNames: "[name].mjs",
+      entryFileNames: "esm/[name].mjs",
+    },
+    {
+      dir: "dist",
+      format: "cjs",
+      preserveModules: true,
+      preserveModulesRoot: "src",
+      exports: "named",
+      entryFileNames: "cjs/[name].cjs",
     },
   ],
   plugins: [
@@ -33,5 +34,11 @@ export default {
     }),
     json(),
     terser(),
+    typescript({
+      declaration: true,
+      emitDeclarationOnly: true,
+      outDir: "dist/types",
+      rootDir: "src"
+    }),
   ],
 };
