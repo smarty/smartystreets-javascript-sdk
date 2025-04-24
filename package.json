@@ -28,6 +28,7 @@
  ],
  "main": "dist/cjs/index.cjs",
  "module": "dist/esm/index.mjs",
+ "types": "dist/index.d.ts",
  "exports": {
   ".": {
    "import": "./dist/esm/index.mjs",
@@ -50,13 +51,17 @@
   "@rollup/plugin-json": "^6.1.0",
   "@rollup/plugin-node-resolve": "^15.3.0",
   "@rollup/plugin-terser": "^0.4.4",
+  "@rollup/plugin-typescript": "^12.1.2",
   "chai": "^4.3.6",
   "mocha": "^10.2.0",
   "rollup": "^4.22.5",
-  "rollup-plugin-delete": "^2.1.0"
+  "rollup-plugin-delete": "^2.1.0",
+  "rollup-plugin-dts": "^6.2.1",
+  "typescript": "^5.8.3"
  },
  "dependencies": {
   "axios": "^1.7.7",
-  "axios-retry": "^4.5.0"
+  "axios-retry": "^4.5.0",
+  "tslib": "^2.8.1"
  }
 }

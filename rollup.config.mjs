@@ -2,9 +2,11 @@ import del from "rollup-plugin-delete";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import terser from "@rollup/plugin-terser";
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
+import dts from "rollup-plugin-dts";
 
-export default {
+export default [{
   input: "index.mjs",
   external: ["axios", "axios-retry"],
   output: [
@@ -26,6 +28,9 @@ export default {
     },
   ],
   plugins: [
+    typescript({
+      tsconfig: "./tsconfig.json",
+    }),
     del({ targets: "dist/*" }),
     nodeResolve(),
     commonjs({
@@ -34,4 +39,12 @@ export default {
     json(),
     terser(),
   ],
-};
+},
+  {
+    input: "index.mjs",
+    output: {
+      file: "dist/index.d.ts",
+      format: "es",
+    },
+    plugins: [dts()],
+  }];

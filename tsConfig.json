@@ -4,7 +4,7 @@
 		"paths": {
 			"@/*": ["./*"]
 		},
-		"allowJs": false,
+		"allowJs": true,
 		"alwaysStrict": true,
 		"exactOptionalPropertyTypes": true,
 		"noPropertyAccessFromIndexSignature": true,
@@ -29,10 +29,7 @@
 		"isolatedModules": true,
 		"jsx": "preserve"
 	},
-	"include": [
-		"**/*.ts",
-		"**/*.tsx"
-	],
+	"include": ["src/**/*"],
 	"exclude": [
 		"node_modules"
 	]
