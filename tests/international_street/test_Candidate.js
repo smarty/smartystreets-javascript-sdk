@@ -22,8 +22,9 @@ describe("An International match candidate", function () {
 				country_iso_3: "14",
 				super_administrative_area: "15",
 				administrative_area: "16",
-				administrative_area_short: "16.1",
-				administrative_area_long: "16.2",
+				administrative_area_iso2: "16.1",
+				administrative_area_short: "16.2",
+				administrative_area_long: "16.3",
 				sub_administrative_area: "17",
 				dependent_locality: "18",
 				dependent_locality_name: "19",
@@ -156,8 +157,9 @@ describe("An International match candidate", function () {
 		expect(components.countryIso3).to.equal("14");
 		expect(components.superAdministrativeArea).to.equal("15");
 		expect(components.administrativeArea).to.equal("16");
-		expect(components.administrativeAreaShort).to.equal("16.1");
-		expect(components.administrativeAreaLong).to.equal("16.2");
+		expect(components.administrativeAreaIso2).to.equal("16.1");
+		expect(components.administrativeAreaShort).to.equal("16.2");
+		expect(components.administrativeAreaLong).to.equal("16.3");
 		expect(components.subAdministrativeArea).to.equal("17");
 		expect(components.dependentLocality).to.equal("18");
 		expect(components.dependentLocalityName).to.equal("19");

@@ -25,6 +25,7 @@ class Candidate {
 			this.components.countryIso3 = responseData.components.country_iso_3;
 			this.components.superAdministrativeArea = responseData.components.super_administrative_area;
 			this.components.administrativeArea = responseData.components.administrative_area;
+			this.components.administrativeAreaIso2 = responseData.components.administrative_area_iso2;
 			this.components.administrativeAreaShort = responseData.components.administrative_area_short;
 			this.components.administrativeAreaLong = responseData.components.administrative_area_long;
 			this.components.subAdministrativeArea = responseData.components.sub_administrative_area;
@@ -101,6 +102,7 @@ class Candidate {
 					this.analysis.changes.components.countryIso3 = responseData.analysis.changes.components.country_iso_3;
 					this.analysis.changes.components.superAdministrativeArea = responseData.analysis.changes.components.super_administrative_area;
 					this.analysis.changes.components.administrativeArea = responseData.analysis.changes.components.administrative_area;
+					this.analysis.changes.components.administrativeAreaIso2 = responseData.analysis.changes.components.administrative_area_iso2;
 					this.analysis.changes.components.administrativeAreaShort = responseData.analysis.changes.components.administrative_area_short;
 					this.analysis.changes.components.administrativeAreaLong = responseData.analysis.changes.components.administrative_area_long;
 					this.analysis.changes.components.subAdministrativeArea = responseData.analysis.changes.components.sub_administrative_area;
