@@ -23,6 +23,7 @@ export default {
       preserveModules: true,
       preserveModulesRoot: "src",
       exports: "named",
+      esModule: false,
       entryFileNames: "cjs/[name].cjs",
     },
   ],
