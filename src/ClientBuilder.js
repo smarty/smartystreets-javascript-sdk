@@ -9,7 +9,7 @@ const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
 const BadCredentialsError = require("./Errors").BadCredentialsError;
 const RetrySender = require("./RetrySender.js");
-const Sleeper = require("./util/Sleeper.js");
+const Sleeper = require("./util/Sleeper.ts");
 
 //TODO: refactor this to work more cleanly with a bundler.
 const UsStreetClient = require("./us_street/Client");
