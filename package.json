@@ -28,6 +28,7 @@
  ],
  "main": "dist/cjs/index.cjs",
  "module": "dist/esm/index.mjs",
+ "types": "dist/types/index.d.ts",
  "exports": {
   ".": {
    "import": "./dist/esm/index.mjs",
@@ -45,18 +46,21 @@
   "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
-  "@babel/preset-env": "^7.25.8",
-  "@rollup/plugin-commonjs": "^28.0.1",
+  "@babel/preset-env": "^7.27.2",
+  "@rollup/plugin-commonjs": "^28.0.3",
   "@rollup/plugin-json": "^6.1.0",
-  "@rollup/plugin-node-resolve": "^15.3.0",
+  "@rollup/plugin-node-resolve": "^16.0.1",
   "@rollup/plugin-terser": "^0.4.4",
+  "@rollup/plugin-typescript": "^12.1.2",
+  "@types/node": "^22.15.17",
   "chai": "^4.3.6",
-  "mocha": "^10.2.0",
-  "rollup": "^4.22.5",
-  "rollup-plugin-delete": "^2.1.0"
+  "mocha": "^11.2.2",
+  "rollup": "^4.40.2",
+  "rollup-plugin-delete": "^3.0.1",
+  "typescript": "^5.8.3"
  },
  "dependencies": {
-  "axios": "^1.7.7",
+  "axios": "^1.9.0",
   "axios-retry": "^4.5.0"
  }
 }

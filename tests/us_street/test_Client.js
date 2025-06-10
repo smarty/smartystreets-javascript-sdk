@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
 const Client = require("../../src/us_street/Client");
-const ClientBuilder = require("../../src/ClientBuilder");
 const Lookup = require("../../src/us_street/Lookup");
 const Candidate = require("../../src/us_street/Candidate");
 const Batch = require("../../src/Batch");

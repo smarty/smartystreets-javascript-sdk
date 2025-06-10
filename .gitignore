@@ -5,3 +5,4 @@ __MACOSX
 /node_modules/
 /dist/
 .env
+.rollup.cache/
