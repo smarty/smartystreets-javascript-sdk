@@ -82,6 +82,24 @@ class Candidate {
 			this.analysis.lacsLinkIndicator = responseData.analysis.lacslink_indicator;
 			this.analysis.isSuiteLinkMatch = responseData.analysis.suitelink_match;
 			this.analysis.enhancedMatch = responseData.analysis.enhanced_match;
+			
+			// Component Analysis
+			if (responseData.analysis.components !== undefined) {
+				this.analysis.components = {};
+				const fields = [
+					"primary_number", "street_predirection", "street_name", "street_postdirection", "street_suffix",
+					"secondary_number", "secondary_designator", "extra_secondary_number", "extra_secondary_designator",
+					"city_name", "state_abbreviation", "zipcode", "plus4_code", "urbanization"
+				];
+				for (const field of fields) {
+					if (responseData.analysis.components[field] !== undefined) {
+						this.analysis.components[field] = {
+							status: responseData.analysis.components[field].status || null,
+							change: responseData.analysis.components[field].change || null
+						};
+					}
+				}
+			}
 		}
 	}
 }

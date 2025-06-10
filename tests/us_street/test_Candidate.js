@@ -66,8 +66,25 @@ describe("A match candidate", function () {
 				suitelink_match: "51",
 				dpv_no_stat: "52",
 				enhanced_match: "53",
+				components: {
+					primary_number: { status: "confirmed", change: ["spelling"] },
+					street_predirection: { status: "confirmed", change: ["spelling"] },
+					street_name: { status: "confirmed", change: ["added"] },
+					street_postdirection: { status: "confirmed" },
+					street_suffix: { status: "confirmed" },
+					secondary_number: { status: "confirmed" },
+					secondary_designator: { status: "confirmed" },
+					extra_secondary_number: { status: "confirmed" },
+					extra_secondary_designator: { status: "confirmed", change: ["abbreviated"] },
+					city_name: { status: "confirmed" },
+					state_abbreviation: { status: "confirmed" },
+					zipcode: { status: "confirmed" },
+					plus4_code: { status: "confirmed" },
+					urbanization: { status: "unconfirmed" }
+				}
 			}
 		};
+
 		const candidate = new Candidate(sampleResponse);
 
 		expect(candidate.inputIndex).to.equal(0);
@@ -129,5 +146,33 @@ describe("A match candidate", function () {
 		expect(candidate.analysis.isSuiteLinkMatch).to.equal('51');
 		expect(candidate.analysis.noStat).to.equal('52');
 		expect(candidate.analysis.enhancedMatch).to.equal('53');
+
+		expect(candidate.analysis.components.primary_number.status).to.equal("confirmed");
+		expect(candidate.analysis.components.primary_number.change).to.deep.equal(["spelling"]);
+
+		expect(candidate.analysis.components.street_predirection.status).to.equal("confirmed");
+		expect(candidate.analysis.components.street_predirection.change).to.deep.equal(["spelling"]);
+
+		expect(candidate.analysis.components.street_name.status).to.equal("confirmed");
+		expect(candidate.analysis.components.street_name.change).to.deep.equal(["added"]);
+
+		expect(candidate.analysis.components.street_postdirection.status).to.equal("confirmed");
+		expect(candidate.analysis.components.street_postdirection.change).to.equal(null);
+
+		expect(candidate.analysis.components.street_suffix.status).to.equal("confirmed");
+
+		expect(candidate.analysis.components.secondary_number.status).to.equal("confirmed");
+		expect(candidate.analysis.components.secondary_designator.status).to.equal("confirmed");
+		expect(candidate.analysis.components.extra_secondary_number.status).to.equal("confirmed");
+
+		expect(candidate.analysis.components.extra_secondary_designator.status).to.equal("confirmed");
+		expect(candidate.analysis.components.extra_secondary_designator.change).to.deep.equal(["abbreviated"]);
+
+		expect(candidate.analysis.components.city_name.status).to.equal("confirmed");
+		expect(candidate.analysis.components.state_abbreviation.status).to.equal("confirmed");
+		expect(candidate.analysis.components.zipcode.status).to.equal("confirmed");
+		expect(candidate.analysis.components.plus4_code.status).to.equal("confirmed");
+
+		expect(candidate.analysis.components.urbanization.status).to.equal("unconfirmed");
 	});
 });
