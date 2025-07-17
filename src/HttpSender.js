@@ -1,4 +1,4 @@
-const Axios = require("axios").default;
+const Axios = require("axios");
 const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
 
 class HttpSender {
