@@ -32,6 +32,7 @@ export default {
     nodeResolve(),
     commonjs({
       esmExternals: true,
+      requireReturnsDefault: true,
     }),
     json(),
     terser(),
