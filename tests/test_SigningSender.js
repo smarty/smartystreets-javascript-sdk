@@ -2,8 +2,8 @@ const chai = require("chai");
 const expect = chai.expect;
 const Request = require("../src/Request");
 const SigningSender = require("../src/SigningSender");
-const StaticCredentials = require("../src/StaticCredentials");
-const SharedCredentials = require("../src/SharedCredentials");
+const StaticCredentials = require("../dist/cjs/StaticCredentials.cjs").default;
+const SharedCredentials = require("../dist/cjs/SharedCredentials.cjs").default;
 const Errors = require("../src/Errors");
 
 describe("A signing sender", function () {
@@ -11,7 +11,7 @@ describe("A signing sender", function () {
 	let mockAuthToken = "testToken";
 	let mockHostName = "testHostName";
 	let mockSender = {
-		send: request => new Promise()
+		send: (request) => new Promise(),
 	};
 	let request;
 

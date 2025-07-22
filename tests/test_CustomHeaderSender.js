@@ -1,16 +1,16 @@
 const chai = require("chai");
 const expect = chai.expect;
-const CustomHeaderSender = require("../src/CustomHeaderSender");
+const CustomHeaderSender = require("../dist/cjs/CustomHeaderSender.cjs").default;
 const Request = require("../src/Request");
 
 describe("A custom header sender", function () {
-	it ("adds custom headers to the request.", function () {
-		function MockSender () {
+	it("adds custom headers to the request.", function () {
+		function MockSender() {
 			this.request;
 
 			this.send = (request) => {
 				this.request = request;
-			}
+			};
 		}
 
 		let mockSender = new MockSender();

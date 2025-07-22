@@ -1,6 +1,6 @@
 const chai = require("chai");
 const expect = chai.expect;
-const BaseUrlSender = require("../src/BaseUrlSender");
+const BaseUrlSender = require("../dist/cjs/BaseUrlSender.cjs").default;
 const Request = require("../src/Request");
 
 describe("A base url sender", function () {
@@ -11,7 +11,7 @@ describe("A base url sender", function () {
 
 	beforeEach(() => {
 		innerSender = {
-			send: () => true
+			send: () => true,
 		};
 		request = new Request();
 		urlOverride = "I'm in your base, killing your mans.";
