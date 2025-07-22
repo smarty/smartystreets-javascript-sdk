@@ -8,7 +8,7 @@ const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
 const BadCredentialsError = require("./Errors").BadCredentialsError;
-const RetrySender = require("./RetrySender.js");
+const RetrySender = require("./RetrySender");
 const Sleeper = require("./util/Sleeper.ts");
 
 //TODO: refactor this to work more cleanly with a bundler.
@@ -27,7 +27,8 @@ const US_EXTRACT_API_URL = "https://us-extract.api.smarty.com/";
 const US_STREET_API_URL = "https://us-street.api.smarty.com/street-address";
 const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smarty.com/lookup";
 const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smarty.com/lookup";
-const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL = "https://international-autocomplete.api.smarty.com/v2/lookup";
+const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL =
+	"https://international-autocomplete.api.smarty.com/v2/lookup";
 const US_ENRICHMENT_API_URL = "https://us-enrichment.api.smarty.com/lookup";
 
 /**
@@ -201,7 +202,10 @@ class ClientBuilder {
 	}
 
 	buildInternationalAddressAutocompleteClient() {
-		return this.buildClient(INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL, InternationalAddressAutocompleteClient);
+		return this.buildClient(
+			INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL,
+			InternationalAddressAutocompleteClient,
+		);
 	}
 
 	buildUsEnrichmentClient() {

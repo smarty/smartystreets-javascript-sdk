@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
-const RetrySender = require("../src/RetrySender");
-const {MockSenderWithStatusCodesAndHeaders} = require("./fixtures/mock_senders");
+const RetrySender = require("../dist/cjs/RetrySender.cjs").default;
+const { MockSenderWithStatusCodesAndHeaders } = require("./fixtures/mock_senders");
 const Request = require("../src/Request.js");
 const MockSleeper = require("./fixtures/MockSleeper.js");
 
@@ -11,7 +11,7 @@ async function sendWithRetry(retries, inner, sleeper) {
 	return await sender.send(request);
 }
 
-describe ("Retry Sender tests", function () {
+describe("Retry Sender tests", function () {
 	it("test success does not retry", async function () {
 		let inner = new MockSenderWithStatusCodesAndHeaders(["200"]);
 		await sendWithRetry(5, inner, new MockSleeper());
@@ -27,7 +27,7 @@ describe ("Retry Sender tests", function () {
 	});
 
 	it("test will retry until success", async function () {
-		let inner =  new MockSenderWithStatusCodesAndHeaders(["500", "500", "500", "200", "500"]);
+		let inner = new MockSenderWithStatusCodesAndHeaders(["500", "500", "500", "200", "500"]);
 		await sendWithRetry(10, inner, new MockSleeper());
 
 		expect(inner.currentStatusCodeIndex).to.equal(4);
@@ -45,12 +45,27 @@ describe ("Retry Sender tests", function () {
 	});
 
 	it("test backoff does not exceed max", async function () {
-		let inner = new MockSenderWithStatusCodesAndHeaders(["500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "500", "200"]);
+		let inner = new MockSenderWithStatusCodesAndHeaders([
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"500",
+			"200",
+		]);
 		const sleeper = new MockSleeper();
 
 		await sendWithRetry(20, inner, sleeper);
 
-		expect(sleeper.sleepDurations).to.deep.equal([0,1,2,3,4,5,6,7,8,9,10,10,10]);
+		expect(sleeper.sleepDurations).to.deep.equal([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10]);
 	});
 
 	it("test empty status does not retry", async function () {
@@ -70,7 +85,7 @@ describe ("Retry Sender tests", function () {
 	});
 
 	it("test rate limit error return", async function () {
-		let inner = new MockSenderWithStatusCodesAndHeaders(["429"], {"Retry-After": 7});
+		let inner = new MockSenderWithStatusCodesAndHeaders(["429"], { "Retry-After": 7 });
 		const sleeper = new MockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);
@@ -79,7 +94,7 @@ describe ("Retry Sender tests", function () {
 	});
 
 	it("test retry after invalid value", async function () {
-		let inner = new MockSenderWithStatusCodesAndHeaders(["429"], {"Retry-After": "a"});
+		let inner = new MockSenderWithStatusCodesAndHeaders(["429"], { "Retry-After": "a" });
 		const sleeper = new MockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);
