@@ -37,7 +37,9 @@
  },
  "scripts": {
   "build": "rollup --config",
-  "test": "mocha 'tests/**/*.{mjs,js}'"
+  "test": "npm run test:js && npm run test:ts",
+  "test:js": "mocha 'tests/**/*.{mjs,js}'",
+  "test:ts": "mocha --require tsx/cjs 'tests/**/*.ts'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
  "license": "Apache-2.0",
@@ -52,11 +54,14 @@
   "@rollup/plugin-node-resolve": "^16.0.1",
   "@rollup/plugin-terser": "^0.4.4",
   "@rollup/plugin-typescript": "^12.1.2",
+  "@types/chai": "^5.2.2",
+  "@types/mocha": "^10.0.10",
   "@types/node": "^22.15.17",
   "chai": "^4.3.6",
   "mocha": "^11.2.2",
   "rollup": "^4.40.2",
   "rollup-plugin-delete": "^3.0.1",
+  "tsx": "^4.20.3",
   "typescript": "^5.8.3"
  },
  "dependencies": {

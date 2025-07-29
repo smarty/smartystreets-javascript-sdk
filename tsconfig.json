@@ -30,9 +30,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "types": ["mocha", "chai", "node"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "tests/**/*.ts"],
   "exclude": [
     "node_modules"
   ]
