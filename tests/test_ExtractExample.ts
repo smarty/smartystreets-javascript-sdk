@@ -11,7 +11,6 @@ describe("Extract example test", () => {
 
 	const usExtractClient = clientBuilder.buildUsExtractClient();
 
-	// Helper function to skip tests when no credentials are provided
 	const skipIfNoCredentials = (): boolean => {
 		if (!authId || !authToken) {
 			expect("bypass").to.equal("bypass");

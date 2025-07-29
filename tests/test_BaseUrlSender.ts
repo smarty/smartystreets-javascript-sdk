@@ -1,17 +1,18 @@
-const chai = require("chai");
-const expect = chai.expect;
-const BaseUrlSender = require("../dist/cjs/BaseUrlSender.cjs").default;
-const Request = require("../src/Request");
+import { expect } from "chai";
+import BaseUrlSender from "../src/BaseUrlSender.js";
+import Request from "../src/Request.js";
+import Response from "../src/Response.js";
+import { Sender } from "../src/types.js";
 
 describe("A base url sender", function () {
-	let innerSender;
-	let request;
-	let urlOverride;
-	let baseUrlSender;
+	let innerSender: Sender;
+	let request: Request;
+	let urlOverride: string;
+	let baseUrlSender: BaseUrlSender;
 
 	beforeEach(() => {
 		innerSender = {
-			send: () => true,
+			send: () => Promise.resolve(new Response(200, {})),
 		};
 		request = new Request();
 		urlOverride = "I'm in your base, killing your mans.";

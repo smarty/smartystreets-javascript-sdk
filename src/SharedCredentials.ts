@@ -1,3 +1,5 @@
+import { Request } from "./types.js";
+
 export default class SharedCredentials {
 	private authId: string;
 	private hostName: string | undefined;
@@ -7,7 +9,7 @@ export default class SharedCredentials {
 		this.hostName = hostName;
 	}
 
-	sign(request: any): void {
+	sign(request: Request): void {
 		request.parameters["key"] = this.authId;
 		if (this.hostName) request.headers["Referer"] = "https://" + this.hostName;
 	}
