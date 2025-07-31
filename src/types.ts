@@ -20,3 +20,14 @@ export interface Sender {
 export interface Sleeper {
 	sleep(seconds: number): Promise<void>;
 }
+
+export interface MockSenderInstance extends Sender {
+	statusCodes: string[];
+	headers?: Record<string, unknown> | undefined;
+	error?: string | undefined;
+	currentStatusCodeIndex: number;
+}
+
+export interface MockSleeperInstance extends Sleeper {
+	sleepDurations: number[];
+}
