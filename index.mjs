@@ -2,11 +2,9 @@
  * this files is the entry point for rollup to bundle the library
  * it exports all the classes and functions as named exports
  */
-import AgentSender from "./src/AgentSender.js";
 import Batch from "./src/Batch.js";
 import ClientBuilder from "./src/ClientBuilder.js";
 import buildClient from "./src/util/buildClients.js";
-import Request from "./src/Request.js";
 import SharedCredentials from "./src/SharedCredentials.js";
 import StaticCredentials from "./src/StaticCredentials.js";
 import Errors from "./src/Errors.js";
@@ -35,11 +33,9 @@ import LookupUSEnrichment from "./src/us_enrichment/Lookup.js";
 import ResponseUSEnrichment from "./src/us_enrichment/Response.js";
 
 export const core = {
-	AgentSender,
 	Batch,
 	ClientBuilder,
 	buildClient,
-	Request,
 	SharedCredentials,
 	StaticCredentials,
 	Errors,
