@@ -1,0 +1,7 @@
+# Ignore artifacts:
+.vscode
+README.md
+package.json
+package-lock.json
+dist/
+.idea/
