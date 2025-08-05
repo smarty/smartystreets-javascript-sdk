@@ -7,7 +7,7 @@ export interface Request {
 }
 
 export interface Response {
-	statusCode: string | number;
+	statusCode: number;
 	payload: object[] | object | string | null;
 	error: Error | null;
 	headers: Record<string, string>;

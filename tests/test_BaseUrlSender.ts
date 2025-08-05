@@ -2,7 +2,7 @@ import { expect } from "chai";
 import BaseUrlSender from "../src/BaseUrlSender.js";
 import Request from "../src/Request.js";
 import Response from "../src/Response.js";
-import { Sender } from "../src/types.js";
+import { Sender } from "../src/types";
 
 describe("A base url sender", function () {
 	let innerSender: Sender;

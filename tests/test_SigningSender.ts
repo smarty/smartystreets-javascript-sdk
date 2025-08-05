@@ -4,7 +4,7 @@ import Response from "../src/Response.js";
 import SigningSender from "../src/SigningSender.js";
 import StaticCredentials from "../src/StaticCredentials.js";
 import SharedCredentials from "../src/SharedCredentials.js";
-import { UnprocessableEntityError } from "../src/Errors.js";
+import { UnprocessableEntityError } from "../src/Errors";
 
 describe("A signing sender", function () {
 	const mockAuthId = "testId";
@@ -40,7 +40,9 @@ describe("A signing sender", function () {
 		expect("key" in request.parameters).to.equal(true);
 		expect((request.parameters as Record<string, string>)["key"]).to.equal(mockAuthId);
 		expect("Referer" in request.headers).to.equal(true);
-		expect((request.headers as Record<string, string>)["Referer"]).to.equal("https://" + mockHostName);
+		expect((request.headers as Record<string, string>)["Referer"]).to.equal(
+			"https://" + mockHostName,
+		);
 	});
 
 	it("errors if signing a POST request with shared credentials.", function () {

@@ -3,7 +3,7 @@ import RetrySender from "../src/RetrySender.js";
 import { MockSenderWithStatusCodesAndHeaders } from "./fixtures/mock_senders.js";
 import Request from "../src/Request.js";
 import Response from "../src/Response.js";
-import type { Sender, Sleeper, MockSenderInstance, MockSleeperInstance } from "../src/types.js";
+import type { Sender, Sleeper, MockSenderInstance, MockSleeperInstance } from "../src/types";
 
 class CompatibleMockSender implements MockSenderInstance {
 	statusCodes: string[];

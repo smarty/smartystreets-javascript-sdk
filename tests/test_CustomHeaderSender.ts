@@ -2,7 +2,7 @@ import { expect } from "chai";
 import CustomHeaderSender from "../src/CustomHeaderSender.js";
 import Request from "../src/Request.js";
 import Response from "../src/Response.js";
-import { Sender } from "../src/types.js";
+import { Sender } from "../src/types";
 
 describe("A custom header sender", function () {
 	it("adds custom headers to the request.", function () {
