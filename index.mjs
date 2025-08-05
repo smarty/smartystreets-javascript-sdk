@@ -33,61 +33,61 @@ import LookupUSEnrichment from "./src/us_enrichment/Lookup.js";
 import ResponseUSEnrichment from "./src/us_enrichment/Response.js";
 
 export const core = {
-  Batch,
-  ClientBuilder,
-  buildClient,
-  SharedCredentials,
-  StaticCredentials,
-  Errors,
+	Batch,
+	ClientBuilder,
+	buildClient,
+	SharedCredentials,
+	StaticCredentials,
+	Errors,
 };
 
 export const usStreet = {
-  Lookup: LookupUSStreet,
-  Candidate: CandidateUSStreet,
+	Lookup: LookupUSStreet,
+	Candidate: CandidateUSStreet,
 };
 
 export const usZipcode = {
-  Lookup: LookupUSZipcode,
-  Result: ResultUSZipcode,
+	Lookup: LookupUSZipcode,
+	Result: ResultUSZipcode,
 };
 
 export const usAutocompletePro = {
-  Lookup: LookupUSAutocompletePro,
-  Suggestion: SuggestionUSAutocompletePro,
+	Lookup: LookupUSAutocompletePro,
+	Suggestion: SuggestionUSAutocompletePro,
 };
 
 export const usExtract = {
-  Lookup: LookupUSExtract,
-  Result: ResultUSExtract,
+	Lookup: LookupUSExtract,
+	Result: ResultUSExtract,
 };
 
 export const internationalStreet = {
-  Lookup: LookupInternationalStreet,
-  Candidate: CandidateInternationalStreet,
+	Lookup: LookupInternationalStreet,
+	Candidate: CandidateInternationalStreet,
 };
 
 export const usReverseGeo = {
-  Lookup: LookupUSReverseGeo,
+	Lookup: LookupUSReverseGeo,
 };
 
 export const internationalAddressAutocomplete = {
-  Lookup: LookupInternationalAddressAutocomplete,
-  Suggestion: SuggestionInternationalAddressAutocomplete,
+	Lookup: LookupInternationalAddressAutocomplete,
+	Suggestion: SuggestionInternationalAddressAutocomplete,
 };
 
 export const usEnrichment = {
-  Lookup: LookupUSEnrichment,
-  Response: ResponseUSEnrichment,
+	Lookup: LookupUSEnrichment,
+	Response: ResponseUSEnrichment,
 };
 
 export default {
-  core,
-  usStreet,
-  usZipcode,
-  usAutocompletePro,
-  usExtract,
-  internationalStreet,
-  usReverseGeo,
-  internationalAddressAutocomplete,
-  usEnrichment,
+	core,
+	usStreet,
+	usZipcode,
+	usAutocompletePro,
+	usExtract,
+	internationalStreet,
+	usReverseGeo,
+	internationalAddressAutocomplete,
+	usEnrichment,
 };
