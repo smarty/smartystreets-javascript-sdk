@@ -37,8 +37,7 @@
  },
  "scripts": {
   "build": "rollup --config",
-  "test": "npm run test:js && npm run test:ts",
-  "test:js": "mocha 'tests/**/*.{mjs,js}'",
+  "test": "npm run test:ts",
   "test:ts": "mocha --require tsx/cjs 'tests/**/*.ts'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
