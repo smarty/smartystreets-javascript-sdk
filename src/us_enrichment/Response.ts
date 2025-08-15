@@ -16,6 +16,8 @@ export class Response {
 export class FinancialResponse extends Response {}
 export class GeoResponse extends Response {}
 
+export default Response;
+
 function camelize(key: string) {
 	const withOrdinals = key
 		.replace(/^1st_/, "first_")
