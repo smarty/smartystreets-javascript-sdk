@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import Address from "../../src/us_extract/Address.js";
-import Candidate from "../../src/us_street/Candidate.js";
+import Address from "../../src/us_extract/Address";
+import Candidate from "../../src/us_street/Candidate";
 
 describe("A US Extract Address", function () {
 	it("populates fields correctly.", function () {

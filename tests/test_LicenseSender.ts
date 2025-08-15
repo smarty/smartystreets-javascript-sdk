@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
-import LicenseSender from "../src/LicenseSender.js";
-import Request from "../src/Request.js";
+import LicenseSender from "../src/LicenseSender";
+import Request from "../src/Request";
 
 describe("A license sender", function () {
 	let innerSender;

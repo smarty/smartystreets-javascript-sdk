@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/us_enrichment/Lookup.js";
+import Lookup from "../../src/us_enrichment/Lookup";
 
 describe("A US Enrichment Lookup", function () {
     it("can be newed up with all basic fields.", function () {

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/international_address_autocomplete/Lookup.js";
+import Lookup from "../../src/international_address_autocomplete/Lookup";
 
 describe("An International Address Autocomplete lookup", function () {
 	it("Can be newed up with a prefix", function () {

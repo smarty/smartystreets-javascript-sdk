@@ -1,8 +1,8 @@
 import { expect } from "chai";
 
-import Request from "../src/Request.js";
-import HttpSender from "../src/HttpSender.js";
-import { buildSmartyResponse } from "../src/util/buildSmartyResponse.js";
+import Request from "../src/Request";
+import HttpSender from "../src/HttpSender";
+import { buildSmartyResponse } from "../src/util/buildSmartyResponse";
 
 describe ("An Axios implementation of a HTTP sender", function () {
 	it("adds a data payload to the HTTP request config.", function () {

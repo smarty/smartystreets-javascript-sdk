@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import Result from "../../src/us_extract/Result.js";
-import Address from "../../src/us_extract/Address.js";
+import Result from "../../src/us_extract/Result";
+import Address from "../../src/us_extract/Address";
 
 describe("A US Extract Result", function () {
 	it("correctly populates fields.", function () {

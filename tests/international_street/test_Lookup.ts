@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import Lookup from "../../src/international_street/Lookup.js";
-import * as errors from "../../src/Errors.js";
+import Lookup from "../../src/international_street/Lookup";
+import * as errors from "../../src/Errors";
 
 describe("An International Street lookup", function () {
 	const messages = {

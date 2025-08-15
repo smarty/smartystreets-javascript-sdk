@@ -1,15 +1,15 @@
 import { expect } from "chai";
 
-import StatusCodeSender from "../src/StatusCodeSender.js";
-import Response from "../src/Response.js";
-import Request from "../src/Request.js";
+import StatusCodeSender from "../src/StatusCodeSender";
+import Response from "../src/Response";
+import Request from "../src/Request";
 import {
 	DefaultError,
 	InternalServerError,
 	ServiceUnavailableError,
 	GatewayTimeoutError,
-} from "../src/Errors.js";
-import { Sender } from "../src/types.js";
+} from "../src/Errors";
+import { Sender } from "../src/types";
 
 describe("A status code sender", function () {
 	it("doesn't attach an error on a 200.", function () {

@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import Client from "../../src/us_enrichment/Client.js";
-import Lookup from "../../src/us_enrichment/Lookup.js";
-import * as errors from "../../src/Errors.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
-import { Response, FinancialResponse, GeoResponse } from "../../src/us_enrichment/Response.js";
+import Client from "../../src/us_enrichment/Client";
+import Lookup from "../../src/us_enrichment/Lookup";
+import * as errors from "../../src/Errors";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
+import { Response, FinancialResponse, GeoResponse } from "../../src/us_enrichment/Response";
 
 describe("A US Enrichment Client", function () {
     it("composes principal url path properly", function () {

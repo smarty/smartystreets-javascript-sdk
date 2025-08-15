@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import Client from "../../src/us_autocomplete_pro/Client.js";
-import Lookup from "../../src/us_autocomplete_pro/Lookup.js";
-import Suggestion from "../../src/us_autocomplete_pro/Suggestion.js";
-import * as errors from "../../src/Errors.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
+import Client from "../../src/us_autocomplete_pro/Client";
+import Lookup from "../../src/us_autocomplete_pro/Lookup";
+import Suggestion from "../../src/us_autocomplete_pro/Suggestion";
+import * as errors from "../../src/Errors";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
 
 describe("A US Autocomplete Pro Client", function () {
 	it("correctly builds parameters for a prefix only lookup.", function () {

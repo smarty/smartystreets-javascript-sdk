@@ -1,5 +1,5 @@
-import { buildSmartyResponse } from "../../src/util/buildSmartyResponse.js";
-import Response from "../../src/Response.js";
+import { buildSmartyResponse } from "../../src/util/buildSmartyResponse";
+import Response from "../../src/Response";
 
 export class MockSender {
 	request: { payload: any; parameters: any; baseUrlParam: any };

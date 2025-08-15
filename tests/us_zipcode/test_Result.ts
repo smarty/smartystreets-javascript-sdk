@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Result from "../../src/us_zipcode/Result.js";
+import Result from "../../src/us_zipcode/Result";
 
 describe("A US Zipcode result", function () {
 	it("populates accurately on a valid lookup.", function () {

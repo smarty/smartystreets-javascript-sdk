@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import Client from "../../src/us_zipcode/Client.js";
-import Lookup from "../../src/us_zipcode/Lookup.js";
-import Result from "../../src/us_zipcode/Result.js";
-import Batch from "../../src/Batch.js";
-import * as errors from "../../src/Errors.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
+import Client from "../../src/us_zipcode/Client";
+import Lookup from "../../src/us_zipcode/Lookup";
+import Result from "../../src/us_zipcode/Result";
+import Batch from "../../src/Batch";
+import * as errors from "../../src/Errors";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
 
 describe("A US Zipcode client", function () {
 	it("calls its inner sender's send function.", function () {

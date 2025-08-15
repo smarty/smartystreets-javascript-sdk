@@ -1,9 +1,9 @@
 import { expect } from "chai";
-import Client from "../../src/us_reverse_geo/Client.js";
-import Lookup from "../../src/us_reverse_geo/Lookup.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
-import Response from "../../src/us_reverse_geo/Response.js";
+import Client from "../../src/us_reverse_geo/Client";
+import Lookup from "../../src/us_reverse_geo/Lookup";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
+import Response from "../../src/us_reverse_geo/Response";
 
 describe("A US Reverse Geo client", function () {
 	it("has an inner sender.", function () {

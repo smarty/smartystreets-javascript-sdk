@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Response from "../../src/us_reverse_geo/Response.js";
+import Response from "../../src/us_reverse_geo/Response";
 
 describe("A US Reverse Geo match response", function () {
 	it("populates with the appropriate fields.", function () {

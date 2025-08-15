@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/us_street/Lookup.js";
+import Lookup from "../../src/us_street/Lookup";
 
 describe ("A US Street lookup", function () {
 	it ("correctly populates fields.", function () {

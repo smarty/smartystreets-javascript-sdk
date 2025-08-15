@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import AgentSender from "../src/AgentSender.js";
-import Request from "../src/Request.js";
-import Response from "../src/Response.js";
+import AgentSender from "../src/AgentSender";
+import Request from "../src/Request";
+import Response from "../src/Response";
 import { Sender } from "../src/types";
 import packageJson from "../package.json" with { type: "json" };
 

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Suggestion from "../../src/us_autocomplete_pro/Suggestion.js";
+import Suggestion from "../../src/us_autocomplete_pro/Suggestion";
 
 describe("A US Autocomplete Pro Suggestion", function () {
 	it("is initialized correctly with API response data.", function () {

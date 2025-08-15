@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/us_reverse_geo/Lookup.js";
+import Lookup from "../../src/us_reverse_geo/Lookup";
 
 describe("A US Reverse Geo lookup", function () {
 	it("correctly populates fields.", function () {

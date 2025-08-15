@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/us_extract/Lookup.js";
+import Lookup from "../../src/us_extract/Lookup";
 
 describe("A US Extract Lookup", function () {
 	it("correctly populates fields.", function () {

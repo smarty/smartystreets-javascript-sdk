@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Candidate from "../../src/us_street/Candidate.js";
+import Candidate from "../../src/us_street/Candidate";
 
 describe("A match candidate", function () {
 	it("has populated fields.", function () {

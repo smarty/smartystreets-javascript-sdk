@@ -1,4 +1,4 @@
-import { Request } from "./types.js";
+import { Request } from "./types";
 
 export default class SharedCredentials {
 	private authId: string;

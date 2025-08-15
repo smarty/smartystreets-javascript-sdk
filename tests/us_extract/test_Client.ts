@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import Client from "../../src/us_extract/Client.js";
-import Lookup from "../../src/us_extract/Lookup.js";
-import Result from "../../src/us_extract/Result.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
-import * as errors from "../../src/Errors.js";
+import Client from "../../src/us_extract/Client";
+import Lookup from "../../src/us_extract/Lookup";
+import Result from "../../src/us_extract/Result";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
+import * as errors from "../../src/Errors";
 
 describe("A US Extract Client", function () {
 	it("throws an error if sending without a lookup.", function () {

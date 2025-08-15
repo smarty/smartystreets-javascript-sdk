@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import Client from "../../src/us_street/Client.js";
-import Lookup from "../../src/us_street/Lookup.js";
-import Candidate from "../../src/us_street/Candidate.js";
-import Batch from "../../src/Batch.js";
-import * as errors from "../../src/Errors.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
+import Client from "../../src/us_street/Client";
+import Lookup from "../../src/us_street/Lookup";
+import Candidate from "../../src/us_street/Candidate";
+import Batch from "../../src/Batch";
+import * as errors from "../../src/Errors";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
 
 describe("A US Street client", function () {
 	it("calls its inner sender's send function.", function () {

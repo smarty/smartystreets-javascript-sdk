@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import Client from "../../src/international_address_autocomplete/Client.js";
-import Lookup from "../../src/international_address_autocomplete/Lookup.js";
-import Suggestion from "../../src/international_address_autocomplete/Suggestion.js";
-import * as errors from "../../src/Errors.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
+import Client from "../../src/international_address_autocomplete/Client";
+import Lookup from "../../src/international_address_autocomplete/Lookup";
+import Suggestion from "../../src/international_address_autocomplete/Suggestion";
+import * as errors from "../../src/Errors";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
 
 describe("An International Address Autocomplete Client", function () {
 	it("correctly builds parameter", function () {

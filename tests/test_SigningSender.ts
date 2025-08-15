@@ -1,9 +1,9 @@
 import { expect } from "chai";
-import Request from "../src/Request.js";
-import Response from "../src/Response.js";
-import SigningSender from "../src/SigningSender.js";
-import StaticCredentials from "../src/StaticCredentials.js";
-import SharedCredentials from "../src/SharedCredentials.js";
+import Request from "../src/Request";
+import Response from "../src/Response";
+import SigningSender from "../src/SigningSender";
+import StaticCredentials from "../src/StaticCredentials";
+import SharedCredentials from "../src/SharedCredentials";
 import { UnprocessableEntityError } from "../src/Errors";
 
 describe("A signing sender", function () {

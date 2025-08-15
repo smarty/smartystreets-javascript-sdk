@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import Client from "../../src/international_street/Client.js";
-import Lookup from "../../src/international_street/Lookup.js";
-import Candidate from "../../src/international_street/Candidate.js";
-import * as errors from "../../src/Errors.js";
-import { MockSender } from "../fixtures/mock_senders.js";
-import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
+import Client from "../../src/international_street/Client";
+import Lookup from "../../src/international_street/Lookup";
+import Candidate from "../../src/international_street/Candidate";
+import * as errors from "../../src/Errors";
+import { MockSender } from "../fixtures/mock_senders";
+import { MockSenderWithResponse } from "../fixtures/mock_senders";
 
 describe("An International Street client", function () {
 	it("has an inner sender.", function () {

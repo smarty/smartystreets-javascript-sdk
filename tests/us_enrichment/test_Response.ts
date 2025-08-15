@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Response } from "../../src/us_enrichment/Response.js";
+import { Response } from "../../src/us_enrichment/Response";
 
 describe("A US Enrichment Response", function () {
     it("is initialized correctly with API response data.", function () {

@@ -1,8 +1,8 @@
 import { expect } from "chai";
-import RetrySender from "../src/RetrySender.js";
-import { MockSenderWithStatusCodesAndHeaders } from "./fixtures/mock_senders.js";
-import Request from "../src/Request.js";
-import Response from "../src/Response.js";
+import RetrySender from "../src/RetrySender";
+import { MockSenderWithStatusCodesAndHeaders } from "./fixtures/mock_senders";
+import Request from "../src/Request";
+import Response from "../src/Response";
 import type { Sender, Sleeper, MockSenderInstance, MockSleeperInstance } from "../src/types";
 
 class CompatibleMockSender implements MockSenderInstance {

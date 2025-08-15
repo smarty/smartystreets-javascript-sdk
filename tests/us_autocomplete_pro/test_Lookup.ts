@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/us_autocomplete_pro/Lookup.js";
+import Lookup from "../../src/us_autocomplete_pro/Lookup";
 
 describe("A US Autocomplete Pro Lookup", function () {
 	it("can be newed up with a prefix.", function () {
