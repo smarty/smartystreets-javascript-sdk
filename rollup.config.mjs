@@ -6,7 +6,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 
 export default {
-	input: "index.mjs",
+	input: "index.ts",
 	external: ["axios", "axios-retry"],
 	output: [
 		{
@@ -41,7 +41,7 @@ export default {
 			declaration: true,
 			declarationMap: true,
 			outDir: "dist/types",
-			rootDir: "src",
+			rootDir: ".",
 			tsconfig: "./tsconfig.json",
 		}),
 		terser(),

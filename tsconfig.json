@@ -35,6 +35,6 @@
 		"isolatedModules": true,
 		"types": ["mocha", "chai", "node"]
 	},
-	"include": ["src/**/*", "tests/**/*", "index.mjs"],
+	"include": ["src/**/*", "tests/**/*", "index.ts"],
 	"exclude": ["node_modules", "dist"]
 }
