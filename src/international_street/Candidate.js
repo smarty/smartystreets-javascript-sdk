@@ -155,6 +155,7 @@ class Candidate {
 			this.metadata.geocodePrecision = responseData.metadata.geocode_precision;
 			this.metadata.maxGeocodePrecision = responseData.metadata.max_geocode_precision;
 			this.metadata.addressFormat = responseData.metadata.address_format;
+			this.metadata.occupantUse = responseData.metadata.occupant_use;
 		}
 	}
 }

@@ -32,6 +32,7 @@ class Lookup {
 		this.geocode = undefined;
 		this.language = undefined;
 		this.inputId = undefined;
+		this.features = undefined;
 
 		this.ensureEnoughInfo = this.ensureEnoughInfo.bind(this);
 		this.ensureValidData = this.ensureValidData.bind(this);

@@ -17,6 +17,14 @@ describe("An International Street lookup", function () {
 
 		expect(lookup.country).to.equal("a");
 		expect(lookup.freeform).to.equal("b");
+		expect(lookup.features).to.equal(undefined);
+	});
+
+	it("supports features parameter on lookup.", function () {
+		let lookup = new Lookup("a", "b");
+		lookup.features = "f1,f2,f3";
+
+		expect(lookup.features).to.equal("f1,f2,f3");
 	});
 
 	it("rejects lookups without a country.", function () {

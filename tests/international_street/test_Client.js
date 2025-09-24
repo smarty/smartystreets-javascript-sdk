@@ -36,6 +36,7 @@ describe("An International Street client", function () {
 		lookup.postalCode = "j";
 		lookup.geocode = "k";
 		lookup.language = "l";
+		lookup.features = "occupant-use";
 		let expectedParameters = {
 			country: "a",
 			freeform: "b",
@@ -49,6 +50,7 @@ describe("An International Street client", function () {
 			postal_code: "j",
 			geocode: "k",
 			language: "l",
+			features: "occupant-use",
 		};
 
 		client.send(lookup);

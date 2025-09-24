@@ -47,6 +47,7 @@ module.exports = {
 		"postal_code": "postalCode",
 		"geocode": "geocode",
 		"language": "language",
+		"features": "features",
 	},
 	internationalAddressAutocomplete: {
 		search: "search",
