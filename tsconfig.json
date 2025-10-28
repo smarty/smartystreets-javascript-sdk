@@ -31,8 +31,10 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
-		"types": ["mocha", "chai", "node"]
-	},
+		"types": ["mocha", "chai", "node"],
+        "importHelpers": false,
+        "target": "es2015"
+    },
 	"include": ["src/**/*", "tests/**/*"],
 	"exclude": ["node_modules"]
 }
