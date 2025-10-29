@@ -1,4 +1,5 @@
-const SmartySDK = require("smartystreets-javascript-sdk");
+import SmartySDK from "smartystreets-javascript-sdk";
+
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
 

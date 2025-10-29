@@ -40,7 +40,9 @@ export default {
       declaration: true,
       emitDeclarationOnly: true,
       outDir: "dist/types",
-      rootDir: "src"
+      rootDir: "src",
+	    importHelpers: false,
+	    target: "es2015",
     }),
   ],
 };
