@@ -72,5 +72,12 @@ module.exports = {
 		exclude: "exclude",
 		dataset: "dataset",
 		data_subset: "dataSubset",
+	},
+	internationalPostalCode: {
+		"input_id": "inputId",
+		"country": "country",
+		"locality": "locality",
+		"administrative_area": "administrativeArea",
+		"postal_code": "postalCode",
 	}
 };

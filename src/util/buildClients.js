@@ -36,6 +36,10 @@ function buildUsEnrichmentApiClient(credentials) {
 	return instantiateClientBuilder(credentials).buildUsEnrichmentClient();
 }
 
+function buildInternationalPostalCodeApiClient(credentials) {
+	return instantiateClientBuilder(credentials).buildInternationalPostalCodeClient();
+}
+
 module.exports = {
 	usStreet: buildUsStreetApiClient,
 	usAutocompletePro: buildUsAutocompleteProApiClient,
@@ -45,4 +49,5 @@ module.exports = {
 	usReverseGeo: buildUsReverseGeoApiClient,
 	internationalAddressAutocomplete: buildInternationalAddressAutocompleteApiClient,
 	usEnrichment: buildUsEnrichmentApiClient,
+	internationalPostalCode: buildInternationalPostalCodeApiClient,
 };
