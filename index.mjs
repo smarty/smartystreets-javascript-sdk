@@ -32,6 +32,9 @@ import SuggestionInternationalAddressAutocomplete from "./src/international_addr
 import LookupUSEnrichment from "./src/us_enrichment/Lookup.js";
 import ResponseUSEnrichment from "./src/us_enrichment/Response.js";
 
+import LookupInternationalPostalCode from "./src/international_postal_code/Lookup.js";
+import ResultInternationalPostalCode from "./src/international_postal_code/Result.js";
+
 export const core = {
 	Batch,
 	ClientBuilder,
@@ -80,6 +83,11 @@ export const usEnrichment = {
 	Response: ResponseUSEnrichment,
 };
 
+export const internationalPostalCode = {
+	Lookup: LookupInternationalPostalCode,
+	Result: ResultInternationalPostalCode,
+};
+
 export default {
 	core,
 	usStreet,
@@ -90,4 +98,5 @@ export default {
 	usReverseGeo,
 	internationalAddressAutocomplete,
 	usEnrichment,
+	internationalPostalCode,
 };

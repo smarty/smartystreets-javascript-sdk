@@ -20,6 +20,7 @@ const InternationalStreetClient = require("./international_street/Client");
 const UsReverseGeoClient = require("./us_reverse_geo/Client");
 const InternationalAddressAutocompleteClient = require("./international_address_autocomplete/Client");
 const UsEnrichmentClient = require("./us_enrichment/Client");
+const InternationalPostalCodeClient = require("./international_postal_code/Client");
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
@@ -30,7 +31,7 @@ const US_REVERSE_GEO_API_URL = "https://us-reverse-geo.api.smarty.com/lookup";
 const INTERNATIONAL_ADDRESS_AUTOCOMPLETE_API_URL =
 	"https://international-autocomplete.api.smarty.com/v2/lookup";
 const US_ENRICHMENT_API_URL = "https://us-enrichment.api.smarty.com/lookup";
-
+const INTERNATIONAL_POSTAL_CODE_API_URL = "https://international-postal-code.api.smarty.com/lookup";
 /**
  * The ClientBuilder class helps you build a client object for one of the supported Smarty APIs.<br>
  * You can use ClientBuilder's methods to customize settings like maximum retries or timeout duration. These methods<br>
@@ -51,7 +52,7 @@ class ClientBuilder {
 		this.licenses = [];
 
 		function noCredentialsProvided() {
-			return !signer instanceof StaticCredentials || !signer instanceof SharedCredentials;
+			return (!signer) instanceof StaticCredentials || (!signer) instanceof SharedCredentials;
 		}
 	}
 
@@ -183,6 +184,10 @@ class ClientBuilder {
 
 	buildUsZipcodeClient() {
 		return this.buildClient(US_ZIP_CODE_API_URL, UsZipcodeClient);
+	}
+
+	buildInternationalPostalCodeClient() {
+		return this.buildClient(INTERNATIONAL_POSTAL_CODE_API_URL, InternationalPostalCodeClient);
 	}
 
 	buildUsAutocompleteProClient() {
