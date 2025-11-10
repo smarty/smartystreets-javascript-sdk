@@ -40,7 +40,7 @@ const INTERNATIONAL_POSTAL_CODE_API_URL = "https://international-postal-code.api
  */
 class ClientBuilder {
 	constructor(signer) {
-		if (noCredentialsProvided()) throw new BadCredentialsError();
+		if (!credentialsProvided()) throw new BadCredentialsError();
 
 		this.signer = signer;
 		this.httpSender = undefined;
@@ -53,8 +53,8 @@ class ClientBuilder {
 		this.licenses = [];
 		this.customQueries = new Map();
 
-		function noCredentialsProvided() {
-			return (!signer) instanceof StaticCredentials || (!signer) instanceof SharedCredentials;
+		function credentialsProvided() {
+			return signer instanceof StaticCredentials || signer instanceof SharedCredentials;
 		}
 	}
 
