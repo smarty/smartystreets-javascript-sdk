@@ -7,6 +7,7 @@ const SharedCredentials = require("./SharedCredentials");
 const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
+const CustomQuerySender = require("@/src/CustomQuerySender");
 const BadCredentialsError = require("./Errors").BadCredentialsError;
 const RetrySender = require("./RetrySender");
 const Sleeper = require("./util/Sleeper.ts");
@@ -50,6 +51,7 @@ class ClientBuilder {
 		this.customHeaders = {};
 		this.debug = undefined;
 		this.licenses = [];
+		this.customQueries = new Map();
 
 		function noCredentialsProvided() {
 			return (!signer) instanceof StaticCredentials || (!signer) instanceof SharedCredentials;
@@ -152,6 +154,42 @@ class ClientBuilder {
 		return this;
 	}
 
+	/**
+	 * Allows the caller to specify key and value pair that is added to the request
+	 * @param {string} key - The query parameter key
+	 * @param {string} value - The query parameter value
+	 * @return Returns <b>this</b> to accommodate method chaining.
+	 */
+	withCustomQuery(key, value) {
+		this.customQueries.set(key, value);
+
+		return this;
+	}
+
+	/**
+	 * Allows the caller to specify key and value pair and appends the value associated with the key, seperated by a comma.
+	 * @param {string} key - The query parameter key
+	 * @param {string} value - The query parameter value
+	 * @return Returns <b>this</b> to accommodate method chaining.
+	 */
+	withCustomCommaSeperatedQuery(key, value) {
+		let values = this.customQueries.get(key);
+		if (values === "") {
+			values = value;
+		} else {
+			values += "," + value;
+		}
+		this.customQueries.set(key, values);
+	}
+
+	/**
+	 * Adds to the request query to use the component analysis feature.
+	 * @return Returns <b>this</b> to accommodate method chaining.
+	 */
+	withFeatureComponentAnalysis() {
+		return this.withCustomCommaSeperatedQuery("features", "component-analysis");
+	}
+
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
@@ -166,8 +204,9 @@ class ClientBuilder {
 		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);
+		const customQuerySender = new CustomQuerySender(licenseSender, this.customQueries);
 
-		return licenseSender;
+		return customQuerySender;
 	}
 
 	buildClient(baseUrl, Client) {
