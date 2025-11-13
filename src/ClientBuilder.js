@@ -60,7 +60,7 @@ class ClientBuilder {
 
 	/**
 	 * @param retries The maximum number of times to retry sending the request to the API. (Default is 5)
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withMaxRetries(retries) {
 		this.maxRetries = retries;
@@ -70,7 +70,7 @@ class ClientBuilder {
 	/**
 	 * @param timeout The maximum time (in milliseconds) to wait for a connection, and also to wait for <br>
 	 *                   the response to be read. (Default is 10000)
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withMaxTimeout(timeout) {
 		this.maxTimeout = timeout;
@@ -79,7 +79,7 @@ class ClientBuilder {
 
 	/**
 	 * @param sender Default is a series of nested senders. See <b>buildSender()</b>.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withSender(sender) {
 		this.httpSender = sender;
@@ -89,7 +89,7 @@ class ClientBuilder {
 	/**
 	 * This may be useful when using a local installation of the Smarty APIs.
 	 * @param url Defaults to the URL for the API corresponding to the <b>Client</b> object being built.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withBaseUrl(url) {
 		this.baseUrl = url;
@@ -103,7 +103,7 @@ class ClientBuilder {
 	 * @param protocol The protocol on the proxy server to which you wish to connect. If the proxy server uses HTTPS, then you must set the protocol to 'https'.
 	 * @param username The username to login to the proxy.
 	 * @param password The password to login to the proxy.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withProxy(host, port, protocol, username, password) {
 		this.proxy = {
@@ -125,32 +125,29 @@ class ClientBuilder {
 	/**
 	 * Use this to add any additional headers you need.
 	 * @param customHeaders A String to Object <b>Map</b> of header name/value pairs.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withCustomHeaders(customHeaders) {
 		this.customHeaders = customHeaders;
-
 		return this;
 	}
 
 	/**
 	 * Enables debug mode, which will print information about the HTTP request and response to console.log
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withDebug() {
 		this.debug = true;
-
 		return this;
 	}
 
 	/**
 	 * Allows the caller to specify the subscription license (aka "track") they wish to use.
 	 * @param licenses A String Array of licenses.
-	 * @returns Returns <b>this</b> to accommodate method chaining.
+	 * @returns ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withLicenses(licenses) {
 		this.licenses = licenses;
-
 		return this;
 	}
 
@@ -158,11 +155,10 @@ class ClientBuilder {
 	 * Allows the caller to specify key and value pair that is added to the request
 	 * @param {string} key - The query parameter key
 	 * @param {string} value - The query parameter value
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withCustomQuery(key, value) {
 		this.customQueries.set(key, value);
-
 		return this;
 	}
 
@@ -170,7 +166,7 @@ class ClientBuilder {
 	 * Allows the caller to specify key and value pair and appends the value associated with the key, seperated by a comma.
 	 * @param {string} key - The query parameter key
 	 * @param {string} value - The query parameter value
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withCustomCommaSeperatedQuery(key, value) {
 		let values = this.customQueries.get(key);
@@ -185,7 +181,7 @@ class ClientBuilder {
 
 	/**
 	 * Adds to the request query to use the component analysis feature.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withFeatureComponentAnalysis() {
 		return this.withCustomCommaSeperatedQuery("features", "component-analysis");
