@@ -180,6 +180,7 @@ class ClientBuilder {
 			values += "," + value;
 		}
 		this.customQueries.set(key, values);
+		return this;
 	}
 
 	/**
