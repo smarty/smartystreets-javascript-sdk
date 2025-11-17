@@ -34,9 +34,8 @@ lookup1.city = "Provo";
 lookup1.state = "Utah";
 lookup1.zipCode = "84601";
 lookup1.maxCandidates = 3;
-lookup1.match = "invalid"; // "invalid" is the most permissive match,
-                           // this will always return at least one result even if the address is invalid.
-                           // Refer to the documentation for additional MatchStrategy options.
+lookup1.match = "enhanced"; // The API will return detailed output based on a more aggressive matching mechanism. It also includes a more comprehensive address dataset beyond just the postal address data. Requires a US Core license or a US Rooftop Geocoding license.
+// Refer to the documentation for additional MatchStrategy options.
 
 let lookup2 = new Lookup();
 lookup2.street = "1600 Amphitheater Pkwy";
