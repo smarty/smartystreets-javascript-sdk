@@ -53,8 +53,7 @@ class Candidate {
 			this.metadata.elotSort = responseData.metadata.elot_sort;
 			this.metadata.latitude = responseData.metadata.latitude;
 			this.metadata.longitude = responseData.metadata.longitude;
-			switch (responseData.metadata.coordinate_license)
-			{
+			switch (responseData.metadata.coordinate_license) {
 				case 1:
 					this.metadata.coordinateLicense = "SmartyStreets Proprietary";
 					break;
