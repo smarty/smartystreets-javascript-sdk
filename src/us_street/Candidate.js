@@ -82,6 +82,31 @@ class Candidate {
 			this.analysis.lacsLinkIndicator = responseData.analysis.lacslink_indicator;
 			this.analysis.isSuiteLinkMatch = responseData.analysis.suitelink_match;
 			this.analysis.enhancedMatch = responseData.analysis.enhanced_match;
+			this.analysis.components = {};
+			console.log("what are the analysis", responseData.analysis);
+			if (responseData.analysis.components !== undefined) {
+				this.analysis.components.primaryNumber = responseData.analysis.components.primary_number;
+				this.analysis.components.streetPredirection =
+					responseData.analysis.components.street_predirection;
+				this.analysis.components.streetName = responseData.analysis.components.street_name;
+				this.analysis.components.streetPostdirection =
+					responseData.analysis.components.street_postdirection;
+				this.analysis.components.streetSuffix = responseData.analysis.components.street_suffix;
+				this.analysis.components.secondaryNumber =
+					responseData.analysis.components.secondary_number;
+				this.analysis.components.secondaryDesignator =
+					responseData.analysis.components.secondary_designator;
+				this.analysis.components.extraSecondaryNumber =
+					responseData.analysis.components.extra_secondary_number;
+				this.analysis.components.extraSecondaryDesignator =
+					responseData.analysis.components.extra_secondary_designator;
+				this.analysis.components.cityName = responseData.analysis.components.city_name;
+				this.analysis.components.stateAbbreviation =
+					responseData.analysis.components.state_abbreviation;
+				this.analysis.components.zipCode = responseData.analysis.components.zipcode;
+				this.analysis.components.plus4Code = responseData.analysis.components.plus4_code;
+				this.analysis.components.urbanization = responseData.analysis.components.urbanization;
+			}
 		}
 	}
 }

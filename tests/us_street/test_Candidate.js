@@ -66,7 +66,23 @@ describe("A match candidate", function () {
 				suitelink_match: "51",
 				dpv_no_stat: "52",
 				enhanced_match: "53",
-			}
+				components: {
+					primary_number: "54",
+					street_predirection: "55",
+					street_name: "56",
+					street_postdirection: "57",
+					street_suffix: "58",
+					secondary_number: "59",
+					secondary_designator: "60",
+					extra_secondary_number: "61",
+					extra_secondary_designator: "62",
+					city_name: "63",
+					state_abbreviation: "64",
+					zipcode: "65",
+					plus4_code: "66",
+					urbanization: "67",
+				},
+			},
 		};
 		const candidate = new Candidate(sampleResponse);
 
@@ -129,5 +145,20 @@ describe("A match candidate", function () {
 		expect(candidate.analysis.isSuiteLinkMatch).to.equal('51');
 		expect(candidate.analysis.noStat).to.equal('52');
 		expect(candidate.analysis.enhancedMatch).to.equal('53');
+
+		expect(candidate.analysis.components.primaryNumber).to.equal("54");
+		expect(candidate.analysis.components.streetPredirection).to.equal("55");
+		expect(candidate.analysis.components.streetName).to.equal("56");
+		expect(candidate.analysis.components.streetPostdirection).to.equal("57");
+		expect(candidate.analysis.components.streetSuffix).to.equal("58");
+		expect(candidate.analysis.components.secondaryNumber).to.equal("59");
+		expect(candidate.analysis.components.secondaryDesignator).to.equal("60");
+		expect(candidate.analysis.components.extraSecondaryNumber).to.equal("61");
+		expect(candidate.analysis.components.extraSecondaryDesignator).to.equal("62");
+		expect(candidate.analysis.components.cityName).to.equal("63");
+		expect(candidate.analysis.components.stateAbbreviation).to.equal("64");
+		expect(candidate.analysis.components.zipCode).to.equal("65");
+		expect(candidate.analysis.components.plus4Code).to.equal("66");
+		expect(candidate.analysis.components.urbanization).to.equal("67");
 	});
 });
