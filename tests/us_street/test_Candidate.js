@@ -32,7 +32,7 @@ describe("A match candidate", function () {
 				zipcode: "22",
 				plus4_code: "23",
 				delivery_point: "24",
-				delivery_point_check_digit: "25"
+				delivery_point_check_digit: "25",
 			},
 			metadata: {
 				record_type: "26",
@@ -52,7 +52,7 @@ describe("A match candidate", function () {
 				time_zone: "39",
 				utc_offset: 40.0,
 				dst: "41",
-				ews_match: "47"
+				ews_match: "47",
 			},
 			analysis: {
 				dpv_match_code: "42",
@@ -66,68 +66,99 @@ describe("A match candidate", function () {
 				suitelink_match: "51",
 				dpv_no_stat: "52",
 				enhanced_match: "53",
-			}
+				components: {
+					primary_number: "54",
+					street_predirection: "55",
+					street_name: "56",
+					street_postdirection: "57",
+					street_suffix: "58",
+					secondary_number: "59",
+					secondary_designator: "60",
+					extra_secondary_number: "61",
+					extra_secondary_designator: "62",
+					city_name: "63",
+					state_abbreviation: "64",
+					zipcode: "65",
+					plus4_code: "66",
+					urbanization: "67",
+				},
+			},
 		};
 		const candidate = new Candidate(sampleResponse);
 
 		expect(candidate.inputIndex).to.equal(0);
 		expect(candidate.candidateIndex).to.equal(1);
-		expect(candidate.addressee).to.equal('2');
-		expect(candidate.deliveryLine1).to.equal('3');
-		expect(candidate.deliveryLine2).to.equal('4');
-		expect(candidate.lastLine).to.equal('5');
-		expect(candidate.deliveryPointBarcode).to.equal('6');
-		expect(candidate.smartyKey).to.equal('0000');
+		expect(candidate.addressee).to.equal("2");
+		expect(candidate.deliveryLine1).to.equal("3");
+		expect(candidate.deliveryLine2).to.equal("4");
+		expect(candidate.lastLine).to.equal("5");
+		expect(candidate.deliveryPointBarcode).to.equal("6");
+		expect(candidate.smartyKey).to.equal("0000");
 
-		expect(candidate.components.urbanization).to.equal('7');
-		expect(candidate.components.primaryNumber).to.equal('8');
-		expect(candidate.components.streetName).to.equal('9');
-		expect(candidate.components.streetPredirection).to.equal('10');
-		expect(candidate.components.streetPostdirection).to.equal('11');
-		expect(candidate.components.streetSuffix).to.equal('12');
-		expect(candidate.components.secondaryNumber).to.equal('13');
-		expect(candidate.components.secondaryDesignator).to.equal('14');
-		expect(candidate.components.extraSecondaryNumber).to.equal('15');
-		expect(candidate.components.extraSecondaryDesignator).to.equal('16');
-		expect(candidate.components.pmbDesignator).to.equal('17');
-		expect(candidate.components.pmbNumber).to.equal('18');
-		expect(candidate.components.cityName).to.equal('19');
-		expect(candidate.components.defaultCityName).to.equal('20');
-		expect(candidate.components.state).to.equal('21');
-		expect(candidate.components.zipCode).to.equal('22');
-		expect(candidate.components.plus4Code).to.equal('23');
-		expect(candidate.components.deliveryPoint).to.equal('24');
-		expect(candidate.components.deliveryPointCheckDigit).to.equal('25');
+		expect(candidate.components.urbanization).to.equal("7");
+		expect(candidate.components.primaryNumber).to.equal("8");
+		expect(candidate.components.streetName).to.equal("9");
+		expect(candidate.components.streetPredirection).to.equal("10");
+		expect(candidate.components.streetPostdirection).to.equal("11");
+		expect(candidate.components.streetSuffix).to.equal("12");
+		expect(candidate.components.secondaryNumber).to.equal("13");
+		expect(candidate.components.secondaryDesignator).to.equal("14");
+		expect(candidate.components.extraSecondaryNumber).to.equal("15");
+		expect(candidate.components.extraSecondaryDesignator).to.equal("16");
+		expect(candidate.components.pmbDesignator).to.equal("17");
+		expect(candidate.components.pmbNumber).to.equal("18");
+		expect(candidate.components.cityName).to.equal("19");
+		expect(candidate.components.defaultCityName).to.equal("20");
+		expect(candidate.components.state).to.equal("21");
+		expect(candidate.components.zipCode).to.equal("22");
+		expect(candidate.components.plus4Code).to.equal("23");
+		expect(candidate.components.deliveryPoint).to.equal("24");
+		expect(candidate.components.deliveryPointCheckDigit).to.equal("25");
 
-		expect(candidate.metadata.recordType).to.equal('26');
-		expect(candidate.metadata.zipType).to.equal('27');
-		expect(candidate.metadata.countyFips).to.equal('28');
-		expect(candidate.metadata.countyName).to.equal('29');
-		expect(candidate.metadata.carrierRoute).to.equal('30');
-		expect(candidate.metadata.congressionalDistrict).to.equal('31');
-		expect(candidate.metadata.buildingDefaultIndicator).to.equal('32');
-		expect(candidate.metadata.rdi).to.equal('33');
-		expect(candidate.metadata.elotSequence).to.equal('34');
-		expect(candidate.metadata.elotSort).to.equal('35');
+		expect(candidate.metadata.recordType).to.equal("26");
+		expect(candidate.metadata.zipType).to.equal("27");
+		expect(candidate.metadata.countyFips).to.equal("28");
+		expect(candidate.metadata.countyName).to.equal("29");
+		expect(candidate.metadata.carrierRoute).to.equal("30");
+		expect(candidate.metadata.congressionalDistrict).to.equal("31");
+		expect(candidate.metadata.buildingDefaultIndicator).to.equal("32");
+		expect(candidate.metadata.rdi).to.equal("33");
+		expect(candidate.metadata.elotSequence).to.equal("34");
+		expect(candidate.metadata.elotSort).to.equal("35");
 		expect(candidate.metadata.latitude).to.equal(36.0);
 		expect(candidate.metadata.longitude).to.equal(37.0);
 		expect(candidate.metadata.coordinateLicense).to.equal("SmartyStreets Proprietary");
-		expect(candidate.metadata.precision).to.equal('38');
-		expect(candidate.metadata.timeZone).to.equal('39');
+		expect(candidate.metadata.precision).to.equal("38");
+		expect(candidate.metadata.timeZone).to.equal("39");
 		expect(candidate.metadata.utcOffset).to.equal(40.0);
-		expect(candidate.metadata.obeysDst).to.equal('41');
-		expect(candidate.metadata.isEwsMatch).to.equal('47');
+		expect(candidate.metadata.obeysDst).to.equal("41");
+		expect(candidate.metadata.isEwsMatch).to.equal("47");
 
-		expect(candidate.analysis.dpvMatchCode).to.equal('42');
-		expect(candidate.analysis.dpvFootnotes).to.equal('43');
-		expect(candidate.analysis.cmra).to.equal('44');
-		expect(candidate.analysis.vacant).to.equal('45');
-		expect(candidate.analysis.active).to.equal('46');
-		expect(candidate.analysis.footnotes).to.equal('48');
-		expect(candidate.analysis.lacsLinkCode).to.equal('49');
-		expect(candidate.analysis.lacsLinkIndicator).to.equal('50');
-		expect(candidate.analysis.isSuiteLinkMatch).to.equal('51');
-		expect(candidate.analysis.noStat).to.equal('52');
-		expect(candidate.analysis.enhancedMatch).to.equal('53');
+		expect(candidate.analysis.dpvMatchCode).to.equal("42");
+		expect(candidate.analysis.dpvFootnotes).to.equal("43");
+		expect(candidate.analysis.cmra).to.equal("44");
+		expect(candidate.analysis.vacant).to.equal("45");
+		expect(candidate.analysis.active).to.equal("46");
+		expect(candidate.analysis.footnotes).to.equal("48");
+		expect(candidate.analysis.lacsLinkCode).to.equal("49");
+		expect(candidate.analysis.lacsLinkIndicator).to.equal("50");
+		expect(candidate.analysis.isSuiteLinkMatch).to.equal("51");
+		expect(candidate.analysis.noStat).to.equal("52");
+		expect(candidate.analysis.enhancedMatch).to.equal("53");
+
+		expect(candidate.analysis.components.primaryNumber).to.equal("54");
+		expect(candidate.analysis.components.streetPredirection).to.equal("55");
+		expect(candidate.analysis.components.streetName).to.equal("56");
+		expect(candidate.analysis.components.streetPostdirection).to.equal("57");
+		expect(candidate.analysis.components.streetSuffix).to.equal("58");
+		expect(candidate.analysis.components.secondaryNumber).to.equal("59");
+		expect(candidate.analysis.components.secondaryDesignator).to.equal("60");
+		expect(candidate.analysis.components.extraSecondaryNumber).to.equal("61");
+		expect(candidate.analysis.components.extraSecondaryDesignator).to.equal("62");
+		expect(candidate.analysis.components.cityName).to.equal("63");
+		expect(candidate.analysis.components.stateAbbreviation).to.equal("64");
+		expect(candidate.analysis.components.zipCode).to.equal("65");
+		expect(candidate.analysis.components.plus4Code).to.equal("66");
+		expect(candidate.analysis.components.urbanization).to.equal("67");
 	});
 });

@@ -7,6 +7,7 @@ const SharedCredentials = require("./SharedCredentials");
 const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
+const CustomQuerySender = require("@/src/CustomQuerySender");
 const BadCredentialsError = require("./Errors").BadCredentialsError;
 const RetrySender = require("./RetrySender");
 const Sleeper = require("./util/Sleeper.ts");
@@ -39,7 +40,7 @@ const INTERNATIONAL_POSTAL_CODE_API_URL = "https://international-postal-code.api
  */
 class ClientBuilder {
 	constructor(signer) {
-		if (noCredentialsProvided()) throw new BadCredentialsError();
+		if (!credentialsProvided()) throw new BadCredentialsError();
 
 		this.signer = signer;
 		this.httpSender = undefined;
@@ -50,15 +51,16 @@ class ClientBuilder {
 		this.customHeaders = {};
 		this.debug = undefined;
 		this.licenses = [];
+		this.customQueries = new Map();
 
-		function noCredentialsProvided() {
-			return (!signer) instanceof StaticCredentials || (!signer) instanceof SharedCredentials;
+		function credentialsProvided() {
+			return signer instanceof StaticCredentials || signer instanceof SharedCredentials;
 		}
 	}
 
 	/**
 	 * @param retries The maximum number of times to retry sending the request to the API. (Default is 5)
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withMaxRetries(retries) {
 		this.maxRetries = retries;
@@ -68,7 +70,7 @@ class ClientBuilder {
 	/**
 	 * @param timeout The maximum time (in milliseconds) to wait for a connection, and also to wait for <br>
 	 *                   the response to be read. (Default is 10000)
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withMaxTimeout(timeout) {
 		this.maxTimeout = timeout;
@@ -77,7 +79,7 @@ class ClientBuilder {
 
 	/**
 	 * @param sender Default is a series of nested senders. See <b>buildSender()</b>.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withSender(sender) {
 		this.httpSender = sender;
@@ -87,7 +89,7 @@ class ClientBuilder {
 	/**
 	 * This may be useful when using a local installation of the Smarty APIs.
 	 * @param url Defaults to the URL for the API corresponding to the <b>Client</b> object being built.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withBaseUrl(url) {
 		this.baseUrl = url;
@@ -101,7 +103,7 @@ class ClientBuilder {
 	 * @param protocol The protocol on the proxy server to which you wish to connect. If the proxy server uses HTTPS, then you must set the protocol to 'https'.
 	 * @param username The username to login to the proxy.
 	 * @param password The password to login to the proxy.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withProxy(host, port, protocol, username, password) {
 		this.proxy = {
@@ -123,33 +125,66 @@ class ClientBuilder {
 	/**
 	 * Use this to add any additional headers you need.
 	 * @param customHeaders A String to Object <b>Map</b> of header name/value pairs.
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withCustomHeaders(customHeaders) {
 		this.customHeaders = customHeaders;
-
 		return this;
 	}
 
 	/**
 	 * Enables debug mode, which will print information about the HTTP request and response to console.log
-	 * @return Returns <b>this</b> to accommodate method chaining.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withDebug() {
 		this.debug = true;
-
 		return this;
 	}
 
 	/**
 	 * Allows the caller to specify the subscription license (aka "track") they wish to use.
 	 * @param licenses A String Array of licenses.
-	 * @returns Returns <b>this</b> to accommodate method chaining.
+	 * @returns ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withLicenses(licenses) {
 		this.licenses = licenses;
-
 		return this;
+	}
+
+	/**
+	 * Allows the caller to specify key and value pair that is added to the request
+	 * @param {string} key - The query parameter key
+	 * @param {string} value - The query parameter value
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
+	 */
+	withCustomQuery(key, value) {
+		this.customQueries.set(key, value);
+		return this;
+	}
+
+	/**
+	 * Allows the caller to specify key and value pair and appends the value associated with the key, seperated by a comma.
+	 * @param {string} key - The query parameter key
+	 * @param {string} value - The query parameter value
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
+	 */
+	withCustomCommaSeperatedQuery(key, value) {
+		let values = this.customQueries.get(key);
+		if (values === "") {
+			values = value;
+		} else {
+			values += "," + value;
+		}
+		this.customQueries.set(key, values);
+		return this;
+	}
+
+	/**
+	 * Adds to the request query to use the component analysis feature.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
+	 */
+	withFeatureComponentAnalysis() {
+		return this.withCustomCommaSeperatedQuery("features", "component-analysis");
 	}
 
 	buildSender() {
@@ -166,8 +201,9 @@ class ClientBuilder {
 		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);
+		const customQuerySender = new CustomQuerySender(licenseSender, this.customQueries);
 
-		return licenseSender;
+		return customQuerySender;
 	}
 
 	buildClient(baseUrl, Client) {
