@@ -187,6 +187,23 @@ class ClientBuilder {
 		return this.withCustomCommaSeperatedQuery("features", "component-analysis");
 	}
 
+	/**
+	 * Adds to the request query to use the financial history feature.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
+	 */
+	withFinancialHistory() {
+		return this.withCustomCommaSeperatedQuery("features", "financial");
+	}
+
+	/**
+	 * Adds to the request query to use the occupant use feature.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
+	 */
+	withOccupantUse() {
+		return this.withCustomCommaSeperatedQuery("features", "occupant-use");
+	}
+
+
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
