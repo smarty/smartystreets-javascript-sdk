@@ -109,7 +109,6 @@ class Candidate {
 					this.analysis.changes.components.dependentLocality = responseData.analysis.changes.components.dependent_locality;
 					this.analysis.changes.components.dependentLocalityName = responseData.analysis.changes.components.dependent_locality_name;
 					this.analysis.changes.components.doubleDependentLocality = responseData.analysis.changes.components.double_dependent_locality;
-					this.analysis.changes.components.features = responseData.analysis.changes.components.features;
 					this.analysis.changes.components.locality = responseData.analysis.changes.components.locality;
 					this.analysis.changes.components.postalCode = responseData.analysis.changes.components.postal_code;
 					this.analysis.changes.components.postalCodeShort = responseData.analysis.changes.components.postal_code_short;
