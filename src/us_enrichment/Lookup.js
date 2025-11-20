@@ -5,6 +5,7 @@ class Lookup {
         this.exclude = exclude;
         this.dataset = dataset;
         this.dataSubset = dataSubset;
+        this.features = undefined;
 
         this.response = {};
         this.customParameters = {};
