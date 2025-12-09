@@ -49,14 +49,14 @@ describe("A US Street client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
-	it("defaults maxCandidates to 5 when match type is enhanced.", function () {
+	it("defaults maxCandidates to 1 when match type is enhanced.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
 		lookup.match = "enhanced";
 		let expectedParameters = {
 			match: "enhanced",
-			candidates: 5,
+			candidates: 1,
 		};
 
 		client.send(lookup);

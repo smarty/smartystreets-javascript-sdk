@@ -29,7 +29,7 @@ class Client {
 
 		if (dataIsLookup) {
 			if (data.maxCandidates == null && data.match == "enhanced")
-				data.maxCandidates = 5;
+				data.maxCandidates = 1;
 			batch = new Batch();
 			batch.add(data);
 		} else {
