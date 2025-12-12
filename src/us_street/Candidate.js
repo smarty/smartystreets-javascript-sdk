@@ -82,7 +82,6 @@ class Candidate {
 			this.analysis.isSuiteLinkMatch = responseData.analysis.suitelink_match;
 			this.analysis.enhancedMatch = responseData.analysis.enhanced_match;
 			this.analysis.components = {};
-			console.log("what are the analysis", responseData.analysis);
 			if (responseData.analysis.components !== undefined) {
 				this.analysis.components.primaryNumber = responseData.analysis.components.primary_number;
 				this.analysis.components.streetPredirection =
