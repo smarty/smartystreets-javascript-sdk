@@ -1,5 +1,6 @@
 import { Request, Response, Sender } from "./types.js";
 import SharedCredentials from "./SharedCredentials.js";
+import BasicAuthCredentials from "./BasicAuthCredentials.js";
 import { UnprocessableEntityError } from "./Errors.js";
 
 interface Signer {

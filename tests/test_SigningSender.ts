@@ -4,6 +4,7 @@ import Response from "../src/Response.js";
 import SigningSender from "../src/SigningSender.js";
 import StaticCredentials from "../src/StaticCredentials.js";
 import SharedCredentials from "../src/SharedCredentials.js";
+import BasicAuthCredentials from "../src/BasicAuthCredentials.js";
 import { UnprocessableEntityError } from "../src/Errors";
 
 describe("A signing sender", function () {
@@ -45,6 +46,16 @@ describe("A signing sender", function () {
 		);
 	});
 
+	it("signs a request with basic auth credentials.", function () {
+		const basicAuthCredentials = new BasicAuthCredentials(mockAuthId, mockAuthToken);
+		const signingSender = new SigningSender(mockSender, basicAuthCredentials);
+
+		signingSender.send(request);
+
+		expect("Authorization" in request.headers).to.equal(true);
+		expect((request.headers as Record<string, string>)["Authorization"]).to.include("Basic ");
+	});
+
 	it("errors if signing a POST request with shared credentials.", function () {
 		const sharedCredentials = new SharedCredentials(mockAuthId, mockHostName);
 		const signingSender = new SigningSender(mockSender, sharedCredentials);
@@ -54,5 +65,16 @@ describe("A signing sender", function () {
 		request.payload = mockRequestPayload;
 
 		expect(() => signingSender.send(request)).to.throw(UnprocessableEntityError);
+	});
+
+	it("does not error if signing a POST request with basic auth credentials.", function () {
+		const basicAuthCredentials = new BasicAuthCredentials(mockAuthId, mockAuthToken);
+		const signingSender = new SigningSender(mockSender, basicAuthCredentials);
+		const mockRequestPayload = {
+			foo: "bar",
+		};
+		request.payload = mockRequestPayload;
+
+		expect(() => signingSender.send(request)).to.not.throw();
 	});
 });
