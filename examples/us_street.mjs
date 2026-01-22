@@ -3,14 +3,14 @@ import SmartySDK from "smartystreets-javascript-sdk";
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.usStreet.Lookup;
 
-// for Server-to-server requests, use this code:
-// let authId = process.env.SMARTY_AUTH_ID;
-// let authToken = process.env.SMARTY_AUTH_TOKEN;
-// const credentials = new SmartyCore.StaticCredentials(authId, authToken);
-
 // for client-side requests (browser/mobile), use this code:
-let key = process.env.SMARTY_EMBEDDED_KEY;
-const credentials = new SmartyCore.SharedCredentials(key);
+// let key = process.env.SMARTY_EMBEDDED_KEY;
+// const credentials = new SmartyCore.SharedCredentials(key);
+
+// for Server-to-server requests, use this code:
+let authId = process.env.SMARTY_AUTH_ID;
+let authToken = process.env.SMARTY_AUTH_TOKEN;
+const credentials = new SmartyCore.BasicAuthCredentials(authId, authToken);
 
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
