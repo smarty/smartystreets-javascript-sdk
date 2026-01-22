@@ -15,9 +15,7 @@ const credentials = new SmartyCore.BasicAuthCredentials(authId, authToken);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-let clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses([
-	"us-rooftop-geocoding-cloud",
-]);
+let clientBuilder = new SmartyCore.ClientBuilder(credentials);
 // .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildUsStreetApiClient();

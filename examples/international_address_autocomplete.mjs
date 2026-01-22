@@ -15,8 +15,8 @@ const credentials = new SmartyCore.BasicAuthCredentials(authId, authToken);
 // The appropriate license values to be used for your subscriptions
 // can be found on the Subscription page of the account dashboard.
 // https://www.smarty.com/docs/cloud/licensing
-const clientBuilder = new SmartyCore.ClientBuilder(credentials).withLicenses(["international-autocomplete-v2-cloud"])
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+const clientBuilder = new SmartyCore.ClientBuilder(credentials);
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 
