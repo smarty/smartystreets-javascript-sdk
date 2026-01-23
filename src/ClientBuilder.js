@@ -4,6 +4,7 @@ const BaseUrlSender = require("./BaseUrlSender");
 const AgentSender = require("./AgentSender");
 const StaticCredentials = require("./StaticCredentials");
 const SharedCredentials = require("./SharedCredentials");
+const BasicAuthCredentials = require("./BasicAuthCredentials");
 const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
@@ -54,7 +55,7 @@ class ClientBuilder {
 		this.customQueries = new Map();
 
 		function credentialsProvided() {
-			return signer instanceof StaticCredentials || signer instanceof SharedCredentials;
+			return signer instanceof StaticCredentials || signer instanceof SharedCredentials || signer instanceof BasicAuthCredentials;
 		}
 	}
 

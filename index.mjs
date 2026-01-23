@@ -7,6 +7,7 @@ import ClientBuilder from "./src/ClientBuilder.js";
 import buildClient from "./src/util/buildClients.js";
 import SharedCredentials from "./src/SharedCredentials.js";
 import StaticCredentials from "./src/StaticCredentials.js";
+import BasicAuthCredentials from "./src/BasicAuthCredentials.js";
 import Errors from "./src/Errors.js";
 
 import LookupUSStreet from "./src/us_street/Lookup.js";
@@ -41,6 +42,7 @@ export const core = {
 	buildClient,
 	SharedCredentials,
 	StaticCredentials,
+	BasicAuthCredentials,
 	Errors,
 };
 
