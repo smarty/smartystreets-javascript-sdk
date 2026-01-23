@@ -2,7 +2,7 @@ const Request = require("../Request");
 const Errors = require("../Errors");
 const buildInputData = require("../util/buildInputData");
 
-module.exports = (batch, sender, Result, keyTranslationFormat) => {
+module.exports = (batch, sender, Result, keyTranslationFormat, customBuildInputData) => {
 	if (batch.isEmpty()) throw new Errors.BatchEmptyError;
 
 	let request = new Request();
@@ -22,6 +22,9 @@ module.exports = (batch, sender, Result, keyTranslationFormat) => {
 
 	function generateRequestPayload(batch) {
 		return batch.lookups.map((lookup) => {
+			if (customBuildInputData) {
+				return customBuildInputData(lookup);
+			}
 			return buildInputData(lookup, keyTranslationFormat);
 		});
 	}

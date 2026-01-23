@@ -42,6 +42,23 @@ describe("A US Street client", function () {
 			urbanization: "9",
 			match: "10",
 			candidates: "11",
+			input_id: "12",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("defaults to enhanced match with 5 candidates when no match type specified.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		let expectedParameters = {
+			street: "123 Main St",
+			match: "enhanced",
+			candidates: 5,
 		};
 
 		client.send(lookup);
@@ -56,6 +73,53 @@ describe("A US Street client", function () {
 		lookup.match = "enhanced";
 		let expectedParameters = {
 			match: "enhanced",
+			candidates: 5,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends no match or candidates when match type is strict.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		lookup.match = "strict";
+		let expectedParameters = {
+			street: "123 Main St",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends candidates but not match when match is strict with explicit candidates.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		lookup.match = "strict";
+		lookup.maxCandidates = 3;
+		let expectedParameters = {
+			street: "123 Main St",
+			candidates: 3,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends match invalid when explicitly set.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "invalid";
+		let expectedParameters = {
+			match: "invalid",
 			candidates: 5,
 		};
 
