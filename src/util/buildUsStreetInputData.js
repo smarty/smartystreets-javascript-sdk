@@ -11,18 +11,14 @@ module.exports = (lookup) => {
 		effectiveMatch = "enhanced";
 	}
 
-	// If match is "strict", don't send match parameter or default candidates
+	// If match is "strict", don't send match parameter
 	if (effectiveMatch === "strict") {
 		effectiveMatch = undefined;
-		// Only send candidates if explicitly set
-		if (!effectiveCandidates) {
-			effectiveCandidates = undefined;
-		}
-	} else {
-		// For non-strict (including default "enhanced"), set default candidates to 5 if not specified
-		if (!effectiveCandidates) {
-			effectiveCandidates = 5;
-		}
+	}
+
+	// For "enhanced" match mode, set default candidates to 5 if not specified
+	if (effectiveMatch === "enhanced" && !effectiveCandidates) {
+		effectiveCandidates = 5;
 	}
 
 	// Create a lookup copy with effective values for serialization
