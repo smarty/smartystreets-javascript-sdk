@@ -35,6 +35,10 @@
    "default": "./dist/cjs/index.cjs"
   }
  },
+ "publishConfig": {
+  "access": "public",
+  "provenance": true
+ },
  "scripts": {
   "build": "rollup --config",
   "test": "npm run test:js && npm run test:ts",
