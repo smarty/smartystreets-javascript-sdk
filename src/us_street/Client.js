@@ -3,7 +3,7 @@ const Lookup = require("./Lookup");
 const Batch = require("../Batch");
 const UndefinedLookupError = require("../Errors").UndefinedLookupError;
 const sendBatch = require("../util/sendBatch");
-const keyTranslationFormat = require("../util/apiToSDKKeyMap").usStreet;
+const buildUsStreetInputData = require("../util/buildUsStreetInputData");
 
 /**
  * This client sends lookups to the Smarty US Street API, <br>
@@ -28,15 +28,13 @@ class Client {
 		let batch;
 
 		if (dataIsLookup) {
-			if (data.maxCandidates == null && data.match == "enhanced")
-				data.maxCandidates = 5;
 			batch = new Batch();
 			batch.add(data);
 		} else {
 			batch = data;
 		}
 
-		return sendBatch(batch, this.sender, Candidate, keyTranslationFormat);
+		return sendBatch(batch, this.sender, Candidate, null, buildUsStreetInputData);
 	}
 }
 

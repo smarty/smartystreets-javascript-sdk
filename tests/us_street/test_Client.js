@@ -42,6 +42,23 @@ describe("A US Street client", function () {
 			urbanization: "9",
 			match: "10",
 			candidates: "11",
+			input_id: "12",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("defaults to enhanced match with 5 candidates when no match type specified.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		let expectedParameters = {
+			street: "123 Main St",
+			match: "enhanced",
+			candidates: 5,
 		};
 
 		client.send(lookup);
@@ -57,6 +74,133 @@ describe("A US Street client", function () {
 		let expectedParameters = {
 			match: "enhanced",
 			candidates: 5,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends no match or candidates when match type is strict.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		lookup.match = "strict";
+		let expectedParameters = {
+			street: "123 Main St",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends candidates but not match when match is strict with explicit candidates.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		lookup.match = "strict";
+		lookup.maxCandidates = 3;
+		let expectedParameters = {
+			street: "123 Main St",
+			candidates: 3,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends match invalid when explicitly set.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "invalid";
+		let expectedParameters = {
+			match: "invalid",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends match invalid with explicit candidates.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "invalid";
+		lookup.maxCandidates = 3;
+		let expectedParameters = {
+			match: "invalid",
+			candidates: 3,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("defaults maxCandidates to 5 when enhanced and maxCandidates is 0.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "enhanced";
+		lookup.maxCandidates = 0;
+		let expectedParameters = {
+			match: "enhanced",
+			candidates: 5,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("uses explicit maxCandidates when enhanced and maxCandidates is set.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "enhanced";
+		lookup.maxCandidates = 10;
+		let expectedParameters = {
+			match: "enhanced",
+			candidates: 10,
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("does not default candidates for non-enhanced match modes.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.street = "123 Main St";
+		lookup.match = "invalid";
+		// maxCandidates left undefined - should NOT default to 5 for non-enhanced
+		let expectedParameters = {
+			street: "123 Main St",
+			match: "invalid",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("passes through explicit zero candidates for non-enhanced match modes.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+		lookup.match = "invalid";
+		lookup.maxCandidates = 0;
+		let expectedParameters = {
+			match: "invalid",
+			candidates: 0,
 		};
 
 		client.send(lookup);
