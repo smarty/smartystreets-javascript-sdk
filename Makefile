@@ -1,6 +1,5 @@
 #!/usr/bin/make -f
 
-VERSION       := $(shell tagit -p --dry-run)
 VERSION_FILE1 := package.json
 VERSION_FILE2 := package-lock.json
 
@@ -42,8 +41,5 @@ version:
 
 publish: test build version
 	npm publish
-	git checkout "$(VERSION_FILE1)" "$(VERSION_FILE2)"
-	tagit -p
-	git push origin --tags
 
 .PHONY: test fmt clean build compile cover integrate version publish
