@@ -49,7 +49,7 @@
  "license": "Apache-2.0",
  "repository": {
   "type": "git",
-  "url": "git+https://github.com/smartystreets/smartystreets-javascript-sdk.git"
+  "url": "github:smartystreets/smartystreets-javascript-sdk"
  },
  "devDependencies": {
   "@babel/preset-env": "^7.28.5",
