@@ -8,5 +8,9 @@
       "Bash(make *)",
       "Bash(npm *)"
     ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   }
 }
