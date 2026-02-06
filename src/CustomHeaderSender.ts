@@ -1,33 +1,40 @@
 import { Request, Response, Sender } from "./types";
 
+export interface AppendHeader {
+	values: string[];
+	separator: string;
+}
+
 export default class CustomHeaderSender {
 	private sender: Sender;
 	private customHeaders: Record<string, string>;
-	private appendHeaderSeparators: Record<string, string>;
+	private appendHeaders: Record<string, AppendHeader>;
 
 	constructor(
 		innerSender: Sender,
 		customHeaders: Record<string, string>,
-		appendHeaderSeparators: Record<string, string> = {},
+		appendHeaders: Record<string, AppendHeader> = {},
 	) {
 		this.sender = innerSender;
 		this.customHeaders = customHeaders;
-		this.appendHeaderSeparators = appendHeaderSeparators;
+		this.appendHeaders = appendHeaders;
 	}
 
 	send(request: Request): Promise<Response> {
+		const headers = request.headers as Record<string, string>;
+
 		for (let key in this.customHeaders) {
-			if (key in this.appendHeaderSeparators) {
-				const separator = this.appendHeaderSeparators[key];
-				const existing = (request.headers as Record<string, string>)[key];
-				if (existing) {
-					(request.headers as Record<string, string>)[key] =
-						existing + separator + this.customHeaders[key];
-				} else {
-					(request.headers as Record<string, string>)[key] = this.customHeaders[key];
-				}
+			headers[key] = this.customHeaders[key];
+		}
+
+		for (let key in this.appendHeaders) {
+			const { values, separator } = this.appendHeaders[key];
+			const appendValue = values.join(separator);
+			const existing = headers[key];
+			if (existing) {
+				headers[key] = existing + separator + appendValue;
 			} else {
-				request.headers[key] = this.customHeaders[key];
+				headers[key] = appendValue;
 			}
 		}
 

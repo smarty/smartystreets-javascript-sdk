@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import CustomHeaderSender from "../src/CustomHeaderSender.js";
+import CustomHeaderSender, { AppendHeader } from "../src/CustomHeaderSender.js";
 import Request from "../src/Request.js";
 import Response from "../src/Response.js";
 import { Sender } from "../src/types";
@@ -33,13 +33,10 @@ describe("A custom header sender", function () {
 
 	it("appended headers are joined with separator.", function () {
 		const mockSender = new MockSender();
-		const customHeaders = {
-			"User-Agent": "custom-value",
+		const appendHeaders: Record<string, AppendHeader> = {
+			"User-Agent": { values: ["custom-value"], separator: " " },
 		};
-		const appendHeaderSeparators = {
-			"User-Agent": " ",
-		};
-		const customHeaderSender = new CustomHeaderSender(mockSender, customHeaders, appendHeaderSeparators);
+		const customHeaderSender = new CustomHeaderSender(mockSender, {}, appendHeaders);
 		const request = new Request(undefined, {
 			"Content-Type": "application/json; charset=utf-8",
 			"User-Agent": "base-value",
@@ -54,13 +51,10 @@ describe("A custom header sender", function () {
 
 	it("appended headers set the value when no existing header is present.", function () {
 		const mockSender = new MockSender();
-		const customHeaders = {
-			"User-Agent": "custom-value",
+		const appendHeaders: Record<string, AppendHeader> = {
+			"User-Agent": { values: ["custom-value"], separator: " " },
 		};
-		const appendHeaderSeparators = {
-			"User-Agent": " ",
-		};
-		const customHeaderSender = new CustomHeaderSender(mockSender, customHeaders, appendHeaderSeparators);
+		const customHeaderSender = new CustomHeaderSender(mockSender, {}, appendHeaders);
 		const request = new Request();
 
 		customHeaderSender.send(request);
@@ -70,15 +64,12 @@ describe("A custom header sender", function () {
 		);
 	});
 
-	it("multiple appended header calls are accumulated.", function () {
+	it("multiple appended header values are accumulated.", function () {
 		const mockSender = new MockSender();
-		const customHeaders = {
-			"User-Agent": "foo bar",
+		const appendHeaders: Record<string, AppendHeader> = {
+			"User-Agent": { values: ["foo", "bar"], separator: " " },
 		};
-		const appendHeaderSeparators = {
-			"User-Agent": " ",
-		};
-		const customHeaderSender = new CustomHeaderSender(mockSender, customHeaders, appendHeaderSeparators);
+		const customHeaderSender = new CustomHeaderSender(mockSender, {}, appendHeaders);
 		const request = new Request(undefined, {
 			"User-Agent": "base-value",
 		});
