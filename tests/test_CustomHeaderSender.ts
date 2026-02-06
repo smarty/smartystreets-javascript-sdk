@@ -30,4 +30,34 @@ describe("A custom header sender", function () {
 		expect("b" in mockSender.request!.headers).to.equal(true);
 		expect((mockSender.request!.headers as Record<string, string>)["b"]).to.equal("2");
 	});
+
+	it("appended headers are joined with separator.", function () {
+		class MockSender implements Sender {
+			request?: Request;
+
+			send = (request: Request): Promise<Response> => {
+				this.request = request;
+				return Promise.resolve(new Response(200, {}));
+			};
+		}
+
+		const mockSender = new MockSender();
+		const customHeaders = {
+			"User-Agent": "custom-value",
+		};
+		const appendHeaders = {
+			"User-Agent": " ",
+		};
+		const customHeaderSender = new CustomHeaderSender(mockSender, customHeaders, appendHeaders);
+		const request = new Request(undefined, {
+			"Content-Type": "application/json; charset=utf-8",
+			"User-Agent": "base-value",
+		});
+
+		customHeaderSender.send(request);
+
+		expect((mockSender.request!.headers as Record<string, string>)["User-Agent"]).to.equal(
+			"base-value custom-value",
+		);
+	});
 });
