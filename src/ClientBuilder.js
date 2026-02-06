@@ -50,7 +50,7 @@ class ClientBuilder {
 		this.baseUrl = undefined;
 		this.proxy = undefined;
 		this.customHeaders = {};
-		this.appendHeaders = {};
+		this.appendHeaderSeparators = {};
 		this.debug = undefined;
 		this.licenses = [];
 		this.customQueries = new Map();
@@ -143,7 +143,7 @@ class ClientBuilder {
 	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withAppendedHeader(key, value, separator) {
-		this.appendHeaders[key] = separator;
+		this.appendHeaderSeparators[key] = separator;
 		if (this.customHeaders[key]) {
 			this.customHeaders[key] += separator + value;
 		} else {
@@ -235,7 +235,7 @@ class ClientBuilder {
 			const retrySender = new RetrySender(this.maxRetries, signingSender, new Sleeper());
 			agentSender = new AgentSender(retrySender);
 		}
-		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders, this.appendHeaders);
+		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders, this.appendHeaderSeparators);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);
 		const customQuerySender = new CustomQuerySender(licenseSender, this.customQueries);

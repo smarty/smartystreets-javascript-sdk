@@ -3,22 +3,22 @@ import { Request, Response, Sender } from "./types";
 export default class CustomHeaderSender {
 	private sender: Sender;
 	private customHeaders: Record<string, string>;
-	private appendHeaders: Record<string, string>;
+	private appendHeaderSeparators: Record<string, string>;
 
 	constructor(
 		innerSender: Sender,
 		customHeaders: Record<string, string>,
-		appendHeaders: Record<string, string> = {},
+		appendHeaderSeparators: Record<string, string> = {},
 	) {
 		this.sender = innerSender;
 		this.customHeaders = customHeaders;
-		this.appendHeaders = appendHeaders;
+		this.appendHeaderSeparators = appendHeaderSeparators;
 	}
 
 	send(request: Request): Promise<Response> {
 		for (let key in this.customHeaders) {
-			if (key in this.appendHeaders) {
-				const separator = this.appendHeaders[key];
+			if (key in this.appendHeaderSeparators) {
+				const separator = this.appendHeaderSeparators[key];
 				const existing = (request.headers as Record<string, string>)[key];
 				if (existing) {
 					(request.headers as Record<string, string>)[key] =
