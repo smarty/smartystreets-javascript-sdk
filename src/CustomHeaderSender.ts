@@ -23,12 +23,11 @@ export default class CustomHeaderSender {
 	send(request: Request): Promise<Response> {
 		const headers = request.headers as Record<string, string>;
 
-		for (let key in this.customHeaders) {
-			headers[key] = this.customHeaders[key];
+		for (const [key, value] of Object.entries(this.customHeaders)) {
+			headers[key] = value;
 		}
 
-		for (let key in this.appendHeaders) {
-			const { values, separator } = this.appendHeaders[key];
+		for (const [key, { values, separator }] of Object.entries(this.appendHeaders)) {
 			const appendValue = values.join(separator);
 			const existing = headers[key];
 			if (existing) {

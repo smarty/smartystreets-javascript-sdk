@@ -144,6 +144,12 @@ class ClientBuilder {
 	 */
 	withAppendedHeader(key, value, separator) {
 		if (this.appendHeaders[key]) {
+			if (this.appendHeaders[key].separator !== separator) {
+				throw new Error(
+					`Conflicting separators for appended header "${key}": ` +
+					`existing "${this.appendHeaders[key].separator}" vs new "${separator}"`,
+				);
+			}
 			this.appendHeaders[key].values.push(value);
 		} else {
 			this.appendHeaders[key] = { values: [value], separator };
