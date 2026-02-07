@@ -50,6 +50,7 @@ class ClientBuilder {
 		this.baseUrl = undefined;
 		this.proxy = undefined;
 		this.customHeaders = {};
+		this.appendHeaders = {};
 		this.debug = undefined;
 		this.licenses = [];
 		this.customQueries = new Map();
@@ -130,6 +131,29 @@ class ClientBuilder {
 	 */
 	withCustomHeaders(customHeaders) {
 		this.customHeaders = customHeaders;
+		return this;
+	}
+
+	/**
+	 * Appends the provided value to the existing header value using the specified separator,
+	 * rather than replacing it. This is useful for single-value headers like User-Agent.
+	 * @param key The header name.
+	 * @param value The value to append.
+	 * @param separator The separator to use when joining values.
+	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
+	 */
+	withAppendedHeader(key, value, separator) {
+		if (this.appendHeaders[key]) {
+			if (this.appendHeaders[key].separator !== separator) {
+				throw new Error(
+					`Conflicting separators for appended header "${key}": ` +
+					`existing "${this.appendHeaders[key].separator}" vs new "${separator}"`,
+				);
+			}
+			this.appendHeaders[key].values.push(value);
+		} else {
+			this.appendHeaders[key] = { values: [value], separator };
+		}
 		return this;
 	}
 
@@ -216,7 +240,7 @@ class ClientBuilder {
 			const retrySender = new RetrySender(this.maxRetries, signingSender, new Sleeper());
 			agentSender = new AgentSender(retrySender);
 		}
-		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders);
+		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders, this.appendHeaders);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);
 		const customQuerySender = new CustomQuerySender(licenseSender, this.customQueries);
