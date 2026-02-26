@@ -10,6 +10,8 @@ npm test           # Run all tests (JS + TS)
 npm run test:js    # Run JavaScript tests only
 npm run test:ts    # Run TypeScript tests only
 npm run build      # Build the library (outputs to dist/)
+npx tsc --noEmit   # Type-check without emitting
+npx prettier --write src/  # Format source files
 ```
 
 To run a single test file:
@@ -17,6 +19,8 @@ To run a single test file:
 npx mocha tests/us_street/test_Client.js           # JS test
 npx mocha --require tsx/cjs tests/test_RetrySender.ts   # TS test
 ```
+
+Build outputs dual formats via Rollup: `dist/cjs/` (CommonJS), `dist/esm/` (ESM), and `dist/types/` (declarations). Axios and axios-retry are external dependencies (not bundled).
 
 ## Architecture
 
@@ -52,13 +56,29 @@ Each API follows the same structure in `src/<api_name>/`:
 
 Supported APIs: `us_street`, `us_zipcode`, `us_autocomplete_pro`, `us_extract`, `us_enrichment`, `us_reverse_geo`, `international_street`, `international_address_autocomplete`, `international_postal_code`
 
+### Credentials
+
+Three credential types, each implementing a `sign(request)` method used by `SigningSender`:
+- **StaticCredentials** (TS) - Server-side: adds `auth-id` + `auth-token` query params
+- **SharedCredentials** (TS) - Client-side/browser: adds embedded `key` param + `Referer` header. Cannot be used with POST (batch) requests.
+- **BasicAuthCredentials** (TS) - Adds HTTP Basic Auth `Authorization` header
+
 ### Entry Point
 
 `index.mjs` exports all public classes organized by API namespace (e.g., `core`, `usStreet`, `usZipcode`).
 
+### Test Infrastructure
+
+Tests use Mocha + Chai (`expect` style). Test files are prefixed with `test_` and mirror the source structure under `tests/`.
+
+`tests/fixtures/mock_senders.js` provides reusable mocks:
+- `MockSender` - Captures the request for inspection
+- `MockSenderWithResponse` - Returns a fixed payload/error
+- `MockSenderWithStatusCodesAndHeaders` - Iterates through status codes (useful for retry tests)
+
 ## Code Style
 
 - Uses Prettier: tabs, double quotes, 100 char line width, trailing commas
-- Mixed JS/TS: Core business logic in JavaScript, infrastructure (credentials, senders) in TypeScript
+- Mixed JS/TS: Business logic (clients, lookups, results) in JS; infrastructure (credentials, senders, types) in TS
 - Tests use Mocha + Chai with `expect` style assertions
 - Test files are prefixed with `test_` and mirror the source structure
