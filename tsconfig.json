@@ -32,9 +32,9 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"types": ["mocha", "chai", "node"],
-        "importHelpers": false,
-        "target": "es2015"
-    },
-	"include": ["src/**/*", "tests/**/*"],
+		"importHelpers": false,
+		"target": "es2015"
+	},
+	"include": ["index.ts", "src/**/*", "tests/**/*"],
 	"exclude": ["node_modules"]
 }
