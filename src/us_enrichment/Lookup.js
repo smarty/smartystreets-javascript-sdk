@@ -1,17 +1,17 @@
 class Lookup {
-    constructor(smartyKey, include, exclude, dataset, dataSubset) {
-        this.smartyKey = smartyKey;
-        this.include = include;
-        this.exclude = exclude;
-        this.dataset = dataset;
-        this.dataSubset = dataSubset;
-        this.features = undefined;
+	constructor(smartyKey, include, exclude, dataset, dataSubset) {
+		this.smartyKey = smartyKey;
+		this.include = include;
+		this.exclude = exclude;
+		this.dataset = dataset;
+		this.dataSubset = dataSubset;
+		this.features = undefined;
 
-        this.response = {};
-        this.customParameters = {};
-    };
+		this.response = {};
+		this.customParameters = {};
+	}
 
-    addCustomParameter(key, value) {
+	addCustomParameter(key, value) {
 		this.customParameters[key] = value;
 	}
 }

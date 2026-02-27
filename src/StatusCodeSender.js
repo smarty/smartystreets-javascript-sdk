@@ -7,9 +7,10 @@ class StatusCodeSender {
 
 	send(request) {
 		return new Promise((resolve, reject) => {
-			this.sender.send(request)
+			this.sender
+				.send(request)
 				.then(resolve)
-				.catch(error => {
+				.catch((error) => {
 					switch (error.statusCode) {
 						case 500:
 							error.error = new Errors.InternalServerError();
@@ -24,7 +25,12 @@ class StatusCodeSender {
 							break;
 
 						default:
-							error.error = new Errors.DefaultError(error && error.payload && error.payload.errors[0] && error.payload.errors[0].message);
+							error.error = new Errors.DefaultError(
+								error &&
+									error.payload &&
+									error.payload.errors[0] &&
+									error.payload.errors[0].message,
+							);
 					}
 					reject(error);
 				});

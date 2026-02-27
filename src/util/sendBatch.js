@@ -3,7 +3,7 @@ const Errors = require("../Errors");
 const buildInputData = require("../util/buildInputData");
 
 module.exports = (batch, sender, Result, keyTranslationFormat, customBuildInputData) => {
-	if (batch.isEmpty()) throw new Errors.BatchEmptyError;
+	if (batch.isEmpty()) throw new Errors.BatchEmptyError();
 
 	let request = new Request();
 
@@ -11,8 +11,9 @@ module.exports = (batch, sender, Result, keyTranslationFormat, customBuildInputD
 	else request.payload = generateRequestPayload(batch);
 
 	return new Promise((resolve, reject) => {
-		sender.send(request)
-			.then(response => {
+		sender
+			.send(request)
+			.then((response) => {
 				if (response.error) reject(response.error);
 
 				resolve(assignResultsToLookups(batch, response));
@@ -30,7 +31,7 @@ module.exports = (batch, sender, Result, keyTranslationFormat, customBuildInputD
 	}
 
 	function assignResultsToLookups(batch, response) {
-		response.payload.map(rawResult => {
+		response.payload.map((rawResult) => {
 			let result = new Result(rawResult);
 			let lookup = batch.getByIndex(result.inputIndex);
 

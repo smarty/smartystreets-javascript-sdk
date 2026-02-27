@@ -2,9 +2,9 @@ const chai = require("chai");
 const expect = chai.expect;
 const Request = require("../src/Request");
 const HttpSender = require("../src/HttpSender");
-const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
+const { buildSmartyResponse } = require("../src/util/buildSmartyResponse");
 
-describe ("An Axios implementation of a HTTP sender", function () {
+describe("An Axios implementation of a HTTP sender", function () {
 	it("adds a data payload to the HTTP request config.", function () {
 		let expectedPayload = "test payload";
 		let request = new Request(expectedPayload);
@@ -15,7 +15,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.data).to.equal(expectedPayload);
 	});
 
-	it ("adds a POST method to the HTTP request config when appropriate.", function () {
+	it("adds a POST method to the HTTP request config when appropriate.", function () {
 		let request = new Request("test payload");
 		let sender = new HttpSender();
 		let requestConfig = sender.buildRequestConfig(request);
@@ -24,7 +24,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.method).to.equal("POST");
 	});
 
-	it ("adds a GET method to the HTTP request config when appropriate.", function () {
+	it("adds a GET method to the HTTP request config when appropriate.", function () {
 		let request = new Request();
 		let sender = new HttpSender();
 		let requestConfig = sender.buildRequestConfig(request);
@@ -33,7 +33,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.method).to.equal("GET");
 	});
 
-	it ("add a timeout to the HTTP request config.", function () {
+	it("add a timeout to the HTTP request config.", function () {
 		let request = new Request("test payload");
 		let sender = new HttpSender();
 		let requestConfig = sender.buildRequestConfig(request);
@@ -47,7 +47,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(customTimeoutRequestConfig.timeout).to.equal(5);
 	});
 
-	it ("adds parameters to the HTTP request config.", function () {
+	it("adds parameters to the HTTP request config.", function () {
 		let request = new Request("");
 		let sender = new HttpSender();
 		request.parameters.test = "1";
@@ -57,7 +57,7 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.params).to.deep.equal(request.parameters);
 	});
 
-	it ("adds headers to the HTTP request config.", function () {
+	it("adds headers to the HTTP request config.", function () {
 		let request = new Request("");
 		let sender = new HttpSender();
 		let requestConfig = sender.buildRequestConfig(request);
@@ -67,10 +67,10 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(requestConfig.headers["Content-Type"]).to.equal("application/json; charset=utf-8");
 	});
 
-	it ("has a response with the right status code.", function () {
+	it("has a response with the right status code.", function () {
 		let sender = new HttpSender();
 		let mockResponse = {
-			status: 200
+			status: 200,
 		};
 		let smartyResponse = buildSmartyResponse(mockResponse);
 
@@ -78,12 +78,12 @@ describe ("An Axios implementation of a HTTP sender", function () {
 		expect(smartyResponse.statusCode).to.equal(200);
 	});
 
-	it ("has a response with a payload.", function () {
+	it("has a response with a payload.", function () {
 		let sender = new HttpSender();
 		let mockData = [1, 2, 3];
 		let mockResponse = {
 			status: 200,
-			data: mockData
+			data: mockData,
 		};
 		let smartyResponse = buildSmartyResponse(mockResponse);
 

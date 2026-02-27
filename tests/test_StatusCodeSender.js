@@ -12,29 +12,27 @@ describe("A status code sender", function () {
 				return new Promise((resolve, reject) => {
 					resolve(new Response(200));
 				});
-			}
+			},
 		};
 
 		let statusCodeSender = new StatusCodeSender(mockSender);
 		let request = new Request();
 
-		return statusCodeSender.send(request).then(response => {
+		return statusCodeSender.send(request).then((response) => {
 			expect(response.error === undefined).to.equal(true);
 		});
 	});
 
 	it("gives a custom message for 400", function () {
 		const payload = {
-			errors: [
-				{message: "custom message"}
-			]
+			errors: [{ message: "custom message" }],
 		};
 		return expectedErrorWithPayloadMessage(400, payload);
-	})
+	});
 
 	it("returns an error message if payload is undefined", function () {
-		return expectedDefaultError()
-	})
+		return expectedDefaultError();
+	});
 
 	it("gives an Internal Server Error on a 500.", function () {
 		return expectedErrorForStatusCode(errors.InternalServerError, 500);
@@ -54,42 +52,48 @@ const expectedErrorWithPayloadMessage = (errorCode, payload) => {
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
-	return statusCodeSender.send(request).then(() => {
-	}, error => {
-		expect(error.error).to.be.an.instanceOf(errors.DefaultError);
-		expect(error.error.message).to.be.equal(payload.errors[0].message);
-	})
-}
+	return statusCodeSender.send(request).then(
+		() => {},
+		(error) => {
+			expect(error.error).to.be.an.instanceOf(errors.DefaultError);
+			expect(error.error.message).to.be.equal(payload.errors[0].message);
+		},
+	);
+};
 
 const expectedDefaultError = () => {
 	let mockSender = generateMockSender(400);
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
-	return statusCodeSender.send(request).then(() => {
-	}, error => {
-		expect(error.error).to.be.an.instanceOf(errors.DefaultError);
-		expect(error.error.message).to.be.equal("unexpected error");
-	})
-}
+	return statusCodeSender.send(request).then(
+		() => {},
+		(error) => {
+			expect(error.error).to.be.an.instanceOf(errors.DefaultError);
+			expect(error.error.message).to.be.equal("unexpected error");
+		},
+	);
+};
 
 function expectedErrorForStatusCode(expectedError, errorCode) {
 	let mockSender = generateMockSender(errorCode);
 	let statusCodeSender = new StatusCodeSender(mockSender);
 	let request = new Request();
 
-	return statusCodeSender.send(request).then(() => {
-	}, error => {
-		expect(error.error).to.be.an.instanceOf(expectedError);
-	})
+	return statusCodeSender.send(request).then(
+		() => {},
+		(error) => {
+			expect(error.error).to.be.an.instanceOf(expectedError);
+		},
+	);
 }
 
 function generateMockSender(errorCode, payload) {
 	return {
 		send: () => {
 			return new Promise((resolve, reject) => {
-				reject(new Response(errorCode, payload))
+				reject(new Response(errorCode, payload));
 			});
-		}
+		},
 	};
 }

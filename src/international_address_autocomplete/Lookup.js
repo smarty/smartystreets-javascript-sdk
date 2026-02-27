@@ -1,5 +1,12 @@
 class Lookup {
-	constructor({search, addressId, country, maxResults = 5, includeOnlyLocality, includeOnlyPostalCode} = {}) {
+	constructor({
+		search,
+		addressId,
+		country,
+		maxResults = 5,
+		includeOnlyLocality,
+		includeOnlyPostalCode,
+	} = {}) {
 		this.result = [];
 
 		this.search = search;

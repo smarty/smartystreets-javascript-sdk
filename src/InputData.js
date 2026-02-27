@@ -5,7 +5,8 @@ class InputData {
 	}
 
 	add(apiField, lookupField) {
-		if (this.lookupFieldIsPopulated(lookupField)) this.data[apiField] = this.formatData(this.lookup[lookupField]);
+		if (this.lookupFieldIsPopulated(lookupField))
+			this.data[apiField] = this.formatData(this.lookup[lookupField]);
 	}
 
 	addCustomParameter(key, value) {

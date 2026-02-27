@@ -1,112 +1,117 @@
 const Errors = require("../Errors");
 const Request = require("../Request");
 const buildInputData = require("../util/buildInputData");
-const {usEnrichment: keyTranslationFormat} = require("../util/apiToSDKKeyMap");
+const { usEnrichment: keyTranslationFormat } = require("../util/apiToSDKKeyMap");
 
 class Client {
-    constructor(sender) {
-        this.sender = sender;
-    }
+	constructor(sender) {
+		this.sender = sender;
+	}
 
-    sendPrincipal(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+	sendPrincipal(lookup) {
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-        let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+		let request = new Request();
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        request.baseUrlParam = lookup.smartyKey + "/property/principal";
+		request.baseUrlParam = lookup.smartyKey + "/property/principal";
 
-        return new Promise((resolve, reject) => {
-            this.sender.send(request)
-                .then(response => {
-                    if (response.error) reject(response.error);
+		return new Promise((resolve, reject) => {
+			this.sender
+				.send(request)
+				.then((response) => {
+					if (response.error) reject(response.error);
 
-                    lookup.response = response.payload;
-                    resolve(lookup);
-                })
-                .catch(reject);
-        });
-    }
+					lookup.response = response.payload;
+					resolve(lookup);
+				})
+				.catch(reject);
+		});
+	}
 
-    sendFinancial(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+	sendFinancial(lookup) {
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-        let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+		let request = new Request();
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        request.baseUrlParam = lookup.smartyKey + "/property/financial";
+		request.baseUrlParam = lookup.smartyKey + "/property/financial";
 
-        return new Promise((resolve, reject) => {
-            this.sender.send(request)
-                .then(response => {
-                    if (response.error) reject(response.error);
+		return new Promise((resolve, reject) => {
+			this.sender
+				.send(request)
+				.then((response) => {
+					if (response.error) reject(response.error);
 
-                    lookup.response = response.payload;
-                    resolve(lookup);
-                })
-                .catch(reject);
-        });
-    }
+					lookup.response = response.payload;
+					resolve(lookup);
+				})
+				.catch(reject);
+		});
+	}
 
-    sendGeo(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+	sendGeo(lookup) {
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-        let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+		let request = new Request();
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        request.baseUrlParam = lookup.smartyKey + "/geo-reference";
+		request.baseUrlParam = lookup.smartyKey + "/geo-reference";
 
-        return new Promise((resolve, reject) => {
-            this.sender.send(request)
-                .then(response => {
-                    if (response.error) reject(response.error);
+		return new Promise((resolve, reject) => {
+			this.sender
+				.send(request)
+				.then((response) => {
+					if (response.error) reject(response.error);
 
-                    lookup.response = response.payload;
-                    resolve(lookup);
-                })
-                .catch(reject);
-        });
-    }
+					lookup.response = response.payload;
+					resolve(lookup);
+				})
+				.catch(reject);
+		});
+	}
 
-    sendSecondary(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+	sendSecondary(lookup) {
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-        let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+		let request = new Request();
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        request.baseUrlParam = lookup.smartyKey + "/secondary";
+		request.baseUrlParam = lookup.smartyKey + "/secondary";
 
-        return new Promise((resolve, reject) => {
-            this.sender.send(request)
-                .then(response => {
-                    if (response.error) reject(response.error);
+		return new Promise((resolve, reject) => {
+			this.sender
+				.send(request)
+				.then((response) => {
+					if (response.error) reject(response.error);
 
-                    lookup.response = response.payload;
-                    resolve(lookup);
-                })
-                .catch(reject);
-        });
-    }
+					lookup.response = response.payload;
+					resolve(lookup);
+				})
+				.catch(reject);
+		});
+	}
 
-    sendSecondaryCount(lookup) {
-        if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
+	sendSecondaryCount(lookup) {
+		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-        let request = new Request();
-        request.parameters = buildInputData(lookup, keyTranslationFormat);
+		let request = new Request();
+		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
-        request.baseUrlParam = lookup.smartyKey + "/secondary/count";
+		request.baseUrlParam = lookup.smartyKey + "/secondary/count";
 
-        return new Promise((resolve, reject) => {
-            this.sender.send(request)
-                .then(response => {
-                    if (response.error) reject(response.error);
+		return new Promise((resolve, reject) => {
+			this.sender
+				.send(request)
+				.then((response) => {
+					if (response.error) reject(response.error);
 
-                    lookup.response = response.payload;
-                    resolve(lookup);
-                })
-                .catch(reject);
-        });
-    }
+					lookup.response = response.payload;
+					resolve(lookup);
+				})
+				.catch(reject);
+		});
+	}
 }
 
 module.exports = Client;

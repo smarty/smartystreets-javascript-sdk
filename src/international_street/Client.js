@@ -20,8 +20,9 @@ class Client {
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request)
-				.then(response => {
+			this.sender
+				.send(request)
+				.then((response) => {
 					if (response.error) reject(response.error);
 
 					resolve(attachLookupCandidates(response, lookup));
@@ -30,7 +31,7 @@ class Client {
 		});
 
 		function attachLookupCandidates(response, lookup) {
-			response.payload.map(rawCandidate => {
+			response.payload.map((rawCandidate) => {
 				lookup.result.push(new Candidate(rawCandidate));
 			});
 

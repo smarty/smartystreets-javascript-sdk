@@ -20,8 +20,9 @@ class Client {
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request)
-				.then(response => {
+			this.sender
+				.send(request)
+				.then((response) => {
 					if (response.error) reject(response.error);
 
 					lookup.result = buildSuggestionsFromResponse(response.payload);
@@ -33,7 +34,7 @@ class Client {
 		function buildSuggestionsFromResponse(payload) {
 			if (payload.suggestions === null) return [];
 
-			return payload.suggestions.map(suggestion => new Suggestion(suggestion));
+			return payload.suggestions.map((suggestion) => new Suggestion(suggestion));
 		}
 	}
 }

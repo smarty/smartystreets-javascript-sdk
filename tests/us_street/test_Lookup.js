@@ -2,8 +2,8 @@ const chai = require("chai");
 const expect = chai.expect;
 const Lookup = require("../../src/us_street/Lookup");
 
-describe ("A US Street lookup", function () {
-	it ("correctly populates fields.", function () {
+describe("A US Street lookup", function () {
+	it("correctly populates fields.", function () {
 		const lookup = new Lookup("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
 
 		expect(lookup.street).to.equal("a");
@@ -21,7 +21,7 @@ describe ("A US Street lookup", function () {
 		expect(lookup.format).to.equal("m");
 	});
 
-	it ("has a result array.", function () {
+	it("has a result array.", function () {
 		const lookup = new Lookup();
 
 		expect(Array.isArray(lookup.result)).to.equal(true);

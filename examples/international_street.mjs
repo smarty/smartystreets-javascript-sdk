@@ -38,8 +38,8 @@ lookup2.administrativeArea = "SP";
 lookup2.country = "Brazil";
 lookup2.postalCode = "02516-050";
 
-await handleRequest(lookup1)
-await handleRequest(lookup2)
+await handleRequest(lookup1);
+await handleRequest(lookup2);
 
 function displayResult(result) {
 	console.log(result.result[0].components);
@@ -53,7 +53,7 @@ async function handleRequest(lookup) {
 	try {
 		const result = await client.send(lookup);
 		displayResult(result);
-	} catch(err) {
+	} catch (err) {
 		handleError(err);
 	}
 }

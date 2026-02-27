@@ -14,7 +14,7 @@ describe("A US Street client", function () {
 			send: function (request) {
 				sentFlag = true;
 				mockSenderRequest = request;
-			}
+			},
 		};
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -217,23 +217,23 @@ describe("A US Street client", function () {
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
-		const expectedMockPayload = [{delivery_line_1: "An address", input_index: 0}];
+		const expectedMockPayload = [{ delivery_line_1: "An address", input_index: 0 }];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
-		let expectedResult = new Candidate({delivery_line_1: "An address", input_index: 0});
+		let expectedResult = new Candidate({ delivery_line_1: "An address", input_index: 0 });
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then((response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
 
 	it("attaches match candidates to their corresponding lookups.", function () {
 		const expectedMockPayload = JSON.stringify([
-			{delivery_line_1: "Address 0", input_index: 0},
-			{delivery_line_1: "Alternate address 0", input_index: 0},
-			{delivery_line_1: "Address 1", input_index: 1},
-			{delivery_line_1: "Address 3", input_index: 3},
+			{ delivery_line_1: "Address 0", input_index: 0 },
+			{ delivery_line_1: "Alternate address 0", input_index: 0 },
+			{ delivery_line_1: "Address 1", input_index: 1 },
+			{ delivery_line_1: "Address 3", input_index: 3 },
 		]);
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
@@ -248,7 +248,7 @@ describe("A US Street client", function () {
 		batch.add(lookup2);
 		batch.add(lookup3);
 
-		client.send(batch).then(response => {
+		client.send(batch).then((response) => {
 			expect(batch.getByIndex(0).result[0].deliveryLine1).to.equal("Address 0");
 			expect(batch.getByIndex(0).result[1].deliveryLine1).to.equal("Alternate address 0");
 			expect(batch.getByIndex(1).result[0].deliveryLine1).to.equal("Address 1");
@@ -263,7 +263,9 @@ describe("A US Street client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		return client.send(lookup).catch((e) => {expect(e).to.equal(expectedMockError);});
+		return client.send(lookup).catch((e) => {
+			expect(e).to.equal(expectedMockError);
+		});
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {

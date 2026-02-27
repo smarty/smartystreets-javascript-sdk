@@ -8,7 +8,6 @@ class DefaultError extends SmartyError {
 	constructor(message) {
 		super(message);
 	}
-
 }
 
 class BatchFullError extends SmartyError {
@@ -31,13 +30,17 @@ class UndefinedLookupError extends SmartyError {
 
 class BadCredentialsError extends SmartyError {
 	constructor() {
-		super("Unauthorized: The credentials were provided incorrectly or did not match any existing active credentials.");
+		super(
+			"Unauthorized: The credentials were provided incorrectly or did not match any existing active credentials.",
+		);
 	}
 }
 
 class PaymentRequiredError extends SmartyError {
 	constructor() {
-		super("Payment Required: There is no active subscription for the account associated with the credentials submitted with the request.");
+		super(
+			"Payment Required: There is no active subscription for the account associated with the credentials submitted with the request.",
+		);
 	}
 }
 
@@ -49,7 +52,9 @@ class RequestEntityTooLargeError extends SmartyError {
 
 class BadRequestError extends SmartyError {
 	constructor() {
-		super("Bad Request (Malformed Payload): A GET request lacked a street field or the request body of a POST request contained malformed JSON.");
+		super(
+			"Bad Request (Malformed Payload): A GET request lacked a street field or the request body of a POST request contained malformed JSON.",
+		);
 	}
 }
 
@@ -61,7 +66,9 @@ class UnprocessableEntityError extends SmartyError {
 
 class TooManyRequestsError extends SmartyError {
 	constructor() {
-		super("When using the public 'embedded key' authentication, we restrict the number of requests coming from a given source over too short of a time.");
+		super(
+			"When using the public 'embedded key' authentication, we restrict the number of requests coming from a given source over too short of a time.",
+		);
 	}
 }
 
@@ -79,7 +86,9 @@ class ServiceUnavailableError extends SmartyError {
 
 class GatewayTimeoutError extends SmartyError {
 	constructor() {
-		super("The upstream data provider did not respond in a timely fashion and the request failed. A serious, yet rare occurrence indeed.");
+		super(
+			"The upstream data provider did not respond in a timely fashion and the request failed. A serious, yet rare occurrence indeed.",
+		);
 	}
 }
 
@@ -96,5 +105,5 @@ module.exports = {
 	InternalServerError: InternalServerError,
 	ServiceUnavailableError: ServiceUnavailableError,
 	GatewayTimeoutError: GatewayTimeoutError,
-	DefaultError: DefaultError
+	DefaultError: DefaultError,
 };

@@ -5,11 +5,11 @@ const BatchFullError = require("./Errors").BatchFullError;
  *     all at once. This is more efficient than sending them one at a time.
  */
 class Batch {
-	constructor () {
+	constructor() {
 		this.lookups = [];
 	}
 
-	add (lookup) {
+	add(lookup) {
 		if (this.lookupsHasRoomForLookup()) this.lookups.push(lookup);
 		else throw new BatchFullError();
 	}
@@ -28,7 +28,7 @@ class Batch {
 	}
 
 	getByInputId(inputId) {
-		return this.lookups.filter(lookup => {
+		return this.lookups.filter((lookup) => {
 			return lookup.inputId === inputId;
 		})[0];
 	}
@@ -37,11 +37,11 @@ class Batch {
 	 * Clears the lookups stored in the batch so it can be used again.<br>
 	 *     This helps avoid the overhead of building a new Batch object for each group of lookups.
 	 */
-	clear () {
+	clear() {
 		this.lookups = [];
 	}
 
-	isEmpty () {
+	isEmpty() {
 		return this.length() === 0;
 	}
 }

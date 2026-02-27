@@ -2,7 +2,7 @@ const Request = require("../Request");
 const Response = require("./Response");
 const buildInputData = require("../util/buildInputData");
 const keyTranslationFormat = require("../util/apiToSDKKeyMap").usReverseGeo;
-const {UndefinedLookupError} = require("../Errors.js");
+const { UndefinedLookupError } = require("../Errors.js");
 
 /**
  * This client sends lookups to the Smarty US Reverse Geo API, <br>
@@ -20,8 +20,9 @@ class Client {
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request)
-				.then(response => {
+			this.sender
+				.send(request)
+				.then((response) => {
 					if (response.error) reject(response.error);
 
 					resolve(attachLookupResults(response, lookup));

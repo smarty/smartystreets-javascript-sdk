@@ -11,7 +11,7 @@ describe("A US Reverse Geo match response", function () {
 						latitude: 1.1,
 						longitude: 2.2,
 						accuracy: "3",
-						license: 1
+						license: 1,
 					},
 					distance: 4.4,
 					address: {
@@ -19,10 +19,10 @@ describe("A US Reverse Geo match response", function () {
 						city: "6",
 						state_abbreviation: "7",
 						zipcode: "8",
-						source: "postal"
-					}
+						source: "postal",
+					},
 				},
-			]
+			],
 		};
 
 		const response = new Response(sampleResponse);

@@ -1,4 +1,4 @@
-const {buildSmartyResponse} = require("../../src/util/buildSmartyResponse.js");
+const { buildSmartyResponse } = require("../../src/util/buildSmartyResponse.js");
 const Response = require("../../src/Response");
 
 module.exports = {
@@ -14,16 +14,20 @@ module.exports = {
 			request.payload = clientRequest.payload;
 			request.parameters = clientRequest.parameters;
 			request.baseUrlParam = clientRequest.baseUrlParam;
-		}
+		};
 	},
 	MockSenderWithResponse: function (expectedPayload, expectedError) {
 		this.send = function () {
 			return new Promise((resolve, reject) => {
 				resolve(new Response("", expectedPayload, expectedError));
 			});
-		}
+		};
 	},
-	MockSenderWithStatusCodesAndHeaders: function (statusCodes, headers = undefined, error = undefined) {
+	MockSenderWithStatusCodesAndHeaders: function (
+		statusCodes,
+		headers = undefined,
+		error = undefined,
+	) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;
@@ -38,6 +42,6 @@ module.exports = {
 			const response = buildSmartyResponse(mockResponse);
 			this.currentStatusCodeIndex += 1;
 			return response;
-		}
-	}
+		};
+	},
 };

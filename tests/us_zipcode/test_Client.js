@@ -14,9 +14,8 @@ describe("A US Zipcode client", function () {
 			send: function (request) {
 				sentFlag = true;
 				mockSenderRequest = request;
-				return new Promise((resolve, reject) => {
-				});
-			}
+				return new Promise((resolve, reject) => {});
+			},
 		};
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -43,11 +42,7 @@ describe("A US Zipcode client", function () {
 		let lookup1 = new Lookup("lookup1");
 		let lookup2 = new Lookup("lookup2");
 		let batch = new Batch();
-		const expectedPayload = [
-			{"city": "lookup0"},
-			{"city": "lookup1"},
-			{"city": "lookup2"}
-		];
+		const expectedPayload = [{ city: "lookup0" }, { city: "lookup1" }, { city: "lookup2" }];
 
 		batch.add(lookup0);
 		batch.add(lookup1);
@@ -59,23 +54,23 @@ describe("A US Zipcode client", function () {
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
-		const expectedMockPayload = [{input_index: 0}];
+		const expectedMockPayload = [{ input_index: 0 }];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
-		let expectedResult = new Result({input_index: 0});
+		let expectedResult = new Result({ input_index: 0 });
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then((response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
 
 	it("attaches match candidates to their corresponding lookups.", function () {
 		const expectedMockPayload = JSON.stringify([
-			{city: "City 0", input_index: 0},
-			{city: "Alternate city 0", input_index: 0},
-			{city: "City 1", input_index: 1},
-			{city: "City 3", input_index: 3},
+			{ city: "City 0", input_index: 0 },
+			{ city: "Alternate city 0", input_index: 0 },
+			{ city: "City 1", input_index: 1 },
+			{ city: "City 3", input_index: 3 },
 		]);
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
@@ -90,7 +85,7 @@ describe("A US Zipcode client", function () {
 		batch.add(lookup2);
 		batch.add(lookup3);
 
-		client.send(batch).then(response => {
+		client.send(batch).then((response) => {
 			expect(batch.getByIndex(0).result[0].city).to.equal("City 0");
 			expect(batch.getByIndex(0).result[1].city).to.equal("Alternate city 0");
 			expect(batch.getByIndex(1).result[0].city).to.equal("City 1");
@@ -123,7 +118,9 @@ describe("A US Zipcode client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup();
 
-		return client.send(lookup).catch((e) => {expect(e).to.equal(expectedMockError);});
+		return client.send(lookup).catch((e) => {
+			expect(e).to.equal(expectedMockError);
+		});
 	});
 
 	it("throws an exception if a lookup is undefined.", function () {

@@ -10,9 +10,7 @@ class LicenseSender {
 		}
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request)
-				.then(resolve)
-				.catch(reject);
+			this.sender.send(request).then(resolve).catch(reject);
 		});
 	}
 }

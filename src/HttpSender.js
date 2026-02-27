@@ -1,5 +1,5 @@
 const Axios = require("axios");
-const {buildSmartyResponse} = require("../src/util/buildSmartyResponse");
+const { buildSmartyResponse } = require("../src/util/buildSmartyResponse");
 
 class HttpSender {
 	constructor(timeout = 10000, proxyConfig, debug = false) {
@@ -9,7 +9,7 @@ class HttpSender {
 		if (debug) this.enableDebug();
 	}
 
-	buildRequestConfig({payload, parameters, headers, baseUrl}) {
+	buildRequestConfig({ payload, parameters, headers, baseUrl }) {
 		let config = {
 			method: "GET",
 			timeout: this.timeout,
@@ -35,31 +35,31 @@ class HttpSender {
 			let requestConfig = this.buildRequestConfig(request);
 
 			this.axiosInstance(requestConfig)
-				.then(response => {
+				.then((response) => {
 					let smartyResponse = buildSmartyResponse(response);
 
 					if (smartyResponse.statusCode >= 400) reject(smartyResponse);
 
 					resolve(smartyResponse);
 				})
-				.catch(error => reject(buildSmartyResponse(undefined, error)));
+				.catch((error) => reject(buildSmartyResponse(undefined, error)));
 		});
 	}
 
 	enableDebug() {
-		this.axiosInstance.interceptors.request.use(request => {
-			console.log('Request:\r\n', request);
-			console.log('\r\n*******************************************\r\n');
-			return request
+		this.axiosInstance.interceptors.request.use((request) => {
+			console.log("Request:\r\n", request);
+			console.log("\r\n*******************************************\r\n");
+			return request;
 		});
 
-		this.axiosInstance.interceptors.response.use(response => {
-			console.log('Response:\r\n');
-			console.log('Status:', response.status, response.statusText);
-			console.log('Headers:', response.headers);
-			console.log('Data:', response.data);
-			return response
-		})
+		this.axiosInstance.interceptors.response.use((response) => {
+			console.log("Response:\r\n");
+			console.log("Status:", response.status, response.statusText);
+			console.log("Headers:", response.headers);
+			console.log("Data:", response.data);
+			return response;
+		});
 	}
 }
 

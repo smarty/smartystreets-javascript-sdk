@@ -43,16 +43,22 @@ class Candidate {
 			this.components.premiseType = responseData.components.premise_type;
 			this.components.thoroughfare = responseData.components.thoroughfare;
 			this.components.thoroughfarePredirection = responseData.components.thoroughfare_predirection;
-			this.components.thoroughfarePostdirection = responseData.components.thoroughfare_postdirection;
+			this.components.thoroughfarePostdirection =
+				responseData.components.thoroughfare_postdirection;
 			this.components.thoroughfareName = responseData.components.thoroughfare_name;
 			this.components.thoroughfareTrailingType = responseData.components.thoroughfare_trailing_type;
 			this.components.thoroughfareType = responseData.components.thoroughfare_type;
 			this.components.dependentThoroughfare = responseData.components.dependent_thoroughfare;
-			this.components.dependentThoroughfarePredirection = responseData.components.dependent_thoroughfare_predirection;
-			this.components.dependentThoroughfarePostdirection = responseData.components.dependent_thoroughfare_postdirection;
-			this.components.dependentThoroughfareName = responseData.components.dependent_thoroughfare_name;
-			this.components.dependentThoroughfareTrailingType = responseData.components.dependent_thoroughfare_trailing_type;
-			this.components.dependentThoroughfareType = responseData.components.dependent_thoroughfare_type;
+			this.components.dependentThoroughfarePredirection =
+				responseData.components.dependent_thoroughfare_predirection;
+			this.components.dependentThoroughfarePostdirection =
+				responseData.components.dependent_thoroughfare_postdirection;
+			this.components.dependentThoroughfareName =
+				responseData.components.dependent_thoroughfare_name;
+			this.components.dependentThoroughfareTrailingType =
+				responseData.components.dependent_thoroughfare_trailing_type;
+			this.components.dependentThoroughfareType =
+				responseData.components.dependent_thoroughfare_type;
 			this.components.building = responseData.components.building;
 			this.components.buildingLeadingType = responseData.components.building_leading_type;
 			this.components.buildingName = responseData.components.building_name;
@@ -69,7 +75,8 @@ class Candidate {
 			this.components.additionalContent = responseData.components.additional_content;
 			this.components.deliveryInstallation = responseData.components.delivery_installation;
 			this.components.deliveryInstallationType = responseData.components.delivery_installation_type;
-			this.components.deliveryInstallationQualifierName = responseData.components.delivery_installation_qualifier_name;
+			this.components.deliveryInstallationQualifierName =
+				responseData.components.delivery_installation_qualifier_name;
 			this.components.route = responseData.components.route;
 			this.components.routeNumber = responseData.components.route_number;
 			this.components.routeType = responseData.components.route_type;
@@ -99,50 +106,94 @@ class Candidate {
 
 				this.analysis.changes.components = {};
 				if (responseData.analysis.changes.components !== undefined) {
-					this.analysis.changes.components.countryIso3 = responseData.analysis.changes.components.country_iso_3;
-					this.analysis.changes.components.superAdministrativeArea = responseData.analysis.changes.components.super_administrative_area;
-					this.analysis.changes.components.administrativeArea = responseData.analysis.changes.components.administrative_area;
-					this.analysis.changes.components.administrativeAreaIso2 = responseData.analysis.changes.components.administrative_area_iso2;
-					this.analysis.changes.components.administrativeAreaShort = responseData.analysis.changes.components.administrative_area_short;
-					this.analysis.changes.components.administrativeAreaLong = responseData.analysis.changes.components.administrative_area_long;
-					this.analysis.changes.components.subAdministrativeArea = responseData.analysis.changes.components.sub_administrative_area;
-					this.analysis.changes.components.dependentLocality = responseData.analysis.changes.components.dependent_locality;
-					this.analysis.changes.components.dependentLocalityName = responseData.analysis.changes.components.dependent_locality_name;
-					this.analysis.changes.components.doubleDependentLocality = responseData.analysis.changes.components.double_dependent_locality;
-					this.analysis.changes.components.locality = responseData.analysis.changes.components.locality;
-					this.analysis.changes.components.postalCode = responseData.analysis.changes.components.postal_code;
-					this.analysis.changes.components.postalCodeShort = responseData.analysis.changes.components.postal_code_short;
-					this.analysis.changes.components.postalCodeExtra = responseData.analysis.changes.components.postal_code_extra;
-					this.analysis.changes.components.premise = responseData.analysis.changes.components.premise;
-					this.analysis.changes.components.premiseExtra = responseData.analysis.changes.components.premise_extra;
-					this.analysis.changes.components.premisePrefixNumber = responseData.analysis.changes.components.premise_prefix_number;
-					this.analysis.changes.components.premiseNumber = responseData.analysis.changes.components.premise_number;
-					this.analysis.changes.components.premiseType = responseData.analysis.changes.components.premise_type;
-					this.analysis.changes.components.thoroughfare = responseData.analysis.changes.components.thoroughfare;
-					this.analysis.changes.components.thoroughfarePredirection = responseData.analysis.changes.components.thoroughfare_predirection;
-					this.analysis.changes.components.thoroughfarePostdirection = responseData.analysis.changes.components.thoroughfare_postdirection;
-					this.analysis.changes.components.thoroughfareName = responseData.analysis.changes.components.thoroughfare_name;
-					this.analysis.changes.components.thoroughfareTrailingType = responseData.analysis.changes.components.thoroughfare_trailing_type;
-					this.analysis.changes.components.thoroughfareType = responseData.analysis.changes.components.thoroughfare_type;
-					this.analysis.changes.components.dependentThoroughfare = responseData.analysis.changes.components.dependent_thoroughfare;
-					this.analysis.changes.components.dependentThoroughfarePredirection = responseData.analysis.changes.components.dependent_thoroughfare_predirection;
-					this.analysis.changes.components.dependentThoroughfarePostdirection = responseData.analysis.changes.components.dependent_thoroughfare_postdirection;
-					this.analysis.changes.components.dependentThoroughfareName = responseData.analysis.changes.components.dependent_thoroughfare_name;
-					this.analysis.changes.components.dependentThoroughfareTrailingType = responseData.analysis.changes.components.dependent_thoroughfare_trailing_type;
-					this.analysis.changes.components.dependentThoroughfareType = responseData.analysis.changes.components.dependent_thoroughfare_type;
-					this.analysis.changes.components.building = responseData.analysis.changes.components.building;
-					this.analysis.changes.components.buildingLeadingType = responseData.analysis.changes.components.building_leading_type;
-					this.analysis.changes.components.buildingName = responseData.analysis.changes.components.building_name;
-					this.analysis.changes.components.buildingTrailingType = responseData.analysis.changes.components.building_trailing_type;
-					this.analysis.changes.components.subBuildingType = responseData.analysis.changes.components.sub_building_type;
-					this.analysis.changes.components.subBuildingNumber = responseData.analysis.changes.components.sub_building_number;
-					this.analysis.changes.components.subBuildingName = responseData.analysis.changes.components.sub_building_name;
-					this.analysis.changes.components.subBuilding = responseData.analysis.changes.components.sub_building;
-					this.analysis.changes.components.levelType = responseData.analysis.changes.components.level_type;
-					this.analysis.changes.components.levelNumber = responseData.analysis.changes.components.level_number;
-					this.analysis.changes.components.postBox = responseData.analysis.changes.components.post_box;
-					this.analysis.changes.components.postBoxType = responseData.analysis.changes.components.post_box_type;
-					this.analysis.changes.components.postBoxNumber = responseData.analysis.changes.components.post_box_number;
+					this.analysis.changes.components.countryIso3 =
+						responseData.analysis.changes.components.country_iso_3;
+					this.analysis.changes.components.superAdministrativeArea =
+						responseData.analysis.changes.components.super_administrative_area;
+					this.analysis.changes.components.administrativeArea =
+						responseData.analysis.changes.components.administrative_area;
+					this.analysis.changes.components.administrativeAreaIso2 =
+						responseData.analysis.changes.components.administrative_area_iso2;
+					this.analysis.changes.components.administrativeAreaShort =
+						responseData.analysis.changes.components.administrative_area_short;
+					this.analysis.changes.components.administrativeAreaLong =
+						responseData.analysis.changes.components.administrative_area_long;
+					this.analysis.changes.components.subAdministrativeArea =
+						responseData.analysis.changes.components.sub_administrative_area;
+					this.analysis.changes.components.dependentLocality =
+						responseData.analysis.changes.components.dependent_locality;
+					this.analysis.changes.components.dependentLocalityName =
+						responseData.analysis.changes.components.dependent_locality_name;
+					this.analysis.changes.components.doubleDependentLocality =
+						responseData.analysis.changes.components.double_dependent_locality;
+					this.analysis.changes.components.locality =
+						responseData.analysis.changes.components.locality;
+					this.analysis.changes.components.postalCode =
+						responseData.analysis.changes.components.postal_code;
+					this.analysis.changes.components.postalCodeShort =
+						responseData.analysis.changes.components.postal_code_short;
+					this.analysis.changes.components.postalCodeExtra =
+						responseData.analysis.changes.components.postal_code_extra;
+					this.analysis.changes.components.premise =
+						responseData.analysis.changes.components.premise;
+					this.analysis.changes.components.premiseExtra =
+						responseData.analysis.changes.components.premise_extra;
+					this.analysis.changes.components.premisePrefixNumber =
+						responseData.analysis.changes.components.premise_prefix_number;
+					this.analysis.changes.components.premiseNumber =
+						responseData.analysis.changes.components.premise_number;
+					this.analysis.changes.components.premiseType =
+						responseData.analysis.changes.components.premise_type;
+					this.analysis.changes.components.thoroughfare =
+						responseData.analysis.changes.components.thoroughfare;
+					this.analysis.changes.components.thoroughfarePredirection =
+						responseData.analysis.changes.components.thoroughfare_predirection;
+					this.analysis.changes.components.thoroughfarePostdirection =
+						responseData.analysis.changes.components.thoroughfare_postdirection;
+					this.analysis.changes.components.thoroughfareName =
+						responseData.analysis.changes.components.thoroughfare_name;
+					this.analysis.changes.components.thoroughfareTrailingType =
+						responseData.analysis.changes.components.thoroughfare_trailing_type;
+					this.analysis.changes.components.thoroughfareType =
+						responseData.analysis.changes.components.thoroughfare_type;
+					this.analysis.changes.components.dependentThoroughfare =
+						responseData.analysis.changes.components.dependent_thoroughfare;
+					this.analysis.changes.components.dependentThoroughfarePredirection =
+						responseData.analysis.changes.components.dependent_thoroughfare_predirection;
+					this.analysis.changes.components.dependentThoroughfarePostdirection =
+						responseData.analysis.changes.components.dependent_thoroughfare_postdirection;
+					this.analysis.changes.components.dependentThoroughfareName =
+						responseData.analysis.changes.components.dependent_thoroughfare_name;
+					this.analysis.changes.components.dependentThoroughfareTrailingType =
+						responseData.analysis.changes.components.dependent_thoroughfare_trailing_type;
+					this.analysis.changes.components.dependentThoroughfareType =
+						responseData.analysis.changes.components.dependent_thoroughfare_type;
+					this.analysis.changes.components.building =
+						responseData.analysis.changes.components.building;
+					this.analysis.changes.components.buildingLeadingType =
+						responseData.analysis.changes.components.building_leading_type;
+					this.analysis.changes.components.buildingName =
+						responseData.analysis.changes.components.building_name;
+					this.analysis.changes.components.buildingTrailingType =
+						responseData.analysis.changes.components.building_trailing_type;
+					this.analysis.changes.components.subBuildingType =
+						responseData.analysis.changes.components.sub_building_type;
+					this.analysis.changes.components.subBuildingNumber =
+						responseData.analysis.changes.components.sub_building_number;
+					this.analysis.changes.components.subBuildingName =
+						responseData.analysis.changes.components.sub_building_name;
+					this.analysis.changes.components.subBuilding =
+						responseData.analysis.changes.components.sub_building;
+					this.analysis.changes.components.levelType =
+						responseData.analysis.changes.components.level_type;
+					this.analysis.changes.components.levelNumber =
+						responseData.analysis.changes.components.level_number;
+					this.analysis.changes.components.postBox =
+						responseData.analysis.changes.components.post_box;
+					this.analysis.changes.components.postBoxType =
+						responseData.analysis.changes.components.post_box_type;
+					this.analysis.changes.components.postBoxNumber =
+						responseData.analysis.changes.components.post_box_number;
 				}
 				//TODO: Fill in the rest of these fields and their corresponding tests.
 			}

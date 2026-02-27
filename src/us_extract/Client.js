@@ -16,12 +16,13 @@ class Client {
 	send(lookup) {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
-		let request = new Request(lookup.text, {"Content-Type": "text/plain; charset=utf-8"});
+		let request = new Request(lookup.text, { "Content-Type": "text/plain; charset=utf-8" });
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
 		return new Promise((resolve, reject) => {
-			this.sender.send(request)
-				.then(response => {
+			this.sender
+				.send(request)
+				.then((response) => {
 					if (response.error) reject(response.error);
 
 					lookup.result = new Result(response.payload);

@@ -15,6 +15,7 @@ npx prettier --write src/  # Format source files
 ```
 
 To run a single test file:
+
 ```bash
 npx mocha tests/us_street/test_Client.js           # JS test
 npx mocha --require tsx/cjs tests/test_RetrySender.ts   # TS test
@@ -50,6 +51,7 @@ Each sender adds specific functionality (authentication, retries, headers, etc.)
 ### API Modules
 
 Each API follows the same structure in `src/<api_name>/`:
+
 - `Lookup.js` - Input/output container
 - `Client.js` - Request/response handling
 - `Candidate.js`, `Result.js`, or `Suggestion.js` - Response data structures
@@ -59,6 +61,7 @@ Supported APIs: `us_street`, `us_zipcode`, `us_autocomplete_pro`, `us_extract`, 
 ### Credentials
 
 Three credential types, each implementing a `sign(request)` method used by `SigningSender`:
+
 - **StaticCredentials** (TS) - Server-side: adds `auth-id` + `auth-token` query params
 - **SharedCredentials** (TS) - Client-side/browser: adds embedded `key` param + `Referer` header. Cannot be used with POST (batch) requests.
 - **BasicAuthCredentials** (TS) - Adds HTTP Basic Auth `Authorization` header
@@ -72,6 +75,7 @@ Three credential types, each implementing a `sign(request)` method used by `Sign
 Tests use Mocha + Chai (`expect` style). Test files are prefixed with `test_` and mirror the source structure under `tests/`.
 
 `tests/fixtures/mock_senders.js` provides reusable mocks:
+
 - `MockSender` - Captures the request for inspection
 - `MockSenderWithResponse` - Returns a fixed payload/error
 - `MockSenderWithStatusCodesAndHeaders` - Iterates through status codes (useful for retry tests)

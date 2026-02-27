@@ -79,17 +79,19 @@ describe("A US Autocomplete Pro Client", function () {
 		let client = new Client(mockSender);
 		let lookup = new Lookup("¯\\_(ツ)_/¯");
 
-		return client.send(lookup).catch((e) => {expect(e).to.equal(expectedError);});
+		return client.send(lookup).catch((e) => {
+			expect(e).to.equal(expectedError);
+		});
 	});
 
 	it("returns an empty array when no suggestions are returned.", () => {
-		let mockExpectedPayload = {suggestions: null};
+		let mockExpectedPayload = { suggestions: null };
 		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Please let this be easy to test.");
 		let expectedSuggestion = [];
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then((response) => {
 			expect(lookup.result).to.deep.equal(expectedSuggestion);
 		});
 	});
@@ -103,14 +105,14 @@ describe("A US Autocomplete Pro Client", function () {
 			zipcode: "e",
 			entries: "f",
 		};
-		let mockExpectedPayload = {suggestions: [responseData]};
+		let mockExpectedPayload = { suggestions: [responseData] };
 		let mockSender = new MockSenderWithResponse(mockExpectedPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("Trevor the Vampire");
 		let expectedSuggestion = new Suggestion(responseData);
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then((response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedSuggestion);
 		});
-	})
+	});
 });

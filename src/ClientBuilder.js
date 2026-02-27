@@ -56,7 +56,11 @@ class ClientBuilder {
 		this.customQueries = new Map();
 
 		function credentialsProvided() {
-			return signer instanceof StaticCredentials || signer instanceof SharedCredentials || signer instanceof BasicAuthCredentials;
+			return (
+				signer instanceof StaticCredentials ||
+				signer instanceof SharedCredentials ||
+				signer instanceof BasicAuthCredentials
+			);
 		}
 	}
 
@@ -147,7 +151,7 @@ class ClientBuilder {
 			if (this.appendHeaders[key].separator !== separator) {
 				throw new Error(
 					`Conflicting separators for appended header "${key}": ` +
-					`existing "${this.appendHeaders[key].separator}" vs new "${separator}"`,
+						`existing "${this.appendHeaders[key].separator}" vs new "${separator}"`,
 				);
 			}
 			this.appendHeaders[key].values.push(value);
@@ -228,7 +232,6 @@ class ClientBuilder {
 		return this.withCustomCommaSeperatedQuery("features", "occupant-use");
 	}
 
-
 	buildSender() {
 		if (this.httpSender) return this.httpSender;
 
@@ -240,7 +243,11 @@ class ClientBuilder {
 			const retrySender = new RetrySender(this.maxRetries, signingSender, new Sleeper());
 			agentSender = new AgentSender(retrySender);
 		}
-		const customHeaderSender = new CustomHeaderSender(agentSender, this.customHeaders, this.appendHeaders);
+		const customHeaderSender = new CustomHeaderSender(
+			agentSender,
+			this.customHeaders,
+			this.appendHeaders,
+		);
 		const baseUrlSender = new BaseUrlSender(customHeaderSender, this.baseUrl);
 		const licenseSender = new LicenseSender(baseUrlSender, this.licenses);
 		const customQuerySender = new CustomQuerySender(licenseSender, this.customQueries);

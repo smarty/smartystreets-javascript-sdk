@@ -46,7 +46,7 @@ lookup = new Lookup("4770 Lincoln");
 
 lookup.selected = "4770 N Lincoln Ave Ste 2 (3) Chicago, IL 60625";
 
-await handleRequest(lookup, "Using 'selected' to Expand Secondaries")
+await handleRequest(lookup, "Using 'selected' to Expand Secondaries");
 
 // ************************************************
 
@@ -60,7 +60,7 @@ async function handleRequest(lookup, lookupType) {
 	try {
 		const results = await client.send(lookup);
 		logSuggestions(results, lookupType);
-	} catch(err) {
-		console.log(err)
+	} catch (err) {
+		console.log(err);
 	}
 }

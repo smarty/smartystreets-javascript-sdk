@@ -6,24 +6,24 @@ const Address = require("../../src/us_extract/Address");
 describe("A US Extract Result", function () {
 	it("correctly populates fields.", function () {
 		const mockResponseData = {
-			"meta": {
-				"lines": 6,
-				"unicode": false,
-				"address_count": 1,
-				"verified_count": 1,
-				"bytes": 53,
-				"character_count": 53,
+			meta: {
+				lines: 6,
+				unicode: false,
+				address_count: 1,
+				verified_count: 1,
+				bytes: 53,
+				character_count: 53,
 			},
-			"addresses": [
+			addresses: [
 				{
-					"text": "5732 Lincoln Drive Minneapolis MN",
-					"verified": true,
-					"line": 4,
-					"start": 16,
-					"end": 49,
-					"api_output": [{}]
-				}
-			]
+					text: "5732 Lincoln Drive Minneapolis MN",
+					verified: true,
+					line: 4,
+					start: 16,
+					end: 49,
+					api_output: [{}],
+				},
+			],
 		};
 		let result = new Result(mockResponseData);
 

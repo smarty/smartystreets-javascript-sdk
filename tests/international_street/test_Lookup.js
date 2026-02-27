@@ -7,9 +7,11 @@ describe("An International Street lookup", function () {
 	const messages = {
 		countryRequired: "Country field is required.",
 		freeformOrAddress1Required: "Either freeform or address1 is required.",
-		insufficientInformation: "Insufficient information: One or more required fields were not set on the lookup.",
+		insufficientInformation:
+			"Insufficient information: One or more required fields were not set on the lookup.",
 		badGeocode: "Invalid input: geocode can only be set to 'true' (default is 'false'.",
-		invalidLanguage: "Invalid input: language can only be set to 'latin' or 'native'. When not set, the the output language will match the language of the input values."
+		invalidLanguage:
+			"Invalid input: language can only be set to 'latin' or 'native'. When not set, the the output language will match the language of the input values.",
 	};
 
 	it("correctly populates fields.", function () {
@@ -99,8 +101,7 @@ describe("An International Street lookup", function () {
 		try {
 			callback();
 			expect(true).to.equal(false);
-		}
-		catch (error) {
+		} catch (error) {
 			expect(error.message).to.equal(expectedError.message);
 			expect(error).to.be.an.instanceOf(errors.UnprocessableEntityError);
 		}

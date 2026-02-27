@@ -1,16 +1,9 @@
 {
-  "permissions": {
-    "allow": [
-      "Edit",
-      "Write",
-      "Bash(rm:./*)",
-      "Bash(git *)",
-      "Bash(make *)",
-      "Bash(npm *)"
-    ]
-  },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+	"permissions": {
+		"allow": ["Edit", "Write", "Bash(rm:./*)", "Bash(git *)", "Bash(make *)", "Bash(npm *)"]
+	},
+	"attribution": {
+		"commit": "",
+		"pr": ""
+	}
 }

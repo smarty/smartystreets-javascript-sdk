@@ -8,7 +8,7 @@ class Response {
 		this.results = [];
 
 		if (responseData)
-			responseData.results.map(rawResult => {
+			responseData.results.map((rawResult) => {
 				this.results.push(new Result(rawResult));
 			});
 	}

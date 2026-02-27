@@ -23,7 +23,7 @@ class Client {
 		const dataIsBatch = data instanceof Batch;
 		const dataIsLookup = data instanceof Lookup;
 
-		if (!dataIsLookup && !dataIsBatch) throw new UndefinedLookupError;
+		if (!dataIsLookup && !dataIsBatch) throw new UndefinedLookupError();
 
 		let batch;
 

@@ -12,7 +12,7 @@ describe("An International Address Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
-		let lookup = new Lookup({search});
+		let lookup = new Lookup({ search });
 		let expectedParameters = {
 			max_results: 5,
 			search: "(",
@@ -26,7 +26,7 @@ describe("An International Address Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
-		let lookup = new Lookup({search});
+		let lookup = new Lookup({ search });
 		lookup.search = search;
 		lookup.country = "Russia";
 		let expectedParameters = {
@@ -43,7 +43,7 @@ describe("An International Address Autocomplete Client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 		let search = "(";
-		let lookup = new Lookup({search});
+		let lookup = new Lookup({ search });
 		lookup.search = search;
 		lookup.maxResults = 10;
 		let expectedParameters = {
@@ -65,18 +65,18 @@ describe("An International Address Autocomplete Client", function () {
 		const responseData = {
 			candidates: [
 				{
-					"street": "L alleya",
-					"locality": "Novosibirsk",
-					"administrative_area": "Novosibirskaya oblast'",
-					"postal_code": "40000",
-					"country_iso3": "RUS",
-				}
-			]
+					street: "L alleya",
+					locality: "Novosibirsk",
+					administrative_area: "Novosibirskaya oblast'",
+					postal_code: "40000",
+					country_iso3: "RUS",
+				},
+			],
 		};
 
 		let mockSender = new MockSenderWithResponse(responseData);
 		let client = new Client(mockSender);
-		let lookup = new Lookup({search: "f"});
+		let lookup = new Lookup({ search: "f" });
 		let expectedSuggestion = new Suggestion(responseData.candidates[0]);
 
 		return client.send(lookup).then(() => {

@@ -57,13 +57,13 @@ describe("An International Street client", function () {
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {
-		const expectedMockPayload = [{address1: "A", }];
+		const expectedMockPayload = [{ address1: "A" }];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
-		let expectedResult = new Candidate({address1: "A"});
+		let expectedResult = new Candidate({ address1: "A" });
 
-		return client.send(lookup).then(response => {
+		return client.send(lookup).then((response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
