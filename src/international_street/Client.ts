@@ -33,9 +33,11 @@ export default class Client {
 		});
 
 		function attachLookupCandidates(response: any, lookup: Lookup): Lookup {
-			response.payload.map((rawCandidate: Record<string, any>) => {
-				lookup.result.push(new Candidate(rawCandidate));
-			});
+			if (response.payload) {
+				response.payload.forEach((rawCandidate: Record<string, any>) => {
+					lookup.result.push(new Candidate(rawCandidate));
+				});
+			}
 
 			return lookup;
 		}
