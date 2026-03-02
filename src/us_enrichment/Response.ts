@@ -1,5 +1,10 @@
-class Response {
-	constructor(responseData) {
+export class Response {
+	smartyKey: string;
+	dataSetName: string;
+	dataSubsetName: string;
+	attributes: Record<string, any>;
+
+	constructor(responseData: Record<string, any>) {
 		this.smartyKey = responseData.smarty_key;
 		this.dataSetName = responseData.data_set_name;
 		this.dataSubsetName = responseData.data_subset_name;
@@ -7,7 +12,7 @@ class Response {
 		this.attributes = {};
 		if (responseData.attributes) {
 			this.attributes.firstFloorSqft = responseData.attributes["1st_floor_sqft"];
-			this.attributes.secondFlootSqft = responseData.attributes["2nd_floor_sqft"];
+			this.attributes.secondFloorSqft = responseData.attributes["2nd_floor_sqft"];
 			this.attributes.acres = responseData.attributes.acres;
 			this.attributes.addressInfoPrivacy = responseData.attributes.address_info_privacy;
 			this.attributes.airConditioner = responseData.attributes.air_conditioner;
@@ -55,7 +60,6 @@ class Response {
 			this.attributes.censusTract = responseData.attributes.census_tract;
 			this.attributes.censusBlockGroup = responseData.attributes.census_block_group;
 			this.attributes.censusFipsPlaceCode = responseData.attributes.census_fips_place_code;
-			this.attributes.censusTract = responseData.attributes.census_tract;
 			this.attributes.centralVacuum = responseData.attributes.central_vacuum;
 			this.attributes.codeTitleCompany = responseData.attributes.code_title_company;
 			this.attributes.combinedStatisticalArea = responseData.attributes.combined_statistical_area;
@@ -124,7 +128,7 @@ class Response {
 			this.attributes.familyRoom = responseData.attributes.family_room;
 			this.attributes.financialHistory = !responseData.attributes.financial_history
 				? []
-				: responseData.attributes.financial_history.map((history) => {
+				: responseData.attributes.financial_history.map((history: Record<string, any>) => {
 						return {
 							codeTitleCompany: history.code_title_company,
 							instrumentDate: history.instrument_date,
@@ -435,8 +439,13 @@ class Response {
 	}
 }
 
-class FinancialResponse {
-	constructor(responseData) {
+export class FinancialResponse {
+	smartyKey: string;
+	dataSetName: string;
+	dataSubsetName: string;
+	attributes: Record<string, any>;
+
+	constructor(responseData: Record<string, any>) {
 		this.smartyKey = responseData.smarty_key;
 		this.dataSetName = responseData.data_set_name;
 		this.dataSubsetName = responseData.data_subset_name;
@@ -497,7 +506,7 @@ class FinancialResponse {
 
 			this.attributes.financialHistory = !responseData.attributes.financial_history
 				? []
-				: responseData.attributes.financial_history.map((history) => {
+				: responseData.attributes.financial_history.map((history: Record<string, any>) => {
 						return {
 							codeTitleCompany: history.code_title_company,
 							instrumentDate: history.instrument_date,
@@ -573,13 +582,17 @@ class FinancialResponse {
 			this.attributes.totalMarketValue = responseData.attributes.total_market_value;
 			this.attributes.trustDescription = responseData.attributes.trust_description;
 			this.attributes.veteranTaxExemption = responseData.attributes.veteran_tax_exemption;
-			this.attributes.widow_tax_exemption = responseData.attributes.widow_tax_exemption;
+			this.attributes.widowTaxExemption = responseData.attributes.widow_tax_exemption;
 		}
 	}
 }
 
-class GeoResponse {
-	constructor(responseData) {
+export class GeoResponse {
+	smartyKey: string;
+	dataSetName: string;
+	attributes: Record<string, any>;
+
+	constructor(responseData: Record<string, any>) {
 		this.smartyKey = responseData.smarty_key;
 		this.dataSetName = responseData.data_set_name;
 
@@ -623,7 +636,7 @@ class GeoResponse {
 	}
 }
 
-module.exports = {
+export default {
 	Response,
 	FinancialResponse,
 	GeoResponse,

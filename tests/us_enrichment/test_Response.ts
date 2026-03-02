@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const { Response } = require("../../src/us_enrichment/Response.js");
+import { expect } from "chai";
+import { Response } from "../../src/us_enrichment/Response.js";
 
 describe("A US Enrichment Response", function () {
 	it("is initialized correctly with API response data.", function () {
@@ -375,7 +374,7 @@ describe("A US Enrichment Response", function () {
 		let response = new Response(mockResponse);
 
 		expect(response.attributes.firstFloorSqft).to.equal("01");
-		expect(response.attributes.secondFlootSqft).to.equal("02");
+		expect(response.attributes.secondFloorSqft).to.equal("02");
 		expect(response.attributes.acres).to.equal("0");
 		expect(response.attributes.addressInfoPrivacy).to.equal("1");
 		expect(response.attributes.airConditioner).to.equal("2");
