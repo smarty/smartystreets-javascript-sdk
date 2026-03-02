@@ -24,9 +24,7 @@ export default class SigningSender {
 			throw new UnprocessableEntityError(message);
 		}
 
-		return new Promise((resolve, reject) => {
-			this.signer.sign(request);
-			this.sender.send(request).then(resolve).catch(reject);
-		});
+		this.signer.sign(request);
+		return this.sender.send(request);
 	}
 }

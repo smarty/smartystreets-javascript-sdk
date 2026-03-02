@@ -1,17 +1,16 @@
-const chai = require("chai");
-const expect = chai.expect;
-const LicenseSender = require("../src/LicenseSender");
-const Request = require("../src/Request");
+import { expect } from "chai";
+import LicenseSender from "../src/LicenseSender.js";
+import Request from "../src/Request.js";
 
 describe("A license sender", function () {
-	let innerSender;
-	let request;
-	let licenses;
-	let licenseSender;
+	let innerSender: any;
+	let request: any;
+	let licenses: any;
+	let licenseSender: any;
 
 	beforeEach(() => {
 		innerSender = {
-			send: () => true,
+			send: () => Promise.resolve(),
 		};
 		request = new Request();
 	});

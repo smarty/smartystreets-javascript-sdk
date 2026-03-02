@@ -37,8 +37,6 @@ export default class CustomHeaderSender {
 			}
 		}
 
-		return new Promise((resolve, reject) => {
-			this.sender.send(request).then(resolve).catch(reject);
-		});
+		return this.sender.send(request);
 	}
 }
