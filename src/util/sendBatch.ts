@@ -2,14 +2,14 @@ import Request from "../Request.js";
 import { BatchEmptyError } from "../Errors.js";
 import buildInputData from "./buildInputData.js";
 import Batch from "../Batch.js";
-import { Sender } from "../types.js";
+import { Sender, Response } from "../types.js";
 
 export default function sendBatch(
 	batch: Batch,
 	sender: Sender,
-	Result: new (data: Record<string, any>) => any,
+	Result: new (data: any) => { inputIndex: number },
 	keyTranslationFormat: Record<string, string> | null,
-	customBuildInputData?: (lookup: Record<string, any>) => Record<string, any>,
+	customBuildInputData?: (lookup: Record<string, any>) => Record<string, string | number>,
 ): Promise<Batch> {
 	if (batch.isEmpty()) throw new BatchEmptyError();
 
@@ -29,17 +29,17 @@ export default function sendBatch(
 			.catch(reject);
 	});
 
-	function generateRequestPayload(batch: Batch): Record<string, any>[] {
-		return batch.lookups.map((lookup: Record<string, any>) => {
+	function generateRequestPayload(batch: Batch): Record<string, string | number>[] {
+		return batch.lookups.map((lookup) => {
 			if (customBuildInputData) {
-				return customBuildInputData(lookup);
+				return customBuildInputData(lookup as Record<string, any>);
 			}
-			return buildInputData(lookup, keyTranslationFormat!);
+			return buildInputData(lookup as Record<string, any>, keyTranslationFormat!);
 		});
 	}
 
-	function assignResultsToLookups(batch: Batch, response: any): Batch {
-		response.payload.forEach((rawResult: Record<string, any>) => {
+	function assignResultsToLookups(batch: Batch, response: Response): Batch {
+		(response.payload as Record<string, any>[]).forEach((rawResult: Record<string, any>) => {
 			const result = new Result(rawResult);
 			const lookup = batch.getByIndex(result.inputIndex);
 

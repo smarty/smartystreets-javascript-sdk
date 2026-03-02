@@ -244,11 +244,12 @@ describe("A US Street client", function () {
 		batch.add(lookup3);
 
 		return client.send(batch).then((_response) => {
-			expect(batch.getByIndex(0).result[0].deliveryLine1).to.equal("Address 0");
-			expect(batch.getByIndex(0).result[1].deliveryLine1).to.equal("Alternate address 0");
-			expect(batch.getByIndex(1).result[0].deliveryLine1).to.equal("Address 1");
-			expect(batch.getByIndex(2).result).to.deep.equal([]);
-			expect(batch.getByIndex(3).result[0].deliveryLine1).to.equal("Address 3");
+			const get = (i: number) => batch.getByIndex(i) as Lookup;
+			expect(get(0).result[0].deliveryLine1).to.equal("Address 0");
+			expect(get(0).result[1].deliveryLine1).to.equal("Alternate address 0");
+			expect(get(1).result[0].deliveryLine1).to.equal("Address 1");
+			expect(get(2).result).to.deep.equal([]);
+			expect(get(3).result[0].deliveryLine1).to.equal("Address 3");
 		});
 	});
 

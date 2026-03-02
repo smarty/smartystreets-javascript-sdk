@@ -1,6 +1,6 @@
 export default class InputData {
 	lookup: Record<string, any>;
-	data: Record<string, any>;
+	data: Record<string, string | number>;
 
 	constructor(lookup: Record<string, any>) {
 		this.lookup = lookup;
@@ -16,9 +16,9 @@ export default class InputData {
 		this.data[key] = value;
 	}
 
-	formatData(field: any): any {
+	formatData(field: string | number | string[]): string | number {
 		if (Array.isArray(field)) return field.join(";");
-		else return field;
+		return field;
 	}
 
 	lookupFieldIsPopulated(lookupField: string): boolean {

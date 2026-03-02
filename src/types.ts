@@ -25,6 +25,12 @@ export interface Signer {
 	sign(request: Request): void;
 }
 
+export interface BaseLookup {
+	inputId?: string | number | undefined;
+	customParameters: Record<string, string>;
+	result: { inputIndex: number }[];
+}
+
 export interface MockSenderInstance extends Sender {
 	statusCodes: number[];
 	headers?: Record<string, unknown> | undefined;

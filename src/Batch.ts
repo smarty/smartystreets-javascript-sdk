@@ -1,13 +1,14 @@
 import { BatchFullError } from "./Errors.js";
+import { BaseLookup } from "./types.js";
 
 export default class Batch {
-	lookups: any[];
+	lookups: BaseLookup[];
 
 	constructor() {
 		this.lookups = [];
 	}
 
-	add(lookup: any): void {
+	add(lookup: BaseLookup): void {
 		if (this.lookupsHasRoomForLookup()) this.lookups.push(lookup);
 		else throw new BatchFullError();
 	}
@@ -21,11 +22,11 @@ export default class Batch {
 		return this.lookups.length;
 	}
 
-	getByIndex(index: number): any {
+	getByIndex(index: number): BaseLookup {
 		return this.lookups[index];
 	}
 
-	getByInputId(inputId: any): any {
+	getByInputId(inputId: string | number): BaseLookup | undefined {
 		return this.lookups.filter((lookup) => {
 			return lookup.inputId === inputId;
 		})[0];

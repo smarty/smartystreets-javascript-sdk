@@ -3,7 +3,7 @@ import apiToSDKKeyMap from "./apiToSDKKeyMap.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.usStreet;
 
-export default function buildUsStreetInputData(lookup: Record<string, any>): Record<string, any> {
+export default function buildUsStreetInputData(lookup: Record<string, any>): Record<string, string | number> {
 	// Apply default match strategy and candidates logic per Go SDK behavior
 	let effectiveMatch = lookup.match;
 	let effectiveCandidates = lookup.maxCandidates;
