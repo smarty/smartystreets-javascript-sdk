@@ -1,3 +1,4 @@
+import Candidate from "./Candidate.js";
 import { UnprocessableEntityError } from "../Errors.js";
 
 const messages = {
@@ -23,7 +24,7 @@ function fieldIsSet(field: string | undefined): boolean {
 }
 
 export default class Lookup {
-	result: any[];
+	result: Candidate[];
 	country: string | undefined;
 	freeform: string | undefined;
 	address1: string | undefined;
@@ -37,7 +38,7 @@ export default class Lookup {
 	geocode: string | undefined;
 	language: string | undefined;
 	inputId: string | undefined;
-	customParameters: Record<string, any>;
+	customParameters: Record<string, string>;
 
 	constructor(country?: string, freeform?: string) {
 		this.result = [];
@@ -61,7 +62,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 

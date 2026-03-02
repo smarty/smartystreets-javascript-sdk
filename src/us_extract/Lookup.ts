@@ -1,17 +1,16 @@
+import Result from "./Result.js";
+
 export default class Lookup {
-	result: Record<string, any>;
+	result: Result;
 	text: string;
 	html: boolean | undefined;
 	aggressive: boolean | undefined;
 	addressesHaveLineBreaks: boolean | undefined;
 	addressesPerLine: number | undefined;
-	customParameters: Record<string, any>;
+	customParameters: Record<string, string>;
 
 	constructor(text: string) {
-		this.result = {
-			meta: {},
-			addresses: [],
-		};
+		this.result = new Result({ meta: {}, addresses: [] });
 		this.text = text;
 		this.html = undefined;
 		this.aggressive = undefined;
@@ -20,7 +19,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }

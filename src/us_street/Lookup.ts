@@ -1,3 +1,5 @@
+import Candidate from "./Candidate.js";
+
 export default class Lookup {
 	street: string | undefined;
 	street2: string | undefined;
@@ -13,8 +15,8 @@ export default class Lookup {
 	inputId: string | undefined;
 	format: string | undefined;
 	countySource: string | undefined;
-	result: any[];
-	customParameters: Record<string, any>;
+	result: Candidate[];
+	customParameters: Record<string, string>;
 
 	constructor(
 		street?: string,
@@ -50,7 +52,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }

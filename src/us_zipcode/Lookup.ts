@@ -1,10 +1,12 @@
+import Result from "./Result.js";
+
 export default class Lookup {
 	city: string | undefined;
 	state: string | undefined;
 	zipCode: string | undefined;
 	inputId: string | undefined;
-	result: any[];
-	customParameters: Record<string, any>;
+	result: Result[];
+	customParameters: Record<string, string>;
 
 	constructor(city?: string, state?: string, zipCode?: string, inputId?: string) {
 		this.city = city;
@@ -15,7 +17,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }

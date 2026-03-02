@@ -1,11 +1,13 @@
+import Result from "./Result.js";
+
 export default class Lookup {
 	inputId: string | undefined;
 	country: string | undefined;
 	postalCode: string | undefined;
 	administrativeArea: string | undefined;
 	locality: string | undefined;
-	result: any[];
-	customParameters: Record<string, any>;
+	result: Result[];
+	customParameters: Record<string, string>;
 
 	constructor(
 		country?: string,
@@ -23,7 +25,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }

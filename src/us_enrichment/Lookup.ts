@@ -5,8 +5,8 @@ export default class Lookup {
 	dataset: string | undefined;
 	dataSubset: string | undefined;
 	features: string | undefined;
-	response: Record<string, any>;
-	customParameters: Record<string, any>;
+	response: Record<string, unknown>;
+	customParameters: Record<string, string>;
 
 	constructor(
 		smartyKey?: string,
@@ -26,7 +26,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }

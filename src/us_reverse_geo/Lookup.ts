@@ -5,7 +5,7 @@ export default class Lookup {
 	longitude: string;
 	source: string;
 	response: Response;
-	customParameters: Record<string, any>;
+	customParameters: Record<string, string>;
 
 	constructor(latitude: number, longitude: number, source: string = "") {
 		this.latitude = latitude.toFixed(8);
@@ -15,7 +15,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }

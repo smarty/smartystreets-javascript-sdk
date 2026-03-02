@@ -12,7 +12,7 @@ export default class InputData {
 			this.data[apiField] = this.formatData(this.lookup[lookupField]);
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.data[key] = value;
 	}
 

@@ -1,12 +1,14 @@
+import Suggestion from "./Suggestion.js";
+
 export default class Lookup {
-	result: any[];
+	result: Suggestion[];
 	search: string | undefined;
 	addressId: string | undefined;
 	country: string | undefined;
 	maxResults: number;
 	includeOnlyLocality: string | undefined;
 	includeOnlyPostalCode: string | undefined;
-	customParameters: Record<string, any>;
+	customParameters: Record<string, string>;
 
 	constructor({
 		search,
@@ -34,7 +36,7 @@ export default class Lookup {
 		this.customParameters = {};
 	}
 
-	addCustomParameter(key: string, value: any): void {
+	addCustomParameter(key: string, value: string): void {
 		this.customParameters[key] = value;
 	}
 }
