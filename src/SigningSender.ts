@@ -1,10 +1,6 @@
-import { Request, Response, Sender } from "./types.js";
+import { Request, Response, Sender, Signer } from "./types.js";
 import SharedCredentials from "./SharedCredentials.js";
 import { UnprocessableEntityError } from "./Errors.js";
-
-interface Signer {
-	sign(request: Request): void;
-}
 
 export default class SigningSender {
 	private signer: Signer;

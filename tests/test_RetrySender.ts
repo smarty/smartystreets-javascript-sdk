@@ -6,7 +6,7 @@ import Response from "../src/Response.js";
 import type { Sender, Sleeper, MockSenderInstance, MockSleeperInstance } from "../src/types";
 
 class CompatibleMockSender implements MockSenderInstance {
-	statusCodes: string[];
+	statusCodes: number[];
 	headers?: Record<string, unknown> | undefined;
 	error?: string | undefined;
 	currentStatusCodeIndex: number;
@@ -15,13 +15,13 @@ class CompatibleMockSender implements MockSenderInstance {
 		currentStatusCodeIndex: number;
 	};
 
-	constructor(statusCodes: string[], headers?: Record<string, unknown>, error?: string) {
+	constructor(statusCodes: number[], headers?: Record<string, unknown>, error?: string) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;
 		this.currentStatusCodeIndex = 0;
 		this.mockSender = new (MockSenderWithStatusCodesAndHeaders as new (
-			...args: [string[], Record<string, unknown>?, string?]
+			...args: [number[], Record<string, unknown>?, string?]
 		) => {
 			send(request: Request): Response;
 			currentStatusCodeIndex: number;
@@ -52,53 +52,40 @@ async function sendWithRetry(retries: number, inner: Sender, sleeper: Sleeper) {
 
 describe("Retry Sender tests", function () {
 	it("test success does not retry", async function () {
-		let inner = new CompatibleMockSender(["200"]);
+		let inner = new CompatibleMockSender([200]);
 		await sendWithRetry(5, inner, new CompatibleMockSleeper());
 
 		expect(inner.currentStatusCodeIndex).to.equal(1);
 	});
 
 	it("test client error does not retry", async function () {
-		let inner = new CompatibleMockSender(["422"]);
+		let inner = new CompatibleMockSender([422]);
 		await sendWithRetry(5, inner, new CompatibleMockSleeper());
 
 		expect(inner.currentStatusCodeIndex).to.equal(1);
 	});
 
 	it("test will retry until success", async function () {
-		let inner = new CompatibleMockSender(["500", "500", "500", "200", "500"]);
+		let inner = new CompatibleMockSender([500, 500, 500, 200, 500]);
 		await sendWithRetry(10, inner, new CompatibleMockSleeper());
 
 		expect(inner.currentStatusCodeIndex).to.equal(4);
 	});
 
 	it("test return response if retry limit exceeded", async function () {
-		let inner = new CompatibleMockSender(["500", "500", "500", "500", "500"]);
+		let inner = new CompatibleMockSender([500, 500, 500, 500, 500]);
 		const sleeper = new CompatibleMockSleeper();
 		const response = await sendWithRetry(4, inner, sleeper);
 
 		expect(response);
 		expect(inner.currentStatusCodeIndex).to.equal(5);
-		expect(response.statusCode).to.equal("500");
+		expect(response.statusCode).to.equal(500);
 		expect(sleeper.sleepDurations).to.deep.equal([0, 1, 2, 3]);
 	});
 
 	it("test backoff does not exceed max", async function () {
 		let inner = new CompatibleMockSender([
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"500",
-			"200",
+			500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 200,
 		]);
 		const sleeper = new CompatibleMockSleeper();
 
@@ -115,7 +102,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test sleep on rate limit", async function () {
-		let inner = new CompatibleMockSender(["429", "200"]);
+		let inner = new CompatibleMockSender([429, 200]);
 		const sleeper = new CompatibleMockSleeper();
 
 		await sendWithRetry(5, inner, sleeper);
@@ -124,7 +111,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test rate limit error return", async function () {
-		let inner = new CompatibleMockSender(["429"], { "Retry-After": 7 });
+		let inner = new CompatibleMockSender([429], { "Retry-After": 7 });
 		const sleeper = new CompatibleMockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);
@@ -133,7 +120,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test retry after invalid value", async function () {
-		let inner = new CompatibleMockSender(["429"], { "Retry-After": "a" });
+		let inner = new CompatibleMockSender([429], { "Retry-After": "a" });
 		const sleeper = new CompatibleMockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);
@@ -142,7 +129,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test retry error", async function () {
-		let inner = new CompatibleMockSender(["429"], undefined, "Big Bad");
+		let inner = new CompatibleMockSender([429], undefined, "Big Bad");
 		const sleeper = new CompatibleMockSleeper();
 
 		const response = await sendWithRetry(10, inner, sleeper);
