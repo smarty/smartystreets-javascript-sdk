@@ -1,3 +1,79 @@
+export interface UsStreetComponents {
+	urbanization: string | undefined;
+	primaryNumber: string | undefined;
+	streetName: string | undefined;
+	streetPredirection: string | undefined;
+	streetPostdirection: string | undefined;
+	streetSuffix: string | undefined;
+	secondaryNumber: string | undefined;
+	secondaryDesignator: string | undefined;
+	extraSecondaryNumber: string | undefined;
+	extraSecondaryDesignator: string | undefined;
+	pmbDesignator: string | undefined;
+	pmbNumber: string | undefined;
+	cityName: string | undefined;
+	defaultCityName: string | undefined;
+	state: string | undefined;
+	zipCode: string | undefined;
+	plus4Code: string | undefined;
+	deliveryPoint: string | undefined;
+	deliveryPointCheckDigit: string | undefined;
+}
+
+export interface UsStreetMetadata {
+	recordType: string | undefined;
+	zipType: string | undefined;
+	countyFips: string | undefined;
+	countyName: string | undefined;
+	carrierRoute: string | undefined;
+	congressionalDistrict: string | undefined;
+	buildingDefaultIndicator: string | undefined;
+	rdi: string | undefined;
+	elotSequence: string | undefined;
+	elotSort: string | undefined;
+	latitude: number | undefined;
+	longitude: number | undefined;
+	coordinateLicense: string | undefined;
+	precision: string | undefined;
+	timeZone: string | undefined;
+	utcOffset: number | undefined;
+	obeysDst: boolean | undefined;
+	isEwsMatch: boolean | undefined;
+}
+
+export interface AnalysisComponents {
+	primaryNumber: string | undefined;
+	streetPredirection: string | undefined;
+	streetName: string | undefined;
+	streetPostdirection: string | undefined;
+	streetSuffix: string | undefined;
+	secondaryNumber: string | undefined;
+	secondaryDesignator: string | undefined;
+	extraSecondaryNumber: string | undefined;
+	extraSecondaryDesignator: string | undefined;
+	cityName: string | undefined;
+	stateAbbreviation: string | undefined;
+	zipCode: string | undefined;
+	plus4Code: string | undefined;
+	urbanization: string | undefined;
+}
+
+export interface UsStreetAnalysis {
+	dpvMatchCode: string | undefined;
+	dpvFootnotes: string | undefined;
+	cmra: string | undefined;
+	vacant: string | undefined;
+	noStat: string | undefined;
+	active: string | undefined;
+	isEwsMatch: boolean | undefined;
+	footnotes: string | undefined;
+	lacsLinkCode: string | undefined;
+	lacsLinkIndicator: string | undefined;
+	isSuiteLinkMatch: boolean | undefined;
+	enhancedMatch: string | undefined;
+	components: AnalysisComponents;
+}
+
 export default class Candidate {
 	inputIndex: number;
 	candidateIndex: number;
@@ -7,9 +83,9 @@ export default class Candidate {
 	lastLine: string;
 	deliveryPointBarcode: string;
 	smartyKey: string;
-	components: Record<string, any>;
-	metadata: Record<string, any>;
-	analysis: Record<string, any>;
+	components: UsStreetComponents;
+	metadata: UsStreetMetadata;
+	analysis: UsStreetAnalysis;
 
 	constructor(responseData: Record<string, any>) {
 		this.inputIndex = responseData.input_index;
@@ -21,7 +97,7 @@ export default class Candidate {
 		this.deliveryPointBarcode = responseData.delivery_point_barcode;
 		this.smartyKey = responseData.smarty_key;
 
-		this.components = {};
+		this.components = {} as UsStreetComponents;
 		if (responseData.components !== undefined) {
 			this.components.urbanization = responseData.components.urbanization;
 			this.components.primaryNumber = responseData.components.primary_number;
@@ -44,7 +120,7 @@ export default class Candidate {
 			this.components.deliveryPointCheckDigit = responseData.components.delivery_point_check_digit;
 		}
 
-		this.metadata = {};
+		this.metadata = {} as UsStreetMetadata;
 		if (responseData.metadata !== undefined) {
 			this.metadata.recordType = responseData.metadata.record_type;
 			this.metadata.zipType = responseData.metadata.zip_type;
@@ -72,7 +148,7 @@ export default class Candidate {
 			this.metadata.isEwsMatch = responseData.metadata.ews_match;
 		}
 
-		this.analysis = {};
+		this.analysis = {} as UsStreetAnalysis;
 		if (responseData.analysis !== undefined) {
 			this.analysis.dpvMatchCode = responseData.analysis.dpv_match_code;
 			this.analysis.dpvFootnotes = responseData.analysis.dpv_footnotes;
@@ -86,7 +162,7 @@ export default class Candidate {
 			this.analysis.lacsLinkIndicator = responseData.analysis.lacslink_indicator;
 			this.analysis.isSuiteLinkMatch = responseData.analysis.suitelink_match;
 			this.analysis.enhancedMatch = responseData.analysis.enhanced_match;
-			this.analysis.components = {};
+			this.analysis.components = {} as AnalysisComponents;
 			if (responseData.analysis.components !== undefined) {
 				this.analysis.components.primaryNumber = responseData.analysis.components.primary_number;
 				this.analysis.components.streetPredirection =

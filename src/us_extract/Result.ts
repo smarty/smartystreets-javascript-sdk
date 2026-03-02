@@ -1,7 +1,16 @@
 import Address from "./Address.js";
 
+export interface ExtractMeta {
+	lines: number | undefined;
+	unicode: boolean | undefined;
+	addressCount: number | undefined;
+	verifiedCount: number | undefined;
+	bytes: number | undefined;
+	characterCount: number | undefined;
+}
+
 export default class Result {
-	meta: Record<string, any>;
+	meta: ExtractMeta;
 	addresses: Address[];
 
 	constructor({

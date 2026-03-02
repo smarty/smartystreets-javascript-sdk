@@ -1,12 +1,27 @@
+export interface ReverseGeoAddress {
+	street: string | undefined;
+	city: string | undefined;
+	stateAbbreviation: string | undefined;
+	zipcode: string | undefined;
+	source: string | undefined;
+}
+
+export interface ReverseGeoCoordinate {
+	latitude: number | undefined;
+	longitude: number | undefined;
+	accuracy: string | undefined;
+	license: string | undefined;
+}
+
 export default class Result {
 	distance: number;
-	address: Record<string, any>;
-	coordinate: Record<string, any>;
+	address: ReverseGeoAddress;
+	coordinate: ReverseGeoCoordinate;
 
 	constructor(responseData: Record<string, any>) {
 		this.distance = responseData.distance;
 
-		this.address = {};
+		this.address = {} as ReverseGeoAddress;
 		if (responseData.address) {
 			this.address.street = responseData.address.street;
 			this.address.city = responseData.address.city;
@@ -15,7 +30,7 @@ export default class Result {
 			this.address.source = responseData.address.source;
 		}
 
-		this.coordinate = {};
+		this.coordinate = {} as ReverseGeoCoordinate;
 		if (responseData.coordinate) {
 			this.coordinate.latitude = responseData.coordinate.latitude;
 			this.coordinate.longitude = responseData.coordinate.longitude;

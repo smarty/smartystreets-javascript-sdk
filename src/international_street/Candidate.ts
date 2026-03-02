@@ -1,3 +1,137 @@
+export interface IntlStreetComponents {
+	countryIso3: string | undefined;
+	superAdministrativeArea: string | undefined;
+	administrativeArea: string | undefined;
+	administrativeAreaIso2: string | undefined;
+	administrativeAreaShort: string | undefined;
+	administrativeAreaLong: string | undefined;
+	subAdministrativeArea: string | undefined;
+	dependentLocality: string | undefined;
+	dependentLocalityName: string | undefined;
+	doubleDependentLocality: string | undefined;
+	locality: string | undefined;
+	postalCode: string | undefined;
+	postalCodeShort: string | undefined;
+	postalCodeExtra: string | undefined;
+	premise: string | undefined;
+	premiseExtra: string | undefined;
+	premisePrefixNumber: string | undefined;
+	premiseNumber: string | undefined;
+	premiseType: string | undefined;
+	thoroughfare: string | undefined;
+	thoroughfarePredirection: string | undefined;
+	thoroughfarePostdirection: string | undefined;
+	thoroughfareName: string | undefined;
+	thoroughfareTrailingType: string | undefined;
+	thoroughfareType: string | undefined;
+	dependentThoroughfare: string | undefined;
+	dependentThoroughfarePredirection: string | undefined;
+	dependentThoroughfarePostdirection: string | undefined;
+	dependentThoroughfareName: string | undefined;
+	dependentThoroughfareTrailingType: string | undefined;
+	dependentThoroughfareType: string | undefined;
+	building: string | undefined;
+	buildingLeadingType: string | undefined;
+	buildingName: string | undefined;
+	buildingTrailingType: string | undefined;
+	subBuildingType: string | undefined;
+	subBuildingNumber: string | undefined;
+	subBuildingName: string | undefined;
+	subBuilding: string | undefined;
+	levelType: string | undefined;
+	levelNumber: string | undefined;
+	postBox: string | undefined;
+	postBoxType: string | undefined;
+	postBoxNumber: string | undefined;
+	additionalContent: string | undefined;
+	deliveryInstallation: string | undefined;
+	deliveryInstallationType: string | undefined;
+	deliveryInstallationQualifierName: string | undefined;
+	route: string | undefined;
+	routeNumber: string | undefined;
+	routeType: string | undefined;
+}
+
+export interface IntlChangesComponents {
+	countryIso3: string | undefined;
+	superAdministrativeArea: string | undefined;
+	administrativeArea: string | undefined;
+	administrativeAreaIso2: string | undefined;
+	administrativeAreaShort: string | undefined;
+	administrativeAreaLong: string | undefined;
+	subAdministrativeArea: string | undefined;
+	dependentLocality: string | undefined;
+	dependentLocalityName: string | undefined;
+	doubleDependentLocality: string | undefined;
+	locality: string | undefined;
+	postalCode: string | undefined;
+	postalCodeShort: string | undefined;
+	postalCodeExtra: string | undefined;
+	premise: string | undefined;
+	premiseExtra: string | undefined;
+	premisePrefixNumber: string | undefined;
+	premiseNumber: string | undefined;
+	premiseType: string | undefined;
+	thoroughfare: string | undefined;
+	thoroughfarePredirection: string | undefined;
+	thoroughfarePostdirection: string | undefined;
+	thoroughfareName: string | undefined;
+	thoroughfareTrailingType: string | undefined;
+	thoroughfareType: string | undefined;
+	dependentThoroughfare: string | undefined;
+	dependentThoroughfarePredirection: string | undefined;
+	dependentThoroughfarePostdirection: string | undefined;
+	dependentThoroughfareName: string | undefined;
+	dependentThoroughfareTrailingType: string | undefined;
+	dependentThoroughfareType: string | undefined;
+	building: string | undefined;
+	buildingLeadingType: string | undefined;
+	buildingName: string | undefined;
+	buildingTrailingType: string | undefined;
+	subBuildingType: string | undefined;
+	subBuildingNumber: string | undefined;
+	subBuildingName: string | undefined;
+	subBuilding: string | undefined;
+	levelType: string | undefined;
+	levelNumber: string | undefined;
+	postBox: string | undefined;
+	postBoxType: string | undefined;
+	postBoxNumber: string | undefined;
+}
+
+export interface IntlChanges {
+	organization: string | undefined;
+	address1: string | undefined;
+	address2: string | undefined;
+	address3: string | undefined;
+	address4: string | undefined;
+	address5: string | undefined;
+	address6: string | undefined;
+	address7: string | undefined;
+	address8: string | undefined;
+	address9: string | undefined;
+	address10: string | undefined;
+	address11: string | undefined;
+	address12: string | undefined;
+	components: IntlChangesComponents;
+}
+
+export interface IntlStreetAnalysis {
+	verificationStatus: string | undefined;
+	addressPrecision: string | undefined;
+	maxAddressPrecision: string | undefined;
+	changes: IntlChanges;
+}
+
+export interface IntlStreetMetadata {
+	latitude: number | undefined;
+	longitude: number | undefined;
+	geocodePrecision: string | undefined;
+	maxGeocodePrecision: string | undefined;
+	addressFormat: string | undefined;
+	occupantUse: string | undefined;
+}
+
 export default class Candidate {
 	organization: string;
 	address1: string;
@@ -12,9 +146,9 @@ export default class Candidate {
 	address10: string;
 	address11: string;
 	address12: string;
-	components: Record<string, any>;
-	analysis: Record<string, any>;
-	metadata: Record<string, any>;
+	components: IntlStreetComponents;
+	analysis: IntlStreetAnalysis;
+	metadata: IntlStreetMetadata;
 
 	constructor(responseData: Record<string, any>) {
 		this.organization = responseData.organization;
@@ -31,7 +165,7 @@ export default class Candidate {
 		this.address11 = responseData.address11;
 		this.address12 = responseData.address12;
 
-		this.components = {};
+		this.components = {} as IntlStreetComponents;
 		if (responseData.components !== undefined) {
 			this.components.countryIso3 = responseData.components.country_iso_3;
 			this.components.superAdministrativeArea = responseData.components.super_administrative_area;
@@ -93,13 +227,13 @@ export default class Candidate {
 			this.components.routeType = responseData.components.route_type;
 		}
 
-		this.analysis = {};
+		this.analysis = {} as IntlStreetAnalysis;
 		if (responseData.analysis !== undefined) {
 			this.analysis.verificationStatus = responseData.analysis.verification_status;
 			this.analysis.addressPrecision = responseData.analysis.address_precision;
 			this.analysis.maxAddressPrecision = responseData.analysis.max_address_precision;
 
-			this.analysis.changes = {};
+			this.analysis.changes = {} as IntlChanges;
 			if (responseData.analysis.changes !== undefined) {
 				this.analysis.changes.organization = responseData.analysis.changes.organization;
 				this.analysis.changes.address1 = responseData.analysis.changes.address1;
@@ -115,7 +249,7 @@ export default class Candidate {
 				this.analysis.changes.address11 = responseData.analysis.changes.address11;
 				this.analysis.changes.address12 = responseData.analysis.changes.address12;
 
-				this.analysis.changes.components = {};
+				this.analysis.changes.components = {} as IntlChangesComponents;
 				if (responseData.analysis.changes.components !== undefined) {
 					this.analysis.changes.components.countryIso3 =
 						responseData.analysis.changes.components.country_iso_3;
@@ -210,7 +344,7 @@ export default class Candidate {
 			}
 		}
 
-		this.metadata = {};
+		this.metadata = {} as IntlStreetMetadata;
 		if (responseData.metadata !== undefined) {
 			this.metadata.latitude = responseData.metadata.latitude;
 			this.metadata.longitude = responseData.metadata.longitude;
