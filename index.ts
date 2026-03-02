@@ -36,7 +36,8 @@ import ResponseUSEnrichment from "./src/us_enrichment/Response.js";
 import LookupInternationalPostalCode from "./src/international_postal_code/Lookup.js";
 import ResultInternationalPostalCode from "./src/international_postal_code/Result.js";
 
-export type { Request, Response, Sender, Sleeper } from "./src/types.js";
+export type { Request, Response, Sender, Sleeper, Signer } from "./src/types.js";
+export { SmartyError } from "./src/Errors.js";
 
 export const core = {
 	Batch,
