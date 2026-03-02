@@ -1,19 +1,10 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_reverse_geo/Client");
-const Lookup = require("../../src/us_reverse_geo/Lookup");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
-const Response = require("../../src/us_reverse_geo/Response");
+import { expect } from "chai";
+import Client from "../../src/us_reverse_geo/Client.js";
+import Lookup from "../../src/us_reverse_geo/Lookup.js";
+import { MockSenderWithResponse } from "../fixtures/mock_senders.js";
+import Response from "../../src/us_reverse_geo/Response.js";
 
 describe("A US Reverse Geo client", function () {
-	it("has an inner sender.", function () {
-		let mockSender = new MockSender();
-		let client = new Client(mockSender);
-
-		expect(client.sender).to.deep.equal(mockSender);
-	});
-
 	it("attaches a result from a response to a lookup.", function () {
 		const expectedMockPayload = {
 			results: [

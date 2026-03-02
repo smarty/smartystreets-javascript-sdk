@@ -1,23 +1,14 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/international_postal_code/Client");
-const Lookup = require("../../src/international_postal_code/Lookup");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import { expect } from "chai";
+import Client from "../../src/international_postal_code/Client.js";
+import Lookup from "../../src/international_postal_code/Lookup.js";
+import { MockSender, MockSenderWithResponse } from "../fixtures/mock_senders.js";
 
 describe("An International Postal Code client", function () {
-	it("has an inner sender.", function () {
-		let mockSender = new MockSender();
-		let client = new Client(mockSender);
-
-		expect(client.sender).to.deep.equal(mockSender);
-	});
-
 	it("throws an error if sending without a lookup.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.send()).to.throw();
+		expect(() => (client.send as any)()).to.throw();
 	});
 
 	it("attaches a result from a response to a lookup.", function () {

@@ -9,7 +9,7 @@ import Lookup from "./Lookup.js";
 const keyTranslationFormat = apiToSDKKeyMap.internationalPostalCode;
 
 export default class Client {
-	sender: Sender;
+	private sender: Sender;
 
 	constructor(sender: Sender) {
 		this.sender = sender;

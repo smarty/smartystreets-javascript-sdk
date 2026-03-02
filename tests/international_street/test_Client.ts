@@ -1,20 +1,11 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/international_street/Client");
-const Lookup = require("../../src/international_street/Lookup");
-const Candidate = require("../../src/international_street/Candidate");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import { expect } from "chai";
+import Client from "../../src/international_street/Client.js";
+import Lookup from "../../src/international_street/Lookup.js";
+import Candidate from "../../src/international_street/Candidate.js";
+import errors from "../../src/Errors.js";
+import { MockSender, MockSenderWithResponse } from "../fixtures/mock_senders.js";
 
 describe("An International Street client", function () {
-	it("has an inner sender.", function () {
-		let mockSender = new MockSender();
-		let client = new Client(mockSender);
-
-		expect(client.sender).to.deep.equal(mockSender);
-	});
-
 	it("throws an error if sending without a lookup.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
@@ -63,7 +54,7 @@ describe("An International Street client", function () {
 		let lookup = new Lookup();
 		let expectedResult = new Candidate({ address1: "A" });
 
-		return client.send(lookup).then((response) => {
+		return client.send(lookup).then((_response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
