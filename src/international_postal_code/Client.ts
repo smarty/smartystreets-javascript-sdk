@@ -3,7 +3,7 @@ import Result from "./Result.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { UndefinedLookupError } from "../Errors.js";
-import { Sender } from "../types.js";
+import { Sender, Response } from "../types.js";
 import Lookup from "./Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.internationalPostalCode;
@@ -32,9 +32,11 @@ export default class Client {
 				.catch(reject);
 		});
 
-		function attachLookupResults(response: any, lookup: Lookup): Lookup {
+		function attachLookupResults(response: Response, lookup: Lookup): Lookup {
 			if (response.payload && Array.isArray(response.payload)) {
-				lookup.result = response.payload.map((r: Record<string, any>) => new Result(r));
+				lookup.result = response.payload.map(
+					(r: Record<string, any>) => new Result(r),
+				);
 			} else {
 				lookup.result = [];
 			}

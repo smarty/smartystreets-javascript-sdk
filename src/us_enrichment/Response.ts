@@ -2,7 +2,7 @@ export class Response {
 	smartyKey: string;
 	dataSetName: string;
 	dataSubsetName: string;
-	attributes: Record<string, any>;
+	attributes: Record<string, unknown>;
 
 	constructor(responseData: Record<string, any>) {
 		this.smartyKey = responseData.smarty_key;
@@ -443,7 +443,7 @@ export class FinancialResponse {
 	smartyKey: string;
 	dataSetName: string;
 	dataSubsetName: string;
-	attributes: Record<string, any>;
+	attributes: Record<string, unknown>;
 
 	constructor(responseData: Record<string, any>) {
 		this.smartyKey = responseData.smarty_key;
@@ -590,7 +590,7 @@ export class FinancialResponse {
 export class GeoResponse {
 	smartyKey: string;
 	dataSetName: string;
-	attributes: Record<string, any>;
+	attributes: Record<string, unknown>;
 
 	constructor(responseData: Record<string, any>) {
 		this.smartyKey = responseData.smarty_key;
@@ -598,40 +598,43 @@ export class GeoResponse {
 
 		this.attributes = {};
 		if (responseData.attributes) {
-			this.attributes.censusBlock = {};
+			const censusBlock: Record<string, unknown> = {};
 			if (responseData.attributes.census_block) {
-				this.attributes.censusBlock.accuracy = responseData.attributes.census_block.accuracy;
-				this.attributes.censusBlock.geoid = responseData.attributes.census_block.geoid;
+				censusBlock.accuracy = responseData.attributes.census_block.accuracy;
+				censusBlock.geoid = responseData.attributes.census_block.geoid;
 			}
+			this.attributes.censusBlock = censusBlock;
 
-			this.attributes.censusCountyDivision = {};
+			const censusCountyDivision: Record<string, unknown> = {};
 			if (responseData.attributes.census_county_division) {
-				this.attributes.censusCountyDivision.accuracy =
+				censusCountyDivision.accuracy =
 					responseData.attributes.census_county_division.accuracy;
-				this.attributes.censusCountyDivision.code =
-					responseData.attributes.census_county_division.code;
-				this.attributes.censusCountyDivision.name =
-					responseData.attributes.census_county_division.name;
+				censusCountyDivision.code = responseData.attributes.census_county_division.code;
+				censusCountyDivision.name = responseData.attributes.census_county_division.name;
 			}
+			this.attributes.censusCountyDivision = censusCountyDivision;
 
-			this.attributes.censusTract = {};
+			const censusTract: Record<string, unknown> = {};
 			if (responseData.attributes.census_tract) {
-				this.attributes.censusTract.code = responseData.attributes.census_tract.code;
+				censusTract.code = responseData.attributes.census_tract.code;
 			}
+			this.attributes.censusTract = censusTract;
 
-			this.attributes.coreBasedStatArea = {};
+			const coreBasedStatArea: Record<string, unknown> = {};
 			if (responseData.attributes.core_based_stat_area) {
-				this.attributes.coreBasedStatArea.code = responseData.attributes.core_based_stat_area.code;
-				this.attributes.coreBasedStatArea.name = responseData.attributes.core_based_stat_area.name;
+				coreBasedStatArea.code = responseData.attributes.core_based_stat_area.code;
+				coreBasedStatArea.name = responseData.attributes.core_based_stat_area.name;
 			}
+			this.attributes.coreBasedStatArea = coreBasedStatArea;
 
-			this.attributes.place = {};
+			const place: Record<string, unknown> = {};
 			if (responseData.attributes.place) {
-				this.attributes.place.accuracy = responseData.attributes.place.accuracy;
-				this.attributes.place.code = responseData.attributes.place.code;
-				this.attributes.place.name = responseData.attributes.place.name;
-				this.attributes.place.type = responseData.attributes.place.type;
+				place.accuracy = responseData.attributes.place.accuracy;
+				place.code = responseData.attributes.place.code;
+				place.name = responseData.attributes.place.name;
+				place.type = responseData.attributes.place.type;
 			}
+			this.attributes.place = place;
 		}
 	}
 }

@@ -28,7 +28,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, any>;
+					lookup.response = response.payload as Record<string, unknown>;
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -49,7 +49,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, any>;
+					lookup.response = response.payload as Record<string, unknown>;
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -70,7 +70,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, any>;
+					lookup.response = response.payload as Record<string, unknown>;
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -91,7 +91,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, any>;
+					lookup.response = response.payload as Record<string, unknown>;
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -112,7 +112,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, any>;
+					lookup.response = response.payload as Record<string, unknown>;
 					resolve(lookup);
 				})
 				.catch(reject);

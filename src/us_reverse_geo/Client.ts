@@ -3,7 +3,7 @@ import Response from "./Response.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { UndefinedLookupError } from "../Errors.js";
-import { Sender } from "../types.js";
+import { Sender, Response as SdkResponse } from "../types.js";
 import Lookup from "./Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.usReverseGeo;
@@ -32,8 +32,8 @@ export default class Client {
 				.catch(reject);
 		});
 
-		function attachLookupResults(response: any, lookup: Lookup): Lookup {
-			lookup.response = new Response(response.payload);
+		function attachLookupResults(response: SdkResponse, lookup: Lookup): Lookup {
+			lookup.response = new Response(response.payload as Record<string, any>);
 
 			return lookup;
 		}

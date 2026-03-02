@@ -3,7 +3,7 @@ import { UndefinedLookupError } from "../Errors.js";
 import Candidate from "./Candidate.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
-import { Sender } from "../types.js";
+import { Sender, Response } from "../types.js";
 import Lookup from "./Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.internationalStreet;
@@ -32,11 +32,13 @@ export default class Client {
 				.catch(reject);
 		});
 
-		function attachLookupCandidates(response: any, lookup: Lookup): Lookup {
+		function attachLookupCandidates(response: Response, lookup: Lookup): Lookup {
 			if (response.payload) {
-				response.payload.forEach((rawCandidate: Record<string, any>) => {
-					lookup.result.push(new Candidate(rawCandidate));
-				});
+				(response.payload as Record<string, any>[]).forEach(
+					(rawCandidate: Record<string, any>) => {
+						lookup.result.push(new Candidate(rawCandidate));
+					},
+				);
 			}
 
 			return lookup;
