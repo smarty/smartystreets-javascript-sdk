@@ -1,26 +1,22 @@
-let chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_zipcode/Client");
-const Lookup = require("../../src/us_zipcode/Lookup");
-const Result = require("../../src/us_zipcode/Result");
-const Batch = require("../../src/Batch");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import { expect } from "chai";
+import Client from "../../src/us_zipcode/Client.js";
+import Lookup from "../../src/us_zipcode/Lookup.js";
+import Result from "../../src/us_zipcode/Result.js";
+import Batch from "../../src/Batch.js";
+import errors from "../../src/Errors.js";
+import { MockSender, MockSenderWithResponse } from "../fixtures/mock_senders.js";
 
 describe("A US Zipcode client", function () {
 	it("calls its inner sender's send function.", function () {
 		const mockSender = {
-			send: function (request) {
+			send: function (_request: any) {
 				sentFlag = true;
-				mockSenderRequest = request;
-				return new Promise((resolve, reject) => {});
+				return new Promise((_resolve) => {});
 			},
 		};
-		const client = new Client(mockSender);
+		const client = new Client(mockSender as any);
 		let lookup = new Lookup();
 		let sentFlag = false;
-		let mockSenderRequest = {};
 
 		client.send(lookup);
 
@@ -60,18 +56,18 @@ describe("A US Zipcode client", function () {
 		let lookup = new Lookup();
 		let expectedResult = new Result({ input_index: 0 });
 
-		return client.send(lookup).then((response) => {
+		return client.send(lookup).then((_response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
 
 	it("attaches match candidates to their corresponding lookups.", function () {
-		const expectedMockPayload = JSON.stringify([
-			{ city: "City 0", input_index: 0 },
-			{ city: "Alternate city 0", input_index: 0 },
-			{ city: "City 1", input_index: 1 },
-			{ city: "City 3", input_index: 3 },
-		]);
+		const expectedMockPayload = [
+			{ status: "Status 0", input_index: 0 },
+			{ status: "Alternate status 0", input_index: 0 },
+			{ status: "Status 1", input_index: 1 },
+			{ status: "Status 3", input_index: 3 },
+		];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
 		let lookup0 = new Lookup();
@@ -85,12 +81,12 @@ describe("A US Zipcode client", function () {
 		batch.add(lookup2);
 		batch.add(lookup3);
 
-		client.send(batch).then((response) => {
-			expect(batch.getByIndex(0).result[0].city).to.equal("City 0");
-			expect(batch.getByIndex(0).result[1].city).to.equal("Alternate city 0");
-			expect(batch.getByIndex(1).result[0].city).to.equal("City 1");
+		return client.send(batch).then((_response) => {
+			expect(batch.getByIndex(0).result[0].status).to.equal("Status 0");
+			expect(batch.getByIndex(0).result[1].status).to.equal("Alternate status 0");
+			expect(batch.getByIndex(1).result[0].status).to.equal("Status 1");
 			expect(batch.getByIndex(2).result).to.deep.equal([]);
-			expect(batch.getByIndex(3).result[0].city).to.equal("City 3");
+			expect(batch.getByIndex(3).result[0].status).to.equal("Status 3");
 		});
 	});
 
@@ -127,7 +123,7 @@ describe("A US Zipcode client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.send()).to.throw(errors.UndefinedLookupError);
+		expect(() => (client.send as any)()).to.throw(errors.UndefinedLookupError);
 	});
 
 	it("builds a request for a single lookup with the correct request parameters.", function () {

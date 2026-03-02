@@ -1,25 +1,21 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Client = require("../../src/us_street/Client");
-const Lookup = require("../../src/us_street/Lookup");
-const Candidate = require("../../src/us_street/Candidate");
-const Batch = require("../../src/Batch");
-const errors = require("../../src/Errors");
-const MockSender = require("../fixtures/mock_senders").MockSender;
-const MockSenderWithResponse = require("../fixtures/mock_senders").MockSenderWithResponse;
+import { expect } from "chai";
+import Client from "../../src/us_street/Client.js";
+import Lookup from "../../src/us_street/Lookup.js";
+import Candidate from "../../src/us_street/Candidate.js";
+import Batch from "../../src/Batch.js";
+import errors from "../../src/Errors.js";
+import { MockSender, MockSenderWithResponse } from "../fixtures/mock_senders.js";
 
 describe("A US Street client", function () {
 	it("calls its inner sender's send function.", function () {
 		const mockSender = {
-			send: function (request) {
+			send: function (_request: any) {
 				sentFlag = true;
-				mockSenderRequest = request;
 			},
 		};
-		const client = new Client(mockSender);
+		const client = new Client(mockSender as any);
 		let lookup = new Lookup();
 		let sentFlag = false;
-		let mockSenderRequest = {};
 
 		client.send(lookup);
 
@@ -29,7 +25,7 @@ describe("A US Street client", function () {
 	it("builds a request for a single lookup with the correct request parameters.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
-		let lookup = new Lookup("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+		let lookup = new Lookup("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" as any, "12");
 		let expectedParameters = {
 			street: "1",
 			street2: "2",
@@ -181,7 +177,6 @@ describe("A US Street client", function () {
 		let lookup = new Lookup();
 		lookup.street = "123 Main St";
 		lookup.match = "invalid";
-		// maxCandidates left undefined - should NOT default to 5 for non-enhanced
 		let expectedParameters = {
 			street: "123 Main St",
 			match: "invalid",
@@ -223,18 +218,18 @@ describe("A US Street client", function () {
 		let lookup = new Lookup();
 		let expectedResult = new Candidate({ delivery_line_1: "An address", input_index: 0 });
 
-		return client.send(lookup).then((response) => {
+		return client.send(lookup).then((_response) => {
 			expect(lookup.result[0]).to.deep.equal(expectedResult);
 		});
 	});
 
 	it("attaches match candidates to their corresponding lookups.", function () {
-		const expectedMockPayload = JSON.stringify([
+		const expectedMockPayload = [
 			{ delivery_line_1: "Address 0", input_index: 0 },
 			{ delivery_line_1: "Alternate address 0", input_index: 0 },
 			{ delivery_line_1: "Address 1", input_index: 1 },
 			{ delivery_line_1: "Address 3", input_index: 3 },
-		]);
+		];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		let client = new Client(mockSender);
 		let lookup0 = new Lookup();
@@ -248,7 +243,7 @@ describe("A US Street client", function () {
 		batch.add(lookup2);
 		batch.add(lookup3);
 
-		client.send(batch).then((response) => {
+		return client.send(batch).then((_response) => {
 			expect(batch.getByIndex(0).result[0].deliveryLine1).to.equal("Address 0");
 			expect(batch.getByIndex(0).result[1].deliveryLine1).to.equal("Alternate address 0");
 			expect(batch.getByIndex(1).result[0].deliveryLine1).to.equal("Address 1");
@@ -272,7 +267,7 @@ describe("A US Street client", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
 
-		expect(() => client.send()).to.throw(errors.UndefinedLookupError);
+		expect(() => (client.send as any)()).to.throw(errors.UndefinedLookupError);
 	});
 
 	it("attaches request parameters for batches with a single lookup and a request payload for batches with more than 1 lookup.", function () {
