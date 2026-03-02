@@ -1,6 +1,5 @@
-const chai = require("chai");
-const expect = chai.expect;
-const Response = require("../../src/us_reverse_geo/Response");
+import { expect } from "chai";
+import Response from "../../src/us_reverse_geo/Response.js";
 
 describe("A US Reverse Geo match response", function () {
 	it("populates with the appropriate fields.", function () {
@@ -32,7 +31,7 @@ describe("A US Reverse Geo match response", function () {
 		let address = result.address;
 		expect(address.street).to.equal("5");
 		expect(address.city).to.equal("6");
-		expect(address.state_abbreviation).to.equal("7");
+		expect(address.stateAbbreviation).to.equal("7");
 		expect(address.zipcode).to.equal("8");
 		expect(address.source).to.equal("postal");
 		let coordinate = result.coordinate;

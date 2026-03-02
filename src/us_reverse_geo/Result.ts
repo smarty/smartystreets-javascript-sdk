@@ -1,18 +1,16 @@
-/**
- * A candidate is a possible match for an address that was submitted.<br>
- *     A lookup can have multiple candidates if the address was ambiguous.
- *
- * @see "https://www.smarty.com/docs/cloud/us-reverse-geo-api#result"
- */
-class Result {
-	constructor(responseData) {
+export default class Result {
+	distance: number;
+	address: Record<string, any>;
+	coordinate: Record<string, any>;
+
+	constructor(responseData: Record<string, any>) {
 		this.distance = responseData.distance;
 
 		this.address = {};
 		if (responseData.address) {
 			this.address.street = responseData.address.street;
 			this.address.city = responseData.address.city;
-			this.address.state_abbreviation = responseData.address.state_abbreviation;
+			this.address.stateAbbreviation = responseData.address.state_abbreviation;
 			this.address.zipcode = responseData.address.zipcode;
 			this.address.source = responseData.address.source;
 		}
@@ -32,5 +30,3 @@ class Result {
 		}
 	}
 }
-
-module.exports = Result;
