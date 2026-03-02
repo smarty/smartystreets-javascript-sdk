@@ -23,6 +23,7 @@ import InternationalAddressAutocompleteClient from "./international_address_auto
 import UsEnrichmentClient from "./us_enrichment/Client.js";
 import InternationalPostalCodeClient from "./international_postal_code/Client.js";
 import { Sender } from "./types.js";
+import { AxiosProxyConfig } from "axios";
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
@@ -43,7 +44,7 @@ export default class ClientBuilder {
 	private maxRetries: number;
 	private maxTimeout: number;
 	private baseUrl: string | undefined;
-	private proxy: any;
+	private proxy: AxiosProxyConfig | undefined;
 	private customHeaders: Record<string, string>;
 	private appendHeaders: Record<string, AppendHeader>;
 	private debug: boolean | undefined;
@@ -196,7 +197,7 @@ export default class ClientBuilder {
 		return customQuerySender;
 	}
 
-	buildClient(baseUrl: string, ClientClass: new (sender: Sender) => any): any {
+	buildClient<T>(baseUrl: string, ClientClass: new (sender: Sender) => T): T {
 		if (!this.baseUrl) {
 			this.baseUrl = baseUrl;
 		}
