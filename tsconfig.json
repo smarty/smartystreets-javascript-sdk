@@ -7,10 +7,8 @@
 		"paths": {
 			"@/*": ["./*"]
 		},
-		"allowJs": true,
 		"alwaysStrict": true,
 		"exactOptionalPropertyTypes": true,
-		"noPropertyAccessFromIndexSignature": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitOverride": true,
