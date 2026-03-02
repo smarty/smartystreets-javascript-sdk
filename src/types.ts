@@ -21,8 +21,12 @@ export interface Sleeper {
 	sleep(seconds: number): Promise<void>;
 }
 
+export interface Signer {
+	sign(request: Request): void;
+}
+
 export interface MockSenderInstance extends Sender {
-	statusCodes: string[];
+	statusCodes: number[];
 	headers?: Record<string, unknown> | undefined;
 	error?: string | undefined;
 	currentStatusCodeIndex: number;
