@@ -27,7 +27,12 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.result = new Result(response.payload as any);
+					lookup.result = new Result(
+						response.payload as {
+							meta: Record<string, any>;
+							addresses: Record<string, any>[];
+						},
+					);
 					resolve(lookup);
 				})
 				.catch(reject);

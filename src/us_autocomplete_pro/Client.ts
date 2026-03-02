@@ -27,18 +27,18 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.result = buildSuggestionsFromResponse(response.payload as any);
+					const payload = response.payload as {
+						suggestions: Record<string, any>[] | null;
+					};
+					lookup.result =
+						payload.suggestions === null
+							? []
+							: payload.suggestions.map(
+									(suggestion) => new Suggestion(suggestion),
+								);
 					resolve(lookup);
 				})
 				.catch(reject);
 		});
-
-		function buildSuggestionsFromResponse(payload: any): Suggestion[] {
-			if (payload.suggestions === null) return [];
-
-			return payload.suggestions.map(
-				(suggestion: Record<string, any>) => new Suggestion(suggestion),
-			);
-		}
 	}
 }
