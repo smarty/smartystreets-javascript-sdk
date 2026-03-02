@@ -1,38 +1,43 @@
 import { buildSmartyResponse } from "../../src/util/buildSmartyResponse.js";
 import Response from "../../src/Response.js";
+import { Request as IRequest, Response as IResponse } from "../../src/types.js";
 
 export class MockSender {
 	request: {
-		payload: any;
-		parameters: any;
-		baseUrlParam: any;
+		payload: string | object | null;
+		parameters: Record<string, string | number>;
+		baseUrlParam: string;
 	};
 
 	constructor() {
 		this.request = {
-			payload: undefined,
-			parameters: undefined,
-			baseUrlParam: undefined,
+			payload: null,
+			parameters: {},
+			baseUrlParam: "",
 		};
 	}
 
-	send(clientRequest: any): any {
+	send(clientRequest: IRequest): Promise<IResponse> {
 		this.request.payload = clientRequest.payload;
 		this.request.parameters = clientRequest.parameters;
 		this.request.baseUrlParam = clientRequest.baseUrlParam;
+		return undefined as unknown as Promise<IResponse>;
 	}
 }
 
 export class MockSenderWithResponse {
-	private expectedPayload: any;
-	private expectedError: any;
+	private expectedPayload: object[] | object | string | null;
+	private expectedError: Error | null;
 
-	constructor(expectedPayload: any, expectedError?: any) {
+	constructor(
+		expectedPayload: object[] | object | string | null,
+		expectedError?: Error | null,
+	) {
 		this.expectedPayload = expectedPayload;
-		this.expectedError = expectedError;
+		this.expectedError = expectedError ?? null;
 	}
 
-	send(): Promise<any> {
+	send(): Promise<IResponse> {
 		return new Promise((resolve) => {
 			resolve(new Response(0, this.expectedPayload, this.expectedError));
 		});
@@ -40,19 +45,23 @@ export class MockSenderWithResponse {
 }
 
 export class MockSenderWithStatusCodesAndHeaders {
-	statusCodes: any[];
-	headers: any;
-	error: any;
+	statusCodes: number[];
+	headers: Record<string, unknown> | undefined;
+	error: string | undefined;
 	currentStatusCodeIndex: number;
 
-	constructor(statusCodes: any[], headers?: any, error?: any) {
+	constructor(
+		statusCodes: number[],
+		headers?: Record<string, unknown>,
+		error?: string,
+	) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;
 		this.currentStatusCodeIndex = 0;
 	}
 
-	send(_request: any) {
+	send(_request: IRequest) {
 		const mockResponse = {
 			status: this.statusCodes[this.currentStatusCodeIndex],
 			headers: this.headers,
