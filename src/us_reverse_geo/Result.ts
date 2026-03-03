@@ -1,16 +1,19 @@
+import type { CoordinateLicense } from "../us_street/Candidate.js";
+
 export interface ReverseGeoAddress {
 	street: string | undefined;
 	city: string | undefined;
 	stateAbbreviation: string | undefined;
 	zipcode: string | undefined;
 	source: string | undefined;
+	smartyKey: string | undefined;
 }
 
 export interface ReverseGeoCoordinate {
 	latitude: number | undefined;
 	longitude: number | undefined;
 	accuracy: string | undefined;
-	license: string | undefined;
+	license: CoordinateLicense | undefined;
 }
 
 interface RawReverseGeoAddress {
@@ -19,6 +22,7 @@ interface RawReverseGeoAddress {
 	state_abbreviation?: string;
 	zipcode?: string;
 	source?: string;
+	smarty_key?: string;
 }
 
 interface RawReverseGeoCoordinate {
@@ -49,6 +53,7 @@ export default class Result {
 			this.address.stateAbbreviation = responseData.address.state_abbreviation;
 			this.address.zipcode = responseData.address.zipcode;
 			this.address.source = responseData.address.source;
+			this.address.smartyKey = responseData.address.smarty_key;
 		}
 
 		this.coordinate = {} as ReverseGeoCoordinate;

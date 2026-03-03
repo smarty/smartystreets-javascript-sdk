@@ -66,20 +66,20 @@ describe("A match candidate", function () {
 				dpv_no_stat: "52",
 				enhanced_match: "53",
 				components: {
-					primary_number: "54",
-					street_predirection: "55",
-					street_name: "56",
-					street_postdirection: "57",
-					street_suffix: "58",
-					secondary_number: "59",
-					secondary_designator: "60",
-					extra_secondary_number: "61",
-					extra_secondary_designator: "62",
-					city_name: "63",
-					state_abbreviation: "64",
-					zipcode: "65",
-					plus4_code: "66",
-					urbanization: "67",
+					primary_number: { status: "54", change: ["a"] },
+					street_predirection: { status: "55", change: ["b"] },
+					street_name: { status: "56", change: ["c"] },
+					street_postdirection: { status: "57", change: ["d"] },
+					street_suffix: { status: "58", change: ["e"] },
+					secondary_number: { status: "59", change: ["f"] },
+					secondary_designator: { status: "60", change: ["g"] },
+					extra_secondary_number: { status: "61", change: ["h"] },
+					extra_secondary_designator: { status: "62", change: ["i"] },
+					city_name: { status: "63", change: ["j"] },
+					state_abbreviation: { status: "64", change: ["k"] },
+					zipcode: { status: "65", change: ["l"] },
+					plus4_code: { status: "66", change: ["m"] },
+					urbanization: { status: "67", change: ["n"] },
 				},
 			},
 		};
@@ -145,19 +145,49 @@ describe("A match candidate", function () {
 		expect(candidate.analysis.noStat).to.equal("52");
 		expect(candidate.analysis.enhancedMatch).to.equal("53");
 
-		expect(candidate.analysis.components.primaryNumber).to.equal("54");
-		expect(candidate.analysis.components.streetPredirection).to.equal("55");
-		expect(candidate.analysis.components.streetName).to.equal("56");
-		expect(candidate.analysis.components.streetPostdirection).to.equal("57");
-		expect(candidate.analysis.components.streetSuffix).to.equal("58");
-		expect(candidate.analysis.components.secondaryNumber).to.equal("59");
-		expect(candidate.analysis.components.secondaryDesignator).to.equal("60");
-		expect(candidate.analysis.components.extraSecondaryNumber).to.equal("61");
-		expect(candidate.analysis.components.extraSecondaryDesignator).to.equal("62");
-		expect(candidate.analysis.components.cityName).to.equal("63");
-		expect(candidate.analysis.components.stateAbbreviation).to.equal("64");
-		expect(candidate.analysis.components.zipCode).to.equal("65");
-		expect(candidate.analysis.components.plus4Code).to.equal("66");
-		expect(candidate.analysis.components.urbanization).to.equal("67");
+		expect(candidate.analysis.components.primaryNumber).to.deep.equal({
+			status: "54",
+			change: ["a"],
+		});
+		expect(candidate.analysis.components.streetPredirection).to.deep.equal({
+			status: "55",
+			change: ["b"],
+		});
+		expect(candidate.analysis.components.streetName).to.deep.equal({ status: "56", change: ["c"] });
+		expect(candidate.analysis.components.streetPostdirection).to.deep.equal({
+			status: "57",
+			change: ["d"],
+		});
+		expect(candidate.analysis.components.streetSuffix).to.deep.equal({
+			status: "58",
+			change: ["e"],
+		});
+		expect(candidate.analysis.components.secondaryNumber).to.deep.equal({
+			status: "59",
+			change: ["f"],
+		});
+		expect(candidate.analysis.components.secondaryDesignator).to.deep.equal({
+			status: "60",
+			change: ["g"],
+		});
+		expect(candidate.analysis.components.extraSecondaryNumber).to.deep.equal({
+			status: "61",
+			change: ["h"],
+		});
+		expect(candidate.analysis.components.extraSecondaryDesignator).to.deep.equal({
+			status: "62",
+			change: ["i"],
+		});
+		expect(candidate.analysis.components.cityName).to.deep.equal({ status: "63", change: ["j"] });
+		expect(candidate.analysis.components.stateAbbreviation).to.deep.equal({
+			status: "64",
+			change: ["k"],
+		});
+		expect(candidate.analysis.components.zipCode).to.deep.equal({ status: "65", change: ["l"] });
+		expect(candidate.analysis.components.plus4Code).to.deep.equal({ status: "66", change: ["m"] });
+		expect(candidate.analysis.components.urbanization).to.deep.equal({
+			status: "67",
+			change: ["n"],
+		});
 	});
 });

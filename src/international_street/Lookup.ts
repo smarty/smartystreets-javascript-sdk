@@ -1,6 +1,9 @@
 import Candidate from "./Candidate.js";
 import { UnprocessableEntityError } from "../Errors.js";
 
+export type Language = "native" | "latin" | (string & {});
+export type Geocode = "true" | (string & {});
+
 const messages = {
 	countryRequired: "Country field is required.",
 	freeformOrAddress1Required: "Either freeform or address1 is required.",
@@ -35,8 +38,8 @@ export default class Lookup {
 	locality: string | undefined;
 	administrativeArea: string | undefined;
 	postalCode: string | undefined;
-	geocode: string | undefined;
-	language: string | undefined;
+	geocode: Geocode | undefined;
+	language: Language | undefined;
 	inputId: string | undefined;
 	customParameters: Record<string, string>;
 

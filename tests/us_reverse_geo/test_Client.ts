@@ -42,6 +42,7 @@ describe("A US Reverse Geo client", function () {
 						stateAbbreviation: "UT",
 						zipcode: "84606",
 						source: "postal",
+						smartyKey: undefined,
 					},
 				},
 			],

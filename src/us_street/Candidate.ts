@@ -1,3 +1,10 @@
+export type CoordinateLicense = "SmartyStreets" | "SmartyStreets Proprietary" | (string & {});
+
+export interface MatchInfo {
+	status: string | undefined;
+	change: string[] | undefined;
+}
+
 export interface UsStreetComponents {
 	urbanization: string | undefined;
 	primaryNumber: string | undefined;
@@ -33,7 +40,7 @@ export interface UsStreetMetadata {
 	elotSort: string | undefined;
 	latitude: number | undefined;
 	longitude: number | undefined;
-	coordinateLicense: string | undefined;
+	coordinateLicense: CoordinateLicense | undefined;
 	precision: string | undefined;
 	timeZone: string | undefined;
 	utcOffset: number | undefined;
@@ -42,20 +49,20 @@ export interface UsStreetMetadata {
 }
 
 export interface AnalysisComponents {
-	primaryNumber: string | undefined;
-	streetPredirection: string | undefined;
-	streetName: string | undefined;
-	streetPostdirection: string | undefined;
-	streetSuffix: string | undefined;
-	secondaryNumber: string | undefined;
-	secondaryDesignator: string | undefined;
-	extraSecondaryNumber: string | undefined;
-	extraSecondaryDesignator: string | undefined;
-	cityName: string | undefined;
-	stateAbbreviation: string | undefined;
-	zipCode: string | undefined;
-	plus4Code: string | undefined;
-	urbanization: string | undefined;
+	primaryNumber: MatchInfo;
+	streetPredirection: MatchInfo;
+	streetName: MatchInfo;
+	streetPostdirection: MatchInfo;
+	streetSuffix: MatchInfo;
+	secondaryNumber: MatchInfo;
+	secondaryDesignator: MatchInfo;
+	extraSecondaryNumber: MatchInfo;
+	extraSecondaryDesignator: MatchInfo;
+	cityName: MatchInfo;
+	stateAbbreviation: MatchInfo;
+	zipCode: MatchInfo;
+	plus4Code: MatchInfo;
+	urbanization: MatchInfo;
 }
 
 export interface UsStreetAnalysis {
@@ -117,21 +124,26 @@ interface RawUsStreetMetadata {
 	ews_match?: boolean;
 }
 
+interface RawMatchInfo {
+	status?: string;
+	change?: string[];
+}
+
 interface RawUsStreetAnalysisComponents {
-	primary_number?: string;
-	street_predirection?: string;
-	street_name?: string;
-	street_postdirection?: string;
-	street_suffix?: string;
-	secondary_number?: string;
-	secondary_designator?: string;
-	extra_secondary_number?: string;
-	extra_secondary_designator?: string;
-	city_name?: string;
-	state_abbreviation?: string;
-	zipcode?: string;
-	plus4_code?: string;
-	urbanization?: string;
+	primary_number?: RawMatchInfo;
+	street_predirection?: RawMatchInfo;
+	street_name?: RawMatchInfo;
+	street_postdirection?: RawMatchInfo;
+	street_suffix?: RawMatchInfo;
+	secondary_number?: RawMatchInfo;
+	secondary_designator?: RawMatchInfo;
+	extra_secondary_number?: RawMatchInfo;
+	extra_secondary_designator?: RawMatchInfo;
+	city_name?: RawMatchInfo;
+	state_abbreviation?: RawMatchInfo;
+	zipcode?: RawMatchInfo;
+	plus4_code?: RawMatchInfo;
+	urbanization?: RawMatchInfo;
 }
 
 interface RawUsStreetAnalysis {
@@ -151,6 +163,7 @@ interface RawUsStreetAnalysis {
 }
 
 export interface RawUsStreetCandidate {
+	input_id?: string;
 	input_index?: number;
 	candidate_index?: number;
 	addressee?: string;
@@ -165,6 +178,7 @@ export interface RawUsStreetCandidate {
 }
 
 export default class Candidate {
+	inputId: string;
 	inputIndex: number;
 	candidateIndex: number;
 	addressee: string;
@@ -178,6 +192,7 @@ export default class Candidate {
 	analysis: UsStreetAnalysis;
 
 	constructor(responseData: RawUsStreetCandidate) {
+		this.inputId = responseData.input_id ?? "";
 		this.inputIndex = responseData.input_index ?? 0;
 		this.candidateIndex = responseData.candidate_index ?? 0;
 		this.addressee = responseData.addressee ?? "";
@@ -254,27 +269,48 @@ export default class Candidate {
 			this.analysis.enhancedMatch = responseData.analysis.enhanced_match;
 			this.analysis.components = {} as AnalysisComponents;
 			if (responseData.analysis.components !== undefined) {
-				this.analysis.components.primaryNumber = responseData.analysis.components.primary_number;
-				this.analysis.components.streetPredirection =
-					responseData.analysis.components.street_predirection;
-				this.analysis.components.streetName = responseData.analysis.components.street_name;
-				this.analysis.components.streetPostdirection =
-					responseData.analysis.components.street_postdirection;
-				this.analysis.components.streetSuffix = responseData.analysis.components.street_suffix;
-				this.analysis.components.secondaryNumber =
-					responseData.analysis.components.secondary_number;
-				this.analysis.components.secondaryDesignator =
-					responseData.analysis.components.secondary_designator;
-				this.analysis.components.extraSecondaryNumber =
-					responseData.analysis.components.extra_secondary_number;
-				this.analysis.components.extraSecondaryDesignator =
-					responseData.analysis.components.extra_secondary_designator;
-				this.analysis.components.cityName = responseData.analysis.components.city_name;
-				this.analysis.components.stateAbbreviation =
-					responseData.analysis.components.state_abbreviation;
-				this.analysis.components.zipCode = responseData.analysis.components.zipcode;
-				this.analysis.components.plus4Code = responseData.analysis.components.plus4_code;
-				this.analysis.components.urbanization = responseData.analysis.components.urbanization;
+				const toMatchInfo = (raw?: RawMatchInfo): MatchInfo => ({
+					status: raw?.status,
+					change: raw?.change,
+				});
+				this.analysis.components.primaryNumber = toMatchInfo(
+					responseData.analysis.components.primary_number,
+				);
+				this.analysis.components.streetPredirection = toMatchInfo(
+					responseData.analysis.components.street_predirection,
+				);
+				this.analysis.components.streetName = toMatchInfo(
+					responseData.analysis.components.street_name,
+				);
+				this.analysis.components.streetPostdirection = toMatchInfo(
+					responseData.analysis.components.street_postdirection,
+				);
+				this.analysis.components.streetSuffix = toMatchInfo(
+					responseData.analysis.components.street_suffix,
+				);
+				this.analysis.components.secondaryNumber = toMatchInfo(
+					responseData.analysis.components.secondary_number,
+				);
+				this.analysis.components.secondaryDesignator = toMatchInfo(
+					responseData.analysis.components.secondary_designator,
+				);
+				this.analysis.components.extraSecondaryNumber = toMatchInfo(
+					responseData.analysis.components.extra_secondary_number,
+				);
+				this.analysis.components.extraSecondaryDesignator = toMatchInfo(
+					responseData.analysis.components.extra_secondary_designator,
+				);
+				this.analysis.components.cityName = toMatchInfo(responseData.analysis.components.city_name);
+				this.analysis.components.stateAbbreviation = toMatchInfo(
+					responseData.analysis.components.state_abbreviation,
+				);
+				this.analysis.components.zipCode = toMatchInfo(responseData.analysis.components.zipcode);
+				this.analysis.components.plus4Code = toMatchInfo(
+					responseData.analysis.components.plus4_code,
+				);
+				this.analysis.components.urbanization = toMatchInfo(
+					responseData.analysis.components.urbanization,
+				);
 			}
 		}
 	}

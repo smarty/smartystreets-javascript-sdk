@@ -1,5 +1,9 @@
 import Candidate from "./Candidate.js";
 
+export type MatchStrategy = "strict" | "invalid" | "enhanced" | (string & {});
+export type OutputFormat = "default" | "project-usa" | (string & {});
+export type CountySource = "postal" | "geographic" | (string & {});
+
 export default class Lookup {
 	street: string | undefined;
 	street2: string | undefined;
@@ -10,11 +14,11 @@ export default class Lookup {
 	lastLine: string | undefined;
 	addressee: string | undefined;
 	urbanization: string | undefined;
-	match: string | undefined;
+	match: MatchStrategy | undefined;
 	maxCandidates: number | undefined;
 	inputId: string | undefined;
-	format: string | undefined;
-	countySource: string | undefined;
+	format: OutputFormat | undefined;
+	countySource: CountySource | undefined;
 	result: Candidate[];
 	customParameters: Record<string, string>;
 
@@ -28,11 +32,11 @@ export default class Lookup {
 		lastLine?: string,
 		addressee?: string,
 		urbanization?: string,
-		match?: string,
+		match?: MatchStrategy,
 		maxCandidates?: number,
 		inputId?: string,
-		format?: string,
-		countySource?: string,
+		format?: OutputFormat,
+		countySource?: CountySource,
 	) {
 		this.street = street;
 		this.street2 = street2;
