@@ -4,6 +4,7 @@ import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender } from "../types.js";
 import Lookup from "./Lookup.js";
+import { Response, FinancialResponse, GeoResponse } from "./Response.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.usEnrichment;
 
@@ -28,7 +29,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, unknown>;
+					lookup.response = new Response(response.payload as Record<string, unknown>);
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -49,7 +50,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, unknown>;
+					lookup.response = new FinancialResponse(response.payload as Record<string, unknown>);
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -70,7 +71,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, unknown>;
+					lookup.response = new GeoResponse(response.payload as Record<string, unknown>);
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -91,7 +92,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, unknown>;
+					lookup.response = new Response(response.payload as Record<string, unknown>);
 					resolve(lookup);
 				})
 				.catch(reject);
@@ -112,7 +113,7 @@ export default class Client {
 				.then((response) => {
 					if (response.error) return reject(response.error);
 
-					lookup.response = response.payload as Record<string, unknown>;
+					lookup.response = new Response(response.payload as Record<string, unknown>);
 					resolve(lookup);
 				})
 				.catch(reject);

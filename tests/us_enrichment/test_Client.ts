@@ -301,58 +301,58 @@ describe("A US Enrichment Client", function () {
 		});
 	});
 
-	it("returns an empty array when no principal respo are returned.", () => {
+	it("returns an empty response when no principal data is returned.", () => {
 		let mockSender = new MockSenderWithResponse({});
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendPrincipal(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal({});
+			expect(lookup.response).to.deep.equal(new Response({}));
 		});
 	});
 
-	it("returns an empty array when no financial suggestions are returned.", () => {
+	it("returns an empty response when no financial data is returned.", () => {
 		let mockSender = new MockSenderWithResponse({});
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendFinancial(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal({});
+			expect(lookup.response).to.deep.equal(new FinancialResponse({}));
 		});
 	});
 
-	it("returns an empty array when no geo suggestions are returned.", () => {
+	it("returns an empty response when no geo data is returned.", () => {
 		let mockSender = new MockSenderWithResponse({});
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendGeo(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal({});
+			expect(lookup.response).to.deep.equal(new GeoResponse({}));
 		});
 	});
 
-	it("returns an empty array when no secondary suggestions are returned.", () => {
+	it("returns an empty response when no secondary data is returned.", () => {
 		let mockSender = new MockSenderWithResponse({});
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendSecondary(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal({});
+			expect(lookup.response).to.deep.equal(new Response({}));
 		});
 	});
 
-	it("returns an empty array when no secondary count suggestions are returned.", () => {
+	it("returns an empty response when no secondary count data is returned.", () => {
 		let mockSender = new MockSenderWithResponse({});
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendSecondaryCount(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal({});
+			expect(lookup.response).to.deep.equal(new Response({}));
 		});
 	});
 
 	it("attaches response to a principal lookup.", function () {
-		const rawMockResponse = {
+		const rawMockPayload = {
 			smarty_key: "a",
 			data_set_name: "b",
 			data_subset_name: "c",
@@ -360,19 +360,19 @@ describe("A US Enrichment Client", function () {
 				assessed_improvement_percent: "1",
 			},
 		};
-		let mockResponse = new Response(rawMockResponse);
+		let expectedResponse = new Response(rawMockPayload);
 
-		let mockSender = new MockSenderWithResponse(mockResponse);
+		let mockSender = new MockSenderWithResponse(rawMockPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendPrincipal(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal(mockResponse);
+			expect(lookup.response).to.deep.equal(expectedResponse);
 		});
 	});
 
 	it("attaches response to a financial lookup.", function () {
-		const rawMockResponse = {
+		const rawMockPayload = {
 			smarty_key: "a",
 			data_set_name: "b",
 			data_subset_name: "c",
@@ -380,39 +380,41 @@ describe("A US Enrichment Client", function () {
 				assessed_improvement_percent: "1",
 			},
 		};
-		let mockResponse = new FinancialResponse(rawMockResponse);
+		let expectedResponse = new FinancialResponse(rawMockPayload);
 
-		let mockSender = new MockSenderWithResponse(mockResponse);
+		let mockSender = new MockSenderWithResponse(rawMockPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendFinancial(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal(mockResponse);
+			expect(lookup.response).to.deep.equal(expectedResponse);
 		});
 	});
 
 	it("attaches response to a geo lookup.", function () {
-		const rawMockResponse = {
+		const rawMockPayload = {
 			smarty_key: "a",
 			data_set_name: "b",
-			data_subset_name: "c",
 			attributes: {
-				assessed_improvement_percent: "1",
+				census_block: {
+					accuracy: "high",
+					geoid: "12345",
+				},
 			},
 		};
-		let mockResponse = new GeoResponse(rawMockResponse);
+		let expectedResponse = new GeoResponse(rawMockPayload);
 
-		let mockSender = new MockSenderWithResponse(mockResponse);
+		let mockSender = new MockSenderWithResponse(rawMockPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendGeo(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal(mockResponse);
+			expect(lookup.response).to.deep.equal(expectedResponse);
 		});
 	});
 
 	it("attaches response to a secondary lookup.", function () {
-		const rawMockResponse = {
+		const rawMockPayload = {
 			smarty_key: "a",
 			data_set_name: "b",
 			data_subset_name: "c",
@@ -420,19 +422,19 @@ describe("A US Enrichment Client", function () {
 				assessed_improvement_percent: "1",
 			},
 		};
-		let mockResponse = new Response(rawMockResponse);
+		let expectedResponse = new Response(rawMockPayload);
 
-		let mockSender = new MockSenderWithResponse(mockResponse);
+		let mockSender = new MockSenderWithResponse(rawMockPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendSecondary(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal(mockResponse);
+			expect(lookup.response).to.deep.equal(expectedResponse);
 		});
 	});
 
 	it("attaches response to a secondary count lookup.", function () {
-		const rawMockResponse = {
+		const rawMockPayload = {
 			smarty_key: "a",
 			data_set_name: "b",
 			data_subset_name: "c",
@@ -440,14 +442,14 @@ describe("A US Enrichment Client", function () {
 				assessed_improvement_percent: "1",
 			},
 		};
-		let mockResponse = new Response(rawMockResponse);
+		let expectedResponse = new Response(rawMockPayload);
 
-		let mockSender = new MockSenderWithResponse(mockResponse);
+		let mockSender = new MockSenderWithResponse(rawMockPayload);
 		let client = new Client(mockSender);
 		let lookup = new Lookup("smartyKey");
 
 		return client.sendSecondaryCount(lookup).then((_response) => {
-			expect(lookup.response).to.deep.equal(mockResponse);
+			expect(lookup.response).to.deep.equal(expectedResponse);
 		});
 	});
 });

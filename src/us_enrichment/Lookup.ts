@@ -1,3 +1,5 @@
+import { Response, FinancialResponse, GeoResponse } from "./Response.js";
+
 export default class Lookup {
 	smartyKey: string | undefined;
 	include: string | undefined;
@@ -5,7 +7,7 @@ export default class Lookup {
 	dataset: string | undefined;
 	dataSubset: string | undefined;
 	features: string | undefined;
-	response: Record<string, unknown>;
+	response: Response | FinancialResponse | GeoResponse;
 	customParameters: Record<string, string>;
 
 	constructor(
@@ -22,7 +24,7 @@ export default class Lookup {
 		this.dataSubset = dataSubset;
 		this.features = undefined;
 
-		this.response = {};
+		this.response = new Response({});
 		this.customParameters = {};
 	}
 
