@@ -1,7 +1,12 @@
 import InputData from "../InputData.js";
 
+interface LookupLike {
+	customParameters?: Record<string, string>;
+	[key: string]: any;
+}
+
 export default function buildInputData(
-	lookup: Record<string, any>,
+	lookup: LookupLike,
 	keyTranslationFormat: Record<string, string>,
 ): Record<string, string | number> {
 	const inputData = new InputData(lookup);

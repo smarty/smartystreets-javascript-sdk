@@ -74,6 +74,96 @@ export interface UsStreetAnalysis {
 	components: AnalysisComponents;
 }
 
+interface RawUsStreetComponents {
+	urbanization?: string;
+	primary_number?: string;
+	street_name?: string;
+	street_predirection?: string;
+	street_postdirection?: string;
+	street_suffix?: string;
+	secondary_number?: string;
+	secondary_designator?: string;
+	extra_secondary_number?: string;
+	extra_secondary_designator?: string;
+	pmb_designator?: string;
+	pmb_number?: string;
+	city_name?: string;
+	default_city_name?: string;
+	state_abbreviation?: string;
+	zipcode?: string;
+	plus4_code?: string;
+	delivery_point?: string;
+	delivery_point_check_digit?: string;
+}
+
+interface RawUsStreetMetadata {
+	record_type?: string;
+	zip_type?: string;
+	county_fips?: string;
+	county_name?: string;
+	carrier_route?: string;
+	congressional_district?: string;
+	building_default_indicator?: string;
+	rdi?: string;
+	elot_sequence?: string;
+	elot_sort?: string;
+	latitude?: number;
+	longitude?: number;
+	coordinate_license?: number;
+	precision?: string;
+	time_zone?: string;
+	utc_offset?: number;
+	dst?: boolean;
+	ews_match?: boolean;
+}
+
+interface RawUsStreetAnalysisComponents {
+	primary_number?: string;
+	street_predirection?: string;
+	street_name?: string;
+	street_postdirection?: string;
+	street_suffix?: string;
+	secondary_number?: string;
+	secondary_designator?: string;
+	extra_secondary_number?: string;
+	extra_secondary_designator?: string;
+	city_name?: string;
+	state_abbreviation?: string;
+	zipcode?: string;
+	plus4_code?: string;
+	urbanization?: string;
+}
+
+interface RawUsStreetAnalysis {
+	dpv_match_code?: string;
+	dpv_footnotes?: string;
+	dpv_cmra?: string;
+	dpv_vacant?: string;
+	dpv_no_stat?: string;
+	active?: string;
+	ews_match?: boolean;
+	footnotes?: string;
+	lacslink_code?: string;
+	lacslink_indicator?: string;
+	suitelink_match?: boolean;
+	enhanced_match?: string;
+	components?: RawUsStreetAnalysisComponents;
+}
+
+export interface RawUsStreetCandidate {
+	input_index?: number;
+	candidate_index?: number;
+	addressee?: string;
+	delivery_line_1?: string;
+	delivery_line_2?: string;
+	last_line?: string;
+	delivery_point_barcode?: string;
+	smarty_key?: string;
+	components?: RawUsStreetComponents;
+	metadata?: RawUsStreetMetadata;
+	analysis?: RawUsStreetAnalysis;
+}
+
 export default class Candidate {
 	inputIndex: number;
 	candidateIndex: number;
@@ -87,15 +177,15 @@ export default class Candidate {
 	metadata: UsStreetMetadata;
 	analysis: UsStreetAnalysis;
 
-	constructor(responseData: Record<string, any>) {
-		this.inputIndex = responseData.input_index;
-		this.candidateIndex = responseData.candidate_index;
-		this.addressee = responseData.addressee;
-		this.deliveryLine1 = responseData.delivery_line_1;
-		this.deliveryLine2 = responseData.delivery_line_2;
-		this.lastLine = responseData.last_line;
-		this.deliveryPointBarcode = responseData.delivery_point_barcode;
-		this.smartyKey = responseData.smarty_key;
+	constructor(responseData: RawUsStreetCandidate) {
+		this.inputIndex = responseData.input_index ?? 0;
+		this.candidateIndex = responseData.candidate_index ?? 0;
+		this.addressee = responseData.addressee ?? "";
+		this.deliveryLine1 = responseData.delivery_line_1 ?? "";
+		this.deliveryLine2 = responseData.delivery_line_2 ?? "";
+		this.lastLine = responseData.last_line ?? "";
+		this.deliveryPointBarcode = responseData.delivery_point_barcode ?? "";
+		this.smartyKey = responseData.smarty_key ?? "";
 
 		this.components = {} as UsStreetComponents;
 		if (responseData.components !== undefined) {

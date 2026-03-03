@@ -1,5 +1,6 @@
 import Request from "../Request.js";
 import Response from "./Response.js";
+import { RawReverseGeoResult } from "./Result.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { UndefinedLookupError } from "../Errors.js";
@@ -33,7 +34,9 @@ export default class Client {
 		});
 
 		function attachLookupResults(response: SdkResponse, lookup: Lookup): Lookup {
-			lookup.response = new Response(response.payload as Record<string, any>);
+			lookup.response = new Response(
+				response.payload as { results: RawReverseGeoResult[] },
+			);
 
 			return lookup;
 		}

@@ -1,12 +1,22 @@
 import { UndefinedLookupError } from "../Errors.js";
 import Request from "../Request.js";
 import Result from "./Result.js";
+import { RawExtractAddress } from "./Address.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender } from "../types.js";
 import Lookup from "./Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.usExtract;
+
+interface RawExtractMeta {
+	lines?: number;
+	unicode?: boolean;
+	address_count?: number;
+	verified_count?: number;
+	bytes?: number;
+	character_count?: number;
+}
 
 export default class Client {
 	private sender: Sender;
@@ -29,8 +39,8 @@ export default class Client {
 
 					lookup.result = new Result(
 						response.payload as {
-							meta: Record<string, any>;
-							addresses: Record<string, any>[];
+							meta: RawExtractMeta;
+							addresses: RawExtractAddress[];
 						},
 					);
 					resolve(lookup);

@@ -9,7 +9,7 @@ export default function sendBatch(
 	sender: Sender,
 	Result: new (data: any) => { inputIndex: number },
 	keyTranslationFormat: Record<string, string> | null,
-	customBuildInputData?: (lookup: Record<string, any>) => Record<string, string | number>,
+	customBuildInputData?: (lookup: any) => Record<string, string | number>,
 ): Promise<Batch> {
 	if (batch.isEmpty()) throw new BatchEmptyError();
 
@@ -32,9 +32,9 @@ export default function sendBatch(
 	function generateRequestPayload(batch: Batch): Record<string, string | number>[] {
 		return batch.lookups.map((lookup) => {
 			if (customBuildInputData) {
-				return customBuildInputData(lookup as Record<string, any>);
+				return customBuildInputData(lookup);
 			}
-			return buildInputData(lookup as Record<string, any>, keyTranslationFormat!);
+			return buildInputData(lookup, keyTranslationFormat!);
 		});
 	}
 

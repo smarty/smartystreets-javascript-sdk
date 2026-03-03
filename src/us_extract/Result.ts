@@ -1,4 +1,4 @@
-import Address from "./Address.js";
+import Address, { RawExtractAddress } from "./Address.js";
 
 export interface ExtractMeta {
 	lines: number | undefined;
@@ -9,6 +9,15 @@ export interface ExtractMeta {
 	characterCount: number | undefined;
 }
 
+interface RawExtractMeta {
+	lines?: number;
+	unicode?: boolean;
+	address_count?: number;
+	verified_count?: number;
+	bytes?: number;
+	character_count?: number;
+}
+
 export default class Result {
 	meta: ExtractMeta;
 	addresses: Address[];
@@ -17,8 +26,8 @@ export default class Result {
 		meta,
 		addresses,
 	}: {
-		meta: Record<string, any>;
-		addresses: Record<string, any>[];
+		meta: RawExtractMeta;
+		addresses: RawExtractAddress[];
 	}) {
 		this.meta = {
 			lines: meta.lines,

@@ -96,12 +96,12 @@ describe("A US Autocomplete Pro Client", function () {
 
 	it("attaches suggestions from a response to a lookup.", function () {
 		const responseData = {
-			streetLine: "a",
+			street_line: "a",
 			secondary: "b",
 			city: "c",
 			state: "d",
 			zipcode: "e",
-			entries: "f",
+			entries: 6,
 		};
 		let mockExpectedPayload = { suggestions: [responseData] };
 		let mockSender = new MockSenderWithResponse(mockExpectedPayload);

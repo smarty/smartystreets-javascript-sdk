@@ -1,5 +1,5 @@
 import Request from "../Request.js";
-import Result from "./Result.js";
+import Result, { RawIntlPostalCodeResult } from "./Result.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { UndefinedLookupError } from "../Errors.js";
@@ -34,8 +34,8 @@ export default class Client {
 
 		function attachLookupResults(response: Response, lookup: Lookup): Lookup {
 			if (response.payload && Array.isArray(response.payload)) {
-				lookup.result = response.payload.map(
-					(r: Record<string, any>) => new Result(r),
+				lookup.result = (response.payload as RawIntlPostalCodeResult[]).map(
+					(r) => new Result(r),
 				);
 			} else {
 				lookup.result = [];

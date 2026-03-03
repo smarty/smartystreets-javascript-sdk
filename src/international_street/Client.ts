@@ -1,6 +1,6 @@
 import Request from "../Request.js";
 import { UndefinedLookupError } from "../Errors.js";
-import Candidate from "./Candidate.js";
+import Candidate, { RawIntlStreetCandidate } from "./Candidate.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender, Response } from "../types.js";
@@ -34,11 +34,9 @@ export default class Client {
 
 		function attachLookupCandidates(response: Response, lookup: Lookup): Lookup {
 			if (response.payload) {
-				(response.payload as Record<string, any>[]).forEach(
-					(rawCandidate: Record<string, any>) => {
-						lookup.result.push(new Candidate(rawCandidate));
-					},
-				);
+				(response.payload as RawIntlStreetCandidate[]).forEach((rawCandidate) => {
+					lookup.result.push(new Candidate(rawCandidate));
+				});
 			}
 
 			return lookup;

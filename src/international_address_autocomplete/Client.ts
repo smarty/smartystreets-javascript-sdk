@@ -1,6 +1,6 @@
 import { UndefinedLookupError } from "../Errors.js";
 import Request from "../Request.js";
-import Suggestion from "./Suggestion.js";
+import Suggestion, { RawIntlAutocompleteSuggestion } from "./Suggestion.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender } from "../types.js";
@@ -32,7 +32,7 @@ export default class Client {
 					if (response.error) return reject(response.error);
 
 					const payload = response.payload as {
-						candidates: Record<string, any>[] | null;
+						candidates: RawIntlAutocompleteSuggestion[] | null;
 					};
 					lookup.result =
 						!payload || payload.candidates === null

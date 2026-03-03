@@ -10,7 +10,7 @@ describe("A US Zipcode result", function () {
 					city: "1",
 					state_abbreviation: "2",
 					state: "3",
-					mailable_city: "4",
+					mailable_city: true,
 				},
 			],
 			zipcodes: [
@@ -45,7 +45,7 @@ describe("A US Zipcode result", function () {
 		expect(result.cities[0].city).to.equal("1");
 		expect(result.cities[0].stateAbbreviation).to.equal("2");
 		expect(result.cities[0].state).to.equal("3");
-		expect(result.cities[0].mailableCity).to.equal("4");
+		expect(result.cities[0].mailableCity).to.equal(true);
 
 		expect(result.zipcodes[0].zipcode).to.equal("5");
 		expect(result.zipcodes[0].zipcodeType).to.equal("6");

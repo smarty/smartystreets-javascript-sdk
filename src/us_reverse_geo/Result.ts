@@ -13,13 +13,34 @@ export interface ReverseGeoCoordinate {
 	license: string | undefined;
 }
 
+interface RawReverseGeoAddress {
+	street?: string;
+	city?: string;
+	state_abbreviation?: string;
+	zipcode?: string;
+	source?: string;
+}
+
+interface RawReverseGeoCoordinate {
+	latitude?: number;
+	longitude?: number;
+	accuracy?: string;
+	license?: number;
+}
+
+export interface RawReverseGeoResult {
+	distance?: number;
+	address?: RawReverseGeoAddress;
+	coordinate?: RawReverseGeoCoordinate;
+}
+
 export default class Result {
 	distance: number;
 	address: ReverseGeoAddress;
 	coordinate: ReverseGeoCoordinate;
 
-	constructor(responseData: Record<string, any>) {
-		this.distance = responseData.distance;
+	constructor(responseData: RawReverseGeoResult) {
+		this.distance = responseData.distance ?? 0;
 
 		this.address = {} as ReverseGeoAddress;
 		if (responseData.address) {

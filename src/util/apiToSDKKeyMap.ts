@@ -1,4 +1,16 @@
-const apiToSDKKeyMap: Record<string, Record<string, string>> = {
+interface ApiToSDKKeyMap {
+	usStreet: Record<string, string>;
+	usAutocompletePro: Record<string, string>;
+	usZipcode: Record<string, string>;
+	internationalStreet: Record<string, string>;
+	internationalAddressAutocomplete: Record<string, string>;
+	usReverseGeo: Record<string, string>;
+	usExtract: Record<string, string>;
+	usEnrichment: Record<string, string>;
+	internationalPostalCode: Record<string, string>;
+}
+
+const apiToSDKKeyMap: ApiToSDKKeyMap = {
 	usStreet: {
 		street: "street",
 		street2: "street2",

@@ -1,9 +1,10 @@
 import buildInputData from "./buildInputData.js";
 import apiToSDKKeyMap from "./apiToSDKKeyMap.js";
+import Lookup from "../us_street/Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.usStreet;
 
-export default function buildUsStreetInputData(lookup: Record<string, any>): Record<string, string | number> {
+export default function buildUsStreetInputData(lookup: Lookup): Record<string, string | number> {
 	// Apply default match strategy and candidates logic per Go SDK behavior
 	let effectiveMatch = lookup.match;
 	let effectiveCandidates = lookup.maxCandidates;

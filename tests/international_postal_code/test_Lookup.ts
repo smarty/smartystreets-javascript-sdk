@@ -18,6 +18,6 @@ describe("An International Postal Code lookup", function () {
 		let lookup = new Lookup("Brazil", "02516-040");
 		lookup.addCustomParameter("test", "value");
 
-		expect(lookup.customParameters.test).to.equal("value");
+		expect(lookup.customParameters["test"]).to.equal("value");
 	});
 });

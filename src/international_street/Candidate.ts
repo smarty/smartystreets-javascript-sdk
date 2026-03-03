@@ -132,6 +132,112 @@ export interface IntlStreetMetadata {
 	occupantUse: string | undefined;
 }
 
+interface RawIntlStreetRawComponents {
+	country_iso_3?: string;
+	super_administrative_area?: string;
+	administrative_area?: string;
+	administrative_area_iso2?: string;
+	administrative_area_short?: string;
+	administrative_area_long?: string;
+	sub_administrative_area?: string;
+	dependent_locality?: string;
+	dependent_locality_name?: string;
+	double_dependent_locality?: string;
+	locality?: string;
+	postal_code?: string;
+	postal_code_short?: string;
+	postal_code_extra?: string;
+	premise?: string;
+	premise_extra?: string;
+	premise_prefix_number?: string;
+	premise_number?: string;
+	premise_type?: string;
+	thoroughfare?: string;
+	thoroughfare_predirection?: string;
+	thoroughfare_postdirection?: string;
+	thoroughfare_name?: string;
+	thoroughfare_trailing_type?: string;
+	thoroughfare_type?: string;
+	dependent_thoroughfare?: string;
+	dependent_thoroughfare_predirection?: string;
+	dependent_thoroughfare_postdirection?: string;
+	dependent_thoroughfare_name?: string;
+	dependent_thoroughfare_trailing_type?: string;
+	dependent_thoroughfare_type?: string;
+	building?: string;
+	building_leading_type?: string;
+	building_name?: string;
+	building_trailing_type?: string;
+	sub_building_type?: string;
+	sub_building_number?: string;
+	sub_building_name?: string;
+	sub_building?: string;
+	level_type?: string;
+	level_number?: string;
+	post_box?: string;
+	post_box_type?: string;
+	post_box_number?: string;
+	additional_content?: string;
+	delivery_installation?: string;
+	delivery_installation_type?: string;
+	delivery_installation_qualifier_name?: string;
+	route?: string;
+	route_number?: string;
+	route_type?: string;
+}
+
+interface RawIntlChanges {
+	organization?: string;
+	address1?: string;
+	address2?: string;
+	address3?: string;
+	address4?: string;
+	address5?: string;
+	address6?: string;
+	address7?: string;
+	address8?: string;
+	address9?: string;
+	address10?: string;
+	address11?: string;
+	address12?: string;
+	components?: RawIntlStreetRawComponents;
+}
+
+interface RawIntlStreetAnalysis {
+	verification_status?: string;
+	address_precision?: string;
+	max_address_precision?: string;
+	changes?: RawIntlChanges;
+}
+
+interface RawIntlStreetMetadata {
+	latitude?: number;
+	longitude?: number;
+	geocode_precision?: string;
+	max_geocode_precision?: string;
+	address_format?: string;
+	occupant_use?: string;
+}
+
+export interface RawIntlStreetCandidate {
+	organization?: string;
+	address1?: string;
+	address2?: string;
+	address3?: string;
+	address4?: string;
+	address5?: string;
+	address6?: string;
+	address7?: string;
+	address8?: string;
+	address9?: string;
+	address10?: string;
+	address11?: string;
+	address12?: string;
+	components?: RawIntlStreetRawComponents;
+	analysis?: RawIntlStreetAnalysis;
+	metadata?: RawIntlStreetMetadata;
+}
+
 export default class Candidate {
 	organization: string;
 	address1: string;
@@ -150,20 +256,20 @@ export default class Candidate {
 	analysis: IntlStreetAnalysis;
 	metadata: IntlStreetMetadata;
 
-	constructor(responseData: Record<string, any>) {
-		this.organization = responseData.organization;
-		this.address1 = responseData.address1;
-		this.address2 = responseData.address2;
-		this.address3 = responseData.address3;
-		this.address4 = responseData.address4;
-		this.address5 = responseData.address5;
-		this.address6 = responseData.address6;
-		this.address7 = responseData.address7;
-		this.address8 = responseData.address8;
-		this.address9 = responseData.address9;
-		this.address10 = responseData.address10;
-		this.address11 = responseData.address11;
-		this.address12 = responseData.address12;
+	constructor(responseData: RawIntlStreetCandidate) {
+		this.organization = responseData.organization ?? "";
+		this.address1 = responseData.address1 ?? "";
+		this.address2 = responseData.address2 ?? "";
+		this.address3 = responseData.address3 ?? "";
+		this.address4 = responseData.address4 ?? "";
+		this.address5 = responseData.address5 ?? "";
+		this.address6 = responseData.address6 ?? "";
+		this.address7 = responseData.address7 ?? "";
+		this.address8 = responseData.address8 ?? "";
+		this.address9 = responseData.address9 ?? "";
+		this.address10 = responseData.address10 ?? "";
+		this.address11 = responseData.address11 ?? "";
+		this.address12 = responseData.address12 ?? "";
 
 		this.components = {} as IntlStreetComponents;
 		if (responseData.components !== undefined) {

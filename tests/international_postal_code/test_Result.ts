@@ -42,9 +42,9 @@ describe("An International Postal Code result", function () {
 
 		const result = new Result(sampleResponse);
 
-		expect(result.inputId).to.equal(undefined);
-		expect(result.superAdministrativeArea).to.equal(undefined);
-		expect(result.postalCodeExtra).to.equal(undefined);
+		expect(result.inputId).to.equal("");
+		expect(result.superAdministrativeArea).to.equal("");
+		expect(result.postalCodeExtra).to.equal("");
 		expect(result.administrativeArea).to.equal("SP");
 		expect(result.locality).to.equal("São Paulo");
 		expect(result.postalCode).to.equal("02516-040");

@@ -50,8 +50,8 @@ describe("A match candidate", function () {
 				precision: "38",
 				time_zone: "39",
 				utc_offset: 40.0,
-				dst: "41",
-				ews_match: "47",
+				dst: true,
+				ews_match: true,
 			},
 			analysis: {
 				dpv_match_code: "42",
@@ -62,7 +62,7 @@ describe("A match candidate", function () {
 				footnotes: "48",
 				lacslink_code: "49",
 				lacslink_indicator: "50",
-				suitelink_match: "51",
+				suitelink_match: true,
 				dpv_no_stat: "52",
 				enhanced_match: "53",
 				components: {
@@ -130,8 +130,8 @@ describe("A match candidate", function () {
 		expect(candidate.metadata.precision).to.equal("38");
 		expect(candidate.metadata.timeZone).to.equal("39");
 		expect(candidate.metadata.utcOffset).to.equal(40.0);
-		expect(candidate.metadata.obeysDst).to.equal("41");
-		expect(candidate.metadata.isEwsMatch).to.equal("47");
+		expect(candidate.metadata.obeysDst).to.equal(true);
+		expect(candidate.metadata.isEwsMatch).to.equal(true);
 
 		expect(candidate.analysis.dpvMatchCode).to.equal("42");
 		expect(candidate.analysis.dpvFootnotes).to.equal("43");
@@ -141,7 +141,7 @@ describe("A match candidate", function () {
 		expect(candidate.analysis.footnotes).to.equal("48");
 		expect(candidate.analysis.lacsLinkCode).to.equal("49");
 		expect(candidate.analysis.lacsLinkIndicator).to.equal("50");
-		expect(candidate.analysis.isSuiteLinkMatch).to.equal("51");
+		expect(candidate.analysis.isSuiteLinkMatch).to.equal(true);
 		expect(candidate.analysis.noStat).to.equal("52");
 		expect(candidate.analysis.enhancedMatch).to.equal("53");
 

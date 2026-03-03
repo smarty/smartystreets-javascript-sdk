@@ -9,7 +9,7 @@ describe("A US Autocomplete Pro Suggestion", function () {
 			city: "c",
 			state: "d",
 			zipcode: "e",
-			entries: "f",
+			entries: 6,
 		};
 		let suggestion = new Suggestion(mockSuggestion);
 
@@ -18,6 +18,6 @@ describe("A US Autocomplete Pro Suggestion", function () {
 		expect(suggestion.city).to.equal("c");
 		expect(suggestion.state).to.equal("d");
 		expect(suggestion.zipcode).to.equal("e");
-		expect(suggestion.entries).to.equal("f");
+		expect(suggestion.entries).to.equal(6);
 	});
 });
