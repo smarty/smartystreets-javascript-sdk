@@ -1682,8 +1682,7 @@ export class GeoResponse {
 
 			const censusCountyDivision: GeoCensusCountyDivision = {} as GeoCensusCountyDivision;
 			if (responseData.attributes.census_county_division) {
-				censusCountyDivision.accuracy =
-					responseData.attributes.census_county_division.accuracy;
+				censusCountyDivision.accuracy = responseData.attributes.census_county_division.accuracy;
 				censusCountyDivision.code = responseData.attributes.census_county_division.code;
 				censusCountyDivision.name = responseData.attributes.census_county_division.name;
 			}

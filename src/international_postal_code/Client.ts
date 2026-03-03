@@ -34,9 +34,7 @@ export default class Client {
 
 		function attachLookupResults(response: Response, lookup: Lookup): Lookup {
 			if (response.payload && Array.isArray(response.payload)) {
-				lookup.result = (response.payload as RawIntlPostalCodeResult[]).map(
-					(r) => new Result(r),
-				);
+				lookup.result = (response.payload as RawIntlPostalCodeResult[]).map((r) => new Result(r));
 			} else {
 				lookup.result = [];
 			}

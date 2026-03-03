@@ -33,9 +33,7 @@ export default class Client {
 					lookup.result =
 						payload.suggestions === null
 							? []
-							: payload.suggestions.map(
-									(suggestion) => new Suggestion(suggestion),
-								);
+							: payload.suggestions.map((suggestion) => new Suggestion(suggestion));
 					resolve(lookup);
 				})
 				.catch(reject);

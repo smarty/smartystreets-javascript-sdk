@@ -34,9 +34,7 @@ export default class Client {
 		});
 
 		function attachLookupResults(response: SdkResponse, lookup: Lookup): Lookup {
-			lookup.response = new Response(
-				response.payload as { results: RawReverseGeoResult[] },
-			);
+			lookup.response = new Response(response.payload as { results: RawReverseGeoResult[] });
 
 			return lookup;
 		}

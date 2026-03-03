@@ -22,13 +22,7 @@ export default class Result {
 	meta: ExtractMeta;
 	addresses: Address[];
 
-	constructor({
-		meta,
-		addresses,
-	}: {
-		meta: RawExtractMeta;
-		addresses: RawExtractAddress[];
-	}) {
+	constructor({ meta, addresses }: { meta: RawExtractMeta; addresses: RawExtractAddress[] }) {
 		this.meta = {
 			lines: meta.lines,
 			unicode: meta.unicode,

@@ -36,9 +36,7 @@ export default class StatusCodeSender {
 							const payload = error.payload as {
 								errors?: { message?: string }[];
 							} | null;
-							error.error = new DefaultError(
-								payload?.errors?.[0]?.message,
-							);
+							error.error = new DefaultError(payload?.errors?.[0]?.message);
 						}
 					}
 					reject(error);

@@ -103,16 +103,14 @@ export default class Result {
 						state: zipcode.state ?? "",
 						alternateCounties: !zipcode.alternate_counties
 							? []
-							: zipcode.alternate_counties.map(
-									(county): AlternateCounty => {
-										return {
-											countyFips: county.county_fips ?? "",
-											countyName: county.county_name ?? "",
-											stateAbbreviation: county.state_abbreviation ?? "",
-											state: county.state ?? "",
-										};
-									},
-								),
+							: zipcode.alternate_counties.map((county): AlternateCounty => {
+									return {
+										countyFips: county.county_fips ?? "",
+										countyName: county.county_name ?? "",
+										stateAbbreviation: county.state_abbreviation ?? "",
+										state: county.state ?? "",
+									};
+								}),
 					};
 				});
 	}

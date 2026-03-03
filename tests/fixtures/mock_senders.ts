@@ -29,10 +29,7 @@ export class MockSenderWithResponse {
 	private expectedPayload: object[] | object | string | null;
 	private expectedError: Error | null;
 
-	constructor(
-		expectedPayload: object[] | object | string | null,
-		expectedError?: Error | null,
-	) {
+	constructor(expectedPayload: object[] | object | string | null, expectedError?: Error | null) {
 		this.expectedPayload = expectedPayload;
 		this.expectedError = expectedError ?? null;
 	}
@@ -50,11 +47,7 @@ export class MockSenderWithStatusCodesAndHeaders {
 	error: string | undefined;
 	currentStatusCodeIndex: number;
 
-	constructor(
-		statusCodes: number[],
-		headers?: Record<string, unknown>,
-		error?: string,
-	) {
+	constructor(statusCodes: number[], headers?: Record<string, unknown>, error?: string) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;
