@@ -23,7 +23,7 @@
  ],
  "files": [
   "dist",
-  "README.md",
+   "README.md",
   "LICENSE"
  ],
  "main": "dist/cjs/index.cjs",
