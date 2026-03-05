@@ -23,17 +23,20 @@ compile: build
 cover: node_modules
 	npm run test -- --reporter=spec
 
-integrate: build
-	@echo "Running integration examples..."
-	@node examples/us_street.mjs > /dev/null || true
-	@node examples/us_zipcode.mjs > /dev/null || true
-	@node examples/us_autocomplete_pro.mjs > /dev/null || true
-	@node examples/us_extract.mjs > /dev/null || true
-	@node examples/us_reverse_geo.mjs > /dev/null || true
-	@node examples/us_enrichment.mjs > /dev/null || true
-	@node examples/international_street.mjs > /dev/null || true
-	@node examples/international_address_autocomplete.mjs > /dev/null || true
-	@node examples/international_postal_code.mjs > /dev/null || true
+examples: build
+	@echo "Running examples..."
+	@node examples/us_street.mjs || true
+	@node examples/us_street_iana_timezone.mjs || true
+	@node examples/us_zipcode.mjs || true
+	@node examples/us_autocomplete_pro.mjs || true
+	@node examples/us_extract.mjs || true
+	@node examples/us_reverse_geo.mjs || true
+	@node examples/us_enrichment.mjs || true
+	@node examples/international_street.mjs || true
+	@node examples/international_address_autocomplete.mjs || true
+	@node examples/international_postal_code.mjs || true
+
+integrate: examples
 
 version:
 	sed -i.bak -e 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)" && rm -f "$(VERSION_FILE1).bak"
@@ -42,4 +45,4 @@ version:
 publish: test build version
 	npm publish
 
-.PHONY: test fmt clean build compile cover integrate version publish
+.PHONY: test fmt clean build compile cover examples integrate version publish
