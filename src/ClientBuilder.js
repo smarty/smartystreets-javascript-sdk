@@ -2,9 +2,12 @@ const HttpSender = require("./HttpSender");
 const SigningSender = require("./SigningSender");
 const BaseUrlSender = require("./BaseUrlSender");
 const AgentSender = require("./AgentSender");
-const StaticCredentials = require("./StaticCredentials");
-const SharedCredentials = require("./SharedCredentials");
-const BasicAuthCredentials = require("./BasicAuthCredentials");
+const _StaticCredentials = require("./StaticCredentials");
+const StaticCredentials = _StaticCredentials.default || _StaticCredentials;
+const _SharedCredentials = require("./SharedCredentials");
+const SharedCredentials = _SharedCredentials.default || _SharedCredentials;
+const _BasicAuthCredentials = require("./BasicAuthCredentials");
+const BasicAuthCredentials = _BasicAuthCredentials.default || _BasicAuthCredentials;
 const CustomHeaderSender = require("./CustomHeaderSender");
 const StatusCodeSender = require("./StatusCodeSender");
 const LicenseSender = require("./LicenseSender");
@@ -194,13 +197,8 @@ class ClientBuilder {
 	 * @return ClientBuilder <b>this</b> to accommodate method chaining.
 	 */
 	withCustomCommaSeperatedQuery(key, value) {
-		let values = this.customQueries.get(key);
-		if (values === "") {
-			values = value;
-		} else {
-			values += "," + value;
-		}
-		this.customQueries.set(key, values);
+		const existing = this.customQueries.get(key);
+		this.customQueries.set(key, existing ? existing + "," + value : value);
 		return this;
 	}
 
@@ -228,6 +226,12 @@ class ClientBuilder {
 		return this.withCustomCommaSeperatedQuery("features", "occupant-use");
 	}
 
+	/**
+	 * withFeatureIANATimeZone turns on the IANA timezone feature for the request.
+	 */
+	withFeatureIANATimeZone() {
+		return this.withCustomCommaSeperatedQuery("features", "iana-timezone");
+	}
 
 	buildSender() {
 		if (this.httpSender) return this.httpSender;

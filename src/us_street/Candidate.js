@@ -64,6 +64,9 @@ class Candidate {
 			this.metadata.timeZone = responseData.metadata.time_zone;
 			this.metadata.utcOffset = responseData.metadata.utc_offset;
 			this.metadata.obeysDst = responseData.metadata.dst;
+			this.metadata.ianaTimeZone = responseData.metadata.iana_time_zone;
+			this.metadata.ianaUtcOffset = responseData.metadata.iana_utc_offset;
+			this.metadata.ianaDst = responseData.metadata.iana_dst;
 			this.metadata.isEwsMatch = responseData.metadata.ews_match;
 		}
 
