@@ -174,6 +174,10 @@ export default class ClientBuilder {
 		return this.withCustomCommaSeperatedQuery("features", "occupant-use");
 	}
 
+	withFeatureIANATimeZone(): ClientBuilder {
+		return this.withCustomCommaSeperatedQuery("features", "iana-timezone");
+	}
+
 	buildSender(): Sender {
 		if (this.httpSender) return this.httpSender;
 

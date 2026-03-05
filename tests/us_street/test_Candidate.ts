@@ -51,6 +51,9 @@ describe("A match candidate", function () {
 				time_zone: "39",
 				utc_offset: 40.0,
 				dst: true,
+				iana_time_zone: "68",
+				iana_utc_offset: 69.0,
+				iana_dst: "70",
 				ews_match: true,
 			},
 			analysis: {
@@ -131,6 +134,9 @@ describe("A match candidate", function () {
 		expect(candidate.metadata.timeZone).to.equal("39");
 		expect(candidate.metadata.utcOffset).to.equal(40.0);
 		expect(candidate.metadata.obeysDst).to.equal(true);
+		expect(candidate.metadata.ianaTimeZone).to.equal("68");
+		expect(candidate.metadata.ianaUtcOffset).to.equal(69.0);
+		expect(candidate.metadata.ianaDst).to.equal("70");
 		expect(candidate.metadata.isEwsMatch).to.equal(true);
 
 		expect(candidate.analysis.dpvMatchCode).to.equal("42");

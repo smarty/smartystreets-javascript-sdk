@@ -45,6 +45,9 @@ export interface UsStreetMetadata {
 	timeZone: string | undefined;
 	utcOffset: number | undefined;
 	obeysDst: boolean | undefined;
+	ianaTimeZone: string | undefined;
+	ianaUtcOffset: number | undefined;
+	ianaDst: string | undefined;
 	isEwsMatch: boolean | undefined;
 }
 
@@ -121,6 +124,9 @@ interface RawUsStreetMetadata {
 	time_zone?: string;
 	utc_offset?: number;
 	dst?: boolean;
+	iana_time_zone?: string;
+	iana_utc_offset?: number;
+	iana_dst?: string;
 	ews_match?: boolean;
 }
 
@@ -250,6 +256,9 @@ export default class Candidate {
 			this.metadata.timeZone = responseData.metadata.time_zone;
 			this.metadata.utcOffset = responseData.metadata.utc_offset;
 			this.metadata.obeysDst = responseData.metadata.dst;
+			this.metadata.ianaTimeZone = responseData.metadata.iana_time_zone;
+			this.metadata.ianaUtcOffset = responseData.metadata.iana_utc_offset;
+			this.metadata.ianaDst = responseData.metadata.iana_dst;
 			this.metadata.isEwsMatch = responseData.metadata.ews_match;
 		}
 

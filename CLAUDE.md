@@ -9,7 +9,15 @@ npm install        # Install dependencies
 npm test           # Run all tests
 npm run build      # Build the library (outputs to dist/)
 npx tsc --noEmit   # Type-check without emitting
-npx prettier --write src/  # Format source files
+npx prettier --write .  # Format all files (respects .prettierignore)
+```
+
+Makefile targets (used by CI):
+```bash
+make test          # fmt + test (installs deps if needed)
+make build         # Rollup build
+make fmt           # Prettier format
+make integrate     # Run all example files against built dist/
 ```
 
 To run a single test file:
@@ -18,7 +26,7 @@ To run a single test file:
 npx mocha --require tsx/cjs tests/test_RetrySender.ts
 ```
 
-Build outputs dual formats via Rollup: `dist/cjs/` (CommonJS), `dist/esm/` (ESM), and `dist/types/` (declarations). Axios and axios-retry are external dependencies (not bundled).
+Build outputs dual formats via Rollup: `dist/cjs/` (CommonJS), `dist/esm/` (ESM), and `dist/types/` (declarations). Rollup preserves module structure (`preserveModules: true`). Axios and axios-retry are external dependencies (not bundled).
 
 ## Architecture
 
@@ -34,6 +42,8 @@ CustomQuerySender → LicenseSender → BaseUrlSender → CustomHeaderSender
 ```
 
 Each sender adds specific functionality (authentication, retries, headers, etc.). The `HttpSender` at the end uses Axios for actual HTTP transport.
+
+All senders implement the `Sender` interface from `src/types.ts`, which also defines the core `Request` and `Response` contracts that flow through the chain.
 
 ### Key Abstractions
 
@@ -82,5 +92,6 @@ Tests use Mocha + Chai (`expect` style). Test files are prefixed with `test_` an
 - Uses Prettier: tabs, double quotes, 100 char line width, trailing commas
 - All source and test files are TypeScript with ES module syntax (`import`/`export`)
 - Import paths use `.js` extensions (TypeScript resolves `.js` to `.ts`)
+- TypeScript is configured with `strict: true`, `exactOptionalPropertyTypes`, and `noPropertyAccessFromIndexSignature`
 - Tests use Mocha + Chai with `expect` style assertions
 - Test files are prefixed with `test_` and mirror the source structure
