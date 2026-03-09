@@ -77,7 +77,7 @@ describe("A US Street client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
-	it("sends no match or candidates when match type is strict.", function () {
+	it("sends match=strict when match type is strict.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -85,6 +85,7 @@ describe("A US Street client", function () {
 		lookup.match = "strict";
 		let expectedParameters = {
 			street: "123 Main St",
+			match: "strict",
 		};
 
 		client.send(lookup);
@@ -92,7 +93,7 @@ describe("A US Street client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
-	it("sends candidates but not match when match is strict with explicit candidates.", function () {
+	it("sends match=strict with explicit candidates.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -102,6 +103,7 @@ describe("A US Street client", function () {
 		let expectedParameters = {
 			street: "123 Main St",
 			candidates: 3,
+			match: "strict",
 		};
 
 		client.send(lookup);
@@ -201,6 +203,38 @@ describe("A US Street client", function () {
 		client.send(lookup);
 
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("sends match=strict in batch mode.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let batch = new Batch();
+		let lookup1 = new Lookup();
+		lookup1.street = "123 Main St";
+		lookup1.match = "strict";
+		let lookup2 = new Lookup();
+		lookup2.street = "456 Oak Ave";
+		lookup2.match = "strict";
+		batch.add(lookup1);
+		batch.add(lookup2);
+
+		client.send(batch);
+
+		expect(mockSender.request.payload[0].match).to.equal("strict");
+		expect(mockSender.request.payload[1].match).to.equal("strict");
+	});
+
+	it("sends defaults in batch mode.", function () {
+		let mockSender = new MockSender();
+		const client = new Client(mockSender);
+		let batch = new Batch();
+		batch.add(new Lookup());
+		batch.add(new Lookup());
+
+		client.send(batch);
+
+		expect(mockSender.request.payload[0].match).to.equal("enhanced");
+		expect(mockSender.request.payload[0].candidates).to.equal(5);
 	});
 
 	it("doesn't send an empty batch.", function () {

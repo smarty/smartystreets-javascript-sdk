@@ -14,11 +14,6 @@ export default function buildUsStreetInputData(lookup: Lookup): Record<string, s
 		effectiveMatch = "enhanced";
 	}
 
-	// If match is "strict", don't send match parameter
-	if (effectiveMatch === "strict") {
-		effectiveMatch = undefined;
-	}
-
 	// For "enhanced" match mode, set default candidates to 5 if not specified
 	if (effectiveMatch === "enhanced" && !effectiveCandidates) {
 		effectiveCandidates = 5;
