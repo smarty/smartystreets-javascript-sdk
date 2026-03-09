@@ -81,7 +81,7 @@ describe("A US Street client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
-	it("sends no match or candidates when match type is strict.", function () {
+	it("sends match=strict when match type is strict.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -89,6 +89,7 @@ describe("A US Street client", function () {
 		lookup.match = "strict";
 		let expectedParameters = {
 			street: "123 Main St",
+			match: "strict",
 		};
 
 		client.send(lookup);
@@ -96,7 +97,7 @@ describe("A US Street client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
-	it("sends candidates but not match when match is strict with explicit candidates.", function () {
+	it("sends match=strict with explicit candidates.", function () {
 		let mockSender = new MockSender();
 		const client = new Client(mockSender);
 		let lookup = new Lookup();
@@ -106,6 +107,7 @@ describe("A US Street client", function () {
 		let expectedParameters = {
 			street: "123 Main St",
 			candidates: 3,
+			match: "strict",
 		};
 
 		client.send(lookup);
