@@ -7,8 +7,6 @@ export type Geocode = "true" | (string & {});
 const messages = {
 	countryRequired: "Country field is required.",
 	freeformOrAddress1Required: "Either freeform or address1 is required.",
-	insufficientInformation:
-		"Insufficient information: One or more required fields were not set on the lookup.",
 	badGeocode: "Invalid input: geocode can only be set to 'true' (default is 'false'.",
 	invalidLanguage:
 		"Invalid input: language can only be set to 'latin' or 'native'. When not set, the the output language will match the language of the input values.",
@@ -72,15 +70,8 @@ export default class Lookup {
 	ensureEnoughInfo(): boolean {
 		if (fieldIsMissing(this.country)) throw new UnprocessableEntityError(messages.countryRequired);
 
-		if (fieldIsSet(this.freeform)) return true;
-
-		if (fieldIsMissing(this.address1))
+		if (fieldIsMissing(this.freeform) && fieldIsMissing(this.address1))
 			throw new UnprocessableEntityError(messages.freeformOrAddress1Required);
-
-		if (fieldIsSet(this.postalCode)) return true;
-
-		if (fieldIsMissing(this.locality) || fieldIsMissing(this.administrativeArea))
-			throw new UnprocessableEntityError(messages.insufficientInformation);
 
 		return true;
 	}

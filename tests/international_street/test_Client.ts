@@ -13,6 +13,20 @@ describe("An International Street client", function () {
 		expect(client.send).to.throw(errors.UndefinedLookupError);
 	});
 
+	it("throws an error if sending an empty lookup.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+
+		expect(() => client.send(new Lookup())).to.throw(errors.UnprocessableEntityError, "Country field is required.");
+	});
+
+	it("throws an error if sending a lookup with country but missing freeform and address1.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+
+		expect(() => client.send(new Lookup("CA"))).to.throw(errors.UnprocessableEntityError, "Either freeform or address1 is required.");
+	});
+
 	it("correctly assigns request parameters based on lookup input.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
@@ -51,7 +65,7 @@ describe("An International Street client", function () {
 		const expectedMockPayload = [{ address1: "A" }];
 		let mockSender = new MockSenderWithResponse(expectedMockPayload);
 		const client = new Client(mockSender);
-		let lookup = new Lookup();
+		let lookup = new Lookup("CA", "123 Main St");
 		let expectedResult = new Candidate({ address1: "A" });
 
 		return client.send(lookup).then((_response) => {

@@ -18,6 +18,8 @@ export default class Client {
 	send(lookup: Lookup): Promise<Lookup> {
 		if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
+		lookup.ensureEnoughInfo();
+
 		const request = new Request();
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
