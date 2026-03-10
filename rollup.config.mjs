@@ -6,43 +6,43 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 
 export default {
-  input: "index.mjs",
-  external: ["axios", "axios-retry"],
-  output: [
-    {
-      dir: "dist",
-      format: "esm",
-      preserveModules: true,
-      preserveModulesRoot: "src",
-      exports: "named",
-      entryFileNames: "esm/[name].mjs",
-    },
-    {
-      dir: "dist",
-      format: "cjs",
-      preserveModules: true,
-      preserveModulesRoot: "src",
-      exports: "named",
-      esModule: false,
-      entryFileNames: "cjs/[name].cjs",
-    },
-  ],
-  plugins: [
-    del({ targets: "dist/*" }),
-    nodeResolve(),
-    commonjs({
-      esmExternals: true,
-      requireReturnsDefault: true,
-    }),
-    json(),
-    terser(),
-    typescript({
-      declaration: true,
-      emitDeclarationOnly: true,
-      outDir: "dist/types",
-      rootDir: "src",
-	    importHelpers: false,
-	    target: "es2015",
-    }),
-  ],
+	input: "index.ts",
+	external: ["axios", "axios-retry"],
+	output: [
+		{
+			dir: "dist",
+			format: "esm",
+			preserveModules: true,
+			preserveModulesRoot: "src",
+			exports: "named",
+			entryFileNames: "esm/[name].mjs",
+		},
+		{
+			dir: "dist",
+			format: "cjs",
+			preserveModules: true,
+			preserveModulesRoot: "src",
+			exports: "named",
+			esModule: false,
+			entryFileNames: "cjs/[name].cjs",
+		},
+	],
+	plugins: [
+		del({ targets: "dist/*" }),
+		nodeResolve(),
+		commonjs({
+			esmExternals: true,
+			requireReturnsDefault: true,
+		}),
+		json(),
+		terser(),
+		typescript({
+			declaration: true,
+			emitDeclarationOnly: true,
+			outDir: "dist/types",
+			rootDir: ".",
+			importHelpers: false,
+			target: "es2015",
+		}),
+	],
 };

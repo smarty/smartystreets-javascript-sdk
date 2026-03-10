@@ -9,10 +9,7 @@ export default class AgentSender {
 	}
 
 	send(request: Request): Promise<Response> {
-		request.parameters["agent"] =
-			"smarty (sdk:javascript@" + packageJson.version + ")";
-		return new Promise((resolve, reject) => {
-			this.sender.send(request).then(resolve).catch(reject);
-		});
+		request.parameters["agent"] = "smarty (sdk:javascript@" + packageJson.version + ")";
+		return this.sender.send(request);
 	}
 }

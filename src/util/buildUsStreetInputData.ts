@@ -1,0 +1,29 @@
+import buildInputData from "./buildInputData.js";
+import apiToSDKKeyMap from "./apiToSDKKeyMap.js";
+import Lookup from "../us_street/Lookup.js";
+
+const keyTranslationFormat = apiToSDKKeyMap.usStreet;
+
+export default function buildUsStreetInputData(lookup: Lookup): Record<string, string | number> {
+	// Apply default match strategy and candidates logic per Go SDK behavior
+	let effectiveMatch = lookup.match;
+	let effectiveCandidates = lookup.maxCandidates;
+
+	// Default match strategy is "enhanced"
+	if (!effectiveMatch) {
+		effectiveMatch = "enhanced";
+	}
+
+	// For "enhanced" match mode, set default candidates to 5 if not specified
+	if (effectiveMatch === "enhanced" && !effectiveCandidates) {
+		effectiveCandidates = 5;
+	}
+
+	// Create a lookup copy with effective values for serialization
+	const effectiveLookup = Object.assign({}, lookup, {
+		match: effectiveMatch,
+		maxCandidates: effectiveCandidates,
+	});
+
+	return buildInputData(effectiveLookup, keyTranslationFormat);
+}

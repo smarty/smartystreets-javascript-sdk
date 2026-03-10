@@ -21,7 +21,7 @@ export default class RetrySender {
 		let response = await this.inner.send(request);
 
 		for (let i = 0; i < this.maxRetries; i++) {
-			const statusCode = parseInt(String(response.statusCode));
+			const statusCode = response.statusCode;
 			if (!this.statusToRetry.includes(statusCode)) {
 				break;
 			}

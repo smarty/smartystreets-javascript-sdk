@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import * as SmartySDK from "../dist/esm/index.mjs";
+import * as SmartySDK from "../index.js";
 
 describe("Extract example test", () => {
 	const authId = "";

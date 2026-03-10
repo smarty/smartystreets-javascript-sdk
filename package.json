@@ -23,7 +23,7 @@
  ],
  "files": [
   "dist",
-  "README.md",
+   "README.md",
   "LICENSE"
  ],
  "main": "dist/cjs/index.cjs",
@@ -31,6 +31,7 @@
  "types": "dist/types/index.d.ts",
  "exports": {
   ".": {
+   "types": "./dist/types/index.d.ts",
    "import": "./dist/esm/index.mjs",
    "default": "./dist/cjs/index.cjs"
   }
@@ -41,9 +42,7 @@
  },
  "scripts": {
   "build": "rollup --config",
-  "test": "npm run test:js && npm run test:ts",
-  "test:js": "mocha 'tests/**/*.{mjs,js}'",
-  "test:ts": "mocha --require tsx/cjs 'tests/**/*.ts'"
+  "test": "mocha --require tsx/cjs 'tests/**/*.ts'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
  "license": "Apache-2.0",

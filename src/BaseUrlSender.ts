@@ -10,12 +10,10 @@ export default class BaseUrlSender {
 	}
 
 	send(request: Request): Promise<Response> {
-		return new Promise((resolve, reject) => {
-			request.baseUrl = `${this.urlOverride}${
-				request.baseUrlParam ? `/${request.baseUrlParam}` : ""
-			}`;
+		request.baseUrl = `${this.urlOverride}${
+			request.baseUrlParam ? `/${request.baseUrlParam}` : ""
+		}`;
 
-			this.sender.send(request).then(resolve).catch(reject);
-		});
+		return this.sender.send(request);
 	}
 }

@@ -13,14 +13,16 @@ let authToken = process.env.SMARTY_AUTH_TOKEN;
 const credentials = new SmartyCore.BasicAuthCredentials(authId, authToken);
 
 let clientBuilder = new SmartyCore.ClientBuilder(credentials);
-	// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
+// .withBaseUrl("YOUR URL") // withBaseUrl() should be used if you are self-hosting the Smarty API
 
 let client = clientBuilder.buildUsExtractClient();
 
 // Documentation for input fields can be found at:
 // https://www.smarty.com/docs/cloud/us-extract-api#http-request-input-fields
 
-let lookup = new Lookup("If you work at 1600 Pennsylvania Ave NW, Washington DC you're gonna have a hard time.");
+let lookup = new Lookup(
+	"If you work at 1600 Pennsylvania Ave NW, Washington DC you're gonna have a hard time.",
+);
 lookup.aggressive = true;
 lookup.addressesHaveLineBreaks = false;
 lookup.addressesPerLine = 1;
@@ -38,7 +40,7 @@ async function handleRequest(lookup) {
 	try {
 		const response = await client.send(lookup);
 		logResult(response);
-	} catch(err) {
+	} catch (err) {
 		console.log(err);
 	}
 }

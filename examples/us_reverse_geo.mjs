@@ -37,7 +37,7 @@ async function handleResponse(lookup) {
 	try {
 		const result = await client.send(lookup);
 		displayResult(result);
-	} catch(err) {
+	} catch (err) {
 		handleError(err);
 	}
 }

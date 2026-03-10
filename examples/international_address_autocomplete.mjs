@@ -24,19 +24,19 @@ const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 // www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 const country = "CAN";
 
-const summaryLookup = new Lookup({search: "123 Anson", country});
+const summaryLookup = new Lookup({ search: "123 Anson", country });
 // uncomment the following line to add a custom parameter
 // summaryLookup.addCustomParameter("max_results", 1);
 
 await handleRequest(summaryLookup, "Response of summary results");
 
-const detailedLookup = new Lookup({addressId: summaryLookup.result[0].addressId, country});
+const detailedLookup = new Lookup({ addressId: summaryLookup.result[0].addressId, country });
 await handleRequest(detailedLookup, "Response using an address ID to get detailed results");
 
 function logSuggestions(response, message) {
 	console.log("*** " + message + " ***");
 
-	response.result.forEach(suggestion => {
+	response.result.forEach((suggestion) => {
 		if (suggestion.addressText) {
 			console.log("Entries: ", suggestion.entries);
 			console.log("Address Text: ", suggestion.addressText);
@@ -56,7 +56,7 @@ async function handleRequest(lookup, lookupType) {
 	try {
 		const results = await client.send(lookup);
 		logSuggestions(results, lookupType);
-	} catch(err) {
-		console.log(err)
+	} catch (err) {
+		console.log(err);
 	}
 }
