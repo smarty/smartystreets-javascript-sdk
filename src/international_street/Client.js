@@ -16,6 +16,8 @@ class Client {
 	send(lookup) {
 		if (typeof lookup === "undefined") throw new Errors.UndefinedLookupError();
 
+		lookup.ensureEnoughInfo();
+
 		let request = new Request();
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
