@@ -6,6 +6,7 @@ export default class Lookup {
 	addressId: string | undefined;
 	country: string | undefined;
 	maxResults: number;
+	maxGroupResults: number;
 	includeOnlyLocality: string | undefined;
 	includeOnlyPostalCode: string | undefined;
 	customParameters: Record<string, string>;
@@ -15,6 +16,7 @@ export default class Lookup {
 		addressId,
 		country,
 		maxResults = 5,
+		maxGroupResults = 100,
 		includeOnlyLocality,
 		includeOnlyPostalCode,
 	}: {
@@ -22,6 +24,7 @@ export default class Lookup {
 		addressId?: string;
 		country?: string;
 		maxResults?: number;
+		maxGroupResults?: number;
 		includeOnlyLocality?: string;
 		includeOnlyPostalCode?: string;
 	} = {}) {
@@ -31,6 +34,7 @@ export default class Lookup {
 		this.addressId = addressId;
 		this.country = country;
 		this.maxResults = maxResults;
+		this.maxGroupResults = maxGroupResults;
 		this.includeOnlyLocality = includeOnlyLocality;
 		this.includeOnlyPostalCode = includeOnlyPostalCode;
 		this.customParameters = {};

@@ -65,6 +65,7 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 		search: "search",
 		country: "country",
 		max_results: "maxResults",
+		max_group_results: "maxGroupResults",
 		include_only_administrative_area: "includeOnlyAdministrativeArea",
 		include_only_locality: "includeOnlyLocality",
 		include_only_postal_code: "includeOnlyPostalCode",
