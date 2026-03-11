@@ -45,6 +45,7 @@ describe("An International Address Autocomplete lookup", function () {
 			addressId: undefined,
 			country: undefined,
 			maxResults: 5,
+			maxGroupResults: 100,
 			includeOnlyLocality: undefined,
 			includeOnlyPostalCode: undefined,
 			customParameters: {},
