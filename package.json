@@ -1,7 +1,7 @@
 {
  "name": "smartystreets-javascript-sdk",
  "version": "0.0.0",
- "description": "Quick and easy Smarty address validation.",
+ "description": "Quick and easy Smarty address validation. Written in TypeScript with bundled type declarations.",
  "keywords": [
   "smarty",
   "smartystreets",

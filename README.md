@@ -126,7 +126,7 @@ const client = new SmartySDK.core.ClientBuilder(credentials)
 
 ## TypeScript
 
-The SDK is written in TypeScript and ships with full type declarations. All types are available as named exports:
+The SDK is written in TypeScript and ships with full type declarations — no `@types/` package needed. All types are available as named exports:
 
 ```typescript
 import SmartySDK, { type MatchStrategy, type SmartyError } from "smartystreets-javascript-sdk";
@@ -135,6 +135,10 @@ const lookup = new SmartySDK.usStreet.Lookup();
 lookup.street = "1600 Amphitheatre Parkway";
 lookup.match = "enhanced" satisfies MatchStrategy;
 ```
+
+JavaScript users benefit too — editors like VS Code automatically pick up the bundled type declarations, providing autocompletion and hover docs with no configuration.
+
+See [UPGRADING.md](UPGRADING.md) for details on migrating from the previous JavaScript-only release.
 
 ## Documentation
 
