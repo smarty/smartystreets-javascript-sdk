@@ -43,6 +43,33 @@ export type { CoordinateLicense, MatchInfo } from "./src/us_street/Candidate.js"
 export type { Geolocation } from "./src/us_autocomplete_pro/Lookup.js";
 export type { Language, Geocode } from "./src/international_street/Lookup.js";
 
+export {
+	Batch,
+	ClientBuilder,
+	buildClient,
+	SharedCredentials,
+	StaticCredentials,
+	BasicAuthCredentials,
+	Errors,
+	LookupUSStreet,
+	CandidateUSStreet,
+	LookupUSZipcode,
+	ResultUSZipcode,
+	LookupUSAutocompletePro,
+	SuggestionUSAutocompletePro,
+	LookupUSExtract,
+	ResultUSExtract,
+	LookupInternationalStreet,
+	CandidateInternationalStreet,
+	LookupUSReverseGeo,
+	LookupInternationalAddressAutocomplete,
+	SuggestionInternationalAddressAutocomplete,
+	LookupUSEnrichment,
+	ResponseUSEnrichment,
+	LookupInternationalPostalCode,
+	ResultInternationalPostalCode,
+};
+
 export const core = {
 	Batch,
 	ClientBuilder,
