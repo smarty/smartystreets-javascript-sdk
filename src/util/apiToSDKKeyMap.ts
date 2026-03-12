@@ -68,6 +68,8 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 		include_only_administrative_area: "includeOnlyAdministrativeArea",
 		include_only_locality: "includeOnlyLocality",
 		include_only_postal_code: "includeOnlyPostalCode",
+		max_group_results: "maxGroupResults",
+		geolocation: "geolocation",
 	},
 	usReverseGeo: {
 		latitude: "latitude",

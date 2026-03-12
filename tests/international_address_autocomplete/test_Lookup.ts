@@ -38,6 +38,18 @@ describe("An International Address Autocomplete lookup", function () {
 		expect(lookup.includeOnlyPostalCode).to.equal(onlyIncludePostalCode);
 	});
 
+	it("Set max group results", function () {
+		const maxGroupResults = 50;
+		let lookup = new Lookup({ maxGroupResults });
+		expect(lookup.maxGroupResults).to.equal(maxGroupResults);
+	});
+
+	it("Set geolocation", function () {
+		const geolocation = true;
+		let lookup = new Lookup({ geolocation });
+		expect(lookup.geolocation).to.equal(geolocation);
+	});
+
 	it("Checking defaults of params on instantiation ", function () {
 		const defaultLookup = {
 			result: [],
@@ -47,6 +59,8 @@ describe("An International Address Autocomplete lookup", function () {
 			maxResults: 5,
 			includeOnlyLocality: undefined,
 			includeOnlyPostalCode: undefined,
+			maxGroupResults: 100,
+			geolocation: false,
 			customParameters: {},
 		};
 		let lookup = new Lookup();

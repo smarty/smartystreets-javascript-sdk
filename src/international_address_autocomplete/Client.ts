@@ -21,6 +21,12 @@ export default class Client {
 		const request = new Request();
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
 
+		if (lookup.geolocation) {
+			request.parameters["geolocation"] = "on";
+		} else {
+			delete request.parameters["geolocation"];
+		}
+
 		if (lookup.addressId) {
 			request.baseUrlParam = lookup.addressId;
 		}

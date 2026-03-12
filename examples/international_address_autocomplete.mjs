@@ -24,9 +24,12 @@ const client = clientBuilder.buildInternationalAddressAutocompleteClient();
 // www.smarty.com/docs/cloud/international-address-autocomplete-api#pro-http-request-input-fields
 const country = "CAN";
 
-const summaryLookup = new Lookup({ search: "123 Anson", country });
-// uncomment the following line to add a custom parameter
-// summaryLookup.addCustomParameter("max_results", 1);
+const summaryLookup = new Lookup({
+	search: "123 Anson",
+	country,
+	maxGroupResults: 50,
+	geolocation: true,
+});
 
 await handleRequest(summaryLookup, "Response of summary results");
 

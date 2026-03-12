@@ -8,6 +8,8 @@ export default class Lookup {
 	maxResults: number;
 	includeOnlyLocality: string | undefined;
 	includeOnlyPostalCode: string | undefined;
+	maxGroupResults: number;
+	geolocation: boolean;
 	customParameters: Record<string, string>;
 
 	constructor({
@@ -17,6 +19,8 @@ export default class Lookup {
 		maxResults = 5,
 		includeOnlyLocality,
 		includeOnlyPostalCode,
+		maxGroupResults = 100,
+		geolocation = false,
 	}: {
 		search?: string;
 		addressId?: string;
@@ -24,6 +28,8 @@ export default class Lookup {
 		maxResults?: number;
 		includeOnlyLocality?: string;
 		includeOnlyPostalCode?: string;
+		maxGroupResults?: number;
+		geolocation?: boolean;
 	} = {}) {
 		this.result = [];
 
@@ -33,6 +39,8 @@ export default class Lookup {
 		this.maxResults = maxResults;
 		this.includeOnlyLocality = includeOnlyLocality;
 		this.includeOnlyPostalCode = includeOnlyPostalCode;
+		this.maxGroupResults = maxGroupResults;
+		this.geolocation = geolocation;
 		this.customParameters = {};
 	}
 
