@@ -23,8 +23,21 @@ compile: build
 cover: node_modules
 	npm run test -- --reporter=spec
 
-examples: build
-	@echo "Running examples..."
+examples-ts: build
+	@echo "Running TypeScript examples..."
+	@npx tsx examples/us_street.ts || true
+	@npx tsx examples/us_street_iana_timezone.ts || true
+	@npx tsx examples/us_zipcode.ts || true
+	@npx tsx examples/us_autocomplete_pro.ts || true
+	@npx tsx examples/us_extract.ts || true
+	@npx tsx examples/us_reverse_geo.ts || true
+	@npx tsx examples/us_enrichment.ts || true
+	@npx tsx examples/international_street.ts || true
+	@npx tsx examples/international_address_autocomplete.ts || true
+	@npx tsx examples/international_postal_code.ts || true
+
+examples-js: build
+	@echo "Running JavaScript examples..."
 	@node examples/us_street.mjs || true
 	@node examples/us_street_iana_timezone.mjs || true
 	@node examples/us_zipcode.mjs || true
@@ -36,6 +49,8 @@ examples: build
 	@node examples/international_address_autocomplete.mjs || true
 	@node examples/international_postal_code.mjs || true
 
+examples: examples-ts examples-js
+
 integrate: examples
 
 version:
@@ -45,4 +60,4 @@ version:
 publish: test build version
 	npm publish
 
-.PHONY: test fmt clean build compile cover examples integrate version publish
+.PHONY: test fmt clean build compile cover examples examples-ts examples-js integrate version publish
