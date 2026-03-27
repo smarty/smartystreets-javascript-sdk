@@ -179,6 +179,14 @@ export default class ClientBuilder {
 	}
 
 	buildSender(): Sender {
+		if (this.httpSender !== undefined) {
+			const conflicts: string[] = [];
+			if (this.maxTimeout !== 10000) conflicts.push("withMaxTimeout()");
+			if (this.proxy !== undefined) conflicts.push("withProxy()");
+			if (this.debug !== undefined) conflicts.push("withDebug()");
+			if (conflicts.length > 0)
+				throw new Error(`withSender() cannot be combined with: ${conflicts.join(", ")}. These options only apply to the built-in HTTP transport.`);
+		}
 		const httpSender = this.httpSender ?? new HttpSender(this.maxTimeout, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);
 		const signingSender = new SigningSender(statusCodeSender, this.signer);

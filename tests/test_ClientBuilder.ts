@@ -24,6 +24,18 @@ describe("ClientBuilder", function () {
 		);
 	});
 
+	it("throws when withSender() is combined with withMaxTimeout().", function () {
+		expect(() =>
+			new ClientBuilder(credentials).withSender({ send: async () => ({ statusCode: 200, payload: [], error: null, headers: {} }) }).withMaxTimeout(5000).buildUsStreetApiClient()
+		).to.throw("withSender() cannot be combined with: withMaxTimeout()");
+	});
+
+	it("throws when withSender() is combined with withProxy().", function () {
+		expect(() =>
+			new ClientBuilder(credentials).withSender({ send: async () => ({ statusCode: 200, payload: [], error: null, headers: {} }) }).withProxy({ host: "localhost", port: 8080 }).buildUsStreetApiClient()
+		).to.throw("withSender() cannot be combined with: withProxy()");
+	});
+
 	it("wraps a custom http sender with the full middleware chain (baseUrl and auth are set).", async function () {
 		let capturedRequest: IRequest | undefined;
 		const capturingSender: Sender = {
