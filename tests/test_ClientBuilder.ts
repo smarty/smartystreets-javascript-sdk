@@ -1,6 +1,8 @@
 import { expect } from "chai";
 import StaticCredentials from "../src/StaticCredentials.js";
 import ClientBuilder from "../src/ClientBuilder.js";
+import Lookup from "../src/us_street/Lookup.js";
+import { Request as IRequest, Response as IResponse, Sender } from "../src/types.js";
 
 describe("ClientBuilder", function () {
 	const credentials = new StaticCredentials("test-id", "test-token");
@@ -20,5 +22,37 @@ describe("ClientBuilder", function () {
 		expect((builder as any).customQueries.get("features")).to.equal(
 			"component-analysis,iana-timezone",
 		);
+	});
+
+	it("throws when withSender() is combined with withMaxTimeout().", function () {
+		expect(() =>
+			new ClientBuilder(credentials).withSender({ send: async () => ({ statusCode: 200, payload: [], error: null, headers: {} }) }).withMaxTimeout(5000).buildUsStreetApiClient()
+		).to.throw("withSender() cannot be combined with: withMaxTimeout()");
+	});
+
+	it("throws when withSender() is combined with withProxy().", function () {
+		expect(() =>
+			new ClientBuilder(credentials).withSender({ send: async () => ({ statusCode: 200, payload: [], error: null, headers: {} }) }).withProxy({ host: "localhost", port: 8080 }).buildUsStreetApiClient()
+		).to.throw("withSender() cannot be combined with: withProxy()");
+	});
+
+	it("wraps a custom http sender with the full middleware chain (baseUrl and auth are set).", async function () {
+		let capturedRequest: IRequest | undefined;
+		const capturingSender: Sender = {
+			send(request: IRequest): Promise<IResponse> {
+				capturedRequest = request;
+				return Promise.resolve({ statusCode: 200, payload: [], error: null, headers: {} });
+			},
+		};
+
+		const client = new ClientBuilder(credentials).withSender(capturingSender).buildUsStreetApiClient();
+
+		const lookup = new Lookup();
+		lookup.street = "1 Rosedale";
+		await client.send(lookup);
+
+		expect(capturedRequest!.baseUrl).to.include("us-street.api.smarty.com");
+		expect(capturedRequest!.parameters["auth-id"]).to.equal("test-id");
+		expect(capturedRequest!.parameters["auth-token"]).to.equal("test-token");
 	});
 });
