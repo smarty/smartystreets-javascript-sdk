@@ -33,7 +33,7 @@ describe("ClientBuilder", function () {
 			},
 		};
 
-		const client = new ClientBuilder(credentials).withWrappedSender(capturingSender).buildUsStreetApiClient();
+		const client = new ClientBuilder(credentials).withSender(capturingSender).buildUsStreetApiClient();
 
 		const lookup = new Lookup();
 		lookup.street = "1 Rosedale";

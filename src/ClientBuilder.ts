@@ -41,7 +41,6 @@ type Signer = StaticCredentials | SharedCredentials | BasicAuthCredentials;
 export default class ClientBuilder {
 	private signer: Signer;
 	private httpSender: Sender | undefined;
-	private wrappedHttpSender: Sender | undefined;
 	private maxRetries: number;
 	private maxTimeout: number;
 	private baseUrl: string | undefined;
@@ -64,7 +63,6 @@ export default class ClientBuilder {
 
 		this.signer = signer;
 		this.httpSender = undefined;
-		this.wrappedHttpSender = undefined;
 		this.maxRetries = 5;
 		this.maxTimeout = 10000;
 		this.baseUrl = undefined;
@@ -88,11 +86,6 @@ export default class ClientBuilder {
 
 	withSender(sender: Sender): ClientBuilder {
 		this.httpSender = sender;
-		return this;
-	}
-
-	withWrappedSender(sender: Sender): ClientBuilder {
-		this.wrappedHttpSender = sender;
 		return this;
 	}
 
@@ -186,9 +179,7 @@ export default class ClientBuilder {
 	}
 
 	buildSender(): Sender {
-		if (this.httpSender) return this.httpSender;
-
-		const httpSender = this.wrappedHttpSender ?? new HttpSender(this.maxTimeout, this.proxy, this.debug);
+		const httpSender = this.httpSender ?? new HttpSender(this.maxTimeout, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);
 		const signingSender = new SigningSender(statusCodeSender, this.signer);
 		let agentSender = new AgentSender(signingSender);
