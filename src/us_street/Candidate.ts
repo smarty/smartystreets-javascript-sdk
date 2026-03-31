@@ -178,6 +178,7 @@ export interface RawUsStreetCandidate {
 	last_line?: string;
 	delivery_point_barcode?: string;
 	smarty_key?: string;
+	smarty_key_ext?: string;
 	components?: RawUsStreetComponents;
 	metadata?: RawUsStreetMetadata;
 	analysis?: RawUsStreetAnalysis;
@@ -193,6 +194,7 @@ export default class Candidate {
 	lastLine: string;
 	deliveryPointBarcode: string;
 	smartyKey: string;
+	smartyKeyExt: string;
 	components: UsStreetComponents;
 	metadata: UsStreetMetadata;
 	analysis: UsStreetAnalysis;
@@ -207,6 +209,7 @@ export default class Candidate {
 		this.lastLine = responseData.last_line ?? "";
 		this.deliveryPointBarcode = responseData.delivery_point_barcode ?? "";
 		this.smartyKey = responseData.smarty_key ?? "";
+		this.smartyKeyExt = responseData.smarty_key_ext ?? "";
 
 		this.components = {} as UsStreetComponents;
 		if (responseData.components !== undefined) {
