@@ -12,6 +12,7 @@ describe("A match candidate", function () {
 			last_line: "5",
 			delivery_point_barcode: "6",
 			smarty_key: "0000",
+			smarty_key_ext: "0",
 			components: {
 				urbanization: "7",
 				primary_number: "8",
@@ -96,6 +97,7 @@ describe("A match candidate", function () {
 		expect(candidate.lastLine).to.equal("5");
 		expect(candidate.deliveryPointBarcode).to.equal("6");
 		expect(candidate.smartyKey).to.equal("0000");
+		expect(candidate.smartyKeyExt).to.equal("0");
 
 		expect(candidate.components.urbanization).to.equal("7");
 		expect(candidate.components.primaryNumber).to.equal("8");
