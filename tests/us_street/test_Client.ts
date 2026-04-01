@@ -257,6 +257,17 @@ describe("A US Street client", function () {
 		});
 	});
 
+	it("maps smarty_key_ext from response to smartyKeyExt on candidate.", function () {
+		const expectedMockPayload = [{ smarty_key_ext: "0", input_index: 0 }];
+		let mockSender = new MockSenderWithResponse(expectedMockPayload);
+		const client = new Client(mockSender);
+		let lookup = new Lookup();
+
+		return client.send(lookup).then((_response) => {
+			expect(lookup.result[0].smartyKeyExt).to.equal("0");
+		});
+	});
+
 	it("attaches match candidates to their corresponding lookups.", function () {
 		const expectedMockPayload = [
 			{ delivery_line_1: "Address 0", input_index: 0 },
