@@ -28,9 +28,15 @@ describe("Retry Sender tests", function () {
 
 	it("test client error does not retry", async function () {
 		const inner = new MockSenderWithStatusCodesAndHeaders([422]);
-		await sendWithRetry(5, inner, new MockSleeper());
 
-		expect(inner.currentStatusCodeIndex).to.equal(1);
+		try {
+			await sendWithRetry(5, inner, new MockSleeper());
+			expect.fail("Expected an error to be thrown");
+		} catch (error) {
+			const response = error as { statusCode: number };
+			expect(response.statusCode).to.equal(422);
+			expect(inner.currentStatusCodeIndex).to.equal(1);
+		}
 	});
 
 	it("test will retry until success", async function () {
@@ -68,9 +74,13 @@ describe("Retry Sender tests", function () {
 
 	it("test empty status does not retry", async function () {
 		const inner = new MockSenderWithStatusCodesAndHeaders([]);
-		await sendWithRetry(5, inner, new MockSleeper());
 
-		expect(inner.currentStatusCodeIndex).to.equal(1);
+		try {
+			await sendWithRetry(5, inner, new MockSleeper());
+			expect.fail("Expected an error to be thrown");
+		} catch {
+			expect(inner.currentStatusCodeIndex).to.equal(1);
+		}
 	});
 
 	it("test sleep on rate limit", async function () {
@@ -86,18 +96,24 @@ describe("Retry Sender tests", function () {
 		const inner = new MockSenderWithStatusCodesAndHeaders([429], { "retry-after": "7" });
 		const sleeper = new MockSleeper();
 
-		await sendWithRetry(10, inner, sleeper);
-
-		expect(sleeper.sleepDurations).to.deep.equal([7]);
+		try {
+			await sendWithRetry(10, inner, sleeper);
+			expect.fail("Expected an error to be thrown");
+		} catch {
+			expect(sleeper.sleepDurations).to.deep.equal([7]);
+		}
 	});
 
 	it("test retry after invalid value", async function () {
 		const inner = new MockSenderWithStatusCodesAndHeaders([429], { "retry-after": "a" });
 		const sleeper = new MockSleeper();
 
-		await sendWithRetry(10, inner, sleeper);
-
-		expect(sleeper.sleepDurations).to.deep.equal([10]);
+		try {
+			await sendWithRetry(10, inner, sleeper);
+			expect.fail("Expected an error to be thrown");
+		} catch {
+			expect(sleeper.sleepDurations).to.deep.equal([10]);
+		}
 	});
 
 	it("test retry error", async function () {
