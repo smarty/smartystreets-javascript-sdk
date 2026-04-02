@@ -115,14 +115,7 @@ export default class HttpSender {
 	): Promise<object[] | object | string | null> {
 		const contentType = response.headers.get("content-type") ?? "";
 		if (contentType.includes("application/json")) {
-			try {
-				return await response.json();
-			} catch (error) {
-				if (this.debug) {
-					console.log("Failed to parse JSON response:", error);
-				}
-				return null;
-			}
+			return await response.json();
 		}
 		const text = await response.text();
 		return text || null;

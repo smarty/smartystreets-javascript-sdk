@@ -3,7 +3,7 @@ import Response from "../Response.js";
 interface HttpResponse {
 	status: number;
 	data?: object[] | object | string | null | undefined;
-	error?: any;
+	error?: string | Error | undefined;
 	headers?: Record<string, string> | undefined;
 }
 

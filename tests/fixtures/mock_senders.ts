@@ -54,7 +54,7 @@ export class MockSenderWithStatusCodesAndHeaders {
 		this.currentStatusCodeIndex = 0;
 	}
 
-	send(_request: IRequest) {
+	async send(_request: IRequest): Promise<IResponse> {
 		const mockResponse = {
 			status: this.statusCodes[this.currentStatusCodeIndex],
 			headers: this.headers,

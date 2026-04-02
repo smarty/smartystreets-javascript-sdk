@@ -9,7 +9,7 @@ export interface Request {
 export interface Response {
 	statusCode: number;
 	payload: object[] | object | string | null;
-	error: Error | null;
+	error: Error | string | null;
 	headers: Record<string, string>;
 }
 
@@ -33,15 +33,4 @@ export interface BaseLookup {
 	inputId?: string | number | undefined;
 	customParameters: Record<string, string>;
 	result: { inputIndex: number }[];
-}
-
-export interface MockSenderInstance extends Sender {
-	statusCodes: number[];
-	headers?: Record<string, string> | undefined;
-	error?: string | undefined;
-	currentStatusCodeIndex: number;
-}
-
-export interface MockSleeperInstance extends Sleeper {
-	sleepDurations: number[];
 }
