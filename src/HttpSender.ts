@@ -8,6 +8,7 @@ export default class HttpSender {
 	private debug: boolean;
 	private fetchFn: FetchFunction | undefined;
 	private dispatcher: import("undici").Dispatcher | undefined;
+	private proxyReady: Promise<void> | undefined;
 
 	constructor(
 		timeout: number = 10000,
@@ -20,7 +21,7 @@ export default class HttpSender {
 		this.fetchFn = fetchFn;
 
 		if (proxyConfig) {
-			this.initProxy(proxyConfig);
+			this.proxyReady = this.initProxy(proxyConfig);
 		}
 	}
 
@@ -30,18 +31,28 @@ export default class HttpSender {
 			this.fetchFn = globalThis.fetch.bind(globalThis);
 			return this.fetchFn;
 		}
-		throw new Error("No fetch implementation available. Provide one via the fetchFn constructor parameter.");
+		throw new Error(
+			"No fetch implementation available. Provide one via the fetchFn constructor parameter.",
+		);
 	}
 
-	private initProxy(config: { url: string }): void {
+	private async initProxy(config: { url: string }): Promise<void> {
+		let ProxyAgent: typeof import("undici").ProxyAgent;
 		try {
-			// eslint-disable-next-line @typescript-eslint/no-require-imports
-			const { ProxyAgent } = require("undici");
-			this.dispatcher = new ProxyAgent(config.url);
+			({ ProxyAgent } = await import("undici"));
 		} catch {
 			throw new Error(
 				"The 'undici' package is required for proxy support. Install it with: npm install undici",
 			);
+		}
+		try {
+			this.dispatcher = new ProxyAgent(config.url);
+		} catch (error) {
+			const err = new Error(
+				`Invalid proxy URL: "${config.url}". The proxy URL must be an origin (scheme + host + port) with no path, query, or fragment.`,
+			);
+			(err as Error & { cause: unknown }).cause = error;
+			throw err;
 		}
 	}
 
@@ -56,9 +67,7 @@ export default class HttpSender {
 
 		if (request.payload) {
 			init.body =
-				typeof request.payload === "string"
-					? request.payload
-					: JSON.stringify(request.payload);
+				typeof request.payload === "string" ? request.payload : JSON.stringify(request.payload);
 		}
 
 		if (this.dispatcher) {
@@ -69,6 +78,8 @@ export default class HttpSender {
 	}
 
 	async send(request: SmartyRequest): Promise<SmartyResponse> {
+		if (this.proxyReady) await this.proxyReady;
+
 		const fetchFn = this.resolveFetch();
 		const { url, init } = this.buildFetchArgs(request);
 
@@ -77,8 +88,9 @@ export default class HttpSender {
 			console.log("\r\n*******************************************\r\n");
 		}
 
+		let response: globalThis.Response | undefined;
 		try {
-			const response = await fetchFn(url, init);
+			response = await fetchFn(url, init);
 			const data = await this.parseResponseBody(response);
 			const headers = Object.fromEntries(response.headers.entries());
 
@@ -96,7 +108,16 @@ export default class HttpSender {
 			return smartyResponse;
 		} catch (error) {
 			if (error && typeof error === "object" && "statusCode" in error) throw error;
-			throw buildSmartyResponse(undefined, error instanceof Error ? error : new Error(String(error)));
+
+			const wrappedError = error instanceof Error ? error : new Error(String(error));
+			if (response) {
+				throw buildSmartyResponse({
+					status: response.status,
+					error: wrappedError,
+					headers: Object.fromEntries(response.headers.entries()),
+				});
+			}
+			throw buildSmartyResponse(undefined, wrappedError);
 		}
 	}
 

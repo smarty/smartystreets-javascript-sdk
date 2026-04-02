@@ -97,18 +97,19 @@ describe("A fetch-based HTTP sender", function () {
 		expect(init.signal).to.be.an.instanceOf(AbortSignal);
 	});
 
-	it("includes a dispatcher when proxy config is provided.", function () {
+	it("includes a dispatcher when proxy config is provided.", async function () {
 		const request = new Request();
 		request.baseUrl = "https://example.com/api";
-		const sender = new HttpSender(
-			10000,
-			{ url: "http://proxy:8080" },
-			false,
-			mockFetchResponse(200),
-		);
-		const { init } = sender.buildFetchArgs(request);
+		let capturedInit: RequestInit | undefined;
+		const capturingFetch: typeof fetch = async (_url, init) => {
+			capturedInit = init;
+			return new Response(JSON.stringify(null), { status: 200, headers: { "content-type": "application/json" } });
+		};
+		const sender = new HttpSender(10000, { url: "http://proxy:8080" }, false, capturingFetch);
 
-		expect((init as Record<string, unknown>)["dispatcher"]).to.not.be.undefined;
+		await sender.send(request);
+
+		expect((capturedInit as Record<string, unknown>)["dispatcher"]).to.not.be.undefined;
 	});
 
 	it("resolves with a SmartyResponse on a 2xx response.", async function () {
