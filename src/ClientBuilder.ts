@@ -93,18 +93,30 @@ export default class ClientBuilder {
 		return this;
 	}
 
+	withProxy(url: string): ClientBuilder;
 	withProxy(
 		host: string,
 		port: number,
 		protocol: string,
 		username?: string,
 		password?: string,
+	): ClientBuilder;
+	withProxy(
+		hostOrUrl: string,
+		port?: number,
+		protocol?: string,
+		username?: string,
+		password?: string,
 	): ClientBuilder {
-		let auth = "";
-		if (username && password) {
-			auth = `${encodeURIComponent(username)}:${encodeURIComponent(password)}@`;
+		if (port === undefined) {
+			this.proxy = { url: hostOrUrl };
+		} else {
+			let auth = "";
+			if (username && password) {
+				auth = `${encodeURIComponent(username)}:${encodeURIComponent(password)}@`;
+			}
+			this.proxy = { url: `${protocol}://${auth}${hostOrUrl}:${port}` };
 		}
-		this.proxy = { url: `${protocol}://${auth}${host}:${port}` };
 
 		return this;
 	}

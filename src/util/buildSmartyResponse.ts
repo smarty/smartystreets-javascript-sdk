@@ -4,7 +4,7 @@ interface HttpResponse {
 	status: number;
 	data?: object[] | object | string | null | undefined;
 	error?: any;
-	headers?: Record<string, any> | undefined;
+	headers?: Record<string, string> | undefined;
 }
 
 export function buildSmartyResponse(response?: HttpResponse, error?: Error): Response {

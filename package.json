@@ -45,6 +45,9 @@
   "test": "mocha --require tsx/cjs 'tests/**/*.ts'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
+ "engines": {
+  "node": ">=18.0.0"
+ },
  "license": "Apache-2.0",
  "repository": {
   "type": "git",

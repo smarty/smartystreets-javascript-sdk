@@ -43,11 +43,11 @@ export class MockSenderWithResponse {
 
 export class MockSenderWithStatusCodesAndHeaders {
 	statusCodes: number[];
-	headers: Record<string, unknown> | undefined;
+	headers: Record<string, string> | undefined;
 	error: string | undefined;
 	currentStatusCodeIndex: number;
 
-	constructor(statusCodes: number[], headers?: Record<string, unknown>, error?: string) {
+	constructor(statusCodes: number[], headers?: Record<string, string>, error?: string) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;

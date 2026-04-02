@@ -37,7 +37,7 @@ export interface BaseLookup {
 
 export interface MockSenderInstance extends Sender {
 	statusCodes: number[];
-	headers?: Record<string, unknown> | undefined;
+	headers?: Record<string, string> | undefined;
 	error?: string | undefined;
 	currentStatusCodeIndex: number;
 }

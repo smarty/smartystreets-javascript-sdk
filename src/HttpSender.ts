@@ -61,6 +61,8 @@ export default class HttpSender {
 					: JSON.stringify(request.payload);
 		}
 
+		// "dispatcher" is an undici-specific extension not present in the standard
+		// RequestInit type, so we must bypass the type system to attach it.
 		if (this.dispatcher) {
 			(init as Record<string, unknown>)["dispatcher"] = this.dispatcher;
 		}
@@ -115,8 +117,10 @@ export default class HttpSender {
 		if (contentType.includes("application/json")) {
 			try {
 				return await response.json();
-			} catch {
-				// Malformed JSON from the server — return null rather than surfacing a parse error.
+			} catch (error) {
+				if (this.debug) {
+					console.log("Failed to parse JSON response:", error);
+				}
 				return null;
 			}
 		}

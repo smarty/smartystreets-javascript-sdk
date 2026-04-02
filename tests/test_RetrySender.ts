@@ -7,7 +7,7 @@ import type { Sender, Sleeper, MockSenderInstance, MockSleeperInstance } from ".
 
 class CompatibleMockSender implements MockSenderInstance {
 	statusCodes: number[];
-	headers?: Record<string, unknown> | undefined;
+	headers?: Record<string, string> | undefined;
 	error?: string | undefined;
 	currentStatusCodeIndex: number;
 	private mockSender: {
@@ -15,7 +15,7 @@ class CompatibleMockSender implements MockSenderInstance {
 		currentStatusCodeIndex: number;
 	};
 
-	constructor(statusCodes: number[], headers?: Record<string, unknown>, error?: string) {
+	constructor(statusCodes: number[], headers?: Record<string, string>, error?: string) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;
@@ -111,7 +111,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test rate limit error return", async function () {
-		let inner = new CompatibleMockSender([429], { "Retry-After": 7 });
+		let inner = new CompatibleMockSender([429], { "Retry-After": "7" });
 		const sleeper = new CompatibleMockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);
