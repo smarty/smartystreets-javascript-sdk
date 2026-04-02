@@ -6,7 +6,7 @@ type FetchFunction = typeof fetch;
 export default class HttpSender {
 	private timeout: number;
 	private debug: boolean;
-	private fetchFn: FetchFunction;
+	private fetchFn: FetchFunction | undefined;
 	private dispatcher: unknown;
 
 	constructor(
@@ -17,11 +17,20 @@ export default class HttpSender {
 	) {
 		this.timeout = timeout;
 		this.debug = debug;
-		this.fetchFn = fetchFn ?? globalThis.fetch.bind(globalThis);
+		this.fetchFn = fetchFn;
 
 		if (proxyConfig) {
 			this.initProxy(proxyConfig);
 		}
+	}
+
+	private resolveFetch(): FetchFunction {
+		if (this.fetchFn) return this.fetchFn;
+		if (typeof globalThis.fetch === "function") {
+			this.fetchFn = globalThis.fetch.bind(globalThis);
+			return this.fetchFn;
+		}
+		throw new Error("No fetch implementation available. Provide one via the fetchFn constructor parameter.");
 	}
 
 	private initProxy(config: ProxyConfig): void {
@@ -60,6 +69,7 @@ export default class HttpSender {
 	}
 
 	async send(request: SmartyRequest): Promise<SmartyResponse> {
+		const fetchFn = this.resolveFetch();
 		const { url, init } = this.buildFetchArgs(request);
 
 		if (this.debug) {
@@ -68,7 +78,7 @@ export default class HttpSender {
 		}
 
 		try {
-			const response = await this.fetchFn(url, init);
+			const response = await fetchFn(url, init);
 			const data = await this.parseResponseBody(response);
 			const headers = Object.fromEntries(response.headers.entries());
 
@@ -81,12 +91,12 @@ export default class HttpSender {
 
 			const smartyResponse = buildSmartyResponse({ status: response.status, data, headers });
 
-			if (smartyResponse.statusCode >= 400) return Promise.reject(smartyResponse);
+			if (smartyResponse.statusCode >= 400) throw smartyResponse;
 
 			return smartyResponse;
 		} catch (error) {
 			if (error && typeof error === "object" && "statusCode" in error) throw error;
-			return Promise.reject(buildSmartyResponse(undefined, error as Error));
+			throw buildSmartyResponse(undefined, error as Error);
 		}
 	}
 
@@ -106,6 +116,7 @@ export default class HttpSender {
 			try {
 				return await response.json();
 			} catch {
+				// Malformed JSON from the server — return null rather than surfacing a parse error.
 				return null;
 			}
 		}
