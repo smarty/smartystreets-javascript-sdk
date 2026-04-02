@@ -18,7 +18,7 @@ export default class RetrySender {
 	}
 
 	async send(request: Request): Promise<Response> {
-		let response = await this.inner.send(request);
+		let response = await this.trySend(request);
 
 		for (let i = 0; i < this.maxRetries; i++) {
 			const statusCode = response.statusCode;
@@ -38,10 +38,21 @@ export default class RetrySender {
 			} else {
 				await this.backoff(i);
 			}
-			response = await this.inner.send(request);
+			response = await this.trySend(request);
 		}
 
 		return response;
+	}
+
+	private async trySend(request: Request): Promise<Response> {
+		try {
+			return await this.inner.send(request);
+		} catch (error) {
+			if (error && typeof error === "object" && "statusCode" in error) {
+				return error as Response;
+			}
+			throw error;
+		}
 	}
 
 	private async backoff(attempt: number): Promise<void> {

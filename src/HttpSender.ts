@@ -1,5 +1,5 @@
 import { buildSmartyResponse } from "./util/buildSmartyResponse.js";
-import { Request as SmartyRequest, Response as SmartyResponse, ProxyConfig } from "./types.js";
+import { Request as SmartyRequest, Response as SmartyResponse } from "./types.js";
 
 type FetchFunction = typeof fetch;
 
@@ -7,11 +7,11 @@ export default class HttpSender {
 	private timeout: number;
 	private debug: boolean;
 	private fetchFn: FetchFunction | undefined;
-	private dispatcher: unknown;
+	private dispatcher: import("undici").Dispatcher | undefined;
 
 	constructor(
 		timeout: number = 10000,
-		proxyConfig?: ProxyConfig,
+		proxyConfig?: { url: string },
 		debug: boolean = false,
 		fetchFn?: FetchFunction,
 	) {
@@ -33,7 +33,7 @@ export default class HttpSender {
 		throw new Error("No fetch implementation available. Provide one via the fetchFn constructor parameter.");
 	}
 
-	private initProxy(config: ProxyConfig): void {
+	private initProxy(config: { url: string }): void {
 		try {
 			// eslint-disable-next-line @typescript-eslint/no-require-imports
 			const { ProxyAgent } = require("undici");
@@ -61,8 +61,6 @@ export default class HttpSender {
 					: JSON.stringify(request.payload);
 		}
 
-		// "dispatcher" is an undici-specific extension not present in the standard
-		// RequestInit type, so we must bypass the type system to attach it.
 		if (this.dispatcher) {
 			(init as Record<string, unknown>)["dispatcher"] = this.dispatcher;
 		}

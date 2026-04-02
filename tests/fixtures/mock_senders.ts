@@ -62,6 +62,7 @@ export class MockSenderWithStatusCodesAndHeaders {
 		};
 		const response = buildSmartyResponse(mockResponse);
 		this.currentStatusCodeIndex += 1;
+		if (response.statusCode >= 400) throw response;
 		return response;
 	}
 }
