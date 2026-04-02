@@ -9,7 +9,7 @@ export interface Request {
 export interface Response {
 	statusCode: number;
 	payload: object[] | object | string | null;
-	error: Error | string | null;
+	error: Error | null;
 	headers: Record<string, string>;
 }
 

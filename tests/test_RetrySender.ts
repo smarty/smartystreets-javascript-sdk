@@ -102,6 +102,7 @@ describe("Retry Sender tests", function () {
 
 		const response = await sendWithRetry(10, inner, sleeper);
 
-		expect(response.error).to.equal("Big Bad");
+		expect(response.error).to.be.an.instanceOf(Error);
+		expect(response.error!.message).to.equal("Big Bad");
 	});
 });

@@ -96,11 +96,14 @@ export default class HttpSender {
 			return smartyResponse;
 		} catch (error) {
 			if (error && typeof error === "object" && "statusCode" in error) throw error;
-			throw buildSmartyResponse(undefined, error as Error);
+			throw buildSmartyResponse(undefined, error instanceof Error ? error : new Error(String(error)));
 		}
 	}
 
 	private buildUrl(request: SmartyRequest): string {
+		if (!request.baseUrl || !/^https?:\/\//i.test(request.baseUrl)) {
+			throw new Error(`Invalid baseUrl: "${request.baseUrl}". Expected an absolute HTTP(S) URL.`);
+		}
 		const url = new URL(request.baseUrl);
 		for (const [key, value] of Object.entries(request.parameters)) {
 			url.searchParams.append(key, String(value));
