@@ -22,8 +22,7 @@ import UsReverseGeoClient from "./us_reverse_geo/Client.js";
 import InternationalAddressAutocompleteClient from "./international_address_autocomplete/Client.js";
 import UsEnrichmentClient from "./us_enrichment/Client.js";
 import InternationalPostalCodeClient from "./international_postal_code/Client.js";
-import { Sender } from "./types.js";
-import { AxiosProxyConfig } from "axios";
+import { ProxyConfig, Sender } from "./types.js";
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
@@ -44,7 +43,7 @@ export default class ClientBuilder {
 	private maxRetries: number;
 	private maxTimeout: number;
 	private baseUrl: string | undefined;
-	private proxy: AxiosProxyConfig | undefined;
+	private proxy: ProxyConfig | undefined;
 	private customHeaders: Record<string, string>;
 	private appendHeaders: Record<string, AppendHeader>;
 	private debug: boolean | undefined;
@@ -101,18 +100,11 @@ export default class ClientBuilder {
 		username?: string,
 		password?: string,
 	): ClientBuilder {
-		this.proxy = {
-			host: host,
-			port: port,
-			protocol: protocol,
-		};
-
+		let auth = "";
 		if (username && password) {
-			this.proxy.auth = {
-				username: username,
-				password: password,
-			};
+			auth = `${encodeURIComponent(username)}:${encodeURIComponent(password)}@`;
 		}
+		this.proxy = { url: `${protocol}://${auth}${host}:${port}` };
 
 		return this;
 	}

@@ -25,6 +25,10 @@ export interface Signer {
 	sign(request: Request): void;
 }
 
+export interface ProxyConfig {
+	url: string;
+}
+
 export interface BaseLookup {
 	inputId?: string | number | undefined;
 	customParameters: Record<string, string>;

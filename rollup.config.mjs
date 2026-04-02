@@ -7,7 +7,7 @@ import typescript from "@rollup/plugin-typescript";
 
 export default {
 	input: "index.ts",
-	external: ["axios", "axios-retry"],
+	external: ["undici"],
 	output: [
 		{
 			dir: "dist",

@@ -32,7 +32,7 @@ describe("ClientBuilder", function () {
 
 	it("throws when withSender() is combined with withProxy().", function () {
 		expect(() =>
-			new ClientBuilder(credentials).withSender({ send: async () => ({ statusCode: 200, payload: [], error: null, headers: {} }) }).withProxy({ host: "localhost", port: 8080 }).buildUsStreetApiClient()
+			new ClientBuilder(credentials).withSender({ send: async () => ({ statusCode: 200, payload: [], error: null, headers: {} }) }).withProxy("localhost", 8080, "http").buildUsStreetApiClient()
 		).to.throw("withSender() cannot be combined with: withProxy()");
 	});
 
