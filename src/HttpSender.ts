@@ -12,7 +12,7 @@ export default class HttpSender {
 	constructor(
 		timeout: number = 10000,
 		proxyConfig?: { url: string },
-		debug: boolean = false,
+		debug = false,
 		fetchFn?: FetchFunction,
 	) {
 		this.timeout = timeout;

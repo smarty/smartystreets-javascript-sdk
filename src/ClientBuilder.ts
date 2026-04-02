@@ -46,7 +46,7 @@ export default class ClientBuilder {
 	private proxy: { url: string } | undefined;
 	private customHeaders: Record<string, string>;
 	private appendHeaders: Record<string, AppendHeader>;
-	private debug: boolean | undefined;
+	private debug: boolean;
 	private licenses: string[];
 	private customQueries: Map<string, string>;
 
@@ -68,7 +68,7 @@ export default class ClientBuilder {
 		this.proxy = undefined;
 		this.customHeaders = {};
 		this.appendHeaders = {};
-		this.debug = undefined;
+		this.debug = false;
 		this.licenses = [];
 		this.customQueries = new Map();
 	}
@@ -187,7 +187,7 @@ export default class ClientBuilder {
 			const conflicts: string[] = [];
 			if (this.maxTimeout !== 10000) conflicts.push("withMaxTimeout()");
 			if (this.proxy !== undefined) conflicts.push("withProxy()");
-			if (this.debug !== undefined) conflicts.push("withDebug()");
+			if (this.debug) conflicts.push("withDebug()");
 			if (conflicts.length > 0)
 				throw new Error(`withSender() cannot be combined with: ${conflicts.join(", ")}. These options only apply to the built-in HTTP transport.`);
 		}

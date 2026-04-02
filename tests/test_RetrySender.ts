@@ -79,7 +79,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test rate limit error return", async function () {
-		const inner = new MockSenderWithStatusCodesAndHeaders([429], { "Retry-After": "7" });
+		const inner = new MockSenderWithStatusCodesAndHeaders([429], { "retry-after": "7" });
 		const sleeper = new MockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);
@@ -88,7 +88,7 @@ describe("Retry Sender tests", function () {
 	});
 
 	it("test retry after invalid value", async function () {
-		const inner = new MockSenderWithStatusCodesAndHeaders([429], { "Retry-After": "a" });
+		const inner = new MockSenderWithStatusCodesAndHeaders([429], { "retry-after": "a" });
 		const sleeper = new MockSleeper();
 
 		await sendWithRetry(10, inner, sleeper);

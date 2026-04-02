@@ -29,7 +29,7 @@ export default class RetrySender {
 			if (statusCode === this.statusTooManyRequests) {
 				let secondsToBackoff = 10;
 				if (response.headers) {
-					const retryAfterHeader = response.headers["Retry-After"];
+					const retryAfterHeader = response.headers["retry-after"];
 					if (Number.isInteger(Number(retryAfterHeader))) {
 						secondsToBackoff = Number(retryAfterHeader);
 					}
