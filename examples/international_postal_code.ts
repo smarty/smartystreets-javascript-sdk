@@ -1,4 +1,8 @@
-import { ClientBuilder, BasicAuthCredentials, LookupInternationalPostalCode } from "smartystreets-javascript-sdk";
+import {
+	ClientBuilder,
+	BasicAuthCredentials,
+	LookupInternationalPostalCode,
+} from "smartystreets-javascript-sdk";
 
 // for client-side requests (browser/mobile), use this code:
 // import { SharedCredentials } from "smartystreets-javascript-sdk";
@@ -43,7 +47,10 @@ function displayResult(lookup: LookupInternationalPostalCode, message: string): 
 	console.log("\n");
 }
 
-async function handleResponse(lookup: LookupInternationalPostalCode, lookupType: string): Promise<void> {
+async function handleResponse(
+	lookup: LookupInternationalPostalCode,
+	lookupType: string,
+): Promise<void> {
 	try {
 		const result = await client.send(lookup);
 		displayResult(result, lookupType);
@@ -59,7 +66,13 @@ async function main(): Promise<void> {
 	// lookup1.addCustomParameter("input_id", 1234);
 
 	// Lookup by locality, administrative area, and country
-	const lookup2 = new LookupInternationalPostalCode("Brazil", undefined, "SP", "Sao Paulo", "ID-8675309");
+	const lookup2 = new LookupInternationalPostalCode(
+		"Brazil",
+		undefined,
+		"SP",
+		"Sao Paulo",
+		"ID-8675309",
+	);
 
 	await handleResponse(lookup1, "Postal code lookup");
 	await handleResponse(lookup2, "Locality and administrative area lookup");

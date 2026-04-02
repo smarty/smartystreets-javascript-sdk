@@ -1,4 +1,8 @@
-import { ClientBuilder, BasicAuthCredentials, LookupInternationalAddressAutocomplete } from "smartystreets-javascript-sdk";
+import {
+	ClientBuilder,
+	BasicAuthCredentials,
+	LookupInternationalAddressAutocomplete,
+} from "smartystreets-javascript-sdk";
 
 // for client-side requests (browser/mobile), use this code:
 // import { SharedCredentials } from "smartystreets-javascript-sdk";
@@ -41,7 +45,10 @@ function logSuggestions(response: LookupInternationalAddressAutocomplete, messag
 	console.log("\n");
 }
 
-async function handleRequest(lookup: LookupInternationalAddressAutocomplete, lookupType: string): Promise<void> {
+async function handleRequest(
+	lookup: LookupInternationalAddressAutocomplete,
+	lookupType: string,
+): Promise<void> {
 	try {
 		const results = await client.send(lookup);
 		logSuggestions(results, lookupType);

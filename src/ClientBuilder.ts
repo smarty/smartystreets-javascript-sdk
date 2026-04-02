@@ -189,7 +189,9 @@ export default class ClientBuilder {
 			if (this.proxy !== undefined) conflicts.push("withProxy()");
 			if (this.debug) conflicts.push("withDebug()");
 			if (conflicts.length > 0)
-				throw new Error(`withSender() cannot be combined with: ${conflicts.join(", ")}. These options only apply to the built-in HTTP transport.`);
+				throw new Error(
+					`withSender() cannot be combined with: ${conflicts.join(", ")}. These options only apply to the built-in HTTP transport.`,
+				);
 		}
 		const httpSender = this.httpSender ?? new HttpSender(this.maxTimeout, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);

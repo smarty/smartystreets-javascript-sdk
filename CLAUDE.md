@@ -13,6 +13,7 @@ npx prettier --write .  # Format all files (respects .prettierignore)
 ```
 
 Makefile targets (used by CI):
+
 ```bash
 make test          # fmt + test (installs deps if needed)
 make build         # Rollup build
