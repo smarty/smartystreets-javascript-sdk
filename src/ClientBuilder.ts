@@ -111,6 +111,11 @@ export default class ClientBuilder {
 		if (port === undefined) {
 			this.proxy = { url: hostOrUrl };
 		} else {
+			if (!protocol) {
+				throw new Error(
+					'withProxy() requires a protocol (e.g. "http" or "https") when using host/port arguments.',
+				);
+			}
 			let auth = "";
 			if (username && password) {
 				auth = `${encodeURIComponent(username)}:${encodeURIComponent(password)}@`;
