@@ -103,7 +103,10 @@ describe("A fetch-based HTTP sender", function () {
 		let capturedInit: RequestInit | undefined;
 		const capturingFetch: typeof fetch = async (_url, init) => {
 			capturedInit = init;
-			return new Response(JSON.stringify(null), { status: 200, headers: { "content-type": "application/json" } });
+			return new Response(JSON.stringify(null), {
+				status: 200,
+				headers: { "content-type": "application/json" },
+			});
 		};
 		const sender = new HttpSender(10000, { url: "http://proxy:8080" }, false, capturingFetch);
 
