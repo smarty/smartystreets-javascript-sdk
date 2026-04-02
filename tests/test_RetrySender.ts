@@ -43,12 +43,16 @@ describe("Retry Sender tests", function () {
 	it("test return response if retry limit exceeded", async function () {
 		const inner = new MockSenderWithStatusCodesAndHeaders([500, 500, 500, 500, 500]);
 		const sleeper = new MockSleeper();
-		const response = await sendWithRetry(4, inner, sleeper);
 
-		expect(response);
-		expect(inner.currentStatusCodeIndex).to.equal(5);
-		expect(response.statusCode).to.equal(500);
-		expect(sleeper.sleepDurations).to.deep.equal([0, 1, 2, 3]);
+		try {
+			await sendWithRetry(4, inner, sleeper);
+			expect.fail("Expected an error to be thrown");
+		} catch (error) {
+			const response = error as { statusCode: number; error: Error };
+			expect(inner.currentStatusCodeIndex).to.equal(5);
+			expect(response.statusCode).to.equal(500);
+			expect(sleeper.sleepDurations).to.deep.equal([0, 1, 2, 3]);
+		}
 	});
 
 	it("test backoff does not exceed max", async function () {
@@ -100,9 +104,13 @@ describe("Retry Sender tests", function () {
 		const inner = new MockSenderWithStatusCodesAndHeaders([429], undefined, "Big Bad");
 		const sleeper = new MockSleeper();
 
-		const response = await sendWithRetry(10, inner, sleeper);
-
-		expect(response.error).to.be.an.instanceOf(Error);
-		expect(response.error!.message).to.equal("Big Bad");
+		try {
+			await sendWithRetry(10, inner, sleeper);
+			expect.fail("Expected an error to be thrown");
+		} catch (error) {
+			const response = error as { statusCode: number; error: Error };
+			expect(response.error).to.be.an.instanceOf(Error);
+			expect(response.error.message).to.equal("Big Bad");
+		}
 	});
 });

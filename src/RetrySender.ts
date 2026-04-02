@@ -41,6 +41,8 @@ export default class RetrySender {
 			response = await this.trySend(request);
 		}
 
+		if (response.error || this.statusToRetry.includes(response.statusCode)) throw response;
+
 		return response;
 	}
 
