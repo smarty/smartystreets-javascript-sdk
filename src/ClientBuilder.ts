@@ -23,7 +23,6 @@ import InternationalAddressAutocompleteClient from "./international_address_auto
 import UsEnrichmentClient from "./us_enrichment/Client.js";
 import InternationalPostalCodeClient from "./international_postal_code/Client.js";
 import { Sender } from "./types.js";
-import { AxiosProxyConfig } from "axios";
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
@@ -44,10 +43,10 @@ export default class ClientBuilder {
 	private maxRetries: number;
 	private maxTimeout: number;
 	private baseUrl: string | undefined;
-	private proxy: AxiosProxyConfig | undefined;
+	private proxy: { url: string } | undefined;
 	private customHeaders: Record<string, string>;
 	private appendHeaders: Record<string, AppendHeader>;
-	private debug: boolean | undefined;
+	private debug: boolean;
 	private licenses: string[];
 	private customQueries: Map<string, string>;
 
@@ -69,7 +68,7 @@ export default class ClientBuilder {
 		this.proxy = undefined;
 		this.customHeaders = {};
 		this.appendHeaders = {};
-		this.debug = undefined;
+		this.debug = false;
 		this.licenses = [];
 		this.customQueries = new Map();
 	}
@@ -94,24 +93,34 @@ export default class ClientBuilder {
 		return this;
 	}
 
+	withProxy(url: string): ClientBuilder;
 	withProxy(
 		host: string,
 		port: number,
 		protocol: string,
 		username?: string,
 		password?: string,
+	): ClientBuilder;
+	withProxy(
+		hostOrUrl: string,
+		port?: number,
+		protocol?: string,
+		username?: string,
+		password?: string,
 	): ClientBuilder {
-		this.proxy = {
-			host: host,
-			port: port,
-			protocol: protocol,
-		};
-
-		if (username && password) {
-			this.proxy.auth = {
-				username: username,
-				password: password,
-			};
+		if (port === undefined) {
+			this.proxy = { url: hostOrUrl };
+		} else {
+			if (!protocol) {
+				throw new Error(
+					'withProxy() requires a protocol (e.g. "http" or "https") when using host/port arguments.',
+				);
+			}
+			let auth = "";
+			if (username && password) {
+				auth = `${encodeURIComponent(username)}:${encodeURIComponent(password)}@`;
+			}
+			this.proxy = { url: `${protocol}://${auth}${hostOrUrl}:${port}` };
 		}
 
 		return this;
@@ -183,9 +192,11 @@ export default class ClientBuilder {
 			const conflicts: string[] = [];
 			if (this.maxTimeout !== 10000) conflicts.push("withMaxTimeout()");
 			if (this.proxy !== undefined) conflicts.push("withProxy()");
-			if (this.debug !== undefined) conflicts.push("withDebug()");
+			if (this.debug) conflicts.push("withDebug()");
 			if (conflicts.length > 0)
-				throw new Error(`withSender() cannot be combined with: ${conflicts.join(", ")}. These options only apply to the built-in HTTP transport.`);
+				throw new Error(
+					`withSender() cannot be combined with: ${conflicts.join(", ")}. These options only apply to the built-in HTTP transport.`,
+				);
 		}
 		const httpSender = this.httpSender ?? new HttpSender(this.maxTimeout, this.proxy, this.debug);
 		const statusCodeSender = new StatusCodeSender(httpSender);

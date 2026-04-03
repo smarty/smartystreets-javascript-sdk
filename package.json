@@ -45,6 +45,9 @@
   "test": "mocha --require tsx/cjs 'tests/**/*.ts'"
  },
  "author": "Smarty SDK Team <support@smarty.com> (https://www.smarty.com)",
+ "engines": {
+  "node": ">=20.0.0"
+ },
  "license": "Apache-2.0",
  "repository": {
   "type": "git",
@@ -72,8 +75,9 @@
   "serialize-javascript": "^7.0.3"
  },
  "dependencies": {
-  "axios": "^1.13.2",
-  "axios-retry": "^4.5.0",
   "tslib": "^2.8.1"
+ },
+ "optionalDependencies": {
+  "undici": "^7.0.0"
  }
 }

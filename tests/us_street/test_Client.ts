@@ -220,8 +220,9 @@ describe("A US Street client", function () {
 
 		client.send(batch);
 
-		expect(mockSender.request.payload[0].match).to.equal("strict");
-		expect(mockSender.request.payload[1].match).to.equal("strict");
+		const payload1 = mockSender.request.payload as Record<string, unknown>[];
+		expect(payload1[0]["match"]).to.equal("strict");
+		expect(payload1[1]["match"]).to.equal("strict");
 	});
 
 	it("sends defaults in batch mode.", function () {
@@ -233,8 +234,9 @@ describe("A US Street client", function () {
 
 		client.send(batch);
 
-		expect(mockSender.request.payload[0].match).to.equal("enhanced");
-		expect(mockSender.request.payload[0].candidates).to.equal(5);
+		const payload2 = mockSender.request.payload as Record<string, unknown>[];
+		expect(payload2[0]["match"]).to.equal("enhanced");
+		expect(payload2[0]["candidates"]).to.equal(5);
 	});
 
 	it("doesn't send an empty batch.", function () {

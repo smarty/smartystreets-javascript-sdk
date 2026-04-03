@@ -30,14 +30,3 @@ export interface BaseLookup {
 	customParameters: Record<string, string>;
 	result: { inputIndex: number }[];
 }
-
-export interface MockSenderInstance extends Sender {
-	statusCodes: number[];
-	headers?: Record<string, unknown> | undefined;
-	error?: string | undefined;
-	currentStatusCodeIndex: number;
-}
-
-export interface MockSleeperInstance extends Sleeper {
-	sleepDurations: number[];
-}

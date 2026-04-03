@@ -1,69 +1,145 @@
-import Axios, { AxiosInstance, AxiosProxyConfig, AxiosRequestConfig } from "axios";
 import { buildSmartyResponse } from "./util/buildSmartyResponse.js";
 import { Request as SmartyRequest, Response as SmartyResponse } from "./types.js";
 
-export default class HttpSender {
-	private axiosInstance: AxiosInstance;
-	private timeout: number;
-	private proxyConfig: AxiosProxyConfig | undefined;
+type FetchFunction = typeof fetch;
 
-	constructor(timeout: number = 10000, proxyConfig?: AxiosProxyConfig, debug: boolean = false) {
-		this.axiosInstance = Axios.create();
+export default class HttpSender {
+	private timeout: number;
+	private debug: boolean;
+	private fetchFn: FetchFunction | undefined;
+	private dispatcher: import("undici").Dispatcher | undefined;
+	private proxyReady: Promise<void> | undefined;
+
+	constructor(
+		timeout: number = 10000,
+		proxyConfig?: { url: string },
+		debug = false,
+		fetchFn?: FetchFunction,
+	) {
 		this.timeout = timeout;
-		this.proxyConfig = proxyConfig;
-		if (debug) this.enableDebug();
+		this.debug = debug;
+		this.fetchFn = fetchFn;
+
+		if (proxyConfig) {
+			this.proxyReady = this.initProxy(proxyConfig);
+		}
 	}
 
-	buildRequestConfig(request: SmartyRequest): AxiosRequestConfig {
-		const config: AxiosRequestConfig = {
-			method: "GET",
-			timeout: this.timeout,
-			params: request.parameters,
+	private resolveFetch(): FetchFunction {
+		if (this.fetchFn) return this.fetchFn;
+		if (typeof globalThis.fetch === "function") {
+			this.fetchFn = globalThis.fetch.bind(globalThis);
+			return this.fetchFn;
+		}
+		throw new Error(
+			"No fetch implementation available. Provide one via the fetchFn constructor parameter.",
+		);
+	}
+
+	private async initProxy(config: { url: string }): Promise<void> {
+		let ProxyAgent: typeof import("undici").ProxyAgent;
+		try {
+			({ ProxyAgent } = await import("undici"));
+		} catch {
+			throw new Error(
+				"The 'undici' package is required for proxy support. Install it with: npm install undici",
+			);
+		}
+		try {
+			this.dispatcher = new ProxyAgent(config.url);
+		} catch (error) {
+			const err = new Error(
+				`Invalid proxy URL: "${config.url}". The proxy URL must be an origin (scheme + host + port) with no path, query, or fragment.`,
+			);
+			(err as Error & { cause: unknown }).cause = error;
+			throw err;
+		}
+	}
+
+	buildFetchArgs(request: SmartyRequest): { url: string; init: RequestInit } {
+		const url = this.buildUrl(request);
+
+		const init: RequestInit = {
+			method: request.payload ? "POST" : "GET",
 			headers: request.headers,
-			baseURL: request.baseUrl,
-			validateStatus: function (status: number) {
-				return status < 500;
-			},
+			signal: AbortSignal.timeout(this.timeout),
 		};
 
 		if (request.payload) {
-			config.method = "POST";
-			config.data = request.payload;
+			init.body =
+				typeof request.payload === "string" ? request.payload : JSON.stringify(request.payload);
 		}
 
-		if (this.proxyConfig) config.proxy = this.proxyConfig;
-		return config;
+		if (this.dispatcher) {
+			(init as Record<string, unknown>)["dispatcher"] = this.dispatcher;
+		}
+
+		return { url, init };
 	}
 
-	send(request: SmartyRequest): Promise<SmartyResponse> {
-		return new Promise((resolve, reject) => {
-			const requestConfig = this.buildRequestConfig(request);
+	async send(request: SmartyRequest): Promise<SmartyResponse> {
+		if (this.proxyReady) await this.proxyReady;
 
-			this.axiosInstance(requestConfig)
-				.then((response) => {
-					const smartyResponse = buildSmartyResponse(response);
+		const fetchFn = this.resolveFetch();
+		const { url, init } = this.buildFetchArgs(request);
 
-					if (smartyResponse.statusCode >= 400) return reject(smartyResponse);
-
-					resolve(smartyResponse);
-				})
-				.catch((error) => reject(buildSmartyResponse(undefined, error)));
-		});
-	}
-
-	private enableDebug(): void {
-		this.axiosInstance.interceptors.request.use((request) => {
-			console.log("Request:\r\n", request);
+		if (this.debug) {
+			console.log("Request:\r\n", { url, ...init });
 			console.log("\r\n*******************************************\r\n");
-			return request;
-		});
+		}
 
-		this.axiosInstance.interceptors.response.use((response) => {
-			console.log("Response:\r\n");
-			console.log("Status:", response.status, response.statusText);
-			console.log("Headers:", response.headers);
-			console.log("Data:", response.data);
-			return response;
-		});
+		let response: globalThis.Response | undefined;
+		try {
+			response = await fetchFn(url, init);
+			const data = await this.parseResponseBody(response);
+			const headers = Object.fromEntries(response.headers.entries());
+
+			if (this.debug) {
+				console.log("Response:\r\n");
+				console.log("Status:", response.status, response.statusText);
+				console.log("Headers:", headers);
+				console.log("Data:", data);
+			}
+
+			const smartyResponse = buildSmartyResponse({ status: response.status, data, headers });
+
+			if (smartyResponse.statusCode >= 400) throw smartyResponse;
+
+			return smartyResponse;
+		} catch (error) {
+			if (error && typeof error === "object" && "statusCode" in error) throw error;
+
+			const wrappedError = error instanceof Error ? error : new Error(String(error));
+			if (response) {
+				throw buildSmartyResponse({
+					status: response.status,
+					error: wrappedError,
+					headers: Object.fromEntries(response.headers.entries()),
+				});
+			}
+			throw buildSmartyResponse(undefined, wrappedError);
+		}
+	}
+
+	private buildUrl(request: SmartyRequest): string {
+		if (!request.baseUrl || !/^https?:\/\//i.test(request.baseUrl)) {
+			throw new Error(`Invalid baseUrl: "${request.baseUrl}". Expected an absolute HTTP(S) URL.`);
+		}
+		const url = new URL(request.baseUrl);
+		for (const [key, value] of Object.entries(request.parameters)) {
+			url.searchParams.append(key, String(value));
+		}
+		return url.toString();
+	}
+
+	private async parseResponseBody(
+		response: globalThis.Response,
+	): Promise<object[] | object | string | null> {
+		const contentType = response.headers.get("content-type") ?? "";
+		if (contentType.includes("application/json")) {
+			return await response.json();
+		}
+		const text = await response.text();
+		return text || null;
 	}
 }

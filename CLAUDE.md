@@ -13,6 +13,7 @@ npx prettier --write .  # Format all files (respects .prettierignore)
 ```
 
 Makefile targets (used by CI):
+
 ```bash
 make test          # fmt + test (installs deps if needed)
 make build         # Rollup build
@@ -26,7 +27,7 @@ To run a single test file:
 npx mocha --require tsx/cjs tests/test_RetrySender.ts
 ```
 
-Build outputs dual formats via Rollup: `dist/cjs/` (CommonJS), `dist/esm/` (ESM), and `dist/types/` (declarations). Rollup preserves module structure (`preserveModules: true`). Axios and axios-retry are external dependencies (not bundled).
+Build outputs dual formats via Rollup: `dist/cjs/` (CommonJS), `dist/esm/` (ESM), and `dist/types/` (declarations). Rollup preserves module structure (`preserveModules: true`). `undici` is the only external dependency (not bundled).
 
 ## Architecture
 
@@ -41,7 +42,7 @@ CustomQuerySender → LicenseSender → BaseUrlSender → CustomHeaderSender
 → AgentSender → RetrySender → SigningSender → StatusCodeSender → HttpSender
 ```
 
-Each sender adds specific functionality (authentication, retries, headers, etc.). The `HttpSender` at the end uses Axios for actual HTTP transport.
+Each sender adds specific functionality (authentication, retries, headers, etc.). The `HttpSender` at the end uses the Fetch API for HTTP transport (with optional `undici` `ProxyAgent` for proxy support in Node.js).
 
 All senders implement the `Sender` interface from `src/types.ts`, which also defines the core `Request` and `Response` contracts that flow through the chain.
 

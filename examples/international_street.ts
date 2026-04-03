@@ -1,4 +1,8 @@
-import { ClientBuilder, BasicAuthCredentials, LookupInternationalStreet } from "smartystreets-javascript-sdk";
+import {
+	ClientBuilder,
+	BasicAuthCredentials,
+	LookupInternationalStreet,
+} from "smartystreets-javascript-sdk";
 
 // for client-side requests (browser/mobile), use this code:
 // import { SharedCredentials } from "smartystreets-javascript-sdk";

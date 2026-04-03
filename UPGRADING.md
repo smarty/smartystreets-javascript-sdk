@@ -88,11 +88,11 @@ console.log(response.lookups[0].result);
 
 ## Import Patterns
 
-| Style | Syntax |
-| --- | --- |
-| ESM default import | `import SmartySDK from "smartystreets-javascript-sdk"` |
-| ESM named imports | `import { core, usStreet } from "smartystreets-javascript-sdk"` |
-| CommonJS | `const SmartySDK = require("smartystreets-javascript-sdk")` |
+| Style                  | Syntax                                                              |
+| ---------------------- | ------------------------------------------------------------------- |
+| ESM default import     | `import SmartySDK from "smartystreets-javascript-sdk"`              |
+| ESM named imports      | `import { core, usStreet } from "smartystreets-javascript-sdk"`     |
+| CommonJS               | `const SmartySDK = require("smartystreets-javascript-sdk")`         |
 | TypeScript type import | `import type { MatchStrategy } from "smartystreets-javascript-sdk"` |
 
 ## FAQ

@@ -20,6 +20,10 @@ export default class StatusCodeSender {
 				.then(resolve)
 				.catch((error: Response) => {
 					switch (error.statusCode) {
+						case 0:
+							error.error = error.error ?? new DefaultError("Network error: unable to connect.");
+							break;
+
 						case 500:
 							error.error = new InternalServerError();
 							break;
@@ -36,7 +40,8 @@ export default class StatusCodeSender {
 							const payload = error.payload as {
 								errors?: { message?: string }[];
 							} | null;
-							error.error = new DefaultError(payload?.errors?.[0]?.message);
+							const message = payload?.errors?.[0]?.message;
+							error.error = new DefaultError(message ?? error.error?.message);
 						}
 					}
 					reject(error);

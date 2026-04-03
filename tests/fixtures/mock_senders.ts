@@ -43,18 +43,18 @@ export class MockSenderWithResponse {
 
 export class MockSenderWithStatusCodesAndHeaders {
 	statusCodes: number[];
-	headers: Record<string, unknown> | undefined;
+	headers: Record<string, string> | undefined;
 	error: string | undefined;
 	currentStatusCodeIndex: number;
 
-	constructor(statusCodes: number[], headers?: Record<string, unknown>, error?: string) {
+	constructor(statusCodes: number[], headers?: Record<string, string>, error?: string) {
 		this.statusCodes = statusCodes;
 		this.headers = headers;
 		this.error = error;
 		this.currentStatusCodeIndex = 0;
 	}
 
-	send(_request: IRequest) {
+	async send(_request: IRequest): Promise<IResponse> {
 		const mockResponse = {
 			status: this.statusCodes[this.currentStatusCodeIndex],
 			headers: this.headers,
@@ -62,6 +62,7 @@ export class MockSenderWithStatusCodesAndHeaders {
 		};
 		const response = buildSmartyResponse(mockResponse);
 		this.currentStatusCodeIndex += 1;
+		if (response.statusCode >= 400) throw response;
 		return response;
 	}
 }
