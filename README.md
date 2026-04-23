@@ -69,6 +69,60 @@ Three credential types are available:
 - **`SharedCredentials(key)`** — Client-side (browser) authentication using an embedded key. Does not support batch (POST) requests.
 - **`BasicAuthCredentials(authId, authToken)`** — HTTP Basic Auth.
 
+## Browser Usage
+
+The SDK works in modern browsers out of the box — it uses the native `fetch` API for transport.
+
+### Credentials
+
+Use `SharedCredentials` with an embedded key registered to your website's host:
+
+```javascript
+const credentials = new SmartySDK.core.SharedCredentials("YOUR_EMBEDDED_KEY");
+const client = new SmartySDK.core.ClientBuilder(credentials).buildUsStreetApiClient();
+```
+
+Note that `SharedCredentials` does not support batch (POST) requests — send one lookup at a time.
+
+### Features not available in the browser
+
+- **`withProxy()`** is Node-only. It relies on `undici`'s `ProxyAgent`, which uses Node internals. Browsers route requests through the user's network configuration, so a proxy option wouldn't apply anyway.
+- **Batch requests** require `StaticCredentials` or `BasicAuthCredentials`, which should not be used in the browser (they'd expose your auth-token to end users).
+
+### Bundler configuration
+
+`undici` is an `optionalDependencies` entry and is only imported dynamically when `withProxy()` is called. Some bundlers still statically analyze the dynamic `import("undici")` call and emit a warning or try to resolve it. If that happens, tell your bundler to ignore or externalize `undici`:
+
+**webpack**
+
+```javascript
+// webpack.config.js
+module.exports = {
+  resolve: {
+    fallback: { undici: false },
+  },
+};
+```
+
+**Vite / Rollup**
+
+```javascript
+// vite.config.js
+export default {
+  build: {
+    rollupOptions: {
+      external: ["undici"],
+    },
+  },
+};
+```
+
+**esbuild**
+
+```bash
+esbuild app.js --bundle --external:undici
+```
+
 ## Common Patterns
 
 ### Batch Requests
