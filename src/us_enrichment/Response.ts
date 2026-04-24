@@ -1,5 +1,6 @@
 export interface FinancialHistory {
 	codeTitleCompany: string | undefined;
+	documentTypeDescription: string | undefined;
 	instrumentDate: string | undefined;
 	interestRateType2: string | undefined;
 	lenderAddress: string | undefined;
@@ -47,6 +48,7 @@ export interface FinancialHistory {
 
 interface RawFinancialHistory {
 	code_title_company?: string;
+	document_type_description?: string;
 	instrument_date?: string;
 	interest_rate_type_2?: string;
 	lender_address?: string;
@@ -517,7 +519,7 @@ interface RawEnrichmentAttributes {
 	contact_crrt?: string;
 	contact_full_address?: string;
 	contact_house_number?: string;
-	contact_main_info_format?: string;
+	contact_mail_info_format?: string;
 	contact_mail_info_privacy?: string;
 	contact_mailing_county?: string;
 	contact_mailing_fips?: string;
@@ -829,175 +831,6 @@ interface RawEnrichmentResponse {
 	attributes?: RawEnrichmentAttributes;
 }
 
-export interface FinancialAttributes {
-	assessedImprovementPercent: string | undefined;
-	assessedImprovementValue: string | undefined;
-	assessedLandValue: string | undefined;
-	assessedValue: string | undefined;
-	assessorLastUpdate: string | undefined;
-	assessorTaxrollUpdate: string | undefined;
-	contactCity: string | undefined;
-	contactCrrt: string | undefined;
-	contactFullAddress: string | undefined;
-	contactHouseNumber: string | undefined;
-	contactMailInfoFormat: string | undefined;
-	contactMailInfoPrivacy: string | undefined;
-	contactMailingCounty: string | undefined;
-	contactMailingFips: string | undefined;
-	contactPostDirection: string | undefined;
-	contactPreDirection: string | undefined;
-	contactState: string | undefined;
-	contactStreetName: string | undefined;
-	contactSuffix: string | undefined;
-	contactUnitDesignator: string | undefined;
-	contactValue: string | undefined;
-	contactZip: string | undefined;
-	contactZip4: string | undefined;
-	deedDocumentPage: string | undefined;
-	deedDocumentBook: string | undefined;
-	deedDocumentNumber: string | undefined;
-	deedOwnerFirstName: string | undefined;
-	deedOwnerFirstName2: string | undefined;
-	deedOwnerFirstName3: string | undefined;
-	deedOwnerFirstName4: string | undefined;
-	deedOwnerFullName: string | undefined;
-	deedOwnerFullName2: string | undefined;
-	deedOwnerFullName3: string | undefined;
-	deedOwnerFullName4: string | undefined;
-	deedOwnerLastName: string | undefined;
-	deedOwnerLastName2: string | undefined;
-	deedOwnerLastName3: string | undefined;
-	deedOwnerLastName4: string | undefined;
-	deedOwnerMiddleName: string | undefined;
-	deedOwnerMiddleName2: string | undefined;
-	deedOwnerMiddleName3: string | undefined;
-	deedOwnerMiddleName4: string | undefined;
-	deedOwnerSuffix: string | undefined;
-	deedOwnerSuffix2: string | undefined;
-	deedOwnerSuffix3: string | undefined;
-	deedOwnerSuffix4: string | undefined;
-	deedSaleDate: string | undefined;
-	deedSalePrice: string | undefined;
-	deedTransactionId: string | undefined;
-	disabledTaxExemption: string | undefined;
-	homeownerTaxExemption: string | undefined;
-	marketImprovementPercent: string | undefined;
-	marketImprovementValue: string | undefined;
-	marketLandValue: string | undefined;
-	marketValueYear: string | undefined;
-	matchType: string | undefined;
-	otherTaxExemption: string | undefined;
-	ownershipTransferDate: string | undefined;
-	ownershipTransferDocNumber: string | undefined;
-	ownershipTransferTransactionId: string | undefined;
-	ownershipType: string | undefined;
-	ownershipType2: string | undefined;
-	previousAssessedValue: string | undefined;
-	priorSaleAmount: string | undefined;
-	priorSaleDate: string | undefined;
-	saleAmount: string | undefined;
-	saleDate: string | undefined;
-	seniorTaxExemption: string | undefined;
-	taxAssessYear: string | undefined;
-	taxBilledAmount: string | undefined;
-	taxDelinquentYear: string | undefined;
-	taxFiscalYear: string | undefined;
-	taxRateArea: string | undefined;
-	totalMarketValue: string | undefined;
-	trustDescription: string | undefined;
-	veteranTaxExemption: string | undefined;
-	widowTaxExemption: string | undefined;
-	financialHistory: FinancialHistory[];
-}
-
-interface RawFinancialAttributes {
-	assessed_improvement_percent?: string;
-	assessed_improvement_value?: string;
-	assessed_land_value?: string;
-	assessed_value?: string;
-	assessor_last_update?: string;
-	assessor_taxroll_update?: string;
-	contact_city?: string;
-	contact_crrt?: string;
-	contact_full_address?: string;
-	contact_house_number?: string;
-	contact_main_info_format?: string;
-	contact_mail_info_privacy?: string;
-	contact_mailing_county?: string;
-	contact_mailing_fips?: string;
-	contact_post_direction?: string;
-	contact_pre_direction?: string;
-	contact_state?: string;
-	contact_street_name?: string;
-	contact_suffix?: string;
-	contact_unit_designator?: string;
-	contact_value?: string;
-	contact_zip?: string;
-	contact_zip4?: string;
-	deed_document_page?: string;
-	deed_document_book?: string;
-	deed_document_number?: string;
-	deed_owner_first_name?: string;
-	deed_owner_first_name2?: string;
-	deed_owner_first_name3?: string;
-	deed_owner_first_name4?: string;
-	deed_owner_full_name?: string;
-	deed_owner_full_name2?: string;
-	deed_owner_full_name3?: string;
-	deed_owner_full_name4?: string;
-	deed_owner_last_name?: string;
-	deed_owner_last_name2?: string;
-	deed_owner_last_name3?: string;
-	deed_owner_last_name4?: string;
-	deed_owner_middle_name?: string;
-	deed_owner_middle_name2?: string;
-	deed_owner_middle_name3?: string;
-	deed_owner_middle_name4?: string;
-	deed_owner_suffix?: string;
-	deed_owner_suffix2?: string;
-	deed_owner_suffix3?: string;
-	deed_owner_suffix4?: string;
-	deed_sale_date?: string;
-	deed_sale_price?: string;
-	deed_transaction_id?: string;
-	disabled_tax_exemption?: string;
-	homeowner_tax_exemption?: string;
-	market_improvement_percent?: string;
-	market_improvement_value?: string;
-	market_land_value?: string;
-	market_value_year?: string;
-	match_type?: string;
-	other_tax_exemption?: string;
-	ownership_transfer_date?: string;
-	ownership_transfer_doc_number?: string;
-	ownership_transfer_transaction_id?: string;
-	ownership_type?: string;
-	ownership_type_2?: string;
-	previous_assessed_value?: string;
-	prior_sale_amount?: string;
-	prior_sale_date?: string;
-	sale_amount?: string;
-	sale_date?: string;
-	senior_tax_exemption?: string;
-	tax_assess_year?: string;
-	tax_billed_amount?: string;
-	tax_delinquent_year?: string;
-	tax_fiscal_year?: string;
-	tax_rate_area?: string;
-	total_market_value?: string;
-	trust_description?: string;
-	veteran_tax_exemption?: string;
-	widow_tax_exemption?: string;
-	financial_history?: RawFinancialHistory[];
-}
-
-interface RawFinancialResponse {
-	smarty_key?: string;
-	data_set_name?: string;
-	data_subset_name?: string;
-	attributes?: RawFinancialAttributes;
-}
-
 export interface GeoCensusBlock {
 	accuracy: string | undefined;
 	geoid: string | undefined;
@@ -1147,7 +980,7 @@ export class Response {
 			this.attributes.contactCrrt = responseData.attributes.contact_crrt;
 			this.attributes.contactFullAddress = responseData.attributes.contact_full_address;
 			this.attributes.contactHouseNumber = responseData.attributes.contact_house_number;
-			this.attributes.contactMailInfoFormat = responseData.attributes.contact_main_info_format;
+			this.attributes.contactMailInfoFormat = responseData.attributes.contact_mail_info_format;
 			this.attributes.contactMailInfoPrivacy = responseData.attributes.contact_mail_info_privacy;
 			this.attributes.contactMailingCounty = responseData.attributes.contact_mailing_county;
 			this.attributes.contactMailingFips = responseData.attributes.contact_mailing_fips;
@@ -1207,6 +1040,7 @@ export class Response {
 				: responseData.attributes.financial_history.map((history): FinancialHistory => {
 						return {
 							codeTitleCompany: history.code_title_company,
+							documentTypeDescription: history.document_type_description,
 							instrumentDate: history.instrument_date,
 							interestRateType2: history.interest_rate_type_2,
 							lenderAddress: history.lender_address,
@@ -1515,153 +1349,6 @@ export class Response {
 	}
 }
 
-export class FinancialResponse {
-	smartyKey: string;
-	dataSetName: string;
-	dataSubsetName: string;
-	attributes: FinancialAttributes;
-
-	constructor(responseData: RawFinancialResponse) {
-		this.smartyKey = responseData.smarty_key ?? "";
-		this.dataSetName = responseData.data_set_name ?? "";
-		this.dataSubsetName = responseData.data_subset_name ?? "";
-
-		this.attributes = {} as FinancialAttributes;
-		if (responseData.attributes) {
-			this.attributes.assessedImprovementPercent =
-				responseData.attributes.assessed_improvement_percent;
-			this.attributes.assessedImprovementValue = responseData.attributes.assessed_improvement_value;
-			this.attributes.assessedLandValue = responseData.attributes.assessed_land_value;
-			this.attributes.assessedValue = responseData.attributes.assessed_value;
-			this.attributes.assessorLastUpdate = responseData.attributes.assessor_last_update;
-			this.attributes.assessorTaxrollUpdate = responseData.attributes.assessor_taxroll_update;
-			this.attributes.contactCity = responseData.attributes.contact_city;
-			this.attributes.contactCrrt = responseData.attributes.contact_crrt;
-			this.attributes.contactFullAddress = responseData.attributes.contact_full_address;
-			this.attributes.contactHouseNumber = responseData.attributes.contact_house_number;
-			this.attributes.contactMailInfoFormat = responseData.attributes.contact_main_info_format;
-			this.attributes.contactMailInfoPrivacy = responseData.attributes.contact_mail_info_privacy;
-			this.attributes.contactMailingCounty = responseData.attributes.contact_mailing_county;
-			this.attributes.contactMailingFips = responseData.attributes.contact_mailing_fips;
-			this.attributes.contactPostDirection = responseData.attributes.contact_post_direction;
-			this.attributes.contactPreDirection = responseData.attributes.contact_pre_direction;
-			this.attributes.contactState = responseData.attributes.contact_state;
-			this.attributes.contactStreetName = responseData.attributes.contact_street_name;
-			this.attributes.contactSuffix = responseData.attributes.contact_suffix;
-			this.attributes.contactUnitDesignator = responseData.attributes.contact_unit_designator;
-			this.attributes.contactValue = responseData.attributes.contact_value;
-			this.attributes.contactZip = responseData.attributes.contact_zip;
-			this.attributes.contactZip4 = responseData.attributes.contact_zip4;
-			this.attributes.deedDocumentPage = responseData.attributes.deed_document_page;
-			this.attributes.deedDocumentBook = responseData.attributes.deed_document_book;
-			this.attributes.deedDocumentNumber = responseData.attributes.deed_document_number;
-			this.attributes.deedOwnerFirstName = responseData.attributes.deed_owner_first_name;
-			this.attributes.deedOwnerFirstName2 = responseData.attributes.deed_owner_first_name2;
-			this.attributes.deedOwnerFirstName3 = responseData.attributes.deed_owner_first_name3;
-			this.attributes.deedOwnerFirstName4 = responseData.attributes.deed_owner_first_name4;
-			this.attributes.deedOwnerFullName = responseData.attributes.deed_owner_full_name;
-			this.attributes.deedOwnerFullName2 = responseData.attributes.deed_owner_full_name2;
-			this.attributes.deedOwnerFullName3 = responseData.attributes.deed_owner_full_name3;
-			this.attributes.deedOwnerFullName4 = responseData.attributes.deed_owner_full_name4;
-			this.attributes.deedOwnerLastName = responseData.attributes.deed_owner_last_name;
-			this.attributes.deedOwnerLastName2 = responseData.attributes.deed_owner_last_name2;
-			this.attributes.deedOwnerLastName3 = responseData.attributes.deed_owner_last_name3;
-			this.attributes.deedOwnerLastName4 = responseData.attributes.deed_owner_last_name4;
-			this.attributes.deedOwnerMiddleName = responseData.attributes.deed_owner_middle_name;
-			this.attributes.deedOwnerMiddleName2 = responseData.attributes.deed_owner_middle_name2;
-			this.attributes.deedOwnerMiddleName3 = responseData.attributes.deed_owner_middle_name3;
-			this.attributes.deedOwnerMiddleName4 = responseData.attributes.deed_owner_middle_name4;
-			this.attributes.deedOwnerSuffix = responseData.attributes.deed_owner_suffix;
-			this.attributes.deedOwnerSuffix2 = responseData.attributes.deed_owner_suffix2;
-			this.attributes.deedOwnerSuffix3 = responseData.attributes.deed_owner_suffix3;
-			this.attributes.deedOwnerSuffix4 = responseData.attributes.deed_owner_suffix4;
-			this.attributes.deedSaleDate = responseData.attributes.deed_sale_date;
-			this.attributes.deedSalePrice = responseData.attributes.deed_sale_price;
-			this.attributes.deedTransactionId = responseData.attributes.deed_transaction_id;
-			this.attributes.disabledTaxExemption = responseData.attributes.disabled_tax_exemption;
-			this.attributes.financialHistory = !responseData.attributes.financial_history
-				? []
-				: responseData.attributes.financial_history.map((history): FinancialHistory => {
-						return {
-							codeTitleCompany: history.code_title_company,
-							instrumentDate: history.instrument_date,
-							interestRateType2: history.interest_rate_type_2,
-							lenderAddress: history.lender_address,
-							lenderAddress2: history.lender_address_2,
-							lenderCity: history.lender_city,
-							lenderCity2: history.lender_city_2,
-							lenderCode: history.lender_code,
-							lenderCode2: history.lender_code_2,
-							lenderFirstName: history.lender_first_name,
-							lenderFirstName2: history.lender_first_name_2,
-							lenderLastName: history.lender_last_name,
-							lenderLastName2: history.lender_last_name_2,
-							lenderName: history.lender_name,
-							lenderName2: history.lender_name_2,
-							lenderSellerCarryBack: history.lender_seller_carry_back,
-							lenderSellerCarryBack2: history.lender_seller_carry_back_2,
-							lenderState: history.lender_state,
-							lenderState2: history.lender_state_2,
-							lenderZip: history.lender_zip,
-							lenderZip2: history.lender_zip_2,
-							lenderZipExtended: history.lender_zip_extended,
-							lenderZipExtended2: history.lender_zip_extended_2,
-							mortgageAmount: history.mortgage_amount,
-							mortgageAmount2: history.mortgage_amount_2,
-							mortgageDueDate: history.mortgage_due_date,
-							mortgageDueDate2: history.mortgage_due_date_2,
-							mortgageInterestRate: history.mortgage_interest_rate,
-							mortgageInterestRateType: history.mortgage_interest_rate_type,
-							mortgageLenderCode: history.mortgage_lender_code,
-							mortgageRate: history.mortgage_rate,
-							mortgageRate2: history.mortgage_rate_2,
-							mortgageRecordingDate: history.mortgage_recording_date,
-							mortgageRecordingDate2: history.mortgage_recording_date_2,
-							mortgageTerm: history.mortgage_term,
-							mortgageTerm2: history.mortgage_term_2,
-							mortgageTermType: history.mortgage_term_type,
-							mortgageTermType2: history.mortgage_term_type_2,
-							mortgageType: history.mortgage_type,
-							mortgageType2: history.mortgage_type_2,
-							multiParcelFlag: history.multi_parcel_flag,
-							nameTitleCompany: history.name_title_company,
-							recordingDate: history.recording_date,
-							transferAmount: history.transfer_amount,
-						};
-					});
-			this.attributes.homeownerTaxExemption = responseData.attributes.homeowner_tax_exemption;
-			this.attributes.marketImprovementPercent = responseData.attributes.market_improvement_percent;
-			this.attributes.marketImprovementValue = responseData.attributes.market_improvement_value;
-			this.attributes.marketLandValue = responseData.attributes.market_land_value;
-			this.attributes.marketValueYear = responseData.attributes.market_value_year;
-			this.attributes.matchType = responseData.attributes.match_type;
-			this.attributes.otherTaxExemption = responseData.attributes.other_tax_exemption;
-			this.attributes.ownershipTransferDate = responseData.attributes.ownership_transfer_date;
-			this.attributes.ownershipTransferDocNumber =
-				responseData.attributes.ownership_transfer_doc_number;
-			this.attributes.ownershipTransferTransactionId =
-				responseData.attributes.ownership_transfer_transaction_id;
-			this.attributes.ownershipType = responseData.attributes.ownership_type;
-			this.attributes.ownershipType2 = responseData.attributes.ownership_type_2;
-			this.attributes.previousAssessedValue = responseData.attributes.previous_assessed_value;
-			this.attributes.priorSaleAmount = responseData.attributes.prior_sale_amount;
-			this.attributes.priorSaleDate = responseData.attributes.prior_sale_date;
-			this.attributes.saleAmount = responseData.attributes.sale_amount;
-			this.attributes.saleDate = responseData.attributes.sale_date;
-			this.attributes.seniorTaxExemption = responseData.attributes.senior_tax_exemption;
-			this.attributes.taxAssessYear = responseData.attributes.tax_assess_year;
-			this.attributes.taxBilledAmount = responseData.attributes.tax_billed_amount;
-			this.attributes.taxDelinquentYear = responseData.attributes.tax_delinquent_year;
-			this.attributes.taxFiscalYear = responseData.attributes.tax_fiscal_year;
-			this.attributes.taxRateArea = responseData.attributes.tax_rate_area;
-			this.attributes.totalMarketValue = responseData.attributes.total_market_value;
-			this.attributes.trustDescription = responseData.attributes.trust_description;
-			this.attributes.veteranTaxExemption = responseData.attributes.veteran_tax_exemption;
-			this.attributes.widowTaxExemption = responseData.attributes.widow_tax_exemption;
-		}
-	}
-}
-
 export class GeoResponse {
 	smartyKey: string;
 	dataSetName: string;
@@ -1715,6 +1402,5 @@ export class GeoResponse {
 
 export default {
 	Response,
-	FinancialResponse,
 	GeoResponse,
 };

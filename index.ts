@@ -32,12 +32,25 @@ import SuggestionInternationalAddressAutocomplete from "./src/international_addr
 
 import LookupUSEnrichment from "./src/us_enrichment/Lookup.js";
 import ResponseUSEnrichment from "./src/us_enrichment/Response.js";
+import SecondaryResponse, {
+	RootAddress,
+	Alias,
+	SecondaryEntry,
+} from "./src/us_enrichment/secondary/SecondaryResponse.js";
+import SecondaryCountResponse from "./src/us_enrichment/secondary/SecondaryCountResponse.js";
+import BusinessSummaryLookup from "./src/us_enrichment/business/SummaryLookup.js";
+import BusinessSummaryResult, {
+	BusinessEntry,
+} from "./src/us_enrichment/business/SummaryResult.js";
+import BusinessDetailLookup from "./src/us_enrichment/business/DetailLookup.js";
+import BusinessDetailResult from "./src/us_enrichment/business/DetailResult.js";
+import BusinessDetailAttributes from "./src/us_enrichment/business/DetailAttributes.js";
 
 import LookupInternationalPostalCode from "./src/international_postal_code/Lookup.js";
 import ResultInternationalPostalCode from "./src/international_postal_code/Result.js";
 
 export type { Request, Response, Sender, Sleeper, Signer } from "./src/types.js";
-export { SmartyError } from "./src/Errors.js";
+export { SmartyError, NotModifiedError } from "./src/Errors.js";
 export type { MatchStrategy, OutputFormat, CountySource } from "./src/us_street/Lookup.js";
 export type { CoordinateLicense, MatchInfo } from "./src/us_street/Candidate.js";
 export type { Geolocation } from "./src/us_autocomplete_pro/Lookup.js";
@@ -66,6 +79,17 @@ export {
 	SuggestionInternationalAddressAutocomplete,
 	LookupUSEnrichment,
 	ResponseUSEnrichment,
+	SecondaryResponse,
+	SecondaryCountResponse,
+	RootAddress,
+	Alias,
+	SecondaryEntry,
+	BusinessSummaryLookup,
+	BusinessSummaryResult,
+	BusinessEntry,
+	BusinessDetailLookup,
+	BusinessDetailResult,
+	BusinessDetailAttributes,
 	LookupInternationalPostalCode,
 	ResultInternationalPostalCode,
 };
@@ -117,6 +141,17 @@ export const internationalAddressAutocomplete = {
 export const usEnrichment = {
 	Lookup: LookupUSEnrichment,
 	Response: ResponseUSEnrichment,
+	SecondaryResponse,
+	SecondaryCountResponse,
+	RootAddress,
+	Alias,
+	SecondaryEntry,
+	BusinessSummaryLookup,
+	BusinessSummaryResult,
+	BusinessEntry,
+	BusinessDetailLookup,
+	BusinessDetailResult,
+	BusinessDetailAttributes,
 };
 
 export const internationalPostalCode = {

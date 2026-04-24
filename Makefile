@@ -32,6 +32,8 @@ examples-ts: build
 	@npx tsx examples/us_extract.ts || true
 	@npx tsx examples/us_reverse_geo.ts || true
 	@npx tsx examples/us_enrichment.ts || true
+	@npx tsx examples/us_enrichment_business.ts || true
+	@npx tsx examples/us_enrichment_etag.ts || true
 	@npx tsx examples/international_street.ts || true
 	@npx tsx examples/international_address_autocomplete.ts || true
 	@npx tsx examples/international_postal_code.ts || true
@@ -45,6 +47,8 @@ examples-js: build
 	@node examples/us_extract.mjs || true
 	@node examples/us_reverse_geo.mjs || true
 	@node examples/us_enrichment.mjs || true
+	@node examples/us_enrichment_business.mjs || true
+	@node examples/us_enrichment_etag.mjs || true
 	@node examples/international_street.mjs || true
 	@node examples/international_address_autocomplete.mjs || true
 	@node examples/international_postal_code.mjs || true

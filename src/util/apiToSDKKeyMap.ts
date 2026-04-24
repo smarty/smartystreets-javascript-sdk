@@ -87,6 +87,7 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 		exclude: "exclude",
 		dataset: "dataset",
 		data_subset: "dataSubset",
+		features: "features",
 	},
 	internationalPostalCode: {
 		input_id: "inputId",

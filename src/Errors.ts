@@ -92,6 +92,18 @@ export class GatewayTimeoutError extends SmartyError {
 	}
 }
 
+export class NotModifiedError extends SmartyError {
+	responseEtag: string | undefined;
+
+	constructor(message?: string, responseEtag?: string) {
+		super(
+			message ??
+				"Not Modified: the requested record has not changed since the previous request with the Etag value.",
+		);
+		this.responseEtag = responseEtag;
+	}
+}
+
 export default {
 	SmartyError,
 	BatchFullError,
@@ -106,5 +118,6 @@ export default {
 	InternalServerError,
 	ServiceUnavailableError,
 	GatewayTimeoutError,
+	NotModifiedError,
 	DefaultError,
 };

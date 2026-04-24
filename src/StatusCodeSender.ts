@@ -2,9 +2,18 @@ import {
 	InternalServerError,
 	ServiceUnavailableError,
 	GatewayTimeoutError,
+	NotModifiedError,
 	DefaultError,
 } from "./Errors.js";
 import { Request, Response, Sender } from "./types.js";
+
+function extractEtag(headers: Record<string, string> | undefined): string | undefined {
+	if (!headers) return undefined;
+	for (const key of Object.keys(headers)) {
+		if (key.toLowerCase() === "etag") return headers[key];
+	}
+	return undefined;
+}
 
 export default class StatusCodeSender {
 	private sender: Sender;
@@ -15,13 +24,23 @@ export default class StatusCodeSender {
 
 	send(request: Request): Promise<Response> {
 		return new Promise((resolve, reject) => {
-			this.sender
-				.send(request)
-				.then(resolve)
-				.catch((error: Response) => {
+			this.sender.send(request).then(
+				(response) => {
+					if (response.statusCode === 304) {
+						response.error = new NotModifiedError(undefined, extractEtag(response.headers));
+						reject(response);
+						return;
+					}
+					resolve(response);
+				},
+				(error: Response) => {
 					switch (error.statusCode) {
 						case 0:
 							error.error = error.error ?? new DefaultError("Network error: unable to connect.");
+							break;
+
+						case 304:
+							error.error = new NotModifiedError(undefined, extractEtag(error.headers));
 							break;
 
 						case 500:
@@ -45,7 +64,8 @@ export default class StatusCodeSender {
 						}
 					}
 					reject(error);
-				});
+				},
+			);
 		});
 	}
 }

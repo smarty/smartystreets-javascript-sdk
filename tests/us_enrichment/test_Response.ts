@@ -67,7 +67,7 @@ describe("A US Enrichment Response", function () {
 				contact_crrt: "54",
 				contact_full_address: "55",
 				contact_house_number: "56",
-				contact_main_info_format: "57",
+				contact_mail_info_format: "57",
 				contact_mail_info_privacy: "58",
 				contact_mailing_county: "59",
 				contact_mailing_fips: "60",

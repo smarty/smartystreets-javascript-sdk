@@ -22,19 +22,32 @@ const clientBuilder = new ClientBuilder(credentials);
 
 const client = clientBuilder.buildUsEnrichmentClient();
 
-// Documentation for input fields can be found at:
-// https://www.smarty.com/docs/us-street-api#input-fields
+// Different smartyKeys illustrate different datasets best. 334968275 is a
+// single-family parcel (good for property/financial/geo); 1106658436 is an
+// apartment complex with hundreds of units (good for secondary endpoints).
+const propertyKey = "334968275";
+const multiUnitKey = "1106658436";
+
+type SendFn = (lookup: LookupUSEnrichment) => Promise<LookupUSEnrichment>;
+
+const datasets: Array<[string, string, SendFn]> = [
+	["Principal", propertyKey, (l) => client.sendPrincipal(l)],
+	["Financial", propertyKey, (l) => client.sendFinancial(l)],
+	["Geo-Reference", propertyKey, (l) => client.sendGeo(l)],
+	["Secondary", multiUnitKey, (l) => client.sendSecondary(l)],
+	["Secondary Count", multiUnitKey, (l) => client.sendSecondaryCount(l)],
+];
 
 async function main(): Promise<void> {
-	const lookup = new LookupUSEnrichment("334968275");
-	// uncomment the following line to add a custom parameter
-	// lookup.addCustomParameter("include", "group_financial");
-
-	try {
-		const result = await client.sendPrincipal(lookup);
-		console.log(result.response);
-	} catch (err: unknown) {
-		console.error(err);
+	for (const [label, key, send] of datasets) {
+		console.log(`\n=== ${label} (${key}) ===`);
+		try {
+			const result = await send(new LookupUSEnrichment(key));
+			console.log(result.response);
+		} catch (err: unknown) {
+			const message = err instanceof Error ? err.message : String(err);
+			console.error(`[${label}] failed:`, message);
+		}
 	}
 }
 

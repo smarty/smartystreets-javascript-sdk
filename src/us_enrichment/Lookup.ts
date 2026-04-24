@@ -1,14 +1,14 @@
-import { Response, FinancialResponse, GeoResponse } from "./Response.js";
+import { Response, GeoResponse } from "./Response.js";
+import SecondaryResponse from "./secondary/SecondaryResponse.js";
+import SecondaryCountResponse from "./secondary/SecondaryCountResponse.js";
+import EnrichmentLookupBase from "./EnrichmentLookupBase.js";
 
-export default class Lookup {
+export default class Lookup extends EnrichmentLookupBase {
 	smartyKey: string | undefined;
-	include: string | undefined;
-	exclude: string | undefined;
 	dataset: string | undefined;
 	dataSubset: string | undefined;
 	features: string | undefined;
-	response: Response | FinancialResponse | GeoResponse;
-	customParameters: Record<string, string>;
+	response: Response | GeoResponse | SecondaryResponse | SecondaryCountResponse;
 
 	constructor(
 		smartyKey?: string,
@@ -17,18 +17,13 @@ export default class Lookup {
 		dataset?: string,
 		dataSubset?: string,
 	) {
+		super();
 		this.smartyKey = smartyKey;
 		this.include = include;
 		this.exclude = exclude;
 		this.dataset = dataset;
 		this.dataSubset = dataSubset;
 		this.features = undefined;
-
 		this.response = new Response({});
-		this.customParameters = {};
-	}
-
-	addCustomParameter(key: string, value: string): void {
-		this.customParameters[key] = value;
 	}
 }

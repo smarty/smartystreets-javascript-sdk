@@ -7,6 +7,7 @@ export class MockSender {
 		payload: string | object | null;
 		parameters: Record<string, string | number>;
 		baseUrlParam: string;
+		headers: Record<string, string>;
 	};
 
 	constructor() {
@@ -14,6 +15,7 @@ export class MockSender {
 			payload: null,
 			parameters: {},
 			baseUrlParam: "",
+			headers: {},
 		};
 	}
 
@@ -21,6 +23,7 @@ export class MockSender {
 		this.request.payload = clientRequest.payload;
 		this.request.parameters = clientRequest.parameters;
 		this.request.baseUrlParam = clientRequest.baseUrlParam;
+		this.request.headers = clientRequest.headers;
 		return undefined as unknown as Promise<IResponse>;
 	}
 }
@@ -28,15 +31,21 @@ export class MockSender {
 export class MockSenderWithResponse {
 	private expectedPayload: object[] | object | string | null;
 	private expectedError: Error | null;
+	private expectedHeaders: Record<string, string>;
 
-	constructor(expectedPayload: object[] | object | string | null, expectedError?: Error | null) {
+	constructor(
+		expectedPayload: object[] | object | string | null,
+		expectedError?: Error | null,
+		expectedHeaders: Record<string, string> = {},
+	) {
 		this.expectedPayload = expectedPayload;
 		this.expectedError = expectedError ?? null;
+		this.expectedHeaders = expectedHeaders;
 	}
 
 	send(): Promise<IResponse> {
 		return new Promise((resolve) => {
-			resolve(new Response(0, this.expectedPayload, this.expectedError));
+			resolve(new Response(0, this.expectedPayload, this.expectedError, this.expectedHeaders));
 		});
 	}
 }
