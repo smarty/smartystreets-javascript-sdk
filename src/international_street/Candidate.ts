@@ -128,6 +128,7 @@ export interface IntlStreetMetadata {
 	longitude: number | undefined;
 	geocodePrecision: string | undefined;
 	maxGeocodePrecision: string | undefined;
+	geocodeClassification: string | undefined;
 	addressFormat: string | undefined;
 	occupantUse: string | undefined;
 }
@@ -215,6 +216,7 @@ interface RawIntlStreetMetadata {
 	longitude?: number;
 	geocode_precision?: string;
 	max_geocode_precision?: string;
+	geocode_classification?: string;
 	address_format?: string;
 	occupant_use?: string;
 }
@@ -456,6 +458,7 @@ export default class Candidate {
 			this.metadata.longitude = responseData.metadata.longitude;
 			this.metadata.geocodePrecision = responseData.metadata.geocode_precision;
 			this.metadata.maxGeocodePrecision = responseData.metadata.max_geocode_precision;
+			this.metadata.geocodeClassification = responseData.metadata.geocode_classification;
 			this.metadata.addressFormat = responseData.metadata.address_format;
 			this.metadata.occupantUse = responseData.metadata.occupant_use;
 		}
