@@ -68,6 +68,7 @@ describe("An International match candidate", function () {
 				longitude: 53.0,
 				geocode_precision: "54",
 				max_geocode_precision: "55",
+				geocode_classification: "55.5",
 				address_format: "56",
 				occupant_use: "56.5",
 			},
@@ -203,6 +204,7 @@ describe("An International match candidate", function () {
 		expect(metadata.longitude).to.equal(53.0);
 		expect(metadata.geocodePrecision).to.equal("54");
 		expect(metadata.maxGeocodePrecision).to.equal("55");
+		expect(metadata.geocodeClassification).to.equal("55.5");
 		expect(metadata.addressFormat).to.equal("56");
 		expect(metadata.occupantUse).to.equal("56.5");
 		let analysis = candidate.analysis;
