@@ -3,8 +3,7 @@ export interface IntlStreetComponents {
 	superAdministrativeArea: string | undefined;
 	administrativeArea: string | undefined;
 	administrativeAreaIso2: string | undefined;
-	administrativeAreaShort: string | undefined;
-	administrativeAreaLong: string | undefined;
+	attention: string | undefined;
 	subAdministrativeArea: string | undefined;
 	dependentLocality: string | undefined;
 	dependentLocalityName: string | undefined;
@@ -18,6 +17,11 @@ export interface IntlStreetComponents {
 	premisePrefixNumber: string | undefined;
 	premiseNumber: string | undefined;
 	premiseType: string | undefined;
+	shortAddressCode: string | undefined;
+	subBuildingLeadingType: string | undefined;
+	subBuildingBlock: string | undefined;
+	subBuildingDoor: string | undefined;
+	subBuildingStaircase: string | undefined;
 	thoroughfare: string | undefined;
 	thoroughfarePredirection: string | undefined;
 	thoroughfarePostdirection: string | undefined;
@@ -57,8 +61,7 @@ export interface IntlChangesComponents {
 	superAdministrativeArea: string | undefined;
 	administrativeArea: string | undefined;
 	administrativeAreaIso2: string | undefined;
-	administrativeAreaShort: string | undefined;
-	administrativeAreaLong: string | undefined;
+	attention: string | undefined;
 	subAdministrativeArea: string | undefined;
 	dependentLocality: string | undefined;
 	dependentLocalityName: string | undefined;
@@ -97,6 +100,11 @@ export interface IntlChangesComponents {
 	postBox: string | undefined;
 	postBoxType: string | undefined;
 	postBoxNumber: string | undefined;
+	shortAddressCode: string | undefined;
+	subBuildingLeadingType: string | undefined;
+	subBuildingBlock: string | undefined;
+	subBuildingDoor: string | undefined;
+	subBuildingStaircase: string | undefined;
 }
 
 export interface IntlChanges {
@@ -109,10 +117,7 @@ export interface IntlChanges {
 	address6: string | undefined;
 	address7: string | undefined;
 	address8: string | undefined;
-	address9: string | undefined;
-	address10: string | undefined;
-	address11: string | undefined;
-	address12: string | undefined;
+	country: string | undefined;
 	components: IntlChangesComponents;
 }
 
@@ -138,8 +143,7 @@ interface RawIntlStreetRawComponents {
 	super_administrative_area?: string;
 	administrative_area?: string;
 	administrative_area_iso2?: string;
-	administrative_area_short?: string;
-	administrative_area_long?: string;
+	attention?: string;
 	sub_administrative_area?: string;
 	dependent_locality?: string;
 	dependent_locality_name?: string;
@@ -153,6 +157,11 @@ interface RawIntlStreetRawComponents {
 	premise_prefix_number?: string;
 	premise_number?: string;
 	premise_type?: string;
+	short_address_code?: string;
+	sub_building_leading_type?: string;
+	sub_building_block?: string;
+	sub_building_door?: string;
+	sub_building_staircase?: string;
 	thoroughfare?: string;
 	thoroughfare_predirection?: string;
 	thoroughfare_postdirection?: string;
@@ -197,10 +206,7 @@ interface RawIntlChanges {
 	address6?: string;
 	address7?: string;
 	address8?: string;
-	address9?: string;
-	address10?: string;
-	address11?: string;
-	address12?: string;
+	country?: string;
 	components?: RawIntlStreetRawComponents;
 }
 
@@ -231,10 +237,6 @@ export interface RawIntlStreetCandidate {
 	address6?: string;
 	address7?: string;
 	address8?: string;
-	address9?: string;
-	address10?: string;
-	address11?: string;
-	address12?: string;
 	components?: RawIntlStreetRawComponents;
 	analysis?: RawIntlStreetAnalysis;
 	metadata?: RawIntlStreetMetadata;
@@ -250,10 +252,6 @@ export default class Candidate {
 	address6: string;
 	address7: string;
 	address8: string;
-	address9: string;
-	address10: string;
-	address11: string;
-	address12: string;
 	components: IntlStreetComponents;
 	analysis: IntlStreetAnalysis;
 	metadata: IntlStreetMetadata;
@@ -268,10 +266,6 @@ export default class Candidate {
 		this.address6 = responseData.address6 ?? "";
 		this.address7 = responseData.address7 ?? "";
 		this.address8 = responseData.address8 ?? "";
-		this.address9 = responseData.address9 ?? "";
-		this.address10 = responseData.address10 ?? "";
-		this.address11 = responseData.address11 ?? "";
-		this.address12 = responseData.address12 ?? "";
 
 		this.components = {} as IntlStreetComponents;
 		if (responseData.components !== undefined) {
@@ -279,8 +273,7 @@ export default class Candidate {
 			this.components.superAdministrativeArea = responseData.components.super_administrative_area;
 			this.components.administrativeArea = responseData.components.administrative_area;
 			this.components.administrativeAreaIso2 = responseData.components.administrative_area_iso2;
-			this.components.administrativeAreaShort = responseData.components.administrative_area_short;
-			this.components.administrativeAreaLong = responseData.components.administrative_area_long;
+			this.components.attention = responseData.components.attention;
 			this.components.subAdministrativeArea = responseData.components.sub_administrative_area;
 			this.components.dependentLocality = responseData.components.dependent_locality;
 			this.components.dependentLocalityName = responseData.components.dependent_locality_name;
@@ -294,6 +287,11 @@ export default class Candidate {
 			this.components.premisePrefixNumber = responseData.components.premise_prefix_number;
 			this.components.premiseNumber = responseData.components.premise_number;
 			this.components.premiseType = responseData.components.premise_type;
+			this.components.shortAddressCode = responseData.components.short_address_code;
+			this.components.subBuildingLeadingType = responseData.components.sub_building_leading_type;
+			this.components.subBuildingBlock = responseData.components.sub_building_block;
+			this.components.subBuildingDoor = responseData.components.sub_building_door;
+			this.components.subBuildingStaircase = responseData.components.sub_building_staircase;
 			this.components.thoroughfare = responseData.components.thoroughfare;
 			this.components.thoroughfarePredirection = responseData.components.thoroughfare_predirection;
 			this.components.thoroughfarePostdirection =
@@ -352,10 +350,7 @@ export default class Candidate {
 				this.analysis.changes.address6 = responseData.analysis.changes.address6;
 				this.analysis.changes.address7 = responseData.analysis.changes.address7;
 				this.analysis.changes.address8 = responseData.analysis.changes.address8;
-				this.analysis.changes.address9 = responseData.analysis.changes.address9;
-				this.analysis.changes.address10 = responseData.analysis.changes.address10;
-				this.analysis.changes.address11 = responseData.analysis.changes.address11;
-				this.analysis.changes.address12 = responseData.analysis.changes.address12;
+				this.analysis.changes.country = responseData.analysis.changes.country;
 
 				this.analysis.changes.components = {} as IntlChangesComponents;
 				if (responseData.analysis.changes.components !== undefined) {
@@ -367,10 +362,8 @@ export default class Candidate {
 						responseData.analysis.changes.components.administrative_area;
 					this.analysis.changes.components.administrativeAreaIso2 =
 						responseData.analysis.changes.components.administrative_area_iso2;
-					this.analysis.changes.components.administrativeAreaShort =
-						responseData.analysis.changes.components.administrative_area_short;
-					this.analysis.changes.components.administrativeAreaLong =
-						responseData.analysis.changes.components.administrative_area_long;
+					this.analysis.changes.components.attention =
+						responseData.analysis.changes.components.attention;
 					this.analysis.changes.components.subAdministrativeArea =
 						responseData.analysis.changes.components.sub_administrative_area;
 					this.analysis.changes.components.dependentLocality =
@@ -397,6 +390,16 @@ export default class Candidate {
 						responseData.analysis.changes.components.premise_number;
 					this.analysis.changes.components.premiseType =
 						responseData.analysis.changes.components.premise_type;
+					this.analysis.changes.components.shortAddressCode =
+						responseData.analysis.changes.components.short_address_code;
+					this.analysis.changes.components.subBuildingLeadingType =
+						responseData.analysis.changes.components.sub_building_leading_type;
+					this.analysis.changes.components.subBuildingBlock =
+						responseData.analysis.changes.components.sub_building_block;
+					this.analysis.changes.components.subBuildingDoor =
+						responseData.analysis.changes.components.sub_building_door;
+					this.analysis.changes.components.subBuildingStaircase =
+						responseData.analysis.changes.components.sub_building_staircase;
 					this.analysis.changes.components.thoroughfare =
 						responseData.analysis.changes.components.thoroughfare;
 					this.analysis.changes.components.thoroughfarePredirection =
