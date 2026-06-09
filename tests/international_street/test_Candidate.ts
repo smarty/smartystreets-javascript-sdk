@@ -86,7 +86,6 @@ describe("An International match candidate", function () {
 					address6: "66",
 					address7: "67",
 					address8: "68",
-					country: "125",
 					components: {
 						country_iso_3: "73",
 						super_administrative_area: "74",
@@ -222,7 +221,6 @@ describe("An International match candidate", function () {
 		expect(changes.address6).to.equal("66");
 		expect(changes.address7).to.equal("67");
 		expect(changes.address8).to.equal("68");
-		expect(changes.country).to.equal("125");
 		let ccomponents = changes.components;
 		expect(ccomponents.countryIso3).to.equal("73");
 		expect(ccomponents.superAdministrativeArea).to.equal("74");

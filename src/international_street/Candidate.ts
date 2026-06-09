@@ -117,7 +117,6 @@ export interface IntlChanges {
 	address6: string | undefined;
 	address7: string | undefined;
 	address8: string | undefined;
-	country: string | undefined;
 	components: IntlChangesComponents;
 }
 
@@ -206,7 +205,6 @@ interface RawIntlChanges {
 	address6?: string;
 	address7?: string;
 	address8?: string;
-	country?: string;
 	components?: RawIntlStreetRawComponents;
 }
 
@@ -350,7 +348,6 @@ export default class Candidate {
 				this.analysis.changes.address6 = responseData.analysis.changes.address6;
 				this.analysis.changes.address7 = responseData.analysis.changes.address7;
 				this.analysis.changes.address8 = responseData.analysis.changes.address8;
-				this.analysis.changes.country = responseData.analysis.changes.country;
 
 				this.analysis.changes.components = {} as IntlChangesComponents;
 				if (responseData.analysis.changes.components !== undefined) {
