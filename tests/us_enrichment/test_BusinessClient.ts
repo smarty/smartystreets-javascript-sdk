@@ -52,6 +52,32 @@ describe("Client.sendBusinessSummary", function () {
 		});
 	});
 
+	it("targets /search/business with a business_name param", function () {
+		const mockSender = new MockSender();
+		const client = new Client(mockSender);
+		const lookup = new SummaryLookup();
+		lookup.businessName = "Style Studio";
+
+		client.sendBusinessSummary(lookup);
+
+		expect(mockSender.request.baseUrlParam).to.equal("search/business");
+		expect(mockSender.request.parameters).to.deep.equal({
+			business_name: "Style Studio",
+		});
+	});
+
+	it("omits the business_name param when businessName is blank", function () {
+		const mockSender = new MockSender();
+		const client = new Client(mockSender);
+		const lookup = new SummaryLookup();
+		lookup.freeform = "1 Rosedale, Baltimore, Maryland";
+		lookup.businessName = "";
+
+		client.sendBusinessSummary(lookup);
+
+		expect(mockSender.request.parameters).to.not.have.property("business_name");
+	});
+
 	it("sends include, exclude, and custom parameters when set", function () {
 		const mockSender = new MockSender();
 		const client = new Client(mockSender);

@@ -17,6 +17,7 @@ describe("Business SummaryLookup", function () {
 		expect(l.state).to.equal(undefined);
 		expect(l.zipcode).to.equal(undefined);
 		expect(l.freeform).to.equal(undefined);
+		expect(l.businessName).to.equal(undefined);
 		expect(l.results).to.equal(undefined);
 		expect(l.customParameters).to.deep.equal({});
 	});
