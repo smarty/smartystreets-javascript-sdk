@@ -1,15 +1,10 @@
-name: Node Tests
+name: Test
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - '**'
+  workflow_call:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
