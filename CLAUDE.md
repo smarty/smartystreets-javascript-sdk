@@ -31,7 +31,7 @@ Build outputs dual formats via Rollup: `dist/cjs/` (CommonJS), `dist/esm/` (ESM)
 
 ## Architecture
 
-This is the official JavaScript SDK for Smarty address validation APIs. It supports both Node.js (CommonJS/ESM) and browser environments. The entire codebase is TypeScript.
+This is the official JavaScript SDK for Smarty address validation APIs. Compatible with Node.js 22 and later. It supports both Node.js (CommonJS/ESM) and browser environments. The entire codebase is TypeScript.
 
 ### Sender Chain Pattern
 
