@@ -3,7 +3,6 @@ import {
 	BasicAuthCredentials,
 	BusinessSummaryLookup,
 	BusinessDetailLookup,
-	NotModifiedError,
 } from "smartystreets-javascript-sdk";
 
 const authId = process.env.SMARTY_AUTH_ID!;
