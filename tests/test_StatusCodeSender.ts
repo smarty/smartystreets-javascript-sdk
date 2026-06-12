@@ -158,6 +158,33 @@ describe("A status code sender", function () {
 		return expectedErrorWithPayloadMessage(418, payload, errors.DefaultError, "API teapot message");
 	});
 
+	it("appends an unparseable string body to the fallback message.", function () {
+		return expectedErrorWithPayloadMessage(
+			422,
+			"not json",
+			errors.UnprocessableEntityError,
+			"GET request lacked required fields. Body: not json",
+		);
+	});
+
+	it("appends a message-less object body to the fallback message.", function () {
+		return expectedErrorWithPayloadMessage(
+			422,
+			{ errors: [] },
+			errors.UnprocessableEntityError,
+			'GET request lacked required fields. Body: {"errors":[]}',
+		);
+	});
+
+	it("labels a blank body with an empty Body marker.", function () {
+		return expectedErrorWithPayloadMessage(
+			422,
+			"   ",
+			errors.UnprocessableEntityError,
+			"GET request lacked required fields. Body:",
+		);
+	});
+
 	it("rejects with NotModifiedError on a 304 and captures lowercase etag header", function () {
 		const response = new Response(304, null, null, { etag: "abc-123" });
 		const mockSender = { send: () => Promise.resolve(response) };
@@ -261,7 +288,7 @@ function expectedErrorWithFallbackMessage(
 		},
 		(error) => {
 			expect(error.error).to.be.an.instanceOf(expectedError);
-			expect(error.error.message).to.be.equal(expectedMessage);
+			expect(error.error.message).to.be.equal(`${expectedMessage} Body:`);
 		},
 	);
 }

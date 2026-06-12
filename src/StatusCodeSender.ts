@@ -24,9 +24,12 @@ function extractEtag(headers: Record<string, string> | undefined): string | unde
 	return undefined;
 }
 
-// Pulls the message(s) out of the API's JSON error body ({"errors":[{"message":"..."}]}),
-// returning undefined when the payload is missing, unparseable, or carries no messages,
-// so callers fall back to the standard message for the status code.
+function unusedBody(payload: Response["payload"]): string {
+	if (payload == null) return "";
+	const raw = typeof payload === "string" ? payload : JSON.stringify(payload);
+	return raw?.trim() ?? "";
+}
+
 function messageFrom(payload: Response["payload"]): string | undefined {
 	let parsed = payload;
 	if (typeof parsed === "string") {
@@ -129,6 +132,10 @@ export default class StatusCodeSender {
 									`The server returned an unexpected HTTP status code: ${error.statusCode}`,
 							);
 						}
+					}
+					if (!message && error.statusCode !== 0 && error.statusCode !== 304 && error.error) {
+						error.error.message =
+							`${error.error.message} Body: ${unusedBody(error.payload)}`.trimEnd();
 					}
 					reject(error);
 				},
