@@ -185,70 +185,16 @@ describe("A status code sender", function () {
 		);
 	});
 
-	it("rejects with NotModifiedError on a 304 and captures lowercase etag header", function () {
+	it("resolves a 304 as success and passes the response through untouched", function () {
 		const response = new Response(304, null, null, { etag: "abc-123" });
 		const mockSender = { send: () => Promise.resolve(response) };
 		const statusCodeSender = new StatusCodeSender(mockSender as any);
 
-		return statusCodeSender.send(new Request()).then(
-			() => {
-				throw new Error("expected rejection");
-			},
-			(rejected) => {
-				expect(rejected.statusCode).to.equal(304);
-				expect(rejected.error).to.be.an.instanceOf(errors.NotModifiedError);
-				expect(rejected.error.responseEtag).to.equal("abc-123");
-			},
-		);
-	});
-
-	it("rejects with NotModifiedError on a 304 and captures mixed-case ETag header", function () {
-		const response = new Response(304, null, null, { ETag: "srv-2" });
-		const mockSender = { send: () => Promise.resolve(response) };
-		const statusCodeSender = new StatusCodeSender(mockSender as any);
-
-		return statusCodeSender.send(new Request()).then(
-			() => {
-				throw new Error("expected rejection");
-			},
-			(rejected) => {
-				expect(rejected.error).to.be.an.instanceOf(errors.NotModifiedError);
-				expect(rejected.error.responseEtag).to.equal("srv-2");
-			},
-		);
-	});
-
-	it("rejects with NotModifiedError with undefined responseEtag when the Etag header is absent", function () {
-		const response = new Response(304, null, null, {});
-		const mockSender = { send: () => Promise.resolve(response) };
-		const statusCodeSender = new StatusCodeSender(mockSender as any);
-
-		return statusCodeSender.send(new Request()).then(
-			() => {
-				throw new Error("expected rejection");
-			},
-			(rejected) => {
-				expect(rejected.error).to.be.an.instanceOf(errors.NotModifiedError);
-				expect(rejected.error.responseEtag).to.equal(undefined);
-			},
-		);
-	});
-
-	it("handles a 304 that was thrown (rather than resolved) by the inner sender", function () {
-		const response = new Response(304, null, null, { Etag: "thrown" });
-		const mockSender = { send: () => Promise.reject(response) };
-		const statusCodeSender = new StatusCodeSender(mockSender as any);
-
-		return statusCodeSender.send(new Request()).then(
-			() => {
-				throw new Error("expected rejection");
-			},
-			(rejected) => {
-				expect(rejected.statusCode).to.equal(304);
-				expect(rejected.error).to.be.an.instanceOf(errors.NotModifiedError);
-				expect(rejected.error.responseEtag).to.equal("thrown");
-			},
-		);
+		return statusCodeSender.send(new Request()).then((resolved) => {
+			expect(resolved.statusCode).to.equal(304);
+			expect(resolved.error == null).to.equal(true);
+			expect(resolved.headers["etag"]).to.equal("abc-123");
+		});
 	});
 });
 

@@ -427,9 +427,7 @@ describe("A US Enrichment Client", function () {
 				street_name: "Main",
 				street_suffix: "St",
 			},
-			secondaries: [
-				{ smarty_key: "s1", secondary_designator: "Apt", secondary_number: "101" },
-			],
+			secondaries: [{ smarty_key: "s1", secondary_designator: "Apt", secondary_number: "101" }],
 		};
 		let expectedResponse = new SecondaryResponse(rawMockPayload);
 
@@ -474,6 +472,28 @@ describe("A US Enrichment Client", function () {
 		client.sendPrincipal(lookup);
 
 		expect(mockSender.request.headers).to.not.have.property("Etag");
+	});
+
+	it("treats a 304 as success with refreshed etag and untouched results", function () {
+		const mockSender = {
+			send: () =>
+				Promise.resolve({
+					statusCode: 304,
+					payload: null,
+					error: null,
+					headers: { etag: "refreshed-etag" },
+				}),
+		};
+		const client = new Client(mockSender as any);
+		const lookup = new Lookup("sk");
+		lookup.requestEtag = "old-etag";
+		lookup.response = "prior" as any;
+
+		return client.sendPrincipal(lookup).then((resolved) => {
+			expect(resolved).to.equal(lookup);
+			expect(lookup.responseEtag).to.equal("refreshed-etag");
+			expect(lookup.response).to.equal("prior");
+		});
 	});
 
 	it("captures responseEtag from lowercase etag header on sendPrincipal", function () {

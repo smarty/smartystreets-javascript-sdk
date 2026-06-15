@@ -5,7 +5,6 @@ import {
 	ForbiddenError,
 	GatewayTimeoutError,
 	InternalServerError,
-	NotModifiedError,
 	PaymentRequiredError,
 	RequestEntityTooLargeError,
 	RequestTimeoutError,
@@ -15,14 +14,6 @@ import {
 	DefaultError,
 } from "./Errors.js";
 import { Request, Response, Sender } from "./types.js";
-
-function extractEtag(headers: Record<string, string> | undefined): string | undefined {
-	if (!headers) return undefined;
-	for (const key of Object.keys(headers)) {
-		if (key.toLowerCase() === "etag") return headers[key];
-	}
-	return undefined;
-}
 
 function unusedBody(payload: Response["payload"]): string {
 	if (payload == null) return "";
@@ -59,11 +50,6 @@ export default class StatusCodeSender {
 		return new Promise((resolve, reject) => {
 			this.sender.send(request).then(
 				(response) => {
-					if (response.statusCode === 304) {
-						response.error = new NotModifiedError(undefined, extractEtag(response.headers));
-						reject(response);
-						return;
-					}
 					resolve(response);
 				},
 				(error: Response) => {
@@ -71,10 +57,6 @@ export default class StatusCodeSender {
 					switch (error.statusCode) {
 						case 0:
 							error.error = error.error ?? new DefaultError("Network error: unable to connect.");
-							break;
-
-						case 304:
-							error.error = new NotModifiedError(undefined, extractEtag(error.headers));
 							break;
 
 						case 400:
