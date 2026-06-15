@@ -1,4 +1,5 @@
 import Suggestion from "./Suggestion.js";
+import type { Source } from "../types.js";
 
 export type Geolocation = "city" | "none" | (string & {});
 
@@ -16,7 +17,7 @@ export default class Lookup {
 	preferZIPCodes: string[];
 	preferRatio: number | undefined;
 	preferGeolocation: Geolocation | undefined;
-	source: string | undefined;
+	source: Source | undefined;
 	customParameters: Record<string, string>;
 
 	constructor(search?: string) {
