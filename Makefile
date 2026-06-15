@@ -43,7 +43,7 @@ examples-js: build
 	@echo "Running JavaScript examples..."
 	@node examples/us_street.mjs || true
 	@node examples/us_street_iana_timezone.mjs || true
-	@node examples/us_street_match_strategy.ts || true
+	@node examples/us_street_match_strategy.mjs || true
 	@node examples/us_zipcode.mjs || true
 	@node examples/us_autocomplete_pro.mjs || true
 	@node examples/us_extract.mjs || true
