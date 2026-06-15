@@ -29,6 +29,7 @@ examples-ts: build
 	@npx tsx examples/us_street_iana_timezone.ts || true
 	@npx tsx examples/us_zipcode.ts || true
 	@npx tsx examples/us_autocomplete_pro.ts || true
+	@npx tsx examples/us_autocomplete.ts || true
 	@npx tsx examples/us_extract.ts || true
 	@npx tsx examples/us_reverse_geo.ts || true
 	@npx tsx examples/us_enrichment.ts || true
@@ -44,6 +45,7 @@ examples-js: build
 	@node examples/us_street_iana_timezone.mjs || true
 	@node examples/us_zipcode.mjs || true
 	@node examples/us_autocomplete_pro.mjs || true
+	@node examples/us_autocomplete.mjs || true
 	@node examples/us_extract.mjs || true
 	@node examples/us_reverse_geo.mjs || true
 	@node examples/us_enrichment.mjs || true

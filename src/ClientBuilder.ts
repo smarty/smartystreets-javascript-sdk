@@ -16,6 +16,7 @@ import Sleeper from "./util/Sleeper.js";
 import UsStreetClient from "./us_street/Client.js";
 import UsZipcodeClient from "./us_zipcode/Client.js";
 import UsAutocompleteProClient from "./us_autocomplete_pro/Client.js";
+import UsAutocompleteClient from "./us_autocomplete/Client.js";
 import UsExtractClient from "./us_extract/Client.js";
 import InternationalStreetClient from "./international_street/Client.js";
 import UsReverseGeoClient from "./us_reverse_geo/Client.js";
@@ -26,6 +27,7 @@ import { Sender } from "./types.js";
 
 const INTERNATIONAL_STREET_API_URI = "https://international-street.api.smarty.com/verify";
 const US_AUTOCOMPLETE_PRO_API_URL = "https://us-autocomplete-pro.api.smarty.com/lookup";
+const US_AUTOCOMPLETE_API_URL = "https://us-autocomplete.api.smarty.com/v2/lookup";
 const US_EXTRACT_API_URL = "https://us-extract.api.smarty.com/";
 const US_STREET_API_URL = "https://us-street.api.smarty.com/street-address";
 const US_ZIP_CODE_API_URL = "https://us-zipcode.api.smarty.com/lookup";
@@ -240,6 +242,10 @@ export default class ClientBuilder {
 
 	buildUsAutocompleteProClient(): UsAutocompleteProClient {
 		return this.buildClient(US_AUTOCOMPLETE_PRO_API_URL, UsAutocompleteProClient);
+	}
+
+	buildUsAutocompleteClient(): UsAutocompleteClient {
+		return this.buildClient(US_AUTOCOMPLETE_API_URL, UsAutocompleteClient);
 	}
 
 	buildUsExtractClient(): UsExtractClient {

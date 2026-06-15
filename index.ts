@@ -19,6 +19,9 @@ import ResultUSZipcode from "./src/us_zipcode/Result.js";
 import LookupUSAutocompletePro from "./src/us_autocomplete_pro/Lookup.js";
 import SuggestionUSAutocompletePro from "./src/us_autocomplete_pro/Suggestion.js";
 
+import LookupUSAutocomplete from "./src/us_autocomplete/Lookup.js";
+import SuggestionUSAutocomplete from "./src/us_autocomplete/Suggestion.js";
+
 import LookupUSExtract from "./src/us_extract/Lookup.js";
 import ResultUSExtract from "./src/us_extract/Result.js";
 
@@ -70,6 +73,8 @@ export {
 	ResultUSZipcode,
 	LookupUSAutocompletePro,
 	SuggestionUSAutocompletePro,
+	LookupUSAutocomplete,
+	SuggestionUSAutocomplete,
 	LookupUSExtract,
 	ResultUSExtract,
 	LookupInternationalStreet,
@@ -119,6 +124,11 @@ export const usAutocompletePro = {
 	Suggestion: SuggestionUSAutocompletePro,
 };
 
+export const usAutocomplete = {
+	Lookup: LookupUSAutocomplete,
+	Suggestion: SuggestionUSAutocomplete,
+};
+
 export const usExtract = {
 	Lookup: LookupUSExtract,
 	Result: ResultUSExtract,
@@ -164,6 +174,7 @@ export default {
 	usStreet,
 	usZipcode,
 	usAutocompletePro,
+	usAutocomplete,
 	usExtract,
 	internationalStreet,
 	usReverseGeo,
