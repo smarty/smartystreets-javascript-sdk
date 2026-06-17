@@ -3,9 +3,10 @@
 
 # Smarty JavaScript SDK
 
-The official JavaScript/TypeScript SDK for accessing [Smarty](https://www.smarty.com) address validation APIs. Works in both Node.js and browser environments.
+The official JavaScript/TypeScript SDK for accessing [Smarty](https://www.smarty.com) address validation APIs. Compatible with Node.js 22 and later. Works in both Node.js and browser environments.
 
 [![npm](https://img.shields.io/npm/v/smartystreets-javascript-sdk)](https://www.npmjs.com/package/smartystreets-javascript-sdk)
+[![node](https://img.shields.io/node/v/smartystreets-javascript-sdk)](https://nodejs.org)
 [![license](https://img.shields.io/npm/l/smartystreets-javascript-sdk)](LICENSE.md)
 
 ## Installation
