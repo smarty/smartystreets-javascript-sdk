@@ -27,6 +27,7 @@ examples-ts: build
 	@echo "Running TypeScript examples..."
 	@npx tsx examples/us_street.ts || true
 	@npx tsx examples/us_street_iana_timezone.ts || true
+	@npx tsx examples/us_street_match_strategy.ts || true
 	@npx tsx examples/us_zipcode.ts || true
 	@npx tsx examples/us_autocomplete_pro.ts || true
 	@npx tsx examples/us_extract.ts || true
@@ -43,6 +44,7 @@ examples-js: build
 	@echo "Running JavaScript examples..."
 	@node examples/us_street.mjs || true
 	@node examples/us_street_iana_timezone.mjs || true
+	@node examples/us_street_match_strategy.mjs || true
 	@node examples/us_zipcode.mjs || true
 	@node examples/us_autocomplete_pro.mjs || true
 	@node examples/us_extract.mjs || true
