@@ -39,12 +39,14 @@ export default function sendBatch(
 	}
 
 	function assignResultsToLookups(batch: Batch, response: Response): Batch {
-		(response.payload as Record<string, any>[]).forEach((rawResult: Record<string, any>) => {
-			const result = new Result(rawResult);
-			const lookup = batch.getByIndex(result.inputIndex);
+		((response.payload as Record<string, any>[]) ?? []).forEach(
+			(rawResult: Record<string, any>) => {
+				const result = new Result(rawResult);
+				const lookup = batch.getByIndex(result.inputIndex);
 
-			lookup.result.push(result);
-		});
+				lookup.result.push(result);
+			},
+		);
 
 		return batch;
 	}
