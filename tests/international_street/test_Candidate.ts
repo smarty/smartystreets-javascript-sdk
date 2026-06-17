@@ -13,17 +13,12 @@ describe("An International match candidate", function () {
 			address6: "7",
 			address7: "8",
 			address8: "9",
-			address9: "10",
-			address10: "11",
-			address11: "12",
-			address12: "13",
 			components: {
 				country_iso_3: "14",
 				super_administrative_area: "15",
 				administrative_area: "16",
 				administrative_area_iso2: "16.1",
-				administrative_area_short: "16.2",
-				administrative_area_long: "16.3",
+				attention: "119",
 				sub_administrative_area: "17",
 				dependent_locality: "18",
 				dependent_locality_name: "19",
@@ -37,6 +32,11 @@ describe("An International match candidate", function () {
 				premise_prefix_number: "26.5",
 				premise_number: "27",
 				premise_type: "28",
+				short_address_code: "120",
+				sub_building_leading_type: "121",
+				sub_building_block: "122",
+				sub_building_door: "123",
+				sub_building_staircase: "124",
 				thoroughfare: "29",
 				thoroughfare_predirection: "30",
 				thoroughfare_postdirection: "31",
@@ -86,16 +86,11 @@ describe("An International match candidate", function () {
 					address6: "66",
 					address7: "67",
 					address8: "68",
-					address9: "69",
-					address10: "70",
-					address11: "71",
-					address12: "72",
 					components: {
 						country_iso_3: "73",
 						super_administrative_area: "74",
 						administrative_area: "75",
-						administrative_area_short: "75.1",
-						administrative_area_long: "75.2",
+						attention: "126",
 						sub_administrative_area: "76",
 						dependent_locality: "77",
 						dependent_locality_name: "78",
@@ -109,6 +104,11 @@ describe("An International match candidate", function () {
 						premise_prefix_number: "86",
 						premise_number: "87",
 						premise_type: "88",
+						short_address_code: "127",
+						sub_building_leading_type: "128",
+						sub_building_block: "129",
+						sub_building_door: "130",
+						sub_building_staircase: "131",
 						thoroughfare: "89",
 						thoroughfare_predirection: "90",
 						thoroughfare_postdirection: "91",
@@ -150,17 +150,12 @@ describe("An International match candidate", function () {
 		expect(candidate.address6).to.equal("7");
 		expect(candidate.address7).to.equal("8");
 		expect(candidate.address8).to.equal("9");
-		expect(candidate.address9).to.equal("10");
-		expect(candidate.address10).to.equal("11");
-		expect(candidate.address11).to.equal("12");
-		expect(candidate.address12).to.equal("13");
 		let components = candidate.components;
 		expect(components.countryIso3).to.equal("14");
 		expect(components.superAdministrativeArea).to.equal("15");
 		expect(components.administrativeArea).to.equal("16");
 		expect(components.administrativeAreaIso2).to.equal("16.1");
-		expect(components.administrativeAreaShort).to.equal("16.2");
-		expect(components.administrativeAreaLong).to.equal("16.3");
+		expect(components.attention).to.equal("119");
 		expect(components.subAdministrativeArea).to.equal("17");
 		expect(components.dependentLocality).to.equal("18");
 		expect(components.dependentLocalityName).to.equal("19");
@@ -174,6 +169,11 @@ describe("An International match candidate", function () {
 		expect(components.premisePrefixNumber).to.equal("26.5");
 		expect(components.premiseNumber).to.equal("27");
 		expect(components.premiseType).to.equal("28");
+		expect(components.shortAddressCode).to.equal("120");
+		expect(components.subBuildingLeadingType).to.equal("121");
+		expect(components.subBuildingBlock).to.equal("122");
+		expect(components.subBuildingDoor).to.equal("123");
+		expect(components.subBuildingStaircase).to.equal("124");
 		expect(components.thoroughfare).to.equal("29");
 		expect(components.thoroughfarePredirection).to.equal("30");
 		expect(components.thoroughfarePostdirection).to.equal("31");
@@ -221,16 +221,11 @@ describe("An International match candidate", function () {
 		expect(changes.address6).to.equal("66");
 		expect(changes.address7).to.equal("67");
 		expect(changes.address8).to.equal("68");
-		expect(changes.address9).to.equal("69");
-		expect(changes.address10).to.equal("70");
-		expect(changes.address11).to.equal("71");
-		expect(changes.address12).to.equal("72");
 		let ccomponents = changes.components;
 		expect(ccomponents.countryIso3).to.equal("73");
 		expect(ccomponents.superAdministrativeArea).to.equal("74");
 		expect(ccomponents.administrativeArea).to.equal("75");
-		expect(ccomponents.administrativeAreaShort).to.equal("75.1");
-		expect(ccomponents.administrativeAreaLong).to.equal("75.2");
+		expect(ccomponents.attention).to.equal("126");
 		expect(ccomponents.subAdministrativeArea).to.equal("76");
 		expect(ccomponents.dependentLocality).to.equal("77");
 		expect(ccomponents.dependentLocalityName).to.equal("78");
@@ -244,6 +239,11 @@ describe("An International match candidate", function () {
 		expect(ccomponents.premisePrefixNumber).to.equal("86");
 		expect(ccomponents.premiseNumber).to.equal("87");
 		expect(ccomponents.premiseType).to.equal("88");
+		expect(ccomponents.shortAddressCode).to.equal("127");
+		expect(ccomponents.subBuildingLeadingType).to.equal("128");
+		expect(ccomponents.subBuildingBlock).to.equal("129");
+		expect(ccomponents.subBuildingDoor).to.equal("130");
+		expect(ccomponents.subBuildingStaircase).to.equal("131");
 		expect(ccomponents.thoroughfare).to.equal("89");
 		expect(ccomponents.thoroughfarePredirection).to.equal("90");
 		expect(ccomponents.thoroughfarePostdirection).to.equal("91");

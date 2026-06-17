@@ -63,7 +63,7 @@ version:
 	sed -i.bak -e 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE1)" && rm -f "$(VERSION_FILE1).bak"
 	sed -i.bak -e 's/^ "version": "0\.0\.0",/ "version": "$(VERSION)",/g' "$(VERSION_FILE2)" && rm -f "$(VERSION_FILE2).bak"
 
-publish: test build version
+publish: build test version
 	npm publish
 
 .PHONY: test fmt clean build compile cover examples examples-ts examples-js integrate version publish
