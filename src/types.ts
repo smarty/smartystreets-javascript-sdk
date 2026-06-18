@@ -25,8 +25,6 @@ export interface Signer {
 	sign(request: Request): void;
 }
 
-export type Source = "all" | "postal" | (string & {});
-
 export interface BaseLookup {
 	inputId?: string | number | undefined;
 	customParameters: Record<string, string>;

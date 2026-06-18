@@ -49,11 +49,12 @@ import BusinessDetailAttributes from "./src/us_enrichment/business/DetailAttribu
 import LookupInternationalPostalCode from "./src/international_postal_code/Lookup.js";
 import ResultInternationalPostalCode from "./src/international_postal_code/Result.js";
 
-export type { Request, Response, Sender, Sleeper, Signer, Source } from "./src/types.js";
+export type { Request, Response, Sender, Sleeper, Signer } from "./src/types.js";
 export { SmartyError, NotModifiedError } from "./src/Errors.js";
 export type { MatchStrategy, OutputFormat, CountySource } from "./src/us_street/Lookup.js";
 export type { CoordinateLicense, MatchInfo } from "./src/us_street/Candidate.js";
-export type { Geolocation } from "./src/us_autocomplete_pro/Lookup.js";
+export type { Geolocation, AutocompleteSource } from "./src/us_autocomplete_pro/Lookup.js";
+export type { ReverseGeoSource } from "./src/us_reverse_geo/Lookup.js";
 export type { Language, Geocode } from "./src/international_street/Lookup.js";
 
 export {

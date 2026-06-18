@@ -1,14 +1,15 @@
 import Response from "./Response.js";
-import type { Source } from "../types.js";
+
+export type ReverseGeoSource = "all" | "postal" | (string & {});
 
 export default class Lookup {
 	latitude: string;
 	longitude: string;
-	source: Source | undefined;
+	source: ReverseGeoSource | undefined;
 	response: Response;
 	customParameters: Record<string, string>;
 
-	constructor(latitude: number, longitude: number, source?: Source) {
+	constructor(latitude: number, longitude: number, source?: ReverseGeoSource) {
 		this.latitude = latitude.toFixed(8);
 		this.longitude = longitude.toFixed(8);
 		this.source = source;
