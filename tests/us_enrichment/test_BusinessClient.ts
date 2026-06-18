@@ -333,26 +333,22 @@ describe("Client.sendBusinessDetail", function () {
 });
 
 describe("Client error unwrapping", function () {
-	it("rejects with NotModifiedError directly when the sender rejects with a Response wrapper (304)", function () {
-		const notModified = new errors.NotModifiedError(undefined, "srv-etag");
-		const wrapper = {
-			statusCode: 304,
-			payload: null,
-			error: notModified,
-			headers: { etag: "srv-etag" },
+	it("resolves successfully on a 304 response and refreshes the etag", function () {
+		const okSender = {
+			send: () =>
+				Promise.resolve({
+					statusCode: 304,
+					payload: null,
+					error: null,
+					headers: { etag: "srv-etag" },
+				}),
 		};
-		const failingSender = { send: () => Promise.reject(wrapper) };
-		const client = new Client(failingSender as any);
+		const client = new Client(okSender as any);
+		const lookup = new SummaryLookup("sk");
 
-		return client.sendBusinessSummary(new SummaryLookup("sk")).then(
-			() => {
-				throw new Error("expected rejection");
-			},
-			(err) => {
-				expect(err).to.be.an.instanceOf(errors.NotModifiedError);
-				expect(err.responseEtag).to.equal("srv-etag");
-			},
-		);
+		return client.sendBusinessSummary(lookup).then(() => {
+			expect(lookup.responseEtag).to.equal("srv-etag");
+		});
 	});
 
 	it("rejects with the inner InternalServerError for a wrapped 500", function () {

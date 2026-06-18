@@ -135,11 +135,12 @@ export default class HttpSender {
 	private async parseResponseBody(
 		response: globalThis.Response,
 	): Promise<object[] | object | string | null> {
+		const text = await response.text();
+		if (!text) return null;
 		const contentType = response.headers.get("content-type") ?? "";
 		if (contentType.includes("application/json")) {
-			return await response.json();
+			return JSON.parse(text);
 		}
-		const text = await response.text();
-		return text || null;
+		return text;
 	}
 }
