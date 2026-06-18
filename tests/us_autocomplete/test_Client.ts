@@ -67,6 +67,73 @@ describe("A US Autocomplete Client", function () {
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
 	});
 
+	it("correctly builds parameters with source all.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("1");
+		lookup.source = "all";
+
+		let expectedParameters = {
+			exclude_states: "",
+			include_only_cities: "",
+			include_only_states: "",
+			include_only_zip_codes: "",
+			prefer_cities: "",
+			prefer_states: "",
+			prefer_zip_codes: "",
+			search: "1",
+			source: "all",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("correctly builds parameters with source postal.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("1");
+		lookup.source = "postal";
+
+		let expectedParameters = {
+			exclude_states: "",
+			include_only_cities: "",
+			include_only_states: "",
+			include_only_zip_codes: "",
+			prefer_cities: "",
+			prefer_states: "",
+			prefer_zip_codes: "",
+			search: "1",
+			source: "postal",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("correctly builds parameters with no source.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("1");
+
+		let expectedParameters = {
+			exclude_states: "",
+			include_only_cities: "",
+			include_only_states: "",
+			include_only_zip_codes: "",
+			prefer_cities: "",
+			prefer_states: "",
+			prefer_zip_codes: "",
+			search: "1",
+		};
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
 	it("throws an error if sending without a lookup.", function () {
 		let mockSender = new MockSender();
 		let client = new Client(mockSender);
