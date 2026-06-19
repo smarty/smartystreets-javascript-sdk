@@ -52,6 +52,32 @@ describe("Client.sendBusinessSummary", function () {
 		});
 	});
 
+	it("targets /search/business with a business_name param", function () {
+		const mockSender = new MockSender();
+		const client = new Client(mockSender);
+		const lookup = new SummaryLookup();
+		lookup.businessName = "Style Studio";
+
+		client.sendBusinessSummary(lookup);
+
+		expect(mockSender.request.baseUrlParam).to.equal("search/business");
+		expect(mockSender.request.parameters).to.deep.equal({
+			business_name: "Style Studio",
+		});
+	});
+
+	it("omits the business_name param when businessName is blank", function () {
+		const mockSender = new MockSender();
+		const client = new Client(mockSender);
+		const lookup = new SummaryLookup();
+		lookup.freeform = "1 Rosedale, Baltimore, Maryland";
+		lookup.businessName = "";
+
+		client.sendBusinessSummary(lookup);
+
+		expect(mockSender.request.parameters).to.not.have.property("business_name");
+	});
+
 	it("sends include, exclude, and custom parameters when set", function () {
 		const mockSender = new MockSender();
 		const client = new Client(mockSender);
@@ -307,26 +333,22 @@ describe("Client.sendBusinessDetail", function () {
 });
 
 describe("Client error unwrapping", function () {
-	it("rejects with NotModifiedError directly when the sender rejects with a Response wrapper (304)", function () {
-		const notModified = new errors.NotModifiedError(undefined, "srv-etag");
-		const wrapper = {
-			statusCode: 304,
-			payload: null,
-			error: notModified,
-			headers: { etag: "srv-etag" },
+	it("resolves successfully on a 304 response and refreshes the etag", function () {
+		const okSender = {
+			send: () =>
+				Promise.resolve({
+					statusCode: 304,
+					payload: null,
+					error: null,
+					headers: { etag: "srv-etag" },
+				}),
 		};
-		const failingSender = { send: () => Promise.reject(wrapper) };
-		const client = new Client(failingSender as any);
+		const client = new Client(okSender as any);
+		const lookup = new SummaryLookup("sk");
 
-		return client.sendBusinessSummary(new SummaryLookup("sk")).then(
-			() => {
-				throw new Error("expected rejection");
-			},
-			(err) => {
-				expect(err).to.be.an.instanceOf(errors.NotModifiedError);
-				expect(err.responseEtag).to.equal("srv-etag");
-			},
-		);
+		return client.sendBusinessSummary(lookup).then(() => {
+			expect(lookup.responseEtag).to.equal("srv-etag");
+		});
 	});
 
 	it("rejects with the inner InternalServerError for a wrapped 500", function () {

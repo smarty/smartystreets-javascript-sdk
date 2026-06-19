@@ -1,4 +1,4 @@
-import SmartySDK, { NotModifiedError } from "smartystreets-javascript-sdk";
+import SmartySDK from "smartystreets-javascript-sdk";
 
 const SmartyCore = SmartySDK.core;
 const { BusinessSummaryLookup, BusinessDetailLookup } = SmartySDK.usEnrichment;
@@ -23,15 +23,11 @@ async function demoSummaryEtag(smartyKey) {
 
 	const second = new BusinessSummaryLookup(smartyKey);
 	second.requestEtag = capturedEtag;
-	try {
-		await client.sendBusinessSummary(second);
+	await client.sendBusinessSummary(second);
+	if (!second.results) {
+		console.log("Second call: 304 Not Modified; refreshed etag:", second.responseEtag);
+	} else {
 		console.log("Second call: 200, new responseEtag:", second.responseEtag);
-	} catch (err) {
-		if (err instanceof NotModifiedError) {
-			console.log("Second call: 304 Not Modified; refreshed etag:", err.responseEtag);
-		} else {
-			throw err;
-		}
 	}
 }
 
@@ -46,20 +42,16 @@ async function demoDetailEtag(businessId) {
 
 	const second = new BusinessDetailLookup(businessId);
 	second.requestEtag = first.responseEtag;
-	try {
-		await client.sendBusinessDetail(second);
+	await client.sendBusinessDetail(second);
+	if (!second.result) {
+		console.log("Second call: 304 Not Modified; refreshed etag:", second.responseEtag);
+	} else {
 		console.log("Second call: 200, new responseEtag:", second.responseEtag);
-	} catch (err) {
-		if (err instanceof NotModifiedError) {
-			console.log("Second call: 304 Not Modified; refreshed etag:", err.responseEtag);
-		} else {
-			throw err;
-		}
 	}
 }
 
 async function main() {
-	const smartyKey = "334968275";
+	const smartyKey = "1962995076";
 	await demoSummaryEtag(smartyKey);
 
 	const summary = new BusinessSummaryLookup(smartyKey);

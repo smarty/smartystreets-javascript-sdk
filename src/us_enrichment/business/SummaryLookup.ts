@@ -4,6 +4,7 @@ import SummaryResult from "./SummaryResult.js";
 export default class SummaryLookup extends EnrichmentLookupBase {
 	smartyKey: string | undefined;
 	freeform: string | undefined;
+	businessName: string | undefined;
 	street: string | undefined;
 	city: string | undefined;
 	state: string | undefined;

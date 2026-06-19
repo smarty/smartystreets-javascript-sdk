@@ -76,9 +76,9 @@ export default class Client {
 
 	sendBusinessSummary(lookup: SummaryLookup): Promise<SummaryLookup> {
 		if (!lookup) throw new UndefinedLookupError();
-		if (isBlank(lookup.smartyKey) && isBlank(lookup.street) && isBlank(lookup.freeform)) {
+		if (isBlank(lookup.smartyKey) && isBlank(lookup.street) && isBlank(lookup.freeform) && isBlank(lookup.businessName)) {
 			throw new SmartyError(
-				"Business.Summary lookup requires one of 'smartyKey', 'street', or 'freeform' to be set",
+				"Business.Summary lookup requires one of 'smartyKey', 'street', 'freeform', or 'business_name' to be set",
 			);
 		}
 
@@ -88,6 +88,7 @@ export default class Client {
 		} else {
 			request.baseUrlParam = "search/business";
 			if (!isBlank(lookup.freeform)) request.parameters["freeform"] = lookup.freeform!;
+			if (!isBlank(lookup.businessName)) request.parameters["business_name"] = lookup.businessName!;
 			if (!isBlank(lookup.street)) request.parameters["street"] = lookup.street!;
 			if (!isBlank(lookup.city)) request.parameters["city"] = lookup.city!;
 			if (!isBlank(lookup.state)) request.parameters["state"] = lookup.state!;
@@ -154,14 +155,16 @@ export default class Client {
 			this.sender
 				.send(request)
 				.then((response) => {
-					if (response.error) return reject(response.error);
 					this.captureResponseEtag(response, lookup);
+					if (response.statusCode === 304) {
+						return resolve(lookup);
+					}
 					onPayload(response.payload as Record<string, unknown>);
 					resolve(lookup);
 				})
 				.catch((err: unknown) => {
 					// StatusCodeSender rejects with the Response wrapper (with .error set).
-					// Unwrap so consumers can catch SmartyError subclasses like NotModifiedError directly.
+					// Unwrap so consumers can catch SmartyError subclasses directly.
 					const inner =
 						err && typeof err === "object" && "error" in err && (err as { error: unknown }).error;
 					reject(inner || err);

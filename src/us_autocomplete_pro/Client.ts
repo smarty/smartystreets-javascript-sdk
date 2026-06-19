@@ -29,9 +29,9 @@ export default class Client {
 
 					const payload = response.payload as {
 						suggestions: RawUsAutocompleteSuggestion[] | null;
-					};
+					} | null;
 					lookup.result =
-						payload.suggestions === null
+						!payload || payload.suggestions === null
 							? []
 							: payload.suggestions.map((suggestion) => new Suggestion(suggestion));
 					resolve(lookup);

@@ -58,6 +58,7 @@ export type { MatchStrategy, OutputFormat, CountySource } from "./src/us_street/
 export type { CoordinateLicense, MatchInfo } from "./src/us_street/Candidate.js";
 export type { Geolocation } from "./src/us_autocomplete_pro/Lookup.js";
 export type { AutocompleteSource } from "./src/us_autocomplete/Lookup.js";
+export type { ReverseGeoSource } from "./src/us_reverse_geo/Lookup.js";
 export type { Language, Geocode } from "./src/international_street/Lookup.js";
 
 export {
