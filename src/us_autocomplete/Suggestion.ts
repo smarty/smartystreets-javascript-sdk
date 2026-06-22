@@ -19,7 +19,7 @@ export default class Suggestion {
 	state: string;
 	zipcode: string;
 	entries: number;
-	source: string | undefined;
+	source: string;
 
 	constructor(responseData: RawUsAutocompleteSuggestion) {
 		this.smartyKey = responseData.smarty_key ?? "";
@@ -30,9 +30,6 @@ export default class Suggestion {
 		this.state = responseData.state ?? "";
 		this.zipcode = responseData.zipcode ?? "";
 		this.entries = responseData.entries ?? 0;
-
-		if (responseData.source) {
-			this.source = responseData.source;
-		}
+		this.source = responseData.source ?? "";
 	}
 }
