@@ -12,6 +12,7 @@ describe("A US Autocomplete Suggestion", function () {
 			state: "d",
 			zipcode: "e",
 			entries: 6,
+			source: "f",
 		};
 		let suggestion = new Suggestion(mockSuggestion);
 
@@ -23,9 +24,10 @@ describe("A US Autocomplete Suggestion", function () {
 		expect(suggestion.state).to.equal("d");
 		expect(suggestion.zipcode).to.equal("e");
 		expect(suggestion.entries).to.equal(6);
+		expect(suggestion.source).to.equal("f");
 	});
 
-	it("defaults smartyKey and entryId to empty strings when absent from the response.", function () {
+	it("defaults smartyKey, entryId, and source to empty strings when absent from the response.", function () {
 		const mockSuggestion = {
 			street_line: "a",
 			city: "c",
@@ -37,6 +39,7 @@ describe("A US Autocomplete Suggestion", function () {
 		expect(suggestion.smartyKey).to.equal("");
 		expect(suggestion.entryId).to.equal("");
 		expect(suggestion.entries).to.equal(0);
+		expect(suggestion.source).to.equal("");
 	});
 
 	it("populates smartyKey and entryId from the response.", function () {
@@ -44,10 +47,5 @@ describe("A US Autocomplete Suggestion", function () {
 
 		expect(suggestion.smartyKey).to.equal("z");
 		expect(suggestion.entryId).to.equal("y");
-	});
-
-	it("sets source only when present in the response.", function () {
-		expect(new Suggestion({}).source).to.equal(undefined);
-		expect(new Suggestion({ source: "postal" }).source).to.equal("postal");
 	});
 });
