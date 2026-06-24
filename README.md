@@ -55,6 +55,7 @@ console.log(response.result); // Array of address suggestions
 | [US Street](https://www.smarty.com/docs/cloud/us-street-api) | `usStreet` | `buildUsStreetApiClient()` | [example](examples/us_street.mjs) |
 | [US Zipcode](https://www.smarty.com/docs/cloud/us-zipcode-api) | `usZipcode` | `buildUsZipcodeClient()` | [example](examples/us_zipcode.mjs) |
 | [US Autocomplete Pro](https://www.smarty.com/docs/cloud/us-autocomplete-pro-api) | `usAutocompletePro` | `buildUsAutocompleteProClient()` | [example](examples/us_autocomplete_pro.mjs) |
+| [US Autocomplete](https://www.smarty.com/docs/apis/us-autocomplete-v2) | `usAutocomplete` | `buildUsAutocompleteClient()` | [example](examples/us_autocomplete.mjs) |
 | [US Extract](https://www.smarty.com/docs/cloud/us-extract-api) | `usExtract` | `buildUsExtractClient()` | [example](examples/us_extract.mjs) |
 | [US Enrichment](https://www.smarty.com/docs/cloud/us-address-enrichment-api) | `usEnrichment` | `buildUsEnrichmentClient()` | [example](examples/us_enrichment.mjs) |
 | [US Reverse Geocoding](https://www.smarty.com/docs/cloud/us-reverse-geo-api) | `usReverseGeo` | `buildUsReverseGeoClient()` | [example](examples/us_reverse_geo.mjs) |

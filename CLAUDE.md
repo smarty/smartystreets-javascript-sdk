@@ -70,7 +70,7 @@ Each API follows the same structure in `src/<api_name>/`:
 - `Client.ts` - Request/response handling
 - `Candidate.ts`, `Result.ts`, or `Suggestion.ts` - Response data structures
 
-Supported APIs: `us_street`, `us_zipcode`, `us_autocomplete_pro`, `us_extract`, `us_enrichment`, `us_reverse_geo`, `international_street`, `international_address_autocomplete`, `international_postal_code`
+Supported APIs: `us_street`, `us_zipcode`, `us_autocomplete`, `us_autocomplete_pro`, `us_extract`, `us_enrichment`, `us_reverse_geo`, `international_street`, `international_address_autocomplete`, `international_postal_code`
 
 ### us_enrichment specifics
 

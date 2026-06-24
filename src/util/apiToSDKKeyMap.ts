@@ -1,6 +1,7 @@
 interface ApiToSDKKeyMap {
 	usStreet: Record<string, string>;
 	usAutocompletePro: Record<string, string>;
+	usAutocomplete: Record<string, string>;
 	usZipcode: Record<string, string>;
 	internationalStreet: Record<string, string>;
 	internationalAddressAutocomplete: Record<string, string>;
@@ -30,6 +31,22 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 	usAutocompletePro: {
 		search: "search",
 		selected: "selected",
+		max_results: "maxResults",
+		include_only_cities: "includeOnlyCities",
+		include_only_states: "includeOnlyStates",
+		include_only_zip_codes: "includeOnlyZIPCodes",
+		exclude_states: "excludeStates",
+		prefer_cities: "preferCities",
+		prefer_states: "preferStates",
+		prefer_zip_codes: "preferZIPCodes",
+		prefer_ratio: "preferRatio",
+		prefer_geolocation: "preferGeolocation",
+		source: "source",
+	},
+	usAutocomplete: {
+		search: "search",
+		selected: "selected",
+		exclude: "exclude",
 		max_results: "maxResults",
 		include_only_cities: "includeOnlyCities",
 		include_only_states: "includeOnlyStates",

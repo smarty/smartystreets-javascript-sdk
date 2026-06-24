@@ -17,6 +17,10 @@ function buildUsAutocompleteProApiClient(credentials: Credentials) {
 	return instantiateClientBuilder(credentials).buildUsAutocompleteProClient();
 }
 
+function buildUsAutocompleteApiClient(credentials: Credentials) {
+	return instantiateClientBuilder(credentials).buildUsAutocompleteClient();
+}
+
 function buildUsExtractApiClient(credentials: Credentials) {
 	return instantiateClientBuilder(credentials).buildUsExtractClient();
 }
@@ -48,6 +52,7 @@ function buildInternationalPostalCodeApiClient(credentials: Credentials) {
 export default {
 	usStreet: buildUsStreetApiClient,
 	usAutocompletePro: buildUsAutocompleteProApiClient,
+	usAutocomplete: buildUsAutocompleteApiClient,
 	usExtract: buildUsExtractApiClient,
 	usZipcode: buildUsZipcodeApiClient,
 	internationalStreet: buildInternationalStreetApiClient,

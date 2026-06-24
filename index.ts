@@ -19,6 +19,9 @@ import ResultUSZipcode from "./src/us_zipcode/Result.js";
 import LookupUSAutocompletePro from "./src/us_autocomplete_pro/Lookup.js";
 import SuggestionUSAutocompletePro from "./src/us_autocomplete_pro/Suggestion.js";
 
+import LookupUSAutocomplete from "./src/us_autocomplete/Lookup.js";
+import SuggestionUSAutocomplete from "./src/us_autocomplete/Suggestion.js";
+
 import LookupUSExtract from "./src/us_extract/Lookup.js";
 import ResultUSExtract from "./src/us_extract/Result.js";
 
@@ -53,7 +56,8 @@ export type { Request, Response, Sender, Sleeper, Signer } from "./src/types.js"
 export { SmartyError, NotModifiedError } from "./src/Errors.js";
 export type { MatchStrategy, OutputFormat, CountySource } from "./src/us_street/Lookup.js";
 export type { CoordinateLicense, MatchInfo } from "./src/us_street/Candidate.js";
-export type { Geolocation, AutocompleteSource } from "./src/us_autocomplete_pro/Lookup.js";
+export type { Geolocation } from "./src/us_autocomplete_pro/Lookup.js";
+export type { AutocompleteSource } from "./src/us_autocomplete/Lookup.js";
 export type { ReverseGeoSource } from "./src/us_reverse_geo/Lookup.js";
 export type { Language, Geocode } from "./src/international_street/Lookup.js";
 
@@ -71,6 +75,8 @@ export {
 	ResultUSZipcode,
 	LookupUSAutocompletePro,
 	SuggestionUSAutocompletePro,
+	LookupUSAutocomplete,
+	SuggestionUSAutocomplete,
 	LookupUSExtract,
 	ResultUSExtract,
 	LookupInternationalStreet,
@@ -120,6 +126,11 @@ export const usAutocompletePro = {
 	Suggestion: SuggestionUSAutocompletePro,
 };
 
+export const usAutocomplete = {
+	Lookup: LookupUSAutocomplete,
+	Suggestion: SuggestionUSAutocomplete,
+};
+
 export const usExtract = {
 	Lookup: LookupUSExtract,
 	Result: ResultUSExtract,
@@ -165,6 +176,7 @@ export default {
 	usStreet,
 	usZipcode,
 	usAutocompletePro,
+	usAutocomplete,
 	usExtract,
 	internationalStreet,
 	usReverseGeo,
