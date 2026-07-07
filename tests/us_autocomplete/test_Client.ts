@@ -167,6 +167,7 @@ describe("A US Autocomplete Client", function () {
 		const responseData = {
 			smarty_key: "z",
 			entry_id: "y",
+			urbanization: "urb",
 			street_line: "a",
 			secondary: "b",
 			city: "c",

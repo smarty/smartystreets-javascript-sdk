@@ -1,6 +1,7 @@
 export interface RawUsAutocompleteSuggestion {
 	smarty_key?: string;
 	entry_id?: string;
+	urbanization?: string;
 	street_line?: string;
 	secondary?: string;
 	city?: string;
@@ -13,6 +14,7 @@ export interface RawUsAutocompleteSuggestion {
 export default class Suggestion {
 	smartyKey: string;
 	entryId: string;
+	urbanization: string;
 	streetLine: string;
 	secondary: string;
 	city: string;
@@ -24,6 +26,7 @@ export default class Suggestion {
 	constructor(responseData: RawUsAutocompleteSuggestion) {
 		this.smartyKey = responseData.smarty_key ?? "";
 		this.entryId = responseData.entry_id ?? "";
+		this.urbanization = responseData.urbanization ?? "";
 		this.streetLine = responseData.street_line ?? "";
 		this.secondary = responseData.secondary ?? "";
 		this.city = responseData.city ?? "";
