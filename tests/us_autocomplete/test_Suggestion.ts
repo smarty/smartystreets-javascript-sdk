@@ -6,6 +6,7 @@ describe("A US Autocomplete Suggestion", function () {
 		const mockSuggestion = {
 			smarty_key: "z",
 			entry_id: "y",
+			urbanization: "urb",
 			street_line: "a",
 			secondary: "b",
 			city: "c",
@@ -18,6 +19,7 @@ describe("A US Autocomplete Suggestion", function () {
 
 		expect(suggestion.smartyKey).to.equal("z");
 		expect(suggestion.entryId).to.equal("y");
+		expect(suggestion.urbanization).to.equal("urb");
 		expect(suggestion.streetLine).to.equal("a");
 		expect(suggestion.secondary).to.equal("b");
 		expect(suggestion.city).to.equal("c");
@@ -38,6 +40,7 @@ describe("A US Autocomplete Suggestion", function () {
 
 		expect(suggestion.smartyKey).to.equal("");
 		expect(suggestion.entryId).to.equal("");
+		expect(suggestion.urbanization).to.equal("");
 		expect(suggestion.entries).to.equal(0);
 		expect(suggestion.source).to.equal("");
 	});
