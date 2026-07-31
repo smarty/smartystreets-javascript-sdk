@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import Client from "../../src/international_street/Client.js";
-import Lookup from "../../src/international_street/Lookup.js";
+import Lookup, { LanguageMode } from "../../src/international_street/Lookup.js";
 import Candidate from "../../src/international_street/Candidate.js";
 import errors from "../../src/Errors.js";
 import { MockSender, MockSenderWithResponse } from "../fixtures/mock_senders.js";
@@ -45,8 +45,8 @@ describe("An International Street client", function () {
 		lookup.locality = "h";
 		lookup.administrativeArea = "i";
 		lookup.postalCode = "j";
-		lookup.geocode = "k";
-		lookup.language = "l";
+		lookup.geocode = "true";
+		lookup.language = LanguageMode.Latin;
 		let expectedParameters = {
 			country: "a",
 			freeform: "b",
@@ -58,13 +58,35 @@ describe("An International Street client", function () {
 			locality: "h",
 			administrative_area: "i",
 			postal_code: "j",
-			geocode: "k",
-			language: "l",
+			geocode: "true",
+			language: "latin",
 		};
 
 		client.send(lookup);
 
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("normalizes a mixed-case language value before sending.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("CA", "123 Main St");
+		lookup.language = "Latin" as LanguageMode;
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters["language"]).to.equal("latin");
+	});
+
+	it("does not mutate the original language value when normalizing.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("CA", "123 Main St");
+		lookup.language = "Latin" as LanguageMode;
+
+		client.send(lookup);
+
+		expect(lookup.language).to.equal("Latin");
 	});
 
 	it("attaches a match candidate from a response to a lookup.", function () {

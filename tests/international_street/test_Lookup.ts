@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Lookup from "../../src/international_street/Lookup.js";
+import Lookup, { LanguageMode } from "../../src/international_street/Lookup.js";
 import errors from "../../src/Errors.js";
 
 describe("An International Street lookup", function () {
@@ -35,7 +35,7 @@ describe("An International Street lookup", function () {
 
 	it("rejects lookups with an invalid language.", function () {
 		let lookup = new Lookup();
-		lookup.language = "Rubberduckian";
+		lookup.language = "Rubberduckian" as LanguageMode;
 
 		ensureValidationThrows(lookup.ensureValidData, messages.invalidLanguage);
 	});
@@ -52,14 +52,21 @@ describe("An International Street lookup", function () {
 
 	it("accepts lookups with a valid language.", function () {
 		let lookup1 = new Lookup();
-		lookup1.language = "latin";
+		lookup1.language = LanguageMode.Latin;
 
 		expect(lookup1.ensureValidData()).to.equal(true);
 
 		let lookup2 = new Lookup();
-		lookup2.language = "native";
+		lookup2.language = LanguageMode.Native;
 
 		expect(lookup2.ensureValidData()).to.equal(true);
+	});
+
+	it("accepts lookups with a mixed-case language value.", function () {
+		let lookup = new Lookup();
+		lookup.language = "Latin" as LanguageMode;
+
+		expect(lookup.ensureValidData()).to.equal(true);
 	});
 
 	function ensureValidationThrows(callback: any, message: any) {

@@ -1,7 +1,11 @@
 import Candidate from "./Candidate.js";
 import { UnprocessableEntityError } from "../Errors.js";
 
-export type Language = "native" | "latin" | (string & {});
+export enum LanguageMode {
+	Native = "native",
+	Latin = "latin",
+}
+
 export type Geocode = "true" | (string & {});
 
 const messages = {
@@ -24,6 +28,22 @@ function fieldIsSet(field: string | undefined): boolean {
 	return !fieldIsMissing(field);
 }
 
+// Resolves a LanguageMode member or a raw value (eg. from untyped JS callers) into a LanguageMode,
+// matching "native"/"latin" regardless of case. Returns undefined for unset/empty input.
+export function resolveLanguageMode(
+	value: LanguageMode | string | undefined,
+): LanguageMode | undefined {
+	if (!fieldIsSet(value)) return undefined;
+
+	const match = Object.values(LanguageMode).find(
+		(mode) => mode.toLowerCase() === String(value).toLowerCase(),
+	);
+
+	if (!match) throw new UnprocessableEntityError(messages.invalidLanguage);
+
+	return match;
+}
+
 export default class Lookup {
 	result: Candidate[];
 	country: string | undefined;
@@ -37,7 +57,7 @@ export default class Lookup {
 	administrativeArea: string | undefined;
 	postalCode: string | undefined;
 	geocode: Geocode | undefined;
-	language: Language | undefined;
+	language: LanguageMode | undefined;
 	inputId: string | undefined;
 	customParameters: Record<string, string>;
 
@@ -77,19 +97,13 @@ export default class Lookup {
 	}
 
 	ensureValidData(): boolean {
-		const languageIsSetIncorrectly = () => {
-			const isLanguage = (language: string) => this.language!.toLowerCase() === language;
-
-			return fieldIsSet(this.language) && !(isLanguage("latin") || isLanguage("native"));
-		};
-
 		const geocodeIsSetIncorrectly = () => {
 			return fieldIsSet(this.geocode) && this.geocode!.toLowerCase() !== "true";
 		};
 
 		if (geocodeIsSetIncorrectly()) throw new UnprocessableEntityError(messages.badGeocode);
 
-		if (languageIsSetIncorrectly()) throw new UnprocessableEntityError(messages.invalidLanguage);
+		resolveLanguageMode(this.language);
 
 		return true;
 	}
