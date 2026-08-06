@@ -4,7 +4,7 @@ import Candidate, { RawIntlStreetCandidate } from "./Candidate.js";
 import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender, Response } from "../types.js";
-import Lookup from "./Lookup.js";
+import Lookup, { resolveLanguageMode } from "./Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.internationalStreet;
 
@@ -19,9 +19,13 @@ export default class Client {
 		if (typeof lookup === "undefined") throw new UndefinedLookupError();
 
 		lookup.ensureEnoughInfo();
+		lookup.ensureValidData();
 
 		const request = new Request();
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
+
+		const resolvedLanguage = resolveLanguageMode(lookup.language);
+		if (resolvedLanguage !== undefined) request.parameters["language"] = resolvedLanguage;
 
 		return new Promise((resolve, reject) => {
 			this.sender
