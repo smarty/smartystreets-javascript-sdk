@@ -1,11 +1,7 @@
 import { ClientBuilder, BasicAuthCredentials, LookupUSExtract } from "smartystreets-javascript-sdk";
 
-// for client-side requests (browser/mobile), use this code:
-// import { SharedCredentials } from "smartystreets-javascript-sdk";
-// const key: string = process.env.SMARTY_EMBEDDED_KEY!;
-// const credentials = new SharedCredentials(key);
-
-// for Server-to-server requests, use this code:
+// The US Extract API is POST-only and embedded keys are restricted to GET, so this
+// API requires secret keys: https://www.smarty.com/docs/cloud/authentication
 const authId = process.env.SMARTY_AUTH_ID!;
 const authToken = process.env.SMARTY_AUTH_TOKEN!;
 const credentials = new BasicAuthCredentials(authId, authToken);

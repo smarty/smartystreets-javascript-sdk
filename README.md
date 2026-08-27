@@ -68,7 +68,7 @@ console.log(response.result); // Array of address suggestions
 Three credential types are available:
 
 - **`StaticCredentials(authId, authToken)`** — Server-side authentication using auth-id and auth-token.
-- **`SharedCredentials(key)`** — Client-side (browser) authentication using an embedded key. Does not support batch (POST) requests.
+- **`SharedCredentials(key)`** — Client-side (browser) authentication using an embedded key. Embedded keys are restricted to HTTP GET, so they cannot be used for batch (POST) requests or with the US Extract API, which is POST-only.
 - **`BasicAuthCredentials(authId, authToken)`** — HTTP Basic Auth.
 
 ## Browser Usage
@@ -84,7 +84,7 @@ const credentials = new SmartySDK.core.SharedCredentials("YOUR_EMBEDDED_KEY");
 const client = new SmartySDK.core.ClientBuilder(credentials).buildUsStreetApiClient();
 ```
 
-Note that `SharedCredentials` does not support batch (POST) requests — send one lookup at a time.
+Note that `SharedCredentials` does not support batch (POST) requests — send one lookup at a time. The US Extract API is POST-only and so is unavailable with an embedded key.
 
 ### Features not available in the browser
 
@@ -129,7 +129,7 @@ esbuild app.js --bundle --external:undici
 
 ### Batch Requests
 
-Send up to 100 lookups in a single request (not available with `SharedCredentials`):
+Send up to 100 lookups in a single request (requires `StaticCredentials` or `BasicAuthCredentials`; not available with `SharedCredentials`):
 
 ```javascript
 const batch = new SmartySDK.core.Batch();
