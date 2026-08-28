@@ -83,7 +83,7 @@ Supported APIs: `us_street`, `us_zipcode`, `us_autocomplete`, `us_autocomplete_p
 Three credential types, each implementing a `sign(request)` method used by `SigningSender`:
 
 - **StaticCredentials** - Server-side: adds `auth-id` + `auth-token` query params
-- **SharedCredentials** - Client-side/browser: adds embedded `key` param + `Referer` header. Cannot be used with POST (batch) requests.
+- **SharedCredentials** - Client-side/browser: adds embedded `key` param + `Referer` header. Cannot be used with POST (batch) requests or the US Extract API (POST-only).
 - **BasicAuthCredentials** - Adds HTTP Basic Auth `Authorization` header
 
 ### Entry Point

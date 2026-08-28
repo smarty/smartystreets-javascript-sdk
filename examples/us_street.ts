@@ -5,12 +5,8 @@ import {
 	Batch,
 } from "smartystreets-javascript-sdk";
 
-// for client-side requests (browser/mobile), use this code:
-// import { SharedCredentials } from "smartystreets-javascript-sdk";
-// const key: string = process.env.SMARTY_EMBEDDED_KEY!;
-// const credentials = new SharedCredentials(key);
-
-// for Server-to-server requests, use this code:
+// Batch requests are sent via HTTP POST. Embedded keys are restricted to GET, so
+// batches require secret keys: https://www.smarty.com/docs/cloud/authentication
 const authId = process.env.SMARTY_AUTH_ID!;
 const authToken = process.env.SMARTY_AUTH_TOKEN!;
 const credentials = new BasicAuthCredentials(authId, authToken);
@@ -66,7 +62,7 @@ async function main(): Promise<void> {
 	// uncomment the following line to add a custom parameter
 	// lookup3.addCustomParameter("max_candidates", 1);
 
-	// NOTE: batches are not supported when using SharedCredentials.
+	// NOTE: batch requests require secret keys; embedded keys cannot be used here.
 	const batch = new Batch();
 	batch.add(lookup1);
 	batch.add(lookup2);
