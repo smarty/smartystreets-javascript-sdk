@@ -1,4 +1,5 @@
 import Suggestion from "./Suggestion.js";
+import { LanguageMode } from "../international_street/Lookup.js";
 
 export default class Lookup {
 	result: Suggestion[];
@@ -10,6 +11,7 @@ export default class Lookup {
 	includeOnlyPostalCode: string | undefined;
 	maxGroupResults: number;
 	geolocation: boolean;
+	language: LanguageMode | undefined;
 	customParameters: Record<string, string>;
 
 	constructor({
@@ -21,6 +23,7 @@ export default class Lookup {
 		includeOnlyPostalCode,
 		maxGroupResults = 100,
 		geolocation = false,
+		language,
 	}: {
 		search?: string;
 		addressId?: string;
@@ -30,6 +33,7 @@ export default class Lookup {
 		includeOnlyPostalCode?: string;
 		maxGroupResults?: number;
 		geolocation?: boolean;
+		language?: LanguageMode;
 	} = {}) {
 		this.result = [];
 
@@ -41,6 +45,7 @@ export default class Lookup {
 		this.includeOnlyPostalCode = includeOnlyPostalCode;
 		this.maxGroupResults = maxGroupResults;
 		this.geolocation = geolocation;
+		this.language = language;
 		this.customParameters = {};
 	}
 

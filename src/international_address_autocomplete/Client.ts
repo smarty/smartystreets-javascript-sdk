@@ -5,6 +5,7 @@ import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender } from "../types.js";
 import Lookup from "./Lookup.js";
+import { resolveLanguageMode } from "../international_street/Lookup.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.internationalAddressAutocomplete;
 
@@ -20,6 +21,9 @@ export default class Client {
 
 		const request = new Request();
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
+
+		const resolvedLanguage = resolveLanguageMode(lookup.language);
+		if (resolvedLanguage !== undefined) request.parameters["language"] = resolvedLanguage;
 
 		if (lookup.geolocation) {
 			request.parameters["geolocation"] = "on";
