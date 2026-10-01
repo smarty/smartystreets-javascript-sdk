@@ -2,6 +2,7 @@ import {
 	ClientBuilder,
 	BasicAuthCredentials,
 	LookupInternationalAddressAutocomplete,
+	InternationalAutocompleteLanguageMode,
 } from "smartystreets-javascript-sdk";
 
 // for client-side requests (browser/mobile), use this code:
@@ -63,6 +64,7 @@ async function main(): Promise<void> {
 		country,
 		maxGroupResults: 50,
 		geolocation: true,
+		language: InternationalAutocompleteLanguageMode.Native,
 	});
 
 	await handleRequest(summaryLookup, "Response of summary results");

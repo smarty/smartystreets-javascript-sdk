@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import Client from "../../src/international_address_autocomplete/Client.js";
 import Lookup from "../../src/international_address_autocomplete/Lookup.js";
-import { LanguageMode } from "../../src/international_street/Lookup.js";
+import { LanguageMode } from "../../src/international_address_autocomplete/LanguageMode.js";
 import Suggestion from "../../src/international_address_autocomplete/Suggestion.js";
 import errors from "../../src/Errors.js";
 import { MockSender, MockSenderWithResponse } from "../fixtures/mock_senders.js";

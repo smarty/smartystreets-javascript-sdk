@@ -1,5 +1,5 @@
 import Suggestion from "./Suggestion.js";
-import { LanguageMode } from "../international_street/Lookup.js";
+import { LanguageMode } from "./LanguageMode.js";
 
 export default class Lookup {
 	result: Suggestion[];

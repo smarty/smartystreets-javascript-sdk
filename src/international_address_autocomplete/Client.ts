@@ -5,7 +5,7 @@ import buildInputData from "../util/buildInputData.js";
 import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { Sender } from "../types.js";
 import Lookup from "./Lookup.js";
-import { resolveLanguageMode } from "../international_street/Lookup.js";
+import { resolveLanguageMode } from "./LanguageMode.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.internationalAddressAutocomplete;
 

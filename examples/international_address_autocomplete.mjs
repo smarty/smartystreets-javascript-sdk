@@ -1,4 +1,4 @@
-import SmartySDK from "smartystreets-javascript-sdk";
+import SmartySDK, { InternationalAutocompleteLanguageMode } from "smartystreets-javascript-sdk";
 
 const SmartyCore = SmartySDK.core;
 const Lookup = SmartySDK.internationalAddressAutocomplete.Lookup;
@@ -29,6 +29,7 @@ const summaryLookup = new Lookup({
 	country,
 	maxGroupResults: 50,
 	geolocation: true,
+	language: InternationalAutocompleteLanguageMode.Native,
 });
 
 await handleRequest(summaryLookup, "Response of summary results");
