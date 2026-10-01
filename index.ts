@@ -61,6 +61,7 @@ export type { AutocompleteSource } from "./src/us_autocomplete/Lookup.js";
 export type { ReverseGeoSource } from "./src/us_reverse_geo/Lookup.js";
 export type { Geocode } from "./src/international_street/Lookup.js";
 export { LanguageMode } from "./src/international_street/Lookup.js";
+export { LanguageMode as InternationalAutocompleteLanguageMode } from "./src/international_address_autocomplete/LanguageMode.js";
 
 export {
 	Batch,

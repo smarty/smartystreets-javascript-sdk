@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import Lookup from "../../src/international_address_autocomplete/Lookup.js";
+import { LanguageMode } from "../../src/international_street/Lookup.js";
 
 describe("An International Address Autocomplete lookup", function () {
 	it("Can be newed up with a prefix", function () {
@@ -50,6 +51,12 @@ describe("An International Address Autocomplete lookup", function () {
 		expect(lookup.geolocation).to.equal(geolocation);
 	});
 
+	it("Set language", function () {
+		const language = LanguageMode.Native;
+		let lookup = new Lookup({ language });
+		expect(lookup.language).to.equal(language);
+	});
+
 	it("Checking defaults of params on instantiation ", function () {
 		const defaultLookup = {
 			result: [],
@@ -61,6 +68,7 @@ describe("An International Address Autocomplete lookup", function () {
 			includeOnlyPostalCode: undefined,
 			maxGroupResults: 100,
 			geolocation: false,
+			language: undefined,
 			customParameters: {},
 		};
 		let lookup = new Lookup();
