@@ -46,12 +46,14 @@ describe("A US Extract Client", function () {
 		lookup.aggressive = 2 as any;
 		lookup.addressesHaveLineBreaks = 3 as any;
 		lookup.addressesPerLine = 4;
+		lookup.match = "enhanced";
 
 		let expectedParams = {
 			html: 1,
 			aggressive: 2,
 			addr_line_breaks: 3,
 			addr_per_line: 4,
+			match: "enhanced",
 		};
 
 		client.send(lookup);

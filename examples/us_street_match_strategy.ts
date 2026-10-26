@@ -40,9 +40,27 @@ interface LookupCase {
 //   - invalid:  most permissive; always returns at least one candidate (a best-guess standardization).
 // Documentation for input fields: https://www.smarty.com/docs/us-street-api#input-fields
 const addresses: AddressInput[] = [
-	{ label: "valid (real, deliverable)", street: "1600 Amphitheatre Pkwy", city: "Mountain View", state: "CA", zip: "94043" },
-	{ label: "invalid (no such address)", street: "9999 W 1150 S", city: "Provo", state: "UT", zip: "84601" },
-	{ label: "ambiguous (missing ZIP/unit)", street: "1 Rosedale St", city: "Baltimore", state: "MD", zip: "" },
+	{
+		label: "valid (real, deliverable)",
+		street: "1600 Amphitheatre Pkwy",
+		city: "Mountain View",
+		state: "CA",
+		zip: "94043",
+	},
+	{
+		label: "invalid (no such address)",
+		street: "9999 W 1150 S",
+		city: "Provo",
+		state: "UT",
+		zip: "84601",
+	},
+	{
+		label: "ambiguous (missing ZIP/unit)",
+		street: "1 Rosedale St",
+		city: "Baltimore",
+		state: "MD",
+		zip: "",
+	},
 ];
 const strategies: MatchStrategy[] = ["strict", "enhanced", "invalid"];
 
@@ -60,7 +78,11 @@ async function main(): Promise<void> {
 			lookup.match = strategy;
 			lookup.maxCandidates = 10; // allow ambiguous addresses to return more than one match
 			batch.add(lookup);
-			cases.push({ label: address.label, address: `${address.street}, ${address.city}, ${address.state}`, strategy });
+			cases.push({
+				label: address.label,
+				address: `${address.street}, ${address.city}, ${address.state}`,
+				strategy,
+			});
 		}
 	}
 
@@ -89,7 +111,9 @@ async function main(): Promise<void> {
 
 			console.log(`  ${candidates.length} candidate(s):`);
 			candidates.forEach((candidate) => {
-				console.log(`    [${candidate.candidateIndex}] ${candidate.deliveryLine1}  ${candidate.lastLine}`);
+				console.log(
+					`    [${candidate.candidateIndex}] ${candidate.deliveryLine1}  ${candidate.lastLine}`,
+				);
 			});
 		});
 	} catch (err: unknown) {

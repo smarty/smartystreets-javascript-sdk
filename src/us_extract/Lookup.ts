@@ -1,4 +1,5 @@
 import Result from "./Result.js";
+import type { MatchStrategy } from "../us_street/Lookup.js";
 
 export default class Lookup {
 	result: Result;
@@ -7,6 +8,7 @@ export default class Lookup {
 	aggressive: boolean | undefined;
 	addressesHaveLineBreaks: boolean | undefined;
 	addressesPerLine: number | undefined;
+	match: MatchStrategy | undefined;
 	customParameters: Record<string, string>;
 
 	constructor(text: string) {
@@ -16,6 +18,7 @@ export default class Lookup {
 		this.aggressive = undefined;
 		this.addressesHaveLineBreaks = undefined;
 		this.addressesPerLine = undefined;
+		this.match = undefined;
 		this.customParameters = {};
 	}
 

@@ -98,6 +98,7 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 		aggressive: "aggressive",
 		addr_line_breaks: "addressesHaveLineBreaks",
 		addr_per_line: "addressesPerLine",
+		match: "match",
 	},
 	usEnrichment: {
 		include: "include",
