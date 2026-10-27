@@ -26,6 +26,10 @@ let client = clientBuilder.buildInternationalPostalCodeClient();
 let lookup1 = new Lookup("Australia", "2776");
 // uncomment the following line to add a custom parameter
 // lookup1.addCustomParameter("input_id", 1234);
+// uncomment the following lines to request native-language output and limit the number of results
+// (import InternationalPostalCodeLanguageMode from "smartystreets-javascript-sdk")
+// lookup1.language = InternationalPostalCodeLanguageMode.Native;
+// lookup1.maxResults = 5;
 
 // Lookup by locality, administrative area, and country
 let lookup2 = new Lookup("Brazil", null, "SP", "Sao Paulo", "ID-8675309");
@@ -48,6 +52,7 @@ function displayResult(lookup, message) {
 			console.log("Postal Code:", result.postalCode);
 			console.log("Postal Code Extra:", result.postalCodeExtra);
 			console.log("Country ISO3:", result.countryIso3);
+			console.log("Thoroughfare:", result.thoroughfare);
 			console.log("---");
 		});
 	} else {

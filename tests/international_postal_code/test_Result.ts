@@ -15,6 +15,7 @@ describe("An International Postal Code result", function () {
 			postal_code: "02516-040",
 			postal_code_extra: "12345",
 			country_iso_3: "BRA",
+			thoroughfare: "Rua Padre Antonio D'Angelo",
 		};
 
 		const result = new Result(sampleResponse);
@@ -30,6 +31,7 @@ describe("An International Postal Code result", function () {
 		expect(result.postalCode).to.equal("02516-040");
 		expect(result.postalCodeExtra).to.equal("12345");
 		expect(result.countryIso3).to.equal("BRA");
+		expect(result.thoroughfare).to.equal("Rua Padre Antonio D'Angelo");
 	});
 
 	it("handles missing optional fields.", function () {
@@ -45,6 +47,7 @@ describe("An International Postal Code result", function () {
 		expect(result.inputId).to.equal("");
 		expect(result.superAdministrativeArea).to.equal("");
 		expect(result.postalCodeExtra).to.equal("");
+		expect(result.thoroughfare).to.equal("");
 		expect(result.administrativeArea).to.equal("SP");
 		expect(result.locality).to.equal("São Paulo");
 		expect(result.postalCode).to.equal("02516-040");

@@ -47,6 +47,7 @@ describe("An International Street client", function () {
 		lookup.postalCode = "j";
 		lookup.geocode = "true";
 		lookup.language = LanguageMode.Latin;
+		lookup.maxResults = 10;
 		let expectedParameters = {
 			country: "a",
 			freeform: "b",
@@ -60,11 +61,33 @@ describe("An International Street client", function () {
 			postal_code: "j",
 			geocode: "true",
 			language: "latin",
+			max_results: 10,
 		};
 
 		client.send(lookup);
 
 		expect(mockSender.request.parameters).to.deep.equal(expectedParameters);
+	});
+
+	it("omits max_results when unset.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("CA", "123 Main St");
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.not.have.property("max_results");
+	});
+
+	it("omits max_results when set to zero.", function () {
+		let mockSender = new MockSender();
+		let client = new Client(mockSender);
+		let lookup = new Lookup("CA", "123 Main St");
+		lookup.maxResults = 0;
+
+		client.send(lookup);
+
+		expect(mockSender.request.parameters).to.not.have.property("max_results");
 	});
 
 	it("normalizes a mixed-case language value before sending.", function () {

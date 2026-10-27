@@ -27,6 +27,9 @@ export default class Client {
 		const resolvedLanguage = resolveLanguageMode(lookup.language);
 		if (resolvedLanguage !== undefined) request.parameters["language"] = resolvedLanguage;
 
+		if (!(typeof lookup.maxResults === "number" && lookup.maxResults > 0))
+			delete request.parameters["max_results"];
+
 		return new Promise((resolve, reject) => {
 			this.sender
 				.send(request)

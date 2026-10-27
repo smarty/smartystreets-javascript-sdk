@@ -5,6 +5,7 @@ import apiToSDKKeyMap from "../util/apiToSDKKeyMap.js";
 import { UndefinedLookupError } from "../Errors.js";
 import { Sender, Response } from "../types.js";
 import Lookup from "./Lookup.js";
+import { resolveLanguageMode } from "./LanguageMode.js";
 
 const keyTranslationFormat = apiToSDKKeyMap.internationalPostalCode;
 
@@ -20,6 +21,12 @@ export default class Client {
 
 		const request = new Request();
 		request.parameters = buildInputData(lookup, keyTranslationFormat);
+
+		const resolvedLanguage = resolveLanguageMode(lookup.language);
+		if (resolvedLanguage !== undefined) request.parameters["language"] = resolvedLanguage;
+
+		if (!(typeof lookup.maxResults === "number" && lookup.maxResults > 0))
+			delete request.parameters["max_results"];
 
 		return new Promise((resolve, reject) => {
 			this.sender

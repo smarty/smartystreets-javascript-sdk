@@ -59,6 +59,7 @@ export default class Lookup {
 	geocode: Geocode | undefined;
 	language: LanguageMode | undefined;
 	inputId: string | undefined;
+	maxResults: number | undefined;
 	customParameters: Record<string, string>;
 
 	constructor(country?: string, freeform?: string) {
@@ -77,6 +78,7 @@ export default class Lookup {
 		this.geocode = undefined;
 		this.language = undefined;
 		this.inputId = undefined;
+		this.maxResults = undefined;
 
 		this.ensureEnoughInfo = this.ensureEnoughInfo.bind(this);
 		this.ensureValidData = this.ensureValidData.bind(this);

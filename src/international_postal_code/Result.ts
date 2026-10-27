@@ -10,6 +10,7 @@ export interface RawIntlPostalCodeResult {
 	postal_code?: string;
 	postal_code_extra?: string;
 	country_iso_3?: string;
+	thoroughfare?: string;
 }
 
 export default class Result {
@@ -24,6 +25,7 @@ export default class Result {
 	postalCode: string;
 	postalCodeExtra: string;
 	countryIso3: string;
+	thoroughfare: string;
 
 	constructor(responseData: RawIntlPostalCodeResult) {
 		this.inputId = responseData.input_id ?? "";
@@ -37,5 +39,6 @@ export default class Result {
 		this.postalCode = responseData.postal_code ?? "";
 		this.postalCodeExtra = responseData.postal_code_extra ?? "";
 		this.countryIso3 = responseData.country_iso_3 ?? "";
+		this.thoroughfare = responseData.thoroughfare ?? "";
 	}
 }
