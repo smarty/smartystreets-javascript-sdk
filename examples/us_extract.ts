@@ -34,6 +34,7 @@ async function main(): Promise<void> {
 	lookup.aggressive = true;
 	lookup.addressesHaveLineBreaks = false;
 	lookup.addressesPerLine = 1;
+	lookup.match = "enhanced";
 
 	// uncomment the following line to add a custom parameter
 	// lookup.addCustomParameter("addr_line_breaks", false);

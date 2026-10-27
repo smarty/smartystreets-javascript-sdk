@@ -76,7 +76,12 @@ export default class Client {
 
 	sendBusinessSummary(lookup: SummaryLookup): Promise<SummaryLookup> {
 		if (!lookup) throw new UndefinedLookupError();
-		if (isBlank(lookup.smartyKey) && isBlank(lookup.street) && isBlank(lookup.freeform) && isBlank(lookup.businessName)) {
+		if (
+			isBlank(lookup.smartyKey) &&
+			isBlank(lookup.street) &&
+			isBlank(lookup.freeform) &&
+			isBlank(lookup.businessName)
+		) {
 			throw new SmartyError(
 				"Business.Summary lookup requires one of 'smartyKey', 'street', 'freeform', or 'business_name' to be set",
 			);
