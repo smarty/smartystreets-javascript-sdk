@@ -10,6 +10,8 @@ describe("An International Postal Code lookup", function () {
 		expect(lookup.postalCode).to.equal("02516-040");
 		expect(lookup.administrativeArea).to.equal("SP");
 		expect(lookup.locality).to.equal("Sao Paulo");
+		expect(lookup.language).to.equal(undefined);
+		expect(lookup.maxResults).to.equal(undefined);
 		expect(lookup.result).to.deep.equal([]);
 		expect(lookup.customParameters).to.deep.equal({});
 	});

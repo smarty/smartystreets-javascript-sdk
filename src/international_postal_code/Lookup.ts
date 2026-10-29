@@ -1,4 +1,5 @@
 import Result from "./Result.js";
+import { LanguageMode } from "./LanguageMode.js";
 
 export default class Lookup {
 	inputId: string | undefined;
@@ -6,6 +7,8 @@ export default class Lookup {
 	postalCode: string | undefined;
 	administrativeArea: string | undefined;
 	locality: string | undefined;
+	language: LanguageMode | undefined;
+	maxResults: number | undefined;
 	result: Result[];
 	customParameters: Record<string, string>;
 
@@ -21,6 +24,8 @@ export default class Lookup {
 		this.postalCode = postalCode;
 		this.administrativeArea = administrativeArea;
 		this.locality = locality;
+		this.language = undefined;
+		this.maxResults = undefined;
 		this.result = [];
 		this.customParameters = {};
 	}

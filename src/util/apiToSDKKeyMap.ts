@@ -77,6 +77,7 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 		postal_code: "postalCode",
 		geocode: "geocode",
 		language: "language",
+		max_results: "maxResults",
 	},
 	internationalAddressAutocomplete: {
 		search: "search",
@@ -113,6 +114,7 @@ const apiToSDKKeyMap: ApiToSDKKeyMap = {
 		locality: "locality",
 		administrative_area: "administrativeArea",
 		postal_code: "postalCode",
+		max_results: "maxResults",
 	},
 };
 
